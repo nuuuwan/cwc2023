@@ -64,7 +64,7 @@ export default class HomePage extends Component {
     if (simulatorMode === SimulatorMode.RANDOM) {
       message = "Random Outcome.";
       subMessage =
-        "If the outcome of the match is probabilistically selected according to past data.";
+        "If the outcome of each match is probabilistically selected according to past data.";
       Icon = CasinoIcon;
       color = "#f80";
     } else {
