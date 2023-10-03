@@ -12,13 +12,11 @@ import {
 import CasinoIcon from "@mui/icons-material/Casino";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-
 import GroupStageView from "../molecules/GroupStageView";
 import Simulator from "../../nonview/core/Simulator.js";
 import GroupStatePointsTableView from "../molecules/GroupStatePointsTableView";
 import KnockOutStageView from "../molecules/KnockOutStageView";
-
+import BigTableView from "../molecules/BigTableView";
 import { UPDATE_DATE } from "../../nonview/core/VERSION.js";
 import { SimulatorMode } from "../../nonview/core/Simulator.js";
 
@@ -26,17 +24,24 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const FAVORITE_TEAM_NAME = "Sri Lanka";
-const FAVORITE_N_RETRY = 100;
+const N_RETRY = 20;
 export default class HomePage extends Component {
   constructor() {
     super();
-    const resultIdx = null,
-      odiIdx = null,
-      koResultIdx = null,
-      simulatorMode = null,
-      nRefreshes = null;
-    this.state = { resultIdx, odiIdx, koResultIdx, simulatorMode, nRefreshes };
+    const resultIdx = null;
+    const odiIdx = null;
+    const koResultIdx = null;
+    const simulatorMode = null;
+    const nRefreshes = null;
+    const historyList = [];
+    this.state = {
+      resultIdx,
+      odiIdx,
+      koResultIdx,
+      simulatorMode,
+      nRefreshes,
+      historyList,
+    };
   }
 
   componentDidMount() {
@@ -44,29 +49,29 @@ export default class HomePage extends Component {
   }
 
   handleOnClickDice(simulatorMode, nRefreshes, isWaitForSriLanka) {
+    let { historyList } = this.state;
     const simulator = new Simulator(simulatorMode);
     const resultIdx = simulator.simulateGroupStage();
     const { odiIdx, koResultIdx } = simulator.simulateKnockOutStage(resultIdx);
+    if (simulatorMode === SimulatorMode.RANDOM) {
+      historyList.push({ resultIdx, odiIdx, koResultIdx });
+    }
     this.setState(
-      { resultIdx, odiIdx, koResultIdx, simulatorMode, nRefreshes },
+      {
+        resultIdx,
+        odiIdx,
+        koResultIdx,
+        simulatorMode,
+        nRefreshes,
+        historyList,
+      },
 
       async function () {
         if (nRefreshes <= 0) {
-          if (isWaitForSriLanka) {
-            alert(
-              `${FAVORITE_TEAM_NAME}'s odds of winning the #CWC2023 are less than 1 in ${FAVORITE_N_RETRY}.\nSorry 🥺.`
-            );
-          }
           return;
         }
 
-        if (isWaitForSriLanka) {
-          if (koResultIdx["Final"].name === FAVORITE_TEAM_NAME) {
-            return;
-          }
-        }
-
-        await sleep(Math.random() * 50 + 25);
+        await sleep(Math.random() * 10);
         this.handleOnClickDice(
           simulatorMode,
           nRefreshes - 1,
@@ -91,7 +96,8 @@ export default class HomePage extends Component {
     );
   }
   renderBody() {
-    const { resultIdx, odiIdx, koResultIdx, simulatorMode } = this.state;
+    const { resultIdx, odiIdx, koResultIdx, simulatorMode, historyList } =
+      this.state;
     if (!resultIdx) {
       return <CircularProgress />;
     }
@@ -119,13 +125,14 @@ export default class HomePage extends Component {
 
         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
         <GroupStageView resultIdx={resultIdx} />
+        <BigTableView historyList={historyList} />
         <GroupStatePointsTableView resultIdx={resultIdx} />
       </Box>
     );
   }
   renderFooter() {
     const onClickRandom = function () {
-      this.handleOnClickDice(SimulatorMode.RANDOM, 10, false);
+      this.handleOnClickDice(SimulatorMode.RANDOM, N_RETRY, false);
     }.bind(this);
 
     const onClickML = function () {
@@ -136,20 +143,13 @@ export default class HomePage extends Component {
       window.location.reload();
     };
 
-    const onClickHeart = function () {
-      this.handleOnClickDice(SimulatorMode.RANDOM, FAVORITE_N_RETRY, true);
-    }.bind(this);
-
     return (
       <BottomNavigation>
         <BottomNavigationAction
           icon={<RefreshIcon />}
           onClick={onClickRefresh}
         />
-        <BottomNavigationAction
-          icon={<FavoriteIcon />}
-          onClick={onClickHeart}
-        />
+
         <BottomNavigationAction icon={<PsychologyIcon />} onClick={onClickML} />
         <BottomNavigationAction icon={<CasinoIcon />} onClick={onClickRandom} />
       </BottomNavigation>
