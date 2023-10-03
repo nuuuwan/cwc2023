@@ -15,12 +15,13 @@ export default function ODIView({ odi, winner }) {
       }}
     >
       <MatchDateView matchDate={odi.date} />
-      <Typography variant="subtitle1">{odi.venue.name}</Typography>
       <Typography variant="h6">
         {winner.label}
         {" " + EMOJI.WINNER}
       </Typography>
       <Typography variant="h6">{odi.getOther(winner).label}</Typography>
+      <Typography variant="caption">{odi.venue.name}</Typography>
+      
     </Paper>
   );
 }

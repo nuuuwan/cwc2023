@@ -23,7 +23,7 @@ export default function GroupStatePointsTableView({ resultIdx }) {
       <Typography variant="h4">Group Stage Points Table</Typography>
 
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>Team</TableCell>
@@ -45,7 +45,6 @@ export default function GroupStatePointsTableView({ resultIdx }) {
               return (
                 <TableRow
                   key={teamID}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
                     {team.label}
