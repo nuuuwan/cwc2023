@@ -1,0 +1,12 @@
+export const P_WINNER = {
+  India: 0.263433236369972,
+  England: 0.204149475810151,
+  Australia: 0.16662562402148,
+  Pakistan: 0.121509434944103,
+  "South Africa": 0.0984856336721999,
+  "New Zealand": 0.089416356355865,
+  "Sri Lanka": 0.0316628933376082,
+  Bangladesh: 0.0131149953394395,
+  Afghanistan: 0.0099343977580673,
+  Netherlands: 0.00166795239111462,
+};
