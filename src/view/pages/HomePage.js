@@ -54,7 +54,7 @@ export default class HomePage extends Component {
         if (nRefreshes <= 0) {
           if (isWaitForSriLanka) {
             alert(
-              `Sorry 🥺.\n${FAVORITE_TEAM_NAME}'s odds of winning are less than 1 in ${FAVORITE_N_RETRY}`
+              `Sorry 🥺.\n${FAVORITE_TEAM_NAME}'s odds of winning the #CWC2023 are less than 1 in ${FAVORITE_N_RETRY}`
             );
           }
           return;
