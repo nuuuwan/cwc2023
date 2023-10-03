@@ -37,7 +37,8 @@ export default class ODI {
     if (this.winner) {
       return this.winner;
     }
-    const q = Math.sqrt(this.p1) / (Math.sqrt(this.p1) + Math.sqrt(this.p2));
+    const f = (x) => x + 0.1;
+    const q = f(this.p1) / (f(this.p1) + f(this.p2));
     return Math.random() < q ? this.team1 : this.team2;
   }
 

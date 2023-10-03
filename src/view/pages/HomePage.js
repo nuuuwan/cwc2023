@@ -112,12 +112,9 @@ export default class HomePage extends Component {
 
     return (
       <Box>
-        <Typography variant="body2" color={color}>
+        <Typography variant="h6" color={color}>
           <Icon />
-          {message}
-        </Typography>
-        <Typography variant="caption" color={color}>
-          {subMessage}
+          <strong>{message}</strong> {" " + subMessage}
         </Typography>
 
         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />

@@ -20,7 +20,7 @@ export default function GroupStatePointsTableView({ resultIdx }) {
     <Box sx={{ maxWidth: 320 }}>
       <Typography variant="h5">Group Stage Points Table</Typography>
 
-      <TableContainer component={Paper} sx={{margin: 1, padding: 1}}>
+      <TableContainer component={Paper} sx={{ margin: 1, padding: 1 }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -33,13 +33,15 @@ export default function GroupStatePointsTableView({ resultIdx }) {
             {Object.entries(teamToWins).map(function ([teamID, nW], iRow) {
               const points = 2 * nW;
               const team = Team.loadFromID(teamID);
-              const isWinner = iRow < N_KNOCKOUT_TEAMS ;
+              const isWinner = iRow < N_KNOCKOUT_TEAMS;
               return (
                 <TableRow key={teamID}>
                   <TableCell component="th" scope="row">
-                    <TeamView team={team} isWinner={isWinner}/>
+                    <TeamView team={team} isWinner={isWinner} />
                   </TableCell>
-                  <TableCell align="right" sx={{fontSize: "200%"}}>{points}</TableCell>
+                  <TableCell align="right" sx={{ fontSize: "200%" }}>
+                    {points}
+                  </TableCell>
                 </TableRow>
               );
             })}
