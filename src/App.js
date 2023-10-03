@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import HomePage from "./view/pages/HomePage";
 import "./App.css";
 
 const FONT_FAMILY = "Nunito";
@@ -33,7 +33,7 @@ export default class App extends Component {
   render() {
     return (
       <ThemeProvider theme={THEME}>
-        TODO
+        <HomePage/>
       </ThemeProvider>
     );
   }
