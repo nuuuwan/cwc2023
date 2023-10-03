@@ -18,7 +18,7 @@ export default function GroupStatePointsTableView({ resultIdx }) {
   const teamToWins = pointsTable.getTeamToWins();
   return (
     <Box sx={{ maxWidth: 320 }}>
-      <Typography variant="h5">Group Stage Points Table</Typography>
+      <Typography variant="h4">Group Stage Points Table</Typography>
 
       <TableContainer component={Paper} sx={{ margin: 1, padding: 1 }}>
         <Table>
@@ -39,7 +39,7 @@ export default function GroupStatePointsTableView({ resultIdx }) {
                   <TableCell component="th" scope="row">
                     <TeamView team={team} isWinner={isWinner} />
                   </TableCell>
-                  <TableCell align="right" sx={{ fontSize: "200%" }}>
+                  <TableCell align="right" sx={{ fontSize: "150%" }}>
                     {points}
                   </TableCell>
                 </TableRow>

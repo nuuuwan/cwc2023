@@ -22,9 +22,9 @@ export default function KnockOutStageView({ odiIdx, koResultIdx }) {
   const semiFinals = entries.slice(1, 3);
   return (
     <Box>
-      <Typography variant="h5">Final</Typography>
+      <Typography variant="h4">Final</Typography>
       {renderGroup(final, odiIdx)}
-      <Typography variant="h5">Semi-Finals</Typography>
+      <Typography variant="h4">Semi-Finals</Typography>
       {renderGroup(semiFinals, odiIdx)}
     </Box>
   );

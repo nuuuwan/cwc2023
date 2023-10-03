@@ -19,12 +19,12 @@ import KnockOutStageView from "../molecules/KnockOutStageView";
 import BigTableView from "../molecules/BigTableView";
 import { UPDATE_DATE } from "../../nonview/core/VERSION.js";
 import { SimulatorMode } from "../../nonview/core/Simulator.js";
-
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const N_RETRY = 20;
+const N_RETRY = 1_000;
 export default class HomePage extends Component {
   constructor() {
     super();
@@ -67,11 +67,11 @@ export default class HomePage extends Component {
       },
 
       async function () {
-        if (nRefreshes <= 0) {
+        if (nRefreshes <= 1) {
           return;
         }
 
-        await sleep(Math.random() * 10);
+        await sleep(1);
         this.handleOnClickDice(
           simulatorMode,
           nRefreshes - 1,
@@ -131,12 +131,16 @@ export default class HomePage extends Component {
     );
   }
   renderFooter() {
-    const onClickRandom = function () {
-      this.handleOnClickDice(SimulatorMode.RANDOM, N_RETRY, false);
+    const onClickRandomOne = function () {
+      this.handleOnClickDice(SimulatorMode.RANDOM, 1);
     }.bind(this);
 
     const onClickML = function () {
-      this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD, 0, false);
+      this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD, 0);
+    }.bind(this);
+
+    const onClickRandom = function () {
+      this.handleOnClickDice(SimulatorMode.RANDOM, N_RETRY);
     }.bind(this);
 
     const onClickRefresh = function () {
@@ -149,9 +153,15 @@ export default class HomePage extends Component {
           icon={<RefreshIcon />}
           onClick={onClickRefresh}
         />
-
+        <BottomNavigationAction
+          icon={<DirectionsRunIcon />}
+          onClick={onClickRandom}
+        />
         <BottomNavigationAction icon={<PsychologyIcon />} onClick={onClickML} />
-        <BottomNavigationAction icon={<CasinoIcon />} onClick={onClickRandom} />
+        <BottomNavigationAction
+          icon={<CasinoIcon />}
+          onClick={onClickRandomOne}
+        />
       </BottomNavigation>
     );
   }

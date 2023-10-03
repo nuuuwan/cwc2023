@@ -16,11 +16,12 @@ import BigTable from "../../nonview/core/BigTable.js";
 
 export default function BigTableView({ historyList }) {
   const bigTable = new BigTable(historyList);
-  const { n, teamToWinner } = bigTable.getTeamProbs();
+  const { n, teamToWinner, teamToFinalist, teamToSemiFinalist } =
+    bigTable.getTeamProbs();
 
   return (
-    <Box sx={{ maxWidth: 320 }}>
-      <Typography variant="h5">Big Table (n={n})</Typography>
+    <Box sx={{ maxWidth: 400 }}>
+      <Typography variant="h4">Big Table (n={n})</Typography>
 
       <TableContainer component={Paper} sx={{ margin: 1, padding: 1 }}>
         <Table>
@@ -28,6 +29,8 @@ export default function BigTableView({ historyList }) {
             <TableRow>
               <TableCell>Team</TableCell>
               <TableCell align="right">{"p(Winner)"}</TableCell>
+              <TableCell align="right">{"p(Finalist)"}</TableCell>
+              <TableCell align="right">{"p(S-Finalist)"}</TableCell>
             </TableRow>
           </TableHead>
 
@@ -38,13 +41,21 @@ export default function BigTableView({ historyList }) {
             ) {
               const team = new Team(teamName);
               const pWinner = nWinner / n;
+              const pFinalist = teamToFinalist[teamName] / n;
+              const pSemiFinalist = teamToSemiFinalist[teamName] / n;
               return (
                 <TableRow key={teamName}>
                   <TableCell component="th" scope="row">
                     <TeamView team={team} />
                   </TableCell>
-                  <TableCell align="right" sx={{ fontSize: "200%" }}>
+                  <TableCell align="right" sx={{ fontSize: "150%" }}>
                     {Format.percent(pWinner)}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontSize: "150%" }}>
+                    {Format.percent(pFinalist)}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontSize: "150%" }}>
+                    {Format.percent(pSemiFinalist)}
                   </TableCell>
                 </TableRow>
               );
