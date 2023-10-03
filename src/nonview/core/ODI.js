@@ -38,4 +38,14 @@ export default class ODI {
   get randomWinner() {
     return Math.random() < this.p1 ? this.team1 : this.team2;
   }
+
+  getOther(winner) {
+    if (winner === this.team1) {
+      return this.team2;
+    }
+    if (winner === this.team2) {
+      return this.team1;
+    }
+    throw new Error("Invalid winner");
+  }
 }

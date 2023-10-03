@@ -2,16 +2,23 @@ import { Component } from "react";
 import { STYLE } from "./HomePageStyle";
 import { Box } from "@mui/material";
 import GroupStageView from "../molecules/GroupStageView";
-
+import Simulator from "../../nonview/core/Simulator.js";
+import GroupStatePointsTableView from "../molecules/GroupStatePointsTableView";
 export default class HomePage extends Component {
   renderHeader() {
-    return "Header";
+    return "TODO-Header";
   }
   renderBody() {
-    return <GroupStageView />;
+    const resultIdx = new Simulator().getRandomResultIdx();
+    return (
+      <Box>
+        <GroupStageView resultIdx={resultIdx} />
+        <GroupStatePointsTableView resultIdx={resultIdx} />
+      </Box>
+    );
   }
   renderFooter() {
-    return "Footer";
+    return "TODO-Footer";
   }
   render() {
     return (

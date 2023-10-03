@@ -5,4 +5,11 @@ export default class Format {
       minimumFractionDigits: 0,
     });
   }
+
+  static matchDate(date) {
+    return date.toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric",
+    });
+  }
 }
