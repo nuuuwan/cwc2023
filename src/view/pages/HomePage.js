@@ -100,8 +100,8 @@ export default class HomePage extends Component {
 
     return (
       <BottomNavigation>
-        <BottomNavigationAction icon={<CasinoIcon />} onClick={onClickRandom} />
         <BottomNavigationAction icon={<PsychologyIcon />} onClick={onClickML} />
+        <BottomNavigationAction icon={<CasinoIcon />} onClick={onClickRandom} />
       </BottomNavigation>
     );
   }
