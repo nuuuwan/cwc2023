@@ -7,7 +7,7 @@ export default function ODIView({ odi, winner }) {
   return (
     <Paper
       sx={{
-        margin: 1,
+        margin: 0.2,
         padding: 1,
         borderColor: odi.getColor(winner),
         borderStyle: "solid",
