@@ -38,6 +38,6 @@ export default class Team {
 
   getLabel(winner) {
     const winnerEmoji = winner.id === this.id ? EMOJI.WINNER : "";
-    return this.label + winnerEmoji;
+    return this.label + ' ' + winnerEmoji;
   }
 }
