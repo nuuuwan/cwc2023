@@ -45,5 +45,12 @@ export const GROUP_STAGE_ODI_LIST = [
   new ODI("ODI 04", "2023-10-07", "South Africa", "Sri Lanka", "Delhi"),
   new ODI("ODI 03", "2023-10-07", "Afghanistan", "Bangladesh", "Dharamshala"),
   new ODI("ODI 02", "2023-10-06", "Pakistan", "Netherlands", "Hyderabad"),
-  new ODI("ODI 01", "2023-10-05", "England", "New Zealand", "Ahmedabad"),
+  new ODI(
+    "ODI 01",
+    "2023-10-05",
+    "England",
+    "New Zealand",
+    "Ahmedabad",
+    "New Zealand"
+  ),
 ];

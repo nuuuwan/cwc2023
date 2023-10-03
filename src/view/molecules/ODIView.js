@@ -2,6 +2,7 @@ import { Paper, Typography } from "@mui/material";
 import MatchDateView from "../atoms/MatchDateView";
 
 export default function ODIView({ odi, winner }) {
+  const opacity = odi.isConcluded ? 0.2 : 1;
   return (
     <Paper
       sx={{
@@ -9,8 +10,9 @@ export default function ODIView({ odi, winner }) {
         padding: 1,
         borderColor: winner.color,
         borderStyle: "solid",
-        borderWidth: 6,
+        borderWidth: 3,
         borderRadius: 6,
+        opacity,
       }}
     >
       <MatchDateView matchDate={odi.date} />

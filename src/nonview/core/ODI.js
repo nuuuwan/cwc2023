@@ -4,12 +4,13 @@ import Format from "../base/Format";
 import MatchDate from "./MatchDate";
 
 export default class ODI {
-  constructor(id, date, team1, team2, venue) {
+  constructor(id, date, team1, team2, venue, winner = null) {
     this.id = id;
     this.date = new MatchDate(date);
     this.team1 = new Team(team1);
     this.team2 = new Team(team2);
     this.venue = new Venue(venue);
+    this.winner = winner ? new Team(winner) : null;
   }
 
   get title() {
@@ -33,11 +34,17 @@ export default class ODI {
   }
 
   get randomWinner() {
+    if (this.winner) {
+      return this.winner;
+    }
     const q = Math.sqrt(this.p1) / (Math.sqrt(this.p1) + Math.sqrt(this.p2));
     return Math.random() < q ? this.team1 : this.team2;
   }
 
   get maximumLikelihoodWinner() {
+    if (this.winner) {
+      return this.winner;
+    }
     return this.p1 > this.p2 ? this.team1 : this.team2;
   }
 
@@ -56,5 +63,9 @@ export default class ODI {
   }
   get notFavorite() {
     return this.p1 > this.p2 ? this.team2 : this.team1;
+  }
+
+  get isConcluded() {
+    return !!this.winner;
   }
 }
