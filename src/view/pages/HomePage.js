@@ -8,7 +8,7 @@ import {
   BottomNavigation,
   BottomNavigationAction,
   CircularProgress,
-  Alert,
+
 } from "@mui/material";
 import CasinoIcon from "@mui/icons-material/Casino";
 import PsychologyIcon from "@mui/icons-material/Psychology";
