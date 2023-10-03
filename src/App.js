@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import "./App.css";
+
+const FONT_FAMILY = "Nunito";
+const THEME = createTheme({
+  palette: {
+    primary: {
+      main: "#800",
+    },
+    secondary: {
+      main: "#f80",
+    },
+    info: {
+      main: "#084",
+    },
+    warning: {
+      main: "#f80",
+    },
+    error: {
+      main: "#800",
+    },
+  },
+  typography: {
+    fontFamily: [FONT_FAMILY, "sans-serif"].join(","),
+    fontSize: 14,
+  },
+});
+
+export default class App extends Component {
+  render() {
+    return (
+      <ThemeProvider theme={THEME}>
+        TODO
+      </ThemeProvider>
+    );
+  }
 }
-
-export default App;
