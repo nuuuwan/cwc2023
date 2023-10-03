@@ -33,7 +33,8 @@ export default class ODI {
   }
 
   get randomWinner() {
-    return Math.random() < this.p1 ? this.team1 : this.team2;
+    const q = Math.sqrt(this.p1) / (Math.sqrt(this.p1) + Math.sqrt(this.p2));
+    return Math.random() < q ? this.team1 : this.team2;
   }
 
   get maximumLikelihoodWinner() {
