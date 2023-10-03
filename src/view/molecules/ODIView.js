@@ -1,6 +1,5 @@
 import { Paper, Typography } from "@mui/material";
 import MatchDateView from "../atoms/MatchDateView";
-import { EMOJI } from "../../nonview/core/EMOJI.js";
 
 export default function ODIView({ odi, winner }) {
   return (
@@ -15,13 +14,10 @@ export default function ODIView({ odi, winner }) {
       }}
     >
       <MatchDateView matchDate={odi.date} />
-      <Typography variant="h6">
-        {winner.label}
-        {" " + EMOJI.WINNER}
-      </Typography>
-      <Typography variant="h6">{odi.getOther(winner).label}</Typography>
 
-      <Typography variant="caption">{odi.id + " · "}</Typography>
+      <Typography variant="h6">{odi.favorite.getLabel(winner)}</Typography>
+      <Typography variant="h6">{odi.notFavorite.getLabel(winner)}</Typography>
+
       <Typography variant="caption">{odi.venue.name}</Typography>
     </Paper>
   );

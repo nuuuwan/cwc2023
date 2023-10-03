@@ -50,4 +50,11 @@ export default class ODI {
     }
     throw new Error("Invalid winner");
   }
+
+  get favorite() {
+    return this.p1 > this.p2 ? this.team1 : this.team2;
+  }
+  get notFavorite() {
+    return this.p1 > this.p2 ? this.team2 : this.team1;
+  }
 }
