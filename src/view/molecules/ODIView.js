@@ -20,8 +20,9 @@ export default function ODIView({ odi, winner }) {
         {" " + EMOJI.WINNER}
       </Typography>
       <Typography variant="h6">{odi.getOther(winner).label}</Typography>
+
+      <Typography variant="caption">{odi.id + " · "}</Typography>
       <Typography variant="caption">{odi.venue.name}</Typography>
-      
     </Paper>
   );
 }

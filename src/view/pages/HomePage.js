@@ -4,16 +4,20 @@ import { Box } from "@mui/material";
 import GroupStageView from "../molecules/GroupStageView";
 import Simulator from "../../nonview/core/Simulator.js";
 import GroupStatePointsTableView from "../molecules/GroupStatePointsTableView";
+import KnockOutStageView from "../molecules/KnockOutStageView";
 export default class HomePage extends Component {
   renderHeader() {
     return "TODO-Header";
   }
   renderBody() {
-    const resultIdx = new Simulator().getRandomResultIdx();
+    const simulator = new Simulator();
+    const resultIdx = simulator.simulateGroupStage();
+    const { odiIdx, koResultIdx } = simulator.simulateKnockOutStage(resultIdx);
     return (
       <Box>
         <GroupStageView resultIdx={resultIdx} />
         <GroupStatePointsTableView resultIdx={resultIdx} />
+        <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
       </Box>
     );
   }

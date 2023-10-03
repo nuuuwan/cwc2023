@@ -31,7 +31,6 @@ export default function GroupStatePointsTableView({ resultIdx }) {
               <TableCell align="right">P</TableCell>
               <TableCell align="right">W</TableCell>
               <TableCell align="right">L</TableCell>
-              
             </TableRow>
           </TableHead>
 
@@ -43,9 +42,7 @@ export default function GroupStatePointsTableView({ resultIdx }) {
               const team = Team.loadFromID(teamID);
               const check = iRow < N_KNOCKOUT_TEAMS ? EMOJI.WINNER : "";
               return (
-                <TableRow
-                  key={teamID}
-                >
+                <TableRow key={teamID}>
                   <TableCell component="th" scope="row">
                     {team.label}
                     {" " + check}
@@ -54,7 +51,6 @@ export default function GroupStatePointsTableView({ resultIdx }) {
                   <TableCell align="right">{nP}</TableCell>
                   <TableCell align="right">{nW}</TableCell>
                   <TableCell align="right">{nL}</TableCell>
-                  
                 </TableRow>
               );
             })}

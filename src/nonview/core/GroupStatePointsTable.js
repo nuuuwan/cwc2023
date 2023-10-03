@@ -1,3 +1,4 @@
+import Team from "./Team.js";
 export default class GroupStagewinsTable {
   constructor(resultIdx) {
     this.resultIdx = resultIdx;
@@ -21,5 +22,12 @@ export default class GroupStagewinsTable {
         idx[alpha3] = parseInt(wins);
         return idx;
       }, {});
+  }
+
+  getTeams() {
+    const teamToWins = this.getTeamToWins();
+    return Object.keys(teamToWins).map(function (alpha3) {
+      return Team.loadFromID(alpha3);
+    });
   }
 }

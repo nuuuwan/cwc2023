@@ -4,15 +4,12 @@ import Format from "../base/Format";
 import MatchDate from "./MatchDate";
 
 export default class ODI {
-  constructor(date, team1, team2, venue) {
+  constructor(id, date, team1, team2, venue) {
+    this.id = id;
     this.date = new MatchDate(date);
     this.team1 = new Team(team1);
     this.team2 = new Team(team2);
     this.venue = new Venue(venue);
-  }
-
-  get id() {
-    return `${this.date.label}-${this.team1.alpha3}-${this.team2.alpha3}`;
   }
 
   get title() {
