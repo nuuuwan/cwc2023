@@ -69,4 +69,15 @@ export default class ODI {
   get isConcluded() {
     return !!this.winner;
   }
+
+  getColor(winner) {
+    const pWinner = winner === this.team1 ? this.p1 : this.p2;
+    if (pWinner <= 0.33) {
+      return "#f00";
+    }
+    if (pWinner >= 0.67) {
+      return "#080";
+    }
+    return "#f80";
+  }
 }

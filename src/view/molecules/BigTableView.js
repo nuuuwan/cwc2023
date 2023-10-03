@@ -20,7 +20,7 @@ export default function BigTableView({ historyList }) {
     bigTable.getTeamProbs();
 
   return (
-    <Box sx={{ maxWidth: 400 }}>
+    <Box sx={{ maxWidth: 320 }}>
       <Typography variant="h4">Big Table (n={n})</Typography>
 
       <TableContainer component={Paper} sx={{ margin: 1, padding: 1 }}>

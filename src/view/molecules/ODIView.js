@@ -9,9 +9,9 @@ export default function ODIView({ odi, winner }) {
       sx={{
         margin: 1,
         padding: 1,
-        borderColor: winner.color,
+        borderColor: odi.getColor(winner),
         borderStyle: "solid",
-        borderWidth: 3,
+        borderWidth: 6,
         borderRadius: 6,
         opacity,
       }}
