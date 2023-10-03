@@ -14,7 +14,7 @@ import PsychologyIcon from "@mui/icons-material/Psychology";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import GroupStageView from "../molecules/GroupStageView";
 import Simulator from "../../nonview/core/Simulator.js";
-import GroupStatePointsTableView from "../molecules/GroupStatePointsTableView";
+
 import KnockOutStageView from "../molecules/KnockOutStageView";
 import BigTableView from "../molecules/BigTableView";
 import { UPDATE_DATE } from "../../nonview/core/VERSION.js";
@@ -126,7 +126,6 @@ export default class HomePage extends Component {
         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
         <GroupStageView resultIdx={resultIdx} />
         <BigTableView historyList={historyList} />
-        <GroupStatePointsTableView resultIdx={resultIdx} />
       </Box>
     );
   }
