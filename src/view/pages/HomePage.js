@@ -19,6 +19,6 @@ export default class HomePage extends Component {
               <Box sx={STYLE.BODY}>{this.renderBody()}</Box>
               <Box sx={STYLE.FOOTER}>{this.renderFooter()}</Box>
             </Box>
-          );
-        }
+        );
+    }
 }
