@@ -56,7 +56,7 @@ export default class Simulator {
       [odiSemiFinal2.id]: winnerSemiFinal2,
       [odiFinal.id]: winnerFinal,
     };
-    console.debug({ odiIdx, koResultIdx });
+
     return { odiIdx, koResultIdx };
   }
 }
