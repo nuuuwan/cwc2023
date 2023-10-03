@@ -82,7 +82,7 @@ export default class HomePage extends Component {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              #CWC2023 Simulator
+              #CWC2023Simulator
               <span className="superscript">{UPDATE_DATE}</span>
             </Typography>
           </Toolbar>

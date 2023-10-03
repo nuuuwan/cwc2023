@@ -10,6 +10,7 @@ export default class Format {
     return date.toLocaleDateString(undefined, {
       month: "short",
       day: "numeric",
+      weekday: 'short',
     });
   }
 }
