@@ -16,7 +16,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import GroupStageView from "../molecules/GroupStageView";
 import Simulator from "../../nonview/core/Simulator.js";
-
+import GroupStatePointsTableView from "../molecules/GroupStatePointsTableView";
 import KnockOutStageView from "../molecules/KnockOutStageView";
 
 import { UPDATE_DATE } from "../../nonview/core/VERSION.js";
@@ -122,6 +122,7 @@ export default class HomePage extends Component {
 
         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
         <GroupStageView resultIdx={resultIdx} />
+        <GroupStatePointsTableView resultIdx={resultIdx} />
       </Box>
     );
   }

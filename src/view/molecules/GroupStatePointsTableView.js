@@ -18,7 +18,7 @@ export default function GroupStatePointsTableView({ resultIdx }) {
   const pointsTable = new GroupStatePointsTable(resultIdx);
   const teamToWins = pointsTable.getTeamToWins();
   return (
-    <Box>
+    <Box sx={{ maxWidth: 320 }}>
       <Typography variant="h5">Group Stage Points Table</Typography>
 
       <TableContainer component={Paper}>
