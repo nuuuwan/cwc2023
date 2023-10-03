@@ -6,14 +6,28 @@ export default class GroupStagewinsTable {
 
   getTeamToWins() {
     return Object.entries(
-      Object.values(this.resultIdx).reduce(function (idx, winner) {
-        if (!idx[winner.id]) {
-          idx[winner.id] = 0;
+      Object.values(this.resultIdx).reduce(
+        function (idx, winner) {
+          if (!idx[winner.id]) {
+            idx[winner.id] = 0;
+          }
+          const randomTerm = Math.random() * 0.0001;
+          idx[winner.id] += 1 + randomTerm;
+          return idx;
+        },
+        {
+          NLD: 0,
+          AFG: 0,
+          BGD: 0,
+          IND: 0,
+          NZL: 0,
+          PAK: 0,
+          LKA: 0,
+          AUS: 0,
+          ZAF: 0,
+          ENG: 0,
         }
-        const randomTerm = Math.random() * 0.0001;
-        idx[winner.id] += 1 + randomTerm;
-        return idx;
-      }, {})
+      )
     )
       .sort(function ([alpha3A, winsA], [alpha3B, winsB]) {
         return winsB - winsA;
