@@ -9,30 +9,30 @@ import {
   BottomNavigationAction,
   CircularProgress,
 } from "@mui/material";
-import CasinoIcon from '@mui/icons-material/Casino';
-
+import CasinoIcon from "@mui/icons-material/Casino";
 
 import GroupStageView from "../molecules/GroupStageView";
 import Simulator from "../../nonview/core/Simulator.js";
 import GroupStatePointsTableView from "../molecules/GroupStatePointsTableView";
 import KnockOutStageView from "../molecules/KnockOutStageView";
 export default class HomePage extends Component {
-  
   constructor() {
     super();
-    const resultIdx = null, odiIdx = null, koResultIdx = null;
-    this.state = {resultIdx, odiIdx, koResultIdx};
+    const resultIdx = null,
+      odiIdx = null,
+      koResultIdx = null;
+    this.state = { resultIdx, odiIdx, koResultIdx };
   }
 
   componentDidMount() {
     this.handleOnClickDice();
   }
-  
+
   handleOnClickDice() {
     const simulator = new Simulator();
     const resultIdx = simulator.simulateGroupStage();
     const { odiIdx, koResultIdx } = simulator.simulateKnockOutStage(resultIdx);
-    this.setState({resultIdx, odiIdx, koResultIdx});
+    this.setState({ resultIdx, odiIdx, koResultIdx });
   }
 
   renderHeader() {
@@ -49,23 +49,25 @@ export default class HomePage extends Component {
     );
   }
   renderBody() {
-    const {resultIdx, odiIdx, koResultIdx} = this.state;
+    const { resultIdx, odiIdx, koResultIdx } = this.state;
     if (!resultIdx) {
       return <CircularProgress />;
     }
     return (
       <Box>
-         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
+        <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
         <GroupStageView resultIdx={resultIdx} />
         <GroupStatePointsTableView resultIdx={resultIdx} />
-       
       </Box>
     );
   }
   renderFooter() {
     return (
       <BottomNavigation>
-        <BottomNavigationAction icon={<CasinoIcon />} onClick={this.handleOnClickDice.bind(this)} />
+        <BottomNavigationAction
+          icon={<CasinoIcon />}
+          onClick={this.handleOnClickDice.bind(this)}
+        />
       </BottomNavigation>
     );
   }

@@ -28,16 +28,11 @@ export default function GroupStatePointsTableView({ resultIdx }) {
             <TableRow>
               <TableCell>Team</TableCell>
               <TableCell align="right">Points</TableCell>
-              <TableCell align="right">P</TableCell>
-              <TableCell align="right">W</TableCell>
-              <TableCell align="right">L</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
             {Object.entries(teamToWins).map(function ([teamID, nW], iRow) {
-              const nP = N_GROUP_STAGE_TEAMS - 1;
-              const nL = nP - nW;
               const points = 2 * nW;
               const team = Team.loadFromID(teamID);
               const check = iRow < N_KNOCKOUT_TEAMS ? EMOJI.WINNER : "";
@@ -48,9 +43,6 @@ export default function GroupStatePointsTableView({ resultIdx }) {
                     {" " + check}
                   </TableCell>
                   <TableCell align="right">{points}</TableCell>
-                  <TableCell align="right">{nP}</TableCell>
-                  <TableCell align="right">{nW}</TableCell>
-                  <TableCell align="right">{nL}</TableCell>
                 </TableRow>
               );
             })}
