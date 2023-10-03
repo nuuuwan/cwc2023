@@ -27,7 +27,7 @@ function sleep(ms) {
 }
 
 const FAVORITE_TEAM_NAME = "Sri Lanka";
-const FAVORITE_N_RETRY = 1_000;
+const FAVORITE_N_RETRY = 100;
 export default class HomePage extends Component {
   constructor() {
     super();
@@ -54,7 +54,7 @@ export default class HomePage extends Component {
         if (nRefreshes <= 0) {
           if (isWaitForSriLanka) {
             alert(
-              `Sorry 🥺. ${FAVORITE_TEAM_NAME}'s odds of winning is < 1 in ${FAVORITE_N_RETRY}`
+              `Sorry 🥺.\n${FAVORITE_TEAM_NAME}'s odds of winning are less than 1 in ${FAVORITE_N_RETRY}`
             );
           }
           return;
@@ -66,7 +66,7 @@ export default class HomePage extends Component {
           }
         }
 
-        await sleep(Math.random() * 100 + 50);
+        await sleep(Math.random() * 50 + 25);
         this.handleOnClickDice(
           simulatorMode,
           nRefreshes - 1,
