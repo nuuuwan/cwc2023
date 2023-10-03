@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import HomePage from "./view/pages/HomePage";
 import "./App.css";
 
-const FONT_FAMILY = "Nunito";
+const FONT_FAMILY = "Advent Pro";
 const THEME = createTheme({
   palette: {
     primary: {

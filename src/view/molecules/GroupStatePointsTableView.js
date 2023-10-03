@@ -27,10 +27,11 @@ export default function GroupStatePointsTableView({ resultIdx }) {
           <TableHead>
             <TableRow>
               <TableCell>Team</TableCell>
+              <TableCell align="right">Points</TableCell>
               <TableCell align="right">P</TableCell>
               <TableCell align="right">W</TableCell>
               <TableCell align="right">L</TableCell>
-              <TableCell align="right">Points</TableCell>
+              
             </TableRow>
           </TableHead>
 
@@ -50,11 +51,11 @@ export default function GroupStatePointsTableView({ resultIdx }) {
                     {team.label}
                     {" " + check}
                   </TableCell>
-
+                  <TableCell align="right">{points}</TableCell>
                   <TableCell align="right">{nP}</TableCell>
                   <TableCell align="right">{nW}</TableCell>
                   <TableCell align="right">{nL}</TableCell>
-                  <TableCell align="right">{points}</TableCell>
+                  
                 </TableRow>
               );
             })}
