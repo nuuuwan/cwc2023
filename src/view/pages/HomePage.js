@@ -8,6 +8,7 @@ import {
   BottomNavigation,
   BottomNavigationAction,
   CircularProgress,
+  Alert,
 } from "@mui/material";
 import CasinoIcon from "@mui/icons-material/Casino";
 import PsychologyIcon from "@mui/icons-material/Psychology";
@@ -24,8 +25,9 @@ export default class HomePage extends Component {
     super();
     const resultIdx = null,
       odiIdx = null,
-      koResultIdx = null;
-    this.state = { resultIdx, odiIdx, koResultIdx };
+      koResultIdx = null,
+      simulatorMode = null;
+    this.state = { resultIdx, odiIdx, koResultIdx, simulatorMode };
   }
 
   componentDidMount() {
@@ -36,7 +38,7 @@ export default class HomePage extends Component {
     const simulator = new Simulator(simulatorMode);
     const resultIdx = simulator.simulateGroupStage();
     const { odiIdx, koResultIdx } = simulator.simulateKnockOutStage(resultIdx);
-    this.setState({ resultIdx, odiIdx, koResultIdx });
+    this.setState({ resultIdx, odiIdx, koResultIdx, simulatorMode });
   }
 
   renderHeader() {
@@ -44,7 +46,7 @@ export default class HomePage extends Component {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
               #CWC2023 Simulator
               <span className="superscript">{UPDATE_DATE}</span>
             </Typography>
@@ -54,12 +56,34 @@ export default class HomePage extends Component {
     );
   }
   renderBody() {
-    const { resultIdx, odiIdx, koResultIdx } = this.state;
+    const { resultIdx, odiIdx, koResultIdx, simulatorMode } = this.state;
     if (!resultIdx) {
       return <CircularProgress />;
     }
+
+    let message, subMessage, Icon, color;
+    if (simulatorMode === SimulatorMode.RANDOM) {
+      message = "Random Outcome.";
+      subMessage =
+        "If the outcome of the match is probabilistically selected according to past data.";
+      Icon = CasinoIcon;
+      color = "#f80";
+    } else {
+      message = "Most likely Outcome.";
+      subMessage = "If every match is won by the favourite.";
+      Icon = PsychologyIcon;
+      color = "#080";
+    }
+
     return (
       <Box>
+        <Typography variant="body2" color={color}>
+          <Icon />
+          {message}
+        </Typography>
+        <Typography variant="caption" color={color}>
+          {subMessage}
+        </Typography>
         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
         <GroupStageView resultIdx={resultIdx} />
         <GroupStatePointsTableView resultIdx={resultIdx} />
@@ -67,11 +91,10 @@ export default class HomePage extends Component {
     );
   }
   renderFooter() {
-    
     const onClickRandom = function () {
       this.handleOnClickDice(SimulatorMode.RANDOM);
     }.bind(this);
-    
+
     const onClickML = function () {
       this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD);
     }.bind(this);
