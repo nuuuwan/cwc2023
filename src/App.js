@@ -33,7 +33,7 @@ export default class App extends Component {
   render() {
     return (
       <ThemeProvider theme={THEME}>
-        <HomePage/>
+        <HomePage />
       </ThemeProvider>
     );
   }
