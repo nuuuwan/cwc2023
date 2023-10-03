@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import CasinoIcon from "@mui/icons-material/Casino";
 import PsychologyIcon from "@mui/icons-material/Psychology";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import GroupStageView from "../molecules/GroupStageView";
 import Simulator from "../../nonview/core/Simulator.js";
@@ -19,25 +21,59 @@ import KnockOutStageView from "../molecules/KnockOutStageView";
 
 import { UPDATE_DATE } from "../../nonview/core/VERSION.js";
 import { SimulatorMode } from "../../nonview/core/Simulator.js";
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+const FAVORITE_TEAM_NAME = "Sri Lanka";
+const FAVORITE_N_RETRY = 1_000;
 export default class HomePage extends Component {
   constructor() {
     super();
     const resultIdx = null,
       odiIdx = null,
       koResultIdx = null,
-      simulatorMode = null;
-    this.state = { resultIdx, odiIdx, koResultIdx, simulatorMode };
+      simulatorMode = null,
+      nRefreshes = null;
+    this.state = { resultIdx, odiIdx, koResultIdx, simulatorMode, nRefreshes };
   }
 
   componentDidMount() {
-    this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD);
+    this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD, 0);
   }
 
-  handleOnClickDice(simulatorMode) {
+  handleOnClickDice(simulatorMode, nRefreshes, isWaitForSriLanka) {
     const simulator = new Simulator(simulatorMode);
     const resultIdx = simulator.simulateGroupStage();
     const { odiIdx, koResultIdx } = simulator.simulateKnockOutStage(resultIdx);
-    this.setState({ resultIdx, odiIdx, koResultIdx, simulatorMode });
+    this.setState(
+      { resultIdx, odiIdx, koResultIdx, simulatorMode, nRefreshes },
+
+      async function () {
+        if (nRefreshes <= 0) {
+          if (isWaitForSriLanka) {
+            alert(
+              `Sorry 🥺. ${FAVORITE_TEAM_NAME}'s odds of winning is < 1 in ${FAVORITE_N_RETRY}`
+            );
+          }
+          return;
+        }
+
+        if (isWaitForSriLanka) {
+          if (koResultIdx["Final"].name === FAVORITE_TEAM_NAME) {
+            return;
+          }
+        }
+
+        await sleep(Math.random() * 100 + 50);
+        this.handleOnClickDice(
+          simulatorMode,
+          nRefreshes - 1,
+          isWaitForSriLanka
+        );
+      }.bind(this)
+    );
   }
 
   renderHeader() {
@@ -83,6 +119,7 @@ export default class HomePage extends Component {
         <Typography variant="caption" color={color}>
           {subMessage}
         </Typography>
+
         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
         <GroupStageView resultIdx={resultIdx} />
         <GroupStatePointsTableView resultIdx={resultIdx} />
@@ -91,15 +128,31 @@ export default class HomePage extends Component {
   }
   renderFooter() {
     const onClickRandom = function () {
-      this.handleOnClickDice(SimulatorMode.RANDOM);
+      this.handleOnClickDice(SimulatorMode.RANDOM, 10, false);
     }.bind(this);
 
     const onClickML = function () {
-      this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD);
+      this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD, 0, false);
+    }.bind(this);
+
+    const onClickRefresh = function () {
+      window.location.reload();
+    };
+
+    const onClickHeart = function () {
+      this.handleOnClickDice(SimulatorMode.RANDOM, FAVORITE_N_RETRY, true);
     }.bind(this);
 
     return (
       <BottomNavigation>
+        <BottomNavigationAction
+          icon={<RefreshIcon />}
+          onClick={onClickRefresh}
+        />
+        <BottomNavigationAction
+          icon={<FavoriteIcon />}
+          onClick={onClickHeart}
+        />
         <BottomNavigationAction icon={<PsychologyIcon />} onClick={onClickML} />
         <BottomNavigationAction icon={<CasinoIcon />} onClick={onClickRandom} />
       </BottomNavigation>
