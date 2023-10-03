@@ -13,14 +13,14 @@ import Team from "../../nonview/core/Team.js";
 import { EMOJI } from "../../nonview/core/EMOJI.js";
 
 const N_KNOCKOUT_TEAMS = 4;
-const N_GROUP_STAGE_TEAMS = 10;
+
 
 export default function GroupStatePointsTableView({ resultIdx }) {
   const pointsTable = new GroupStatePointsTable(resultIdx);
   const teamToWins = pointsTable.getTeamToWins();
   return (
     <Box>
-      <Typography variant="h4">Group Stage Points Table</Typography>
+      <Typography variant="h6">Group Stage Points Table</Typography>
 
       <TableContainer component={Paper}>
         <Table>

@@ -2,13 +2,29 @@ import { GROUP_STAGE_ODI_LIST } from "./GROUP_STAGE_ODI_LIST.js";
 import GroupStatePointsTable from "./GroupStatePointsTable.js";
 import ODI from "./ODI.js";
 
+export const SimulatorMode = {
+  RANDOM: "RANDOM",
+  MAXIMUM_LIKELIHOOD: "MAXIMUM_LIKELIHOOD",
+};
+
 export default class Simulator {
+  constructor(mode) {
+    this.mode = mode;
+  }
+
+  get isModeRandom() {
+    return this.mode === SimulatorMode.RANDOM;
+  }
+
+  getWinner(odi) {
+    return this.isModeRandom ? odi.randomWinner : odi.maximumLikelihoodWinner;
+  }
+
   simulateGroupStage() {
     return GROUP_STAGE_ODI_LIST.reduce(function (idx, odi) {
-      const winner = odi.randomWinner;
-      idx[odi.id] = winner;
+      idx[odi.id] = this.getWinner(odi);
       return idx;
-    }, {});
+    }.bind(this), {});
   }
 
   simulateKnockOutStage(resultIdx) {
@@ -30,8 +46,8 @@ export default class Simulator {
       "Kolkata"
     );
 
-    const winnerSemiFinal1 = odiSemiFinal1.randomWinner;
-    const winnerSemiFinal2 = odiSemiFinal2.randomWinner;
+    const winnerSemiFinal1 = this.getWinner(odiSemiFinal1);
+    const winnerSemiFinal2 = this.getWinner(odiSemiFinal2);
 
     const odiFinal = new ODI(
       "Final",
@@ -40,7 +56,7 @@ export default class Simulator {
       winnerSemiFinal2.name,
       "Ahmedabad"
     );
-    const winnerFinal = odiFinal.randomWinner;
+    const winnerFinal = this.getWinner(odiFinal);
 
     const odiIdx = [odiSemiFinal1, odiSemiFinal2, odiFinal].reduce(function (
       idx,

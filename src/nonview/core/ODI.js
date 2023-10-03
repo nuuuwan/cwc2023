@@ -36,6 +36,10 @@ export default class ODI {
     return Math.random() < this.p1 ? this.team1 : this.team2;
   }
 
+  get maximumLikelihoodWinner() {
+    return this.p1 > this.p2 ? this.team1 : this.team2;
+  }
+
   getOther(winner) {
     if (winner === this.team1) {
       return this.team2;

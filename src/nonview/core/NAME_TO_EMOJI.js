@@ -2,7 +2,7 @@ export const NAME_TO_EMOJI = {
   Afghanistan: "🇦🇫",
   Australia: "🇦🇺",
   Bangladesh: "🇧🇩",
-  England: "🇬🇧",
+  England: "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
   India: "🇮🇳",
   Netherlands: "🇳🇱",
   "New Zealand": "🇳🇿",

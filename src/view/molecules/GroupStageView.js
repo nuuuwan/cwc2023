@@ -6,7 +6,7 @@ import { Grid, Box, Typography } from "@mui/material";
 export default function GroupStageView({ resultIdx }) {
   return (
     <Box>
-      <Typography variant="h4">Group Stage</Typography>
+      <Typography variant="h6">Group Stage</Typography>
       <Grid container sx={{ margin: 1, padding: 1 }}>
         {GROUP_STAGE_ODI_LIST.map(function (odi, i) {
           return (
