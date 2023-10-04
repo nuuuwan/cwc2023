@@ -47,7 +47,9 @@ export default class HomePage extends Component {
   }
 
   componentDidMount() {
-    this.handleOnClickDice(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
+    this.buildHistory();
+    this.handleDoSimulate(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
+    
   }
 
   buildHistory() {
@@ -61,7 +63,7 @@ export default class HomePage extends Component {
     this.setState({ historyList });
   }
 
-  handleOnClickDice(simulatorMode, nIncr) {
+  handleDoSimulate(simulatorMode, nIncr) {
     const simulator = new Simulator(simulatorMode);
     const {resultIdx, cumInvPWinner} = simulator.simulateGroupStage();
     const {odiIdx, koResultIdx} = simulator.simulateKnockOutStage(resultIdx);
@@ -131,15 +133,15 @@ export default class HomePage extends Component {
   }
   renderFooter() {
     const onClickRandomOne = function () {
-      this.handleOnClickDice(SIMULATOR_MODE.RANDOM, 1);
+      this.handleDoSimulate(SIMULATOR_MODE.RANDOM, 1);
     }.bind(this);
 
     const onClickMaximumLikelihood = function () {
-      this.handleOnClickDice(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
+      this.handleDoSimulate(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
     }.bind(this);
 
     const onClickMinimumLikelihood = function () {
-      this.handleOnClickDice(SIMULATOR_MODE.MINIMUM_LIKELIHOOD, 1);
+      this.handleDoSimulate(SIMULATOR_MODE.MINIMUM_LIKELIHOOD, 1);
     }.bind(this);
 
     const onClickRandom = function () {
