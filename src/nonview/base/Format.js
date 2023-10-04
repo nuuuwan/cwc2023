@@ -86,7 +86,7 @@ export default class Format {
       [1_000_000, "M"],
       [1_000, "K"],
     ]) {
-      if (x > v) {
+      if (x >= v) {
         return (
           (x / v).toLocaleString(undefined, { maximumSignificantDigits: 2 }) +
           suffix

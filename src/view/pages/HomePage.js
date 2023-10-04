@@ -10,7 +10,6 @@ import BigTableView from "../molecules/BigTableView";
 
 import { SIMULATOR_MODE } from "../../nonview/analytics/SimulatorMode.js";
 import React from "react";
-import Format from "../../nonview/base/Format.js";
 import { N_MONTE_CARLO_SIMULATIONS } from "../../nonview/constants/STATISTICS.js";
 import HomePageFooter from "../molecules/HomePageFooter";
 import HomePageHeader from "../molecules/HomePageHeader";
@@ -85,18 +84,15 @@ export default class HomePage extends Component {
     this.setState({ odiStateIdx });
   }
 
-  renderHeader(n, teamIDToSemiFinalist) {
-    return <HomePageHeader n={n} teamIDToSemiFinalist={teamIDToSemiFinalist} />;
+  renderHeader(n, teamIDToWinner) {
+    return <HomePageHeader n={n} teamIDToWinner={teamIDToWinner} />;
   }
   renderBody(
     resultIdx,
-    cumInvPWinner,
     odiIdx,
     koResultIdx,
     simulatorMode,
     odiStateIdx,
-
-    perMatchProb,
     n,
     teamIDToWinner,
     teamIDToFinalist,
@@ -119,9 +115,6 @@ export default class HomePage extends Component {
 
         <Typography variant="body1" color={simulatorMode.color}>
           {"That is " + simulatorMode.subMessage + " "}
-          The likelihood of this exact sequence of results is about
-          <strong> 1 in {" " + Format.int(cumInvPWinner)}</strong>, or on
-          average <strong>{Format.percent(perMatchProb)}</strong> per match.
         </Typography>
 
         <KnockOutStageView
@@ -157,7 +150,6 @@ export default class HomePage extends Component {
   render() {
     const {
       resultIdx,
-      cumInvPWinner,
       odiIdx,
       koResultIdx,
       simulatorMode,
@@ -167,9 +159,7 @@ export default class HomePage extends Component {
       return <CircularProgress />;
     }
 
-    const nMatches = 45 + 3; // TODO: Find completed matches
-    const perMatchProb = Math.exp(-(Math.log(cumInvPWinner) / nMatches));
-
+    
     const historyList = this.buildHistory();
     const bigTable = new BigTable(historyList);
     const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
@@ -177,18 +167,14 @@ export default class HomePage extends Component {
 
     return (
       <Box sx={STYLE.ALL}>
-        <Box sx={STYLE.HEADER}>
-          {this.renderHeader(n, teamIDToSemiFinalist)}
-        </Box>
+        <Box sx={STYLE.HEADER}>{this.renderHeader(n, teamIDToWinner)}</Box>
         <Box sx={STYLE.BODY}>
           {this.renderBody(
             resultIdx,
-            cumInvPWinner,
             odiIdx,
             koResultIdx,
             simulatorMode,
             odiStateIdx,
-            perMatchProb,
             n,
             teamIDToWinner,
             teamIDToFinalist,
