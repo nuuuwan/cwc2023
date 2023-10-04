@@ -2,28 +2,23 @@ import { Component } from "react";
 import { STYLE } from "./HomePageStyle";
 import {
   Box,
-  AppBar,
-  Toolbar,
   Typography,
-  BottomNavigation,
-  BottomNavigationAction,
   CircularProgress,
   Grid,
 } from "@mui/material";
-
-import RefreshIcon from "@mui/icons-material/Refresh";
-import TableRowsIcon from "@mui/icons-material/TableRows";
 
 import GroupStageView from "../molecules/GroupStageView";
 import Simulator from "../../nonview/analytics/Simulator.js";
 
 import KnockOutStageView from "../molecules/KnockOutStageView";
 import BigTableView from "../molecules/BigTableView";
-import { UPDATE_DATE } from "../../nonview/constants/VERSION.js";
+
 import { SIMULATOR_MODE } from "../../nonview/analytics/SimulatorMode.js";
 import React from "react";
 import Format from "../../nonview/base/Format.js";
 import { N_MONTE_CARLO_SIMULATIONS } from "../../nonview/constants/STATISTICS.js";
+import HomePageFooter from "../molecules/HomePageFooter";
+import HomePageHeader from "../molecules/HomePageHeader";
 
 export default class HomePage extends Component {
   constructor() {
@@ -95,18 +90,7 @@ export default class HomePage extends Component {
   }
 
   renderHeader() {
-    return (
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              #CWC2023Simulator
-              <span className="superscript">Updated {UPDATE_DATE}</span>
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </Box>
-    );
+    return <HomePageHeader />;
   }
   renderBody() {
     const {
@@ -166,42 +150,11 @@ export default class HomePage extends Component {
     );
   }
   renderFooter() {
-    const onClickRandom = function () {
-      this.myRefBigTable.scrollIntoView({ behavior: "smooth" });
-    }.bind(this);
-
-    const onClickRefresh = function () {
-      window.location.reload();
-    };
-
-    const simulatorButtons = Object.values(SIMULATOR_MODE).map(
-      function (simulatorMode) {
-        const onClick = function () {
-          this.handleDoSimulate(simulatorMode);
-        }.bind(this);
-
-        return (
-          <BottomNavigationAction
-            key={"simulateButton-" + simulatorMode.id}
-            icon={<simulatorMode.Icon />}
-            onClick={onClick}
-          />
-        );
-      }.bind(this)
-    );
-
     return (
-      <BottomNavigation>
-        <BottomNavigationAction
-          icon={<RefreshIcon />}
-          onClick={onClickRefresh}
-        />
-        <BottomNavigationAction
-          icon={<TableRowsIcon />}
-          onClick={onClickRandom}
-        />
-        {simulatorButtons}
-      </BottomNavigation>
+      <HomePageFooter
+        myRefBigTable={this.myRefBigTable}
+        handleDoSimulate={this.handleDoSimulate.bind(this)}
+      />
     );
   }
   render() {
