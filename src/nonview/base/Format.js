@@ -6,7 +6,8 @@ export default class Format {
   static percent(x) {
     return x.toLocaleString(undefined, {
       style: "percent",
-      minimumFractionDigits: 0,
+     
+      maximumFractionDigits: 0,
     });
   }
 
@@ -41,7 +42,10 @@ export default class Format {
           <span style={style}>{" ± " + Format.percent(span)}</span>
         </div>
         <div style={style}>
-          {Format.int(mean)} of {Format.int(n)}
+          {Format.int(mean)} 
+          <span style={{fontSize:"75%"}}>
+          {' of ' + Format.int(n)}
+          </span>
         </div>
       </div>
     );
@@ -56,8 +60,9 @@ export default class Format {
   }
 
   static int(x) {
-    return x.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-    });
+    if (x > 1_000) {
+      return (x / 1_000).toLocaleString(undefined, {maximumSignificantDigits:2}) + 'K';
+    }
+    return (x ).toLocaleString(undefined, {maximumSignificantDigits:2}) ;
   }
 }
