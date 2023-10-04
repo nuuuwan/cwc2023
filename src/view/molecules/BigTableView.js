@@ -56,10 +56,10 @@ function BigTableInnerView({
                   <TableCell align="right" sx={{ fontSize: "150%" }}>
                     {Format.binomial(pWinner, n)}
                   </TableCell>
-                  <TableCell align="right" sx={{ fontSize: "150%" }}>
+                  <TableCell align="right" sx={{ fontSize: "100%" }}>
                     {Format.binomial(pFinalist, n)}
                   </TableCell>
-                  <TableCell align="right" sx={{ fontSize: "150%" }}>
+                  <TableCell align="right" sx={{ fontSize: "100%" }}>
                     {Format.binomial(pSemiFinalist, n)}
                   </TableCell>
                 </TableRow>

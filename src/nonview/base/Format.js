@@ -43,9 +43,6 @@ export default class Format {
         </div>
         <div style={style}>
           {Format.int(mean)} 
-          <span style={{fontSize:"75%"}}>
-          {' of ' + Format.int(n)}
-          </span>
         </div>
       </div>
     );
