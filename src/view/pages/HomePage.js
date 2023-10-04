@@ -23,8 +23,8 @@ import { UPDATE_DATE } from "../../nonview/constants/VERSION.js";
 import { SIMULATOR_MODE } from "../../nonview/analytics/SimulatorMode.js";
 import React from "react";
 import Format from "../../nonview/base/Format.js";
+import { N_MONTE_CARLO_SIMULATIONS } from "../../nonview/constants/STATISTICS.js";
 
-const N_RETRY = 10_000;
 export default class HomePage extends Component {
   constructor() {
     super();
@@ -53,7 +53,7 @@ export default class HomePage extends Component {
   buildHistory() {
     let historyList = [];
     const simulator = new Simulator(SIMULATOR_MODE.RANDOM);
-    for (let i = 0; i < N_RETRY; i++) {
+    for (let i = 0; i < N_MONTE_CARLO_SIMULATIONS; i++) {
       const { resultIdx, cumInvPWinner } = simulator.simulateGroupStage();
       const { odiIdx, koResultIdx } =
         simulator.simulateKnockOutStage(resultIdx);

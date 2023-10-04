@@ -53,13 +53,13 @@ function BigTableInnerView({
                     <TeamView team={team} />
                   </TableCell>
                   <TableCell align="right" sx={{ fontSize: "100%" }}>
-                    {Format.binomial(pWinner, n)}
+                    {Format.percent(pWinner)}
                   </TableCell>
                   <TableCell align="right" sx={{ fontSize: "100%" }}>
-                    {Format.binomial(pFinalist, n)}
+                    {Format.percent(pFinalist)}
                   </TableCell>
                   <TableCell align="right" sx={{ fontSize: "100%" }}>
-                    {Format.binomial(pSemiFinalist, n)}
+                    {Format.percent(pSemiFinalist)}
                   </TableCell>
                 </TableRow>
               );

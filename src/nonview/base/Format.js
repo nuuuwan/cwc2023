@@ -1,4 +1,4 @@
-import { MIN_STATISTICAL_N, MIN_NO_CHANCE_N } from "../constants/STATISTICS.js";
+import { MIN_NO_CHANCE_N } from "../constants/STATISTICS.js";
 
 import { EMOJI } from "../constants/EMOJI.js";
 
@@ -23,38 +23,23 @@ export default class Format {
     return "#008";
   }
 
-  static percent(x) {
-    const s = x.toLocaleString(undefined, {
-      style: "percent",
+  static percent(p) {
+    const EPSILON = 0.5 / MIN_NO_CHANCE_N;
+    let s = "";
+    if (p < EPSILON) {
+      s =  EMOJI.LOSER;
+    } else if (p > 1 - EPSILON) {
+      s =  EMOJI.WINNER;
+    } else {
+      s = p.toLocaleString(undefined, {
+        style: "percent",
 
-      maximumFractionDigits: 0,
-    });
-    const color = Format.getPercentColor(x);
+        maximumFractionDigits: 0,
+      });
+    }
+
+    const color = Format.getPercentColor(p);
     return <span style={{ color }}>{s}</span>;
-  }
-
-  static binomial(p, n) {
-    const EPSILON = 1.0 / MIN_NO_CHANCE_N;
-
-    if (n < MIN_STATISTICAL_N) {
-      return "?";
-    }
-
-    if (n >= MIN_NO_CHANCE_N) {
-      if (p < EPSILON) {
-        return EMOJI.LOSER;
-      }
-      if (p > 1 - EPSILON) {
-        return EMOJI.WINNER;
-      }
-    }
-
-    const q = 1 - p;
-    const stdev = Math.sqrt(n * p * q);
-    const span = (3 * stdev) / n;
-    const opacity = span < p ? 1 : 0.25;
-
-    return <div style={{ opacity, color: "#f80" }}>{Format.percent(p)}</div>;
   }
 
   static matchDate(date) {
