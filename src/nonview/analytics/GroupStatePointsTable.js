@@ -1,5 +1,5 @@
 import Team, { TEAM } from "../core/Team.js";
-export default class GroupStagewinsTable {
+export default class GroupStagePointsTable {
   constructor(resultIdx) {
     this.resultIdx = resultIdx;
   }

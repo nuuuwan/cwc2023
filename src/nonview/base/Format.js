@@ -72,6 +72,13 @@ export default class Format {
     });
   }
 
+  static float(x) {
+    return x.toLocaleString(undefined, {
+      maximumFractionDigits: 1,
+      minimumFractionDigits: 1,
+    });
+  }
+
   static bigInt(x) {
     return x.toExponential(0);
   }

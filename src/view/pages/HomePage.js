@@ -77,7 +77,8 @@ export default class HomePage extends Component {
     n,
     teamIDToWinner,
     teamIDToFinalist,
-    teamIDToSemiFinalist
+    teamIDToSemiFinalist,
+    teamIDToTotalPosition
   ) {
     return (
       <Box color={simulatorMode.color}>
@@ -116,6 +117,7 @@ export default class HomePage extends Component {
           teamIDToWinner={teamIDToWinner}
           teamIDToFinalist={teamIDToFinalist}
           teamIDToSemiFinalist={teamIDToSemiFinalist}
+          teamIDToTotalPosition={teamIDToTotalPosition}
         />
       </Box>
     );
@@ -136,8 +138,13 @@ export default class HomePage extends Component {
 
     const historyList = this.buildHistory();
     const bigTable = new BigTable(historyList);
-    const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
-      bigTable.getTeamProbs();
+    const {
+      n,
+      teamIDToWinner,
+      teamIDToFinalist,
+      teamIDToSemiFinalist,
+      teamIDToTotalPosition,
+    } = bigTable.getTeamProbs();
 
     return (
       <Box sx={STYLE.ALL}>
@@ -152,7 +159,8 @@ export default class HomePage extends Component {
             n,
             teamIDToWinner,
             teamIDToFinalist,
-            teamIDToSemiFinalist
+            teamIDToSemiFinalist,
+            teamIDToTotalPosition
           )}
         </Box>
         <Box sx={STYLE.FOOTER}>{this.renderFooter()}</Box>

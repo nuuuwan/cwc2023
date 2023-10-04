@@ -10,9 +10,9 @@ export default class BigTable {
     let teamIDToWinner = Team.initTeamIDToX(0);
     let teamIDToFinalist = Team.initTeamIDToX(0);
     let teamIDToSemiFinalist = Team.initTeamIDToX(0);
-
+    let teamIDToTotalPosition = Team.initTeamIDToX(0);
     for (let history of this.historyList) {
-      const { koResultIdx, odiIdx } = history;
+      const { koResultIdx, odiIdx, resultIdx } = history;
 
       // Winner
       const winner = koResultIdx["Final"];
@@ -37,13 +37,33 @@ export default class BigTable {
       for (let semiFinalist of semiFinalists) {
         teamIDToSemiFinalist[semiFinalist.id] += 1;
       }
+
+      // Total Points
+      let teamIDToPoints = Team.initTeamIDToX(0);
+      for (let team of Object.values(resultIdx)) {
+        teamIDToPoints[team.id] += 1;
+      }
+      teamIDToPoints = Dict.sortByValue(teamIDToPoints);
+      const orderedTeamIDs = Object.keys(teamIDToPoints);
+
+      for (let iOrder in orderedTeamIDs) {
+        const teamID = orderedTeamIDs[iOrder];
+        teamIDToTotalPosition[teamID] += parseInt(iOrder) + 1;
+      }
     }
 
     // Sort
     teamIDToWinner = Dict.sortByValue(teamIDToWinner);
     teamIDToFinalist = Dict.sortByValue(teamIDToFinalist);
     teamIDToSemiFinalist = Dict.sortByValue(teamIDToSemiFinalist);
+    teamIDToTotalPosition = Dict.sortByValue(teamIDToTotalPosition);
 
-    return { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist };
+    return {
+      n,
+      teamIDToWinner,
+      teamIDToFinalist,
+      teamIDToSemiFinalist,
+      teamIDToTotalPosition,
+    };
   }
 }

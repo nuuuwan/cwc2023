@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import { MIN_STATISTICAL_N } from "../../nonview/constants/STATISTICS.js";
 import { UPDATE_DATE } from "../../nonview/constants/VERSION.js";
 import {
   Table,
@@ -19,6 +18,7 @@ function BigTableInnerView({
   teamIDToWinner,
   teamIDToFinalist,
   teamIDToSemiFinalist,
+  teamIDToTotalPosition,
 }) {
   return (
     <Box>
@@ -35,35 +35,39 @@ function BigTableInnerView({
               <TableCell align="right">{"Winner"}</TableCell>
               <TableCell align="right">{"Final"}</TableCell>
               <TableCell align="right">{"SF"}</TableCell>
+              <TableCell align="right">{"eRank"}</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {Object.entries(teamIDToWinner).map(function (
-              [teamName, nWinner],
-              iRow
-            ) {
-              const team = new Team(teamName);
-              const pWinner = nWinner / n;
-              const pFinalist = teamIDToFinalist[teamName] / n;
-              const pSemiFinalist = teamIDToSemiFinalist[teamName] / n;
-              return (
-                <TableRow key={teamName}>
-                  <TableCell component="th" scope="row">
-                    <TeamView team={team} />
-                  </TableCell>
-                  <TableCell align="right" sx={{ fontSize: "100%" }}>
-                    {Format.percent(pWinner)}
-                  </TableCell>
-                  <TableCell align="right" sx={{ fontSize: "100%" }}>
-                    {Format.percent(pFinalist)}
-                  </TableCell>
-                  <TableCell align="right" sx={{ fontSize: "100%" }}>
-                    {Format.percent(pSemiFinalist)}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+            {Object.keys(teamIDToTotalPosition)
+              .reverse()
+              .map(function (teamID) {
+                const team = new Team(teamID);
+                const pWinner = teamIDToWinner[teamID] / n;
+                const pFinalist = teamIDToFinalist[teamID] / n;
+                const pSemiFinalist = teamIDToSemiFinalist[teamID] / n;
+                const eRank = teamIDToTotalPosition[teamID] / n;
+                return (
+                  <TableRow key={teamID}>
+                    <TableCell component="th" scope="row">
+                      <TeamView team={team} />
+                    </TableCell>
+                    <TableCell align="right" sx={{ fontSize: "100%" }}>
+                      {Format.percent(pWinner)}
+                    </TableCell>
+                    <TableCell align="right" sx={{ fontSize: "100%" }}>
+                      {Format.percent(pFinalist)}
+                    </TableCell>
+                    <TableCell align="right" sx={{ fontSize: "100%" }}>
+                      {Format.percent(pSemiFinalist)}
+                    </TableCell>
+                    <TableCell align="right" sx={{ fontSize: "100%" }}>
+                      {Format.float(eRank)}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -76,23 +80,18 @@ export default function BigTableView({
   teamIDToWinner,
   teamIDToFinalist,
   teamIDToSemiFinalist,
+  teamIDToTotalPosition,
 }) {
   return (
     <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
       <Typography variant="h5">#CWC2023 Probabilities</Typography>
-      {n < MIN_STATISTICAL_N ? (
-        <Alert severity="warning">
-          Run at least {MIN_STATISTICAL_N} simulations to generate and display
-          statistics.
-        </Alert>
-      ) : (
-        <BigTableInnerView
-          n={n}
-          teamIDToWinner={teamIDToWinner}
-          teamIDToFinalist={teamIDToFinalist}
-          teamIDToSemiFinalist={teamIDToSemiFinalist}
-        />
-      )}
+      <BigTableInnerView
+        n={n}
+        teamIDToWinner={teamIDToWinner}
+        teamIDToFinalist={teamIDToFinalist}
+        teamIDToSemiFinalist={teamIDToSemiFinalist}
+        teamIDToTotalPosition={teamIDToTotalPosition}
+      />
     </Box>
   );
 }
