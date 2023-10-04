@@ -1,4 +1,3 @@
-import Team from "./Team";
 import Venue from "./Venue";
 import Format from "../base/Format";
 import MatchDate from "./MatchDate";
@@ -19,7 +18,7 @@ export default class ODI {
     this.team1 = team1;
     this.team2 = team2;
     this.venue = new Venue(venue);
-    this.winner = winner ? new Team(winner) : null;
+    this.winner = winner ? winner : null;
     this.odds1 = odds1;
     this.odds2 = odds2;
   }

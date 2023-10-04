@@ -1,3 +1,5 @@
+import Team from "./Team.js";
+
 export default class BigTable {
   constructor(historyList) {
     this.historyList = historyList;
@@ -5,28 +7,22 @@ export default class BigTable {
 
   getTeamProbs() {
     const n = this.historyList.length;
-    let teamToWinner = {};
-    let teamToFinalist = {};
-    let teamToSemiFinalist = {};
+    let teamIDToWinner = Team.initTeamIDToX(0);
+    let teamIDToFinalist = Team.initTeamIDToX(0);
+    let teamIDToSemiFinalist = Team.initTeamIDToX(0);
 
     for (let history of this.historyList) {
       const { koResultIdx, odiIdx } = history;
 
       // Winner
-      const winner = koResultIdx["Final"].name;
-      if (!teamToWinner[winner]) {
-        teamToWinner[winner] = 0;
-      }
-      teamToWinner[winner] += 1;
+      const winner = koResultIdx["Final"];
+      teamIDToWinner[winner.id] += 1;
 
       // Finalist
       const odiFinal = odiIdx["Final"];
       const finalists = [odiFinal.team1, odiFinal.team2];
       for (let finalist of finalists) {
-        if (!teamToFinalist[finalist.name]) {
-          teamToFinalist[finalist.name] = 0;
-        }
-        teamToFinalist[finalist.name] += 1;
+        teamIDToFinalist[finalist.id] += 1;
       }
 
       // Semi-Finalist
@@ -39,16 +35,13 @@ export default class BigTable {
         odiSF2.team2,
       ];
       for (let semiFinalist of semiFinalists) {
-        if (!teamToSemiFinalist[semiFinalist.name]) {
-          teamToSemiFinalist[semiFinalist.name] = 0;
-        }
-        teamToSemiFinalist[semiFinalist.name] += 1;
+        teamIDToSemiFinalist[semiFinalist.id] += 1;
       }
     }
-    teamToWinner = Object.fromEntries(
-      Object.entries(teamToWinner).sort(([, a], [, b]) => b - a)
+    teamIDToWinner = Object.fromEntries(
+      Object.entries(teamIDToWinner).sort(([, a], [, b]) => b - a)
     );
 
-    return { n, teamToWinner, teamToFinalist, teamToSemiFinalist };
+    return { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist };
   }
 }

@@ -13,7 +13,7 @@ export default class GroupStagewinsTable {
         const randomTerm = Math.random() * 0.0001;
         idx[winner.id] += 1 + randomTerm;
         return idx;
-      }, Team.emptyDict())
+      }, Team.initTeamIDToX(0))
     )
       .sort(function ([idA, winsA], [idB, winsB]) {
         return winsB - winsA;
@@ -25,8 +25,8 @@ export default class GroupStagewinsTable {
   }
 
   getTeams() {
-    const teamToWins = this.getTeamToWins();
-    return Object.keys(teamToWins).map(function (id) {
+    const teamIDToWins = this.getTeamToWins();
+    return Object.keys(teamIDToWins).map(function (id) {
       return TEAM[id];
     });
   }

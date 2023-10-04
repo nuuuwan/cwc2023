@@ -17,7 +17,7 @@ import BigTable from "../../nonview/core/BigTable.js";
 
 export default function BigTableView({ historyList }) {
   const bigTable = new BigTable(historyList);
-  const { n, teamToWinner, teamToFinalist, teamToSemiFinalist } =
+  const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
     bigTable.getTeamProbs();
 
   return (
@@ -40,14 +40,14 @@ export default function BigTableView({ historyList }) {
           </TableHead>
 
           <TableBody>
-            {Object.entries(teamToWinner).map(function (
+            {Object.entries(teamIDToWinner).map(function (
               [teamName, nWinner],
               iRow
             ) {
               const team = new Team(teamName);
               const pWinner = nWinner / n;
-              const pFinalist = teamToFinalist[teamName] / n;
-              const pSemiFinalist = teamToSemiFinalist[teamName] / n;
+              const pFinalist = teamIDToFinalist[teamName] / n;
+              const pSemiFinalist = teamIDToSemiFinalist[teamName] / n;
               return (
                 <TableRow key={teamName}>
                   <TableCell component="th" scope="row">

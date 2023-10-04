@@ -15,7 +15,7 @@ const N_KNOCKOUT_TEAMS = 4;
 
 export default function GroupStatePointsTableView({ resultIdx }) {
   const pointsTable = new GroupStatePointsTable(resultIdx);
-  const teamToWins = pointsTable.getTeamToWins();
+  const teamIDToWins = pointsTable.getTeamToWins();
   return (
     <Box sx={{ maxWidth: 320 }}>
       <Typography variant="h4">Group Stage Points Table</Typography>
@@ -30,7 +30,7 @@ export default function GroupStatePointsTableView({ resultIdx }) {
           </TableHead>
 
           <TableBody>
-            {Object.entries(teamToWins).map(function ([teamID, nW], iRow) {
+            {Object.entries(teamIDToWins).map(function ([teamID, nW], iRow) {
               const points = 2 * nW;
               const team = Team.loadFromID(teamID);
               const isWinner = iRow < N_KNOCKOUT_TEAMS;
