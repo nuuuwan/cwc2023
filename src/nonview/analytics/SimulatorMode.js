@@ -13,13 +13,6 @@ export default class SimulatorMode {
 }
 
 export const SIMULATOR_MODE = {
-  RANDOM: new SimulatorMode(
-    "RANDOM",
-    "Random Outcome",
-    "if the outcome of each match is randomly selected based on passed outcomes",
-    Format.getPercentColor(0.5),
-    CasinoIcon
-  ),
   MAXIMUM_LIKELIHOOD: new SimulatorMode(
     "MAXIMUM_LIKELIHOOD",
     "Most likely outcome",
@@ -33,5 +26,12 @@ export const SIMULATOR_MODE = {
     "if every match is won by the underdog.",
     Format.getPercentColor(0.1),
     ThumbDownIcon
+  ),
+  RANDOM: new SimulatorMode(
+    "RANDOM",
+    "Random Outcome",
+    "if the outcome of each match is randomly selected based on passed outcomes",
+    Format.getPercentColor(0.5),
+    CasinoIcon
   ),
 };

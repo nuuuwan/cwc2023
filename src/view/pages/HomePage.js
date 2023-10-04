@@ -8,8 +8,9 @@ import {
   BottomNavigation,
   BottomNavigationAction,
   CircularProgress,
+  Grid,
 } from "@mui/material";
-import CasinoIcon from "@mui/icons-material/Casino";
+
 import RefreshIcon from "@mui/icons-material/Refresh";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 
@@ -22,9 +23,6 @@ import { UPDATE_DATE } from "../../nonview/constants/VERSION.js";
 import { SIMULATOR_MODE } from "../../nonview/analytics/SimulatorMode.js";
 import React from "react";
 import Format from "../../nonview/base/Format.js";
-
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
 const N_RETRY = 10_000;
 export default class HomePage extends Component {
@@ -50,37 +48,37 @@ export default class HomePage extends Component {
   componentDidMount() {
     this.buildHistory();
     this.handleDoSimulate(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
-    
   }
 
   buildHistory() {
     let historyList = [];
     const simulator = new Simulator(SIMULATOR_MODE.RANDOM);
     for (let i = 0; i < N_RETRY; i++) {
-      const {resultIdx, cumInvPWinner} = simulator.simulateGroupStage();
-      const {odiIdx, koResultIdx} = simulator.simulateKnockOutStage(resultIdx);
+      const { resultIdx, cumInvPWinner } = simulator.simulateGroupStage();
+      const { odiIdx, koResultIdx } =
+        simulator.simulateKnockOutStage(resultIdx);
       historyList.push({ resultIdx, cumInvPWinner, odiIdx, koResultIdx });
     }
     this.setState({ historyList });
   }
 
   handleDoSimulate(simulatorMode) {
-    
-    
     const simulator = new Simulator(simulatorMode);
-    const {resultIdx, cumInvPWinner} = simulator.simulateGroupStage();
-    const {odiIdx, koResultIdx} = simulator.simulateKnockOutStage(resultIdx);
+    const { resultIdx, cumInvPWinner } = simulator.simulateGroupStage();
+    const { odiIdx, koResultIdx } = simulator.simulateKnockOutStage(resultIdx);
 
-    this.setState({
-      resultIdx,
-      cumInvPWinner,
-      odiIdx,
-      koResultIdx,
-      simulatorMode,
-      
-    },function() {
-      this.myRefSimulation.scrollIntoView({ behavior: "smooth" });
-    }.bind(this));
+    this.setState(
+      {
+        resultIdx,
+        cumInvPWinner,
+        odiIdx,
+        koResultIdx,
+        simulatorMode,
+      },
+      function () {
+        this.myRefSimulation.scrollIntoView({ behavior: "smooth" });
+      }.bind(this)
+    );
   }
 
   renderHeader() {
@@ -113,21 +111,25 @@ export default class HomePage extends Component {
     const nMatches = 45 + 3; // TODO: Find completed matches
     const perMatchProb = Math.exp(-(Math.log(cumInvPWinner) / nMatches));
     return (
-      <Box>
+      <Box color={simulatorMode.color}>
         <div ref={(ref) => (this.myRefSimulation = ref)}></div>
-        <Typography variant="h6" color={simulatorMode.color}>
-          <simulatorMode.Icon />
-          <strong>{simulatorMode.message}</strong>
-          <br />
-        </Typography>
+
+        <Grid container direction="row" alignItems="center">
+          <Grid item>
+            <simulatorMode.Icon />
+          </Grid>
+          <Grid item>
+            <Typography variant="h5">
+              <strong>{simulatorMode.message}</strong>
+            </Typography>
+          </Grid>
+        </Grid>
+
         <Typography variant="body1" color={simulatorMode.color}>
-          {"That is " + simulatorMode.subMessage}
-          <br />
+          {"That is " + simulatorMode.subMessage + " "}
           The likelihood of this exact sequence of results is about
-          <br />
           <strong> 1 in {" " + Format.int(cumInvPWinner)}</strong>, or on
           average <strong>{Format.percent(perMatchProb)}</strong> per match.
-          <br />
         </Typography>
 
         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
@@ -139,18 +141,6 @@ export default class HomePage extends Component {
     );
   }
   renderFooter() {
-    const onClickRandomOne = function () {
-      this.handleDoSimulate(SIMULATOR_MODE.RANDOM);
-    }.bind(this);
-
-    const onClickMaximumLikelihood = function () {
-      this.handleDoSimulate(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD);
-    }.bind(this);
-
-    const onClickMinimumLikelihood = function () {
-      this.handleDoSimulate(SIMULATOR_MODE.MINIMUM_LIKELIHOOD);
-    }.bind(this);
-
     const onClickRandom = function () {
       this.myRefBigTable.scrollIntoView({ behavior: "smooth" });
     }.bind(this);
@@ -158,6 +148,22 @@ export default class HomePage extends Component {
     const onClickRefresh = function () {
       window.location.reload();
     };
+
+    const simulatorButtons = Object.values(SIMULATOR_MODE).map(
+      function (simulatorMode) {
+        const onClick = function () {
+          this.handleDoSimulate(simulatorMode);
+        }.bind(this);
+
+        return (
+          <BottomNavigationAction
+            key={"simulateButton-" + simulatorMode.id}
+            icon={<simulatorMode.Icon />}
+            onClick={onClick}
+          />
+        );
+      }.bind(this)
+    );
 
     return (
       <BottomNavigation>
@@ -169,18 +175,7 @@ export default class HomePage extends Component {
           icon={<TableRowsIcon />}
           onClick={onClickRandom}
         />
-        <BottomNavigationAction
-          icon={<ThumbUpIcon />}
-          onClick={onClickMaximumLikelihood}
-        />
-        <BottomNavigationAction
-          icon={<ThumbDownIcon />}
-          onClick={onClickMinimumLikelihood}
-        />
-        <BottomNavigationAction
-          icon={<CasinoIcon />}
-          onClick={onClickRandomOne}
-        />
+        {simulatorButtons}
       </BottomNavigation>
     );
   }
