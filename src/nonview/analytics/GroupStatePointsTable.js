@@ -10,7 +10,7 @@ export default class GroupStagewinsTable {
         if (!idx[winner.id]) {
           idx[winner.id] = 0;
         }
-        const randomTerm = Math.random() * 0.0001;
+        const randomTerm = winner.pWinner * 0.0001;
         idx[winner.id] += 1 + randomTerm;
         return idx;
       }, Team.initTeamIDToX(0))

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { STYLE } from "./HomePageStyle";
-import { Box, Typography, CircularProgress, Grid } from "@mui/material";
+import { Box, Typography, Grid } from "@mui/material";
 
 import GroupStageView from "../molecules/GroupStageView";
 import Simulator from "../../nonview/analytics/Simulator.js";
@@ -18,17 +18,9 @@ import BigTable from "../../nonview/analytics/BigTable.js";
 export default class HomePage extends Component {
   constructor() {
     super();
-    const resultIdx = null;
-    const cumInvPWinner = null;
-    const odiIdx = null;
-    const koResultIdx = null;
-    const odiStateIdx = {};
     this.state = {
-      resultIdx,
-      cumInvPWinner,
-      odiIdx,
-      koResultIdx,
-      odiStateIdx,
+      simulatorMode: SIMULATOR_MODE.MAXIMUM_LIKELIHOOD,
+      odiStateIdx: {},
     };
 
     this.myRefBigTable = React.createRef();
@@ -53,23 +45,9 @@ export default class HomePage extends Component {
   }
 
   handleDoSimulate(simulatorMode) {
-    const { odiStateIdx } = this.state;
-    const simulator = new Simulator(simulatorMode, odiStateIdx);
-    const { resultIdx, cumInvPWinner } = simulator.simulateGroupStage();
-    const { odiIdx, koResultIdx } = simulator.simulateKnockOutStage(resultIdx);
-
-    this.setState(
-      {
-        resultIdx,
-        cumInvPWinner,
-        odiIdx,
-        koResultIdx,
-        simulatorMode,
-      },
-      function () {
-        this.myRefSimulation.scrollIntoView({ behavior: "smooth" });
-      }.bind(this)
-    );
+    this.setState({
+      simulatorMode,
+    });
   }
 
   handleOnClickODI(odi) {
@@ -81,7 +59,10 @@ export default class HomePage extends Component {
     } else {
       odiStateIdx[odi.id] = 0;
     }
-    this.setState({ odiStateIdx });
+    this.setState({
+      odiStateIdx,
+      simulatorMode: SIMULATOR_MODE.MAXIMUM_LIKELIHOOD,
+    });
   }
 
   renderHeader(n, teamIDToWinner) {
@@ -148,18 +129,11 @@ export default class HomePage extends Component {
     );
   }
   render() {
-    const {
-      resultIdx,
-      odiIdx,
-      koResultIdx,
-      simulatorMode,
-      odiStateIdx,
-    } = this.state;
-    if (!resultIdx) {
-      return <CircularProgress />;
-    }
+    const { simulatorMode, odiStateIdx } = this.state;
+    const simulator = new Simulator(simulatorMode, odiStateIdx);
+    const { resultIdx } = simulator.simulateGroupStage();
+    const { odiIdx, koResultIdx } = simulator.simulateKnockOutStage(resultIdx);
 
-    
     const historyList = this.buildHistory();
     const bigTable = new BigTable(historyList);
     const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
