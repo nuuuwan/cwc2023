@@ -27,9 +27,9 @@ export default class Format {
     const EPSILON = 0.5 / MIN_NO_CHANCE_N;
     let s = "";
     if (p < EPSILON) {
-      s =  EMOJI.LOSER;
+      s = EMOJI.LOSER;
     } else if (p > 1 - EPSILON) {
-      s =  EMOJI.WINNER;
+      s = EMOJI.WINNER;
     } else {
       s = p.toLocaleString(undefined, {
         style: "percent",

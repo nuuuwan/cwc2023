@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { MIN_STATISTICAL_N } from "../../nonview/constants/STATISTICS.js";
+import { UPDATE_DATE } from "../../nonview/constants/VERSION.js";
 import {
   Table,
   TableBody,
@@ -25,7 +26,7 @@ function BigTableInnerView({
       <Alert severity="info">
         Odds of winning, reaching the final, and reaching the semi-final in the
         #CWC2023. Results are based on <strong>{Format.int(n)}</strong> Monte
-        Carlo Simulations.
+        Carlo Simulations, as of <strong>{UPDATE_DATE}</strong>.
       </Alert>
       <TableContainer component={Box} sx={{ marginTop: 1, padding: 0 }}>
         <Table>
