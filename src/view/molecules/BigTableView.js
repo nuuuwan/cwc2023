@@ -13,7 +13,7 @@ import {
 import Team from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
 import Format from "../../nonview/base/Format.js";
-import BigTable from "../../nonview/core/BigTable.js";
+import BigTable from "../../nonview/analytics/BigTable.js";
 
 export default function BigTableView({ historyList }) {
   const bigTable = new BigTable(historyList);

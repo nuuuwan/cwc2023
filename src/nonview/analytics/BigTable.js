@@ -1,4 +1,4 @@
-import Team from "./Team.js";
+import Team from "../core/Team.js";
 
 export default class BigTable {
   constructor(historyList) {

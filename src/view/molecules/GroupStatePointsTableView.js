@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import GroupStatePointsTable from "../../nonview/core/GroupStatePointsTable.js";
+import GroupStatePointsTable from "../../nonview/analytics/GroupStatePointsTable.js";
 import {
   Table,
   TableBody,

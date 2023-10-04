@@ -13,12 +13,12 @@ import CasinoIcon from "@mui/icons-material/Casino";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import GroupStageView from "../molecules/GroupStageView";
-import Simulator from "../../nonview/core/Simulator.js";
+import Simulator from "../../nonview/analytics/Simulator.js";
 
 import KnockOutStageView from "../molecules/KnockOutStageView";
 import BigTableView from "../molecules/BigTableView";
-import { UPDATE_DATE } from "../../nonview/core/VERSION.js";
-import { SimulatorMode } from "../../nonview/core/Simulator.js";
+import { UPDATE_DATE } from "../../nonview/constants/VERSION.js";
+import { SimulatorMode } from "../../nonview/analytics/Simulator.js";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));

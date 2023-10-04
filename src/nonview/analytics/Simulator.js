@@ -1,6 +1,6 @@
-import { GROUP_STAGE_ODI_LIST } from "./GROUP_STAGE_ODI_LIST.js";
+import { GROUP_STAGE_ODI_LIST } from "../core/GROUP_STAGE_ODI_LIST.js";
 import GroupStatePointsTable from "./GroupStatePointsTable.js";
-import ODI from "./ODI.js";
+import ODI from "../core/ODI.js";
 
 export const SimulatorMode = {
   RANDOM: "RANDOM",

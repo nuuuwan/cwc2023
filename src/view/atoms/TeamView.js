@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { EMOJI } from "../../nonview/core/EMOJI.js";
+import { EMOJI } from "../../nonview/constants/EMOJI.js";
 import Format from "../../nonview/base/Format.js";
 
 export default function TeamView({ team, isWinner, p }) {

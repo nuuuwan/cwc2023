@@ -1,4 +1,4 @@
-import Team, { TEAM } from "./Team.js";
+import Team, { TEAM } from "../core/Team.js";
 export default class GroupStagewinsTable {
   constructor(resultIdx) {
     this.resultIdx = resultIdx;
