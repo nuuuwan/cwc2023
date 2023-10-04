@@ -23,8 +23,8 @@ import { SimulatorMode } from "../../nonview/analytics/Simulator.js";
 import React from "react";
 import Format from "../../nonview/base/Format.js";
 
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
 const N_RETRY = 10_000;
 export default class HomePage extends Component {
@@ -111,7 +111,8 @@ export default class HomePage extends Component {
     switch (simulatorMode) {
       case SimulatorMode.RANDOM:
         message = "Random Outcome. ";
-        subMessage = "That is, if the outcome of each match is randomly selected based on passed outcomes. ";
+        subMessage =
+          "That is, if the outcome of each match is randomly selected based on passed outcomes. ";
         Icon = CasinoIcon;
         color = "#f80";
         break;
@@ -131,15 +132,14 @@ export default class HomePage extends Component {
         throw new Error(`Invalid mode: ${simulatorMode}`);
     }
 
-
     return (
       <Box>
         <Typography variant="h6" color={color}>
           <Icon />
           <strong>{message}</strong>
-          <br/>
+          <br />
           {subMessage}
-          <br/>
+          <br />
           The likelihood of this exact sequence of results is about
           <strong> 1 in {" " + Format.int(cumInvPWinner)}</strong>.
         </Typography>
@@ -184,8 +184,14 @@ export default class HomePage extends Component {
           icon={<TableRowsIcon />}
           onClick={onClickRandom}
         />
-        <BottomNavigationAction icon={<ThumbUpIcon />} onClick={onClickMaximumLikelihood} />
-        <BottomNavigationAction icon={<ThumbDownIcon />} onClick={onClickMinimumLikelihood} />
+        <BottomNavigationAction
+          icon={<ThumbUpIcon />}
+          onClick={onClickMaximumLikelihood}
+        />
+        <BottomNavigationAction
+          icon={<ThumbDownIcon />}
+          onClick={onClickMinimumLikelihood}
+        />
         <BottomNavigationAction
           icon={<CasinoIcon />}
           onClick={onClickRandomOne}

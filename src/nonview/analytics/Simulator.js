@@ -13,9 +13,8 @@ export default class Simulator {
     this.mode = mode;
   }
 
-
   getWinner(odi) {
-    switch(this.mode) {
+    switch (this.mode) {
       case SimulatorMode.RANDOM:
         return odi.randomWinner;
       case SimulatorMode.MAXIMUM_LIKELIHOOD:

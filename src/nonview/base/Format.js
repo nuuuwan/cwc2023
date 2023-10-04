@@ -48,7 +48,6 @@ export default class Format {
   }
 
   static int(x) {
-
     if (x > 1_000_000_000_000) {
       return Format.bigInt(x);
     }
