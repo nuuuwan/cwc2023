@@ -4,6 +4,9 @@ import Format from "../../nonview/base/Format.js";
 
 export default function TeamView({ team, isWinner, p }) {
   const emoji = isWinner ? EMOJI.WINNER : "";
+  if (p === 1) {
+    p = 0;
+  }
 
   return (
     <Typography variant="body1">
