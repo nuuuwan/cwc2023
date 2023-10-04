@@ -14,7 +14,7 @@ export default function ODIView({ odi, winner }) {
         borderWidth: 4,
         borderRadius: 2,
         opacity,
-        width: 90,
+        width: 75,
       }}
     >
       <MatchDateView date={odi.date} />

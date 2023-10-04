@@ -2,7 +2,7 @@ import { GROUP_STAGE_ODI_LIST } from "../../nonview/core/GROUP_STAGE_ODI_LIST.js
 
 import ODIView from "./ODIView.js";
 import { Grid, Box, Typography, Paper } from "@mui/material";
-const SX_PAPER = { padding: 1, margin: 2, background: "#ccc1" };
+const SX_PAPER = { padding: 0.5, margin: 1, background: "#ccc1" };
 export default function GroupStageView({ resultIdx }) {
   let inner = [];
   let iItem = 0;
