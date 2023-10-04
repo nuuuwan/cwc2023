@@ -5,7 +5,7 @@ import { Grid, Box, Typography, Paper } from "@mui/material";
 const SX_PAPER = { padding: 0.5, margin: 0.5 };
 const SX_GRID = { margin: 0.5, padding: 0.5 };
 
-export default function GroupStageView({ resultIdx }) {
+export default function GroupStageView({ resultIdx, onClickODI, odiStateIdx }) {
   let inner = [];
   let iItem = 0;
   let currentInner = [];
@@ -15,7 +15,7 @@ export default function GroupStageView({ resultIdx }) {
 
     currentInner.push(
       <Grid key={"odi-" + odi.id} item>
-        <ODIView odi={odi} winner={resultIdx[odi.id]} />
+        <ODIView odi={odi} winner={resultIdx[odi.id]} onClickODI={onClickODI} odiState={odiStateIdx[odi.id]} />
       </Grid>
     );
 

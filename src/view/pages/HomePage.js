@@ -33,12 +33,14 @@ export default class HomePage extends Component {
     const odiIdx = null;
     const koResultIdx = null;
     const historyList = [];
+    const odiStateIdx = {};
     this.state = {
       resultIdx,
       cumInvPWinner,
       odiIdx,
       koResultIdx,
       historyList,
+      odiStateIdx,
     };
 
     this.myRefBigTable = React.createRef();
@@ -52,7 +54,7 @@ export default class HomePage extends Component {
 
   buildHistory() {
     let historyList = [];
-    const simulator = new Simulator(SIMULATOR_MODE.RANDOM);
+    const simulator = new Simulator(SIMULATOR_MODE.RANDOM, {});
     for (let i = 0; i < N_MONTE_CARLO_SIMULATIONS; i++) {
       const { resultIdx, cumInvPWinner } = simulator.simulateGroupStage();
       const { odiIdx, koResultIdx } =
@@ -63,7 +65,8 @@ export default class HomePage extends Component {
   }
 
   handleDoSimulate(simulatorMode) {
-    const simulator = new Simulator(simulatorMode);
+    const { odiStateIdx } = this.state;
+    const simulator = new Simulator(simulatorMode, odiStateIdx);
     const { resultIdx, cumInvPWinner } = simulator.simulateGroupStage();
     const { odiIdx, koResultIdx } = simulator.simulateKnockOutStage(resultIdx);
 
@@ -79,6 +82,18 @@ export default class HomePage extends Component {
         this.myRefSimulation.scrollIntoView({ behavior: "smooth" });
       }.bind(this)
     );
+  }
+
+  handleOnClickODI(odi) {
+    let { odiStateIdx } = this.state;
+    if (!odiStateIdx[odi.id]) {
+      odiStateIdx[odi.id] = 1;
+    } else if (odiStateIdx[odi.id] === 1) {
+      odiStateIdx[odi.id] = 2;
+    }  else {
+      odiStateIdx[odi.id] = 0;
+    }
+    this.setState({ odiStateIdx });
   }
 
   renderHeader() {
@@ -103,6 +118,7 @@ export default class HomePage extends Component {
       koResultIdx,
       simulatorMode,
       historyList,
+      odiStateIdx,
     } = this.state;
     if (!resultIdx) {
       return <CircularProgress />;
@@ -132,8 +148,17 @@ export default class HomePage extends Component {
           average <strong>{Format.percent(perMatchProb)}</strong> per match.
         </Typography>
 
-        <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
-        <GroupStageView resultIdx={resultIdx} />
+        <KnockOutStageView
+          odiIdx={odiIdx}
+          koResultIdx={koResultIdx}
+          odiStateIdx={odiStateIdx}
+          onClickODI={this.handleOnClickODI.bind(this)}
+        />
+        <GroupStageView
+          resultIdx={resultIdx}
+          odiStateIdx={odiStateIdx}
+          onClickODI={this.handleOnClickODI.bind(this)}
+        />
 
         <div ref={(ref) => (this.myRefBigTable = ref)}></div>
         <BigTableView historyList={historyList} />
