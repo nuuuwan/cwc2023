@@ -85,6 +85,13 @@ export default class ODI {
     return this.p1 > this.p2 ? this.team1 : this.team2;
   }
 
+  get minimumLikelihoodWinner() {
+    if (this.winner) {
+      return this.winner;
+    }
+    return this.p1 > this.p2 ? this.team2 : this.team1;
+  }
+
   getOther(winner) {
     if (winner === this.team1) {
       return this.team2;

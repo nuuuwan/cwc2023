@@ -10,7 +10,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 import CasinoIcon from "@mui/icons-material/Casino";
-import PsychologyIcon from "@mui/icons-material/Psychology";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 
@@ -23,6 +22,9 @@ import { UPDATE_DATE } from "../../nonview/constants/VERSION.js";
 import { SimulatorMode } from "../../nonview/analytics/Simulator.js";
 import React from "react";
 import Format from "../../nonview/base/Format.js";
+
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 const N_RETRY = 10_000;
 export default class HomePage extends Component {
@@ -105,25 +107,39 @@ export default class HomePage extends Component {
     }
 
     let message, subMessage, Icon, color;
-    if (simulatorMode === SimulatorMode.RANDOM) {
-      message = "Random Outcome. ";
-      subMessage =
-        "That is, if the outcome of each match is randomly selected based on passed outcomes. ";
-      Icon = CasinoIcon;
-      color = "#f80";
-    } else {
-      message = "Most likely Outcome. ";
-      subMessage = "That is, if every match is won by the favourite. ";
-      Icon = PsychologyIcon;
-      color = "#080";
+
+    switch (simulatorMode) {
+      case SimulatorMode.RANDOM:
+        message = "Random Outcome. ";
+        subMessage = "That is, if the outcome of each match is randomly selected based on passed outcomes. ";
+        Icon = CasinoIcon;
+        color = "#f80";
+        break;
+      case SimulatorMode.MAXIMUM_LIKELIHOOD:
+        message = "Most likely Outcome. ";
+        subMessage = "That is, if every match is won by the favourite. ";
+        Icon = ThumbUpIcon;
+        color = "#080";
+        break;
+      case SimulatorMode.MINIMUM_LIKELIHOOD:
+        message = "Least likely Outcome. ";
+        subMessage = "That is, if every match is won by the underdog. ";
+        Icon = ThumbDownIcon;
+        color = "#f00";
+        break;
+      default:
+        throw new Error(`Invalid mode: ${simulatorMode}`);
     }
+
 
     return (
       <Box>
         <Typography variant="h6" color={color}>
           <Icon />
           <strong>{message}</strong>
+          <br/>
           {subMessage}
+          <br/>
           The likelihood of this exact sequence of results is about
           <strong> 1 in {" " + Format.int(cumInvPWinner)}</strong>.
         </Typography>
@@ -141,8 +157,12 @@ export default class HomePage extends Component {
       this.handleOnClickDice(SimulatorMode.RANDOM, 1);
     }.bind(this);
 
-    const onClickML = function () {
+    const onClickMaximumLikelihood = function () {
       this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD, 1);
+    }.bind(this);
+
+    const onClickMinimumLikelihood = function () {
+      this.handleOnClickDice(SimulatorMode.MINIMUM_LIKELIHOOD, 1);
     }.bind(this);
 
     const onClickRandom = function () {
@@ -164,7 +184,8 @@ export default class HomePage extends Component {
           icon={<TableRowsIcon />}
           onClick={onClickRandom}
         />
-        <BottomNavigationAction icon={<PsychologyIcon />} onClick={onClickML} />
+        <BottomNavigationAction icon={<ThumbUpIcon />} onClick={onClickMaximumLikelihood} />
+        <BottomNavigationAction icon={<ThumbDownIcon />} onClick={onClickMinimumLikelihood} />
         <BottomNavigationAction
           icon={<CasinoIcon />}
           onClick={onClickRandomOne}

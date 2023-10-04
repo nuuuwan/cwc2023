@@ -5,6 +5,7 @@ import ODI from "../core/ODI.js";
 export const SimulatorMode = {
   RANDOM: "RANDOM",
   MAXIMUM_LIKELIHOOD: "MAXIMUM_LIKELIHOOD",
+  MINIMUM_LIKELIHOOD: "MINIMUM_LIKELIHOOD",
 };
 
 export default class Simulator {
@@ -12,12 +13,18 @@ export default class Simulator {
     this.mode = mode;
   }
 
-  get isModeRandom() {
-    return this.mode === SimulatorMode.RANDOM;
-  }
 
   getWinner(odi) {
-    return this.isModeRandom ? odi.randomWinner : odi.maximumLikelihoodWinner;
+    switch(this.mode) {
+      case SimulatorMode.RANDOM:
+        return odi.randomWinner;
+      case SimulatorMode.MAXIMUM_LIKELIHOOD:
+        return odi.maximumLikelihoodWinner;
+      case SimulatorMode.MINIMUM_LIKELIHOOD:
+        return odi.minimumLikelihoodWinner;
+      default:
+        throw new Error(`Invalid mode: ${this.mode}`);
+    }
   }
 
   simulateGroupStage() {
