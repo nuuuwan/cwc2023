@@ -1,3 +1,5 @@
+import { MIN_STATISTICAL_N } from "../constants/STATISTICS.js";
+
 export default class Format {
   static percent(x) {
     return x.toLocaleString(undefined, {
@@ -7,7 +9,7 @@ export default class Format {
   }
 
   static binomial(p, n) {
-    if (n < 30) {
+    if (n < MIN_STATISTICAL_N) {
       return "?";
     }
 

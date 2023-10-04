@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-
+import { MIN_STATISTICAL_N } from "../../nonview/constants/STATISTICS.js";
 import {
   Table,
   TableBody,
@@ -15,14 +15,14 @@ import TeamView from "../atoms/TeamView.js";
 import Format from "../../nonview/base/Format.js";
 import BigTable from "../../nonview/analytics/BigTable.js";
 
-export default function BigTableView({ historyList }) {
-  const bigTable = new BigTable(historyList);
-  const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
-    bigTable.getTeamProbs();
-
+function BigTableInnerView({
+  n,
+  teamIDToWinner,
+  teamIDToFinalist,
+  teamIDToSemiFinalist,
+}) {
   return (
-    <Box sx={{ margin: 1, padding: 1 }}>
-      <Typography variant="h4">#CWC2023 Probabilities (n={n})</Typography>
+    <Box>
       <Alert severity="info">
         Odds of winning, reaching the final, and reaching the semi-final in the
         #CWC2023. Results are based on <strong>{n}</strong> Monte Carlo
@@ -68,6 +68,31 @@ export default function BigTableView({ historyList }) {
           </TableBody>
         </Table>
       </TableContainer>
+    </Box>
+  );
+}
+
+export default function BigTableView({ historyList }) {
+  const bigTable = new BigTable(historyList);
+  const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
+    bigTable.getTeamProbs();
+
+  return (
+    <Box sx={{ margin: 1, padding: 1 }}>
+      <Typography variant="h4">#CWC2023 Probabilities (n={n})</Typography>
+      {n < MIN_STATISTICAL_N ? (
+        <Alert severity="warning">
+          Run at least {MIN_STATISTICAL_N} simulations to generate and display
+          statistics.
+        </Alert>
+      ) : (
+        <BigTableInnerView
+          n={n}
+          teamIDToWinner={teamIDToWinner}
+          teamIDToFinalist={teamIDToFinalist}
+          teamIDToSemiFinalist={teamIDToSemiFinalist}
+        />
+      )}
     </Box>
   );
 }
