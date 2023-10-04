@@ -25,7 +25,7 @@ def generate_group_stage_odi_list():
         '',
         'export const GROUP_STAGE_ODI_LIST = [',
     ]
-
+    data_list.reverse()
     for data in data_list:
         id = data['\ufeffid']
         date = data['date']
@@ -50,6 +50,7 @@ def open_files():
         os.startfile(path)
 
     for url in [
+        'https://www.cricketworldcup.com/fixtures',
         'https://www.oddschecker.com/cricket',
         'https://www.oddschecker.com/cricket/world-cup/winner',
         'https://www.oddsportal.com/cricket/world/icc-world-cup/',
@@ -58,5 +59,5 @@ def open_files():
 
 
 if __name__ == '__main__':
-    open_files()
+    # open_files()
     generate_group_stage_odi_list()
