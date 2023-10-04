@@ -16,8 +16,8 @@ export default class ODI {
   ) {
     this.id = id;
     this.date = new MatchDate(date);
-    this.team1 = new Team(team1);
-    this.team2 = new Team(team2);
+    this.team1 = team1;
+    this.team2 = team2;
     this.venue = new Venue(venue);
     this.winner = winner ? new Team(winner) : null;
     this.odds1 = odds1;

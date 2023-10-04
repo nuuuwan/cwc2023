@@ -1,58 +1,48 @@
-import { P_WINNER } from "./P_WINNER.js";
-import { NAME_TO_EMOJI } from "./NAME_TO_EMOJI.js";
-import { NAME_TO_ALPHA3, ALPHA3_TO_NAME } from "./NAME_TO_ALPHA3.js";
-import { NAME_TO_COLOR } from "./NAME_TO_COLOR.js";
-import { EMOJI } from "./EMOJI.js";
+import { TEAM_ID_TO_P_WINNER } from "./TEAM_ID_TO_P_WINNER.js";
+import { TEAM_ID_TO_EMOJI } from "./TEAM_ID_TO_EMOJI.js";
+import { TEAM_ID_TO_COLOR } from "./TEAM_ID_TO_COLOR.js";
 export default class Team {
-  constructor(name) {
-    this.name = name;
-  }
-
-  static loadFromID(id) {
-    return new Team(ALPHA3_TO_NAME[id]);
+  constructor(id) {
+    this.id = id;
   }
 
   get emoji() {
-    return NAME_TO_EMOJI[this.name];
-  }
-
-  get alpha3() {
-    return NAME_TO_ALPHA3[this.name];
-  }
-
-  get id() {
-    return this.alpha3;
-  }
-
-  get label() {
-    return this.emoji + " " + this.alpha3;
+    return TEAM_ID_TO_EMOJI[this.id];
   }
 
   get pWinner() {
-    return P_WINNER[this.name];
+    return TEAM_ID_TO_P_WINNER[this.id];
   }
 
   get color() {
-    return NAME_TO_COLOR[this.name];
-  }
-
-  getLabel(winner) {
-    const winnerEmoji = winner.id === this.id ? EMOJI.WINNER : "";
-    return this.label + " " + winnerEmoji;
+    return TEAM_ID_TO_COLOR[this.id];
   }
 
   static emptyDict() {
     return {
-      NLD: 0,
       AFG: 0,
+      AUS: 0,
       BGD: 0,
+      ENG: 0,
       IND: 0,
+      LKA: 0,
+      NLD: 0,
       NZL: 0,
       PAK: 0,
-      LKA: 0,
-      AUS: 0,
       ZAF: 0,
-      ENG: 0,
-    }
+    };
   }
 }
+
+export const TEAM = {
+  AFG: new Team("AFG"),
+  AUS: new Team("AUS"),
+  BGD: new Team("BGD"),
+  ENG: new Team("ENG"),
+  IND: new Team("IND"),
+  LKA: new Team("LKA"),
+  NLD: new Team("NLD"),
+  NZL: new Team("NZL"),
+  PAK: new Team("PAK"),
+  ZAF: new Team("ZAF"),
+};

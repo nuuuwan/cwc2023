@@ -37,15 +37,15 @@ export default class Simulator {
     const odiSemiFinal1 = new ODI(
       "SF 1",
       "2023-11-15",
-      teams[0].name,
-      teams[3].name,
+      teams[0],
+      teams[3],
       "Mumbai"
     );
     const odiSemiFinal2 = new ODI(
       "SF 2",
       "2023-11-16",
-      teams[1].name,
-      teams[2].name,
+      teams[1],
+      teams[2],
       "Kolkata"
     );
 
@@ -55,8 +55,8 @@ export default class Simulator {
     const odiFinal = new ODI(
       "Final",
       "2023-11-19",
-      winnerSemiFinal1.name,
-      winnerSemiFinal2.name,
+      winnerSemiFinal1,
+      winnerSemiFinal2,
       "Ahmedabad"
     );
     const winnerFinal = this.getWinner(odiFinal);
