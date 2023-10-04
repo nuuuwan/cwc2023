@@ -132,7 +132,7 @@ export default class HomePage extends Component {
         throw new Error(`Invalid mode: ${simulatorMode}`);
     }
     const nMatches = 45 + 3; // TODO: Find completed matches
-    const perMatchProb = Math.exp(-(Math.log(cumInvPWinner) / nMatches))
+    const perMatchProb = Math.exp(-(Math.log(cumInvPWinner) / nMatches));
     return (
       <Box>
         <Typography variant="h6" color={color}>
@@ -142,8 +142,8 @@ export default class HomePage extends Component {
           {subMessage}
           <br />
           The likelihood of this exact sequence of results is about
-          <strong> 1 in {" " + Format.int(cumInvPWinner)}</strong>,
-          or on average <strong>{Format.percent(perMatchProb)}</strong> per match.
+          <strong> 1 in {" " + Format.int(cumInvPWinner)}</strong>, or on
+          average <strong>{Format.percent(perMatchProb)}</strong> per match.
         </Typography>
 
         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
