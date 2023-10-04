@@ -5,13 +5,11 @@ import Format from "../../nonview/base/Format.js";
 export default function TeamView({ team, isWinner, p }) {
   const emoji = isWinner ? EMOJI.WINNER : "";
 
-  const pStr = p ? " " + Format.percent(p) : "";
-
   return (
     <Typography variant="body1">
       {team.emoji + " "}
-      {team.id}
-      <span style={{ fontSize: "67%" }}>{pStr}</span>
+      {team.id}{" "}
+      <span style={{ fontSize: "50%" }}>{p ? Format.percent(p) : null}</span>
       {" " + emoji}
     </Typography>
   );

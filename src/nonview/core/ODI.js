@@ -123,20 +123,7 @@ export default class ODI {
 
   getColor(winner) {
     const pWinner = winner === this.team1 ? this.p1 : this.p2;
-    if (pWinner <= 0.2) {
-      return "#f00";
-    }
-    if (pWinner >= 0.8) {
-      return "#080";
-    }
-    if (pWinner <= 0.4) {
-      return "#f004";
-    }
-    if (pWinner >= 0.6) {
-      return "#0804";
-    }
-
-    return "#00f1";
+    return Format.getPercentColor(pWinner);
   }
 
   getP(team) {

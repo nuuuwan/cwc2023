@@ -3,12 +3,34 @@ import { MIN_STATISTICAL_N, MIN_NO_CHANCE_N } from "../constants/STATISTICS.js";
 import { EMOJI } from "../constants/EMOJI.js";
 
 export default class Format {
+  static getPercentColor(p) {
+    if (p <= 0.2) {
+      return "#f00";
+    }
+
+    if (p <= 0.4) {
+      return "#f80";
+    }
+
+    if (p <= 0.6) {
+      return "#080";
+    }
+
+    if (p <= 0.8) {
+      return "#088";
+    }
+
+    return "#008";
+  }
+
   static percent(x) {
-    return x.toLocaleString(undefined, {
+    const s = x.toLocaleString(undefined, {
       style: "percent",
 
       maximumFractionDigits: 0,
     });
+    const color = Format.getPercentColor(x);
+    return <span style={{ color }}>{s}</span>;
   }
 
   static binomial(p, n) {
