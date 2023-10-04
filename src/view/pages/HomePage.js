@@ -110,20 +110,20 @@ export default class HomePage extends Component {
 
     switch (simulatorMode) {
       case SimulatorMode.RANDOM:
-        message = "Random Outcome. ";
+        message = "Random Outcome ";
         subMessage =
           "That is, if the outcome of each match is randomly selected based on passed outcomes. ";
         Icon = CasinoIcon;
         color = "#f80";
         break;
       case SimulatorMode.MAXIMUM_LIKELIHOOD:
-        message = "Most likely Outcome. ";
+        message = "Most likely Outcome ";
         subMessage = "That is, if every match is won by the favourite. ";
         Icon = ThumbUpIcon;
         color = "#080";
         break;
       case SimulatorMode.MINIMUM_LIKELIHOOD:
-        message = "Least likely Outcome. ";
+        message = "Least likely Outcome ";
         subMessage = "That is, if every match is won by the underdog. ";
         Icon = ThumbDownIcon;
         color = "#f00";
