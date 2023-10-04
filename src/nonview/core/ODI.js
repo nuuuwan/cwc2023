@@ -1,6 +1,5 @@
 import Venue from "./Venue";
 import Format from "../base/Format";
-import MatchDate from "./MatchDate";
 
 export default class ODI {
   constructor(
@@ -14,7 +13,7 @@ export default class ODI {
     odds2 = null
   ) {
     this.id = id;
-    this.date = new MatchDate(date);
+    this.date = date;
     this.team1 = team1;
     this.team2 = team2;
     this.venue = new Venue(venue);
@@ -23,18 +22,6 @@ export default class ODI {
     this.odds2 = odds2;
   }
 
-  toCSVLine() {
-    return [
-      this.id,
-      this.date.date.toLocaleDateString(),
-      this.team1.id,
-      this.team2.id,
-      this.venue.name,
-      this.winner ? this.winner.id : "",
-      this.odds1 ? this.odds1 : "",
-      this.odds2 ? this.odds2 : "",
-    ].join(",");
-  }
 
   get title() {
     return `${this.team1.label} vs ${this.team2.label}`;

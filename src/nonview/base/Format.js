@@ -36,7 +36,7 @@ export default class Format {
   }
 
   static matchDate(date) {
-    return date.toLocaleDateString(undefined, {
+    return date.toLocaleString(undefined, {
       month: "short",
       day: "numeric",
       weekday: "short",

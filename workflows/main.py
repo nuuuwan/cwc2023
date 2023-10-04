@@ -36,7 +36,7 @@ def generate_group_stage_odi_list():
         odds1 = data['odds1'] if data['odds1'] else 'null'
         odds2 = data['odds2'] if data['odds2'] else 'null'
 
-        line = f'  new ODI("{id}", "{date}", TEAM.{team1}, TEAM.{team2}, "{venue}", {winner}, {odds1}, {odds2}),'
+        line = f'  new ODI("{id}", new Date("{date}"), TEAM.{team1}, TEAM.{team2}, "{venue}", {winner}, {odds1}, {odds2}),'
         lines.append(line)
 
     lines.append('];')

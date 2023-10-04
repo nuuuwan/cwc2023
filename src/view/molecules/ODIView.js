@@ -17,7 +17,7 @@ export default function ODIView({ odi, winner }) {
         width: 90,
       }}
     >
-      <MatchDateView matchDate={odi.date} />
+      <MatchDateView date={odi.date} />
 
       <TeamView
         team={odi.team1}
