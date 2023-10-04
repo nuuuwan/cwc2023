@@ -77,7 +77,7 @@ export default function BigTableView({ historyList }) {
     bigTable.getTeamProbs();
 
   return (
-    <Box sx={{ margin: 1, padding: 1 }}>
+    <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
       <Typography variant="h5">
         #CWC2023 Probabilities (n={Format.int(n)})
       </Typography>
