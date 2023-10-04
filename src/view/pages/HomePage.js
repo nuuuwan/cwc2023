@@ -19,6 +19,7 @@ import Format from "../../nonview/base/Format.js";
 import { N_MONTE_CARLO_SIMULATIONS } from "../../nonview/constants/STATISTICS.js";
 import HomePageFooter from "../molecules/HomePageFooter";
 import HomePageHeader from "../molecules/HomePageHeader";
+import BigTable from "../../nonview/analytics/BigTable.js";
 
 export default class HomePage extends Component {
   constructor() {
@@ -109,6 +110,10 @@ export default class HomePage extends Component {
     const perMatchProb = Math.exp(-(Math.log(cumInvPWinner) / nMatches));
 
     const historyList = this.buildHistory();
+    const bigTable = new BigTable(historyList);
+    const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
+    bigTable.getTeamProbs();
+
 
     return (
       <Box color={simulatorMode.color}>
@@ -145,7 +150,12 @@ export default class HomePage extends Component {
         />
 
         <div ref={(ref) => (this.myRefBigTable = ref)}></div>
-        <BigTableView historyList={historyList} />
+        <BigTableView 
+          n={n}
+          teamIDToWinner={teamIDToWinner}
+          teamIDToFinalist={teamIDToFinalist}
+          teamIDToSemiFinalist={teamIDToSemiFinalist}
+        />
       </Box>
     );
   }
