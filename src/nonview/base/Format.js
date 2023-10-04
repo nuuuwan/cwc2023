@@ -44,12 +44,24 @@ export default class Format {
   }
 
   static int(x) {
-    if (x > 1_000) {
-      return (
-        (x / 1_000).toLocaleString(undefined, { maximumSignificantDigits: 2 }) +
-        "K"
-      );
+    for (let [v, suffix] of [
+      [1_000_000_000_000_000_000_000_000, "x10²⁴"],
+      [1_000_000_000_000_000_000_000, "x10²¹"],
+      [1_000_000_000_000_000_000, "x10¹⁸"],
+      [1_000_000_000_000_000, "x10¹⁵"],
+      [1_000_000_000_000, "x10¹²"],
+      [1_000_000_000, "B"],
+      [1_000_000, "M"],
+      [1_000, "K"],
+    ]) {
+      if (x > v) {
+        return (
+          (x / v).toLocaleString(undefined, { maximumSignificantDigits: 2 }) +
+          suffix
+        );
+      }
     }
+
     return x.toLocaleString(undefined, { maximumSignificantDigits: 2 });
   }
 }

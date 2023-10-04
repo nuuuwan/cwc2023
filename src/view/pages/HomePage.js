@@ -22,17 +22,20 @@ import BigTableView from "../molecules/BigTableView";
 import { UPDATE_DATE } from "../../nonview/constants/VERSION.js";
 import { SimulatorMode } from "../../nonview/analytics/Simulator.js";
 import React from "react";
+import Format from "../../nonview/base/Format.js";
 
 const N_RETRY = 10_000;
 export default class HomePage extends Component {
   constructor() {
     super();
     const resultIdx = null;
+    const cumInvPWinner = null;
     const odiIdx = null;
     const koResultIdx = null;
     const historyList = [];
     this.state = {
       resultIdx,
+      cumInvPWinner,
       odiIdx,
       koResultIdx,
       historyList,
@@ -49,20 +52,24 @@ export default class HomePage extends Component {
     let { historyList } = this.state;
     const simulator = new Simulator(simulatorMode);
 
-    let resultIdx, odiIdx, koResultIdx;
+    let resultIdx, cumInvPWinner, odiIdx, koResultIdx;
     for (let i = 0; i < nIncr; i++) {
-      resultIdx = simulator.simulateGroupStage();
+      const gResult = simulator.simulateGroupStage();
+      resultIdx = gResult.resultIdx;
+      cumInvPWinner = gResult.cumInvPWinner;
+
       const koResult = simulator.simulateKnockOutStage(resultIdx);
       odiIdx = koResult.odiIdx;
       koResultIdx = koResult.koResultIdx;
 
       if (simulatorMode === SimulatorMode.RANDOM) {
-        historyList.push({ resultIdx, odiIdx, koResultIdx });
+        historyList.push({ resultIdx, cumInvPWinner, odiIdx, koResultIdx });
       }
     }
 
     this.setState({
       resultIdx,
+      cumInvPWinner,
       odiIdx,
       koResultIdx,
       historyList,
@@ -85,22 +92,28 @@ export default class HomePage extends Component {
     );
   }
   renderBody() {
-    const { resultIdx, odiIdx, koResultIdx, simulatorMode, historyList } =
-      this.state;
+    const {
+      resultIdx,
+      cumInvPWinner,
+      odiIdx,
+      koResultIdx,
+      simulatorMode,
+      historyList,
+    } = this.state;
     if (!resultIdx) {
       return <CircularProgress />;
     }
 
     let message, subMessage, Icon, color;
     if (simulatorMode === SimulatorMode.RANDOM) {
-      message = "Random Outcome.";
+      message = "Random Outcome. ";
       subMessage =
-        "If the outcome of each match is probabilistically selected according to past data.";
+        "That is, if the outcome of each match is randomly selected based on passed outcomes. ";
       Icon = CasinoIcon;
       color = "#f80";
     } else {
-      message = "Most likely Outcome.";
-      subMessage = "If every match is won by the favourite.";
+      message = "Most likely Outcome. ";
+      subMessage = "That is, if every match is won by the favourite. ";
       Icon = PsychologyIcon;
       color = "#080";
     }
@@ -109,7 +122,10 @@ export default class HomePage extends Component {
       <Box>
         <Typography variant="h6" color={color}>
           <Icon />
-          <strong>{message}</strong> {" " + subMessage}
+          <strong>{message}</strong>
+          {subMessage}
+          The likelihood of this exact sequence of results is about
+          <strong> 1 in {" " + Format.int(cumInvPWinner)}</strong>.
         </Typography>
 
         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />

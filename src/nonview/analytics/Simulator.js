@@ -21,13 +21,18 @@ export default class Simulator {
   }
 
   simulateGroupStage() {
-    return GROUP_STAGE_ODI_LIST.reduce(
-      function (idx, odi) {
-        idx[odi.id] = this.getWinner(odi);
-        return idx;
+    const { resultIdx, cumInvPWinner } = GROUP_STAGE_ODI_LIST.reduce(
+      function ({ resultIdx, cumInvPWinner }, odi) {
+        const winner = this.getWinner(odi);
+        const pWinner = odi.getP(winner);
+        resultIdx[odi.id] = winner;
+        cumInvPWinner *= 1 / pWinner;
+
+        return { resultIdx, cumInvPWinner };
       }.bind(this),
-      {}
+      { resultIdx: {}, cumInvPWinner: 1 }
     );
+    return { resultIdx, cumInvPWinner };
   }
 
   simulateKnockOutStage(resultIdx) {
