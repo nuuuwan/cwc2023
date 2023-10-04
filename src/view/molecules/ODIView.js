@@ -18,7 +18,6 @@ export default function ODIView({ odi, winner }) {
       }}
     >
       <MatchDateView date={odi.date} />
-
       <TeamView
         team={odi.team1}
         isWinner={odi.team1.id === winner.id}
@@ -29,8 +28,7 @@ export default function ODIView({ odi, winner }) {
         isWinner={odi.team2.id === winner.id}
         p={odi.getP(odi.team2)}
       />
-
-      <Typography variant="caption">{odi.venue.name}</Typography>
+      <Typography variant="body2">{odi.venue.id}</Typography>
     </Paper>
   );
 }
