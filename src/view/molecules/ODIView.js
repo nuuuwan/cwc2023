@@ -4,7 +4,9 @@ import TeamView from "../atoms/TeamView";
 import LockIcon from "@mui/icons-material/Lock";
 export default function ODIView({ odi, winner, odiState, onClickODI }) {
   const onClick = () => {
-    onClickODI(odi);
+    if (!odi.isConcluded) {
+      onClickODI(odi);
+    }
   };
   const opacity = odi.isConcluded ? 0.2 : 1;
   let winnerInner = winner;
