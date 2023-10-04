@@ -1,5 +1,7 @@
 import { MIN_STATISTICAL_N, MIN_NO_CHANCE_N } from "../constants/STATISTICS.js";
 
+import { EMOJI } from "../constants/EMOJI.js";
+
 export default class Format {
   static percent(x) {
     return x.toLocaleString(undefined, {
@@ -9,16 +11,18 @@ export default class Format {
   }
 
   static binomial(p, n) {
+    const EPSILON = 1.0 / MIN_NO_CHANCE_N;
+
     if (n < MIN_STATISTICAL_N) {
       return "?";
     }
 
     if (n >= MIN_NO_CHANCE_N) {
-      if (p < 0.001) {
-        return "❌";
+      if (p < EPSILON) {
+        return EMOJI.LOSER;
       }
-      if (p > 0.999) {
-        return "✔️";
+      if (p > 1 - EPSILON) {
+        return EMOJI.WINNER;
       }
     }
 
@@ -28,12 +32,16 @@ export default class Format {
 
     const opacity = span < p ? 1 : 0.25;
 
+    const renderedCI = (
+      <span style={{ fontSize: "80%", whiteSpace: "nowrap", opacity: 0.25 }}>
+        {" ± " + Format.percent(span)}
+      </span>
+    );
+
     return (
       <span style={{ opacity, color: "#f80" }}>
         {Format.percent(p)}
-        <span style={{ fontSize: "80%", whiteSpace: "nowrap", opacity: 0.25 }}>
-          {" ± " + Format.percent(span)}
-        </span>
+        {renderedCI}
       </span>
     );
   }
@@ -43,6 +51,12 @@ export default class Format {
       month: "short",
       day: "numeric",
       weekday: "short",
+    });
+  }
+
+  static int(x) {
+    return x.toLocaleString(undefined, {
+      minimumFractionDigits: 0,
     });
   }
 }

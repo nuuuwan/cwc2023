@@ -12,6 +12,8 @@ import {
 import CasinoIcon from "@mui/icons-material/Casino";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import TableRowsIcon from "@mui/icons-material/TableRows";
+
 import GroupStageView from "../molecules/GroupStageView";
 import Simulator from "../../nonview/analytics/Simulator.js";
 
@@ -19,66 +21,52 @@ import KnockOutStageView from "../molecules/KnockOutStageView";
 import BigTableView from "../molecules/BigTableView";
 import { UPDATE_DATE } from "../../nonview/constants/VERSION.js";
 import { SimulatorMode } from "../../nonview/analytics/Simulator.js";
-import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+import React from "react";
 
-const N_RETRY = 100;
+const N_RETRY = 10_000;
 export default class HomePage extends Component {
   constructor() {
     super();
     const resultIdx = null;
     const odiIdx = null;
     const koResultIdx = null;
-    const simulatorMode = null;
-    const nRefreshes = null;
     const historyList = [];
     this.state = {
       resultIdx,
       odiIdx,
       koResultIdx,
-      simulatorMode,
-      nRefreshes,
       historyList,
     };
+
+    this.myRefBigTable = React.createRef();
   }
 
   componentDidMount() {
-    this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD, 0);
+    this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD, 1);
   }
 
-  handleOnClickDice(simulatorMode, nRefreshes, isWaitForSriLanka) {
+  handleOnClickDice(simulatorMode, nIncr) {
     let { historyList } = this.state;
     const simulator = new Simulator(simulatorMode);
-    const resultIdx = simulator.simulateGroupStage();
-    const { odiIdx, koResultIdx } = simulator.simulateKnockOutStage(resultIdx);
-    if (simulatorMode === SimulatorMode.RANDOM) {
-      historyList.push({ resultIdx, odiIdx, koResultIdx });
+
+    let resultIdx, odiIdx, koResultIdx;
+    for (let i = 0; i < nIncr; i++) {
+      resultIdx = simulator.simulateGroupStage();
+      const koResult = simulator.simulateKnockOutStage(resultIdx);
+      odiIdx = koResult.odiIdx;
+      koResultIdx = koResult.koResultIdx;
+
+      if (simulatorMode === SimulatorMode.RANDOM) {
+        historyList.push({ resultIdx, odiIdx, koResultIdx });
+      }
     }
-    this.setState(
-      {
-        resultIdx,
-        odiIdx,
-        koResultIdx,
-        simulatorMode,
-        nRefreshes,
-        historyList,
-      },
 
-      async function () {
-        if (nRefreshes <= 1) {
-          return;
-        }
-
-        await sleep(1);
-        this.handleOnClickDice(
-          simulatorMode,
-          nRefreshes - 1,
-          isWaitForSriLanka
-        );
-      }.bind(this)
-    );
+    this.setState({
+      resultIdx,
+      odiIdx,
+      koResultIdx,
+      historyList,
+    });
   }
 
   renderHeader() {
@@ -125,7 +113,9 @@ export default class HomePage extends Component {
 
         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
         <GroupStageView resultIdx={resultIdx} />
+
         <BigTableView historyList={historyList} />
+        <div ref={(ref) => (this.myRefBigTable = ref)}></div>
       </Box>
     );
   }
@@ -135,11 +125,12 @@ export default class HomePage extends Component {
     }.bind(this);
 
     const onClickML = function () {
-      this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD, 0);
+      this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD, 1);
     }.bind(this);
 
     const onClickRandom = function () {
       this.handleOnClickDice(SimulatorMode.RANDOM, N_RETRY);
+      this.myRefBigTable.scrollIntoView({ behavior: "smooth" });
     }.bind(this);
 
     const onClickRefresh = function () {
@@ -153,7 +144,7 @@ export default class HomePage extends Component {
           onClick={onClickRefresh}
         />
         <BottomNavigationAction
-          icon={<DirectionsRunIcon />}
+          icon={<TableRowsIcon />}
           onClick={onClickRandom}
         />
         <BottomNavigationAction icon={<PsychologyIcon />} onClick={onClickML} />

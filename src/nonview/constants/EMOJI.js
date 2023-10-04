@@ -1,3 +1,4 @@
 export const EMOJI = {
-  WINNER: "✔️",
+  WINNER: "✅",
+  LOSER: "❌",
 };

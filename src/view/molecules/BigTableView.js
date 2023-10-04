@@ -25,8 +25,8 @@ function BigTableInnerView({
     <Box>
       <Alert severity="info">
         Odds of winning, reaching the final, and reaching the semi-final in the
-        #CWC2023. Results are based on <strong>{n}</strong> Monte Carlo
-        Simulations. 99% confidence intervals are shown.
+        #CWC2023. Results are based on <strong>{Format.int(n)}</strong> Monte
+        Carlo Simulations. 99% confidence intervals are shown.
       </Alert>
       <TableContainer component={Paper} sx={{ margin: 1, padding: 1 }}>
         <Table>
@@ -79,7 +79,9 @@ export default function BigTableView({ historyList }) {
 
   return (
     <Box sx={{ margin: 1, padding: 1 }}>
-      <Typography variant="h4">#CWC2023 Probabilities (n={n})</Typography>
+      <Typography variant="h4">
+        #CWC2023 Probabilities (n={Format.int(n)})
+      </Typography>
       {n < MIN_STATISTICAL_N ? (
         <Alert severity="warning">
           Run at least {MIN_STATISTICAL_N} simulations to generate and display
