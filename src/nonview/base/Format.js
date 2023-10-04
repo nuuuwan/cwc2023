@@ -1,4 +1,4 @@
-import { MIN_NO_CHANCE_N } from "../constants/STATISTICS.js";
+import { EPSILON } from "../constants/STATISTICS.js";
 
 import { EMOJI } from "../constants/EMOJI.js";
 
@@ -24,7 +24,6 @@ export default class Format {
   }
 
   static percent(p) {
-    const EPSILON = 0.1 / MIN_NO_CHANCE_N;
     let s = "";
     const color = Format.getPercentColor(p);
     let background = color + "1",

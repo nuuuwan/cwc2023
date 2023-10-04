@@ -1,11 +1,6 @@
 import { Component } from "react";
 import { STYLE } from "./HomePageStyle";
-import {
-  Box,
-  Typography,
-  CircularProgress,
-  Grid,
-} from "@mui/material";
+import { Box, Typography, CircularProgress, Grid } from "@mui/material";
 
 import GroupStageView from "../molecules/GroupStageView";
 import Simulator from "../../nonview/analytics/Simulator.js";
@@ -90,31 +85,23 @@ export default class HomePage extends Component {
     this.setState({ odiStateIdx });
   }
 
-  renderHeader() {
-    return <HomePageHeader />;
+  renderHeader(n, teamIDToSemiFinalist) {
+    return <HomePageHeader n={n} teamIDToSemiFinalist={teamIDToSemiFinalist} />;
   }
-  renderBody() {
-    const {
-      resultIdx,
-      cumInvPWinner,
-      odiIdx,
-      koResultIdx,
-      simulatorMode,
-      odiStateIdx,
-    } = this.state;
-    if (!resultIdx) {
-      return <CircularProgress />;
-    }
+  renderBody(
+    resultIdx,
+    cumInvPWinner,
+    odiIdx,
+    koResultIdx,
+    simulatorMode,
+    odiStateIdx,
 
-    const nMatches = 45 + 3; // TODO: Find completed matches
-    const perMatchProb = Math.exp(-(Math.log(cumInvPWinner) / nMatches));
-
-    const historyList = this.buildHistory();
-    const bigTable = new BigTable(historyList);
-    const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
-    bigTable.getTeamProbs();
-
-
+    perMatchProb,
+    n,
+    teamIDToWinner,
+    teamIDToFinalist,
+    teamIDToSemiFinalist
+  ) {
     return (
       <Box color={simulatorMode.color}>
         <div ref={(ref) => (this.myRefSimulation = ref)}></div>
@@ -150,7 +137,7 @@ export default class HomePage extends Component {
         />
 
         <div ref={(ref) => (this.myRefBigTable = ref)}></div>
-        <BigTableView 
+        <BigTableView
           n={n}
           teamIDToWinner={teamIDToWinner}
           teamIDToFinalist={teamIDToFinalist}
@@ -168,10 +155,46 @@ export default class HomePage extends Component {
     );
   }
   render() {
+    const {
+      resultIdx,
+      cumInvPWinner,
+      odiIdx,
+      koResultIdx,
+      simulatorMode,
+      odiStateIdx,
+    } = this.state;
+    if (!resultIdx) {
+      return <CircularProgress />;
+    }
+
+    const nMatches = 45 + 3; // TODO: Find completed matches
+    const perMatchProb = Math.exp(-(Math.log(cumInvPWinner) / nMatches));
+
+    const historyList = this.buildHistory();
+    const bigTable = new BigTable(historyList);
+    const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
+      bigTable.getTeamProbs();
+
     return (
       <Box sx={STYLE.ALL}>
-        <Box sx={STYLE.HEADER}>{this.renderHeader()}</Box>
-        <Box sx={STYLE.BODY}>{this.renderBody()}</Box>
+        <Box sx={STYLE.HEADER}>
+          {this.renderHeader(n, teamIDToSemiFinalist)}
+        </Box>
+        <Box sx={STYLE.BODY}>
+          {this.renderBody(
+            resultIdx,
+            cumInvPWinner,
+            odiIdx,
+            koResultIdx,
+            simulatorMode,
+            odiStateIdx,
+            perMatchProb,
+            n,
+            teamIDToWinner,
+            teamIDToFinalist,
+            teamIDToSemiFinalist
+          )}
+        </Box>
         <Box sx={STYLE.FOOTER}>{this.renderFooter()}</Box>
       </Box>
     );

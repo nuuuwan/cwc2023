@@ -1,5 +1,5 @@
 import Team from "../core/Team.js";
-
+import Dict from "../base/Dict.js";
 export default class BigTable {
   constructor(historyList) {
     this.historyList = historyList;
@@ -38,9 +38,11 @@ export default class BigTable {
         teamIDToSemiFinalist[semiFinalist.id] += 1;
       }
     }
-    teamIDToWinner = Object.fromEntries(
-      Object.entries(teamIDToWinner).sort(([, a], [, b]) => b - a)
-    );
+
+    // Sort
+    teamIDToWinner = Dict.sortByValue(teamIDToWinner);
+    teamIDToFinalist = Dict.sortByValue(teamIDToFinalist);
+    teamIDToSemiFinalist = Dict.sortByValue(teamIDToSemiFinalist);
 
     return { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist };
   }

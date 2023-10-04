@@ -14,7 +14,6 @@ import Team from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
 import Format from "../../nonview/base/Format.js";
 
-
 function BigTableInnerView({
   n,
   teamIDToWinner,
@@ -72,8 +71,12 @@ function BigTableInnerView({
   );
 }
 
-export default function BigTableView({ n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist }) {
-  
+export default function BigTableView({
+  n,
+  teamIDToWinner,
+  teamIDToFinalist,
+  teamIDToSemiFinalist,
+}) {
   return (
     <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
       <Typography variant="h5">#CWC2023 Probabilities</Typography>
