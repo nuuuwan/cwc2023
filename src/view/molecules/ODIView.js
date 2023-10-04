@@ -11,7 +11,7 @@ export default function ODIView({ odi, winner }) {
         padding: 0.5,
         borderColor: odi.getColor(winner),
         borderStyle: "solid",
-        borderWidth: 2,
+        borderWidth: 4,
         borderRadius: 2,
         opacity,
         width: 90,
