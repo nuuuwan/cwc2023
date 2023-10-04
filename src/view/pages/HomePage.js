@@ -44,6 +44,7 @@ export default class HomePage extends Component {
     };
 
     this.myRefBigTable = React.createRef();
+    this.myRefSimulation = React.createRef();
   }
 
   componentDidMount() {
@@ -63,7 +64,9 @@ export default class HomePage extends Component {
     this.setState({ historyList });
   }
 
-  handleDoSimulate(simulatorMode, nIncr) {
+  handleDoSimulate(simulatorMode) {
+    
+    
     const simulator = new Simulator(simulatorMode);
     const {resultIdx, cumInvPWinner} = simulator.simulateGroupStage();
     const {odiIdx, koResultIdx} = simulator.simulateKnockOutStage(resultIdx);
@@ -74,7 +77,10 @@ export default class HomePage extends Component {
       odiIdx,
       koResultIdx,
       simulatorMode,
-    });
+      
+    },function() {
+      this.myRefSimulation.scrollIntoView({ behavior: "smooth" });
+    }.bind(this));
   }
 
   renderHeader() {
@@ -108,6 +114,7 @@ export default class HomePage extends Component {
     const perMatchProb = Math.exp(-(Math.log(cumInvPWinner) / nMatches));
     return (
       <Box>
+        <div ref={(ref) => (this.myRefSimulation = ref)}></div>
         <Typography variant="h6" color={simulatorMode.color}>
           <simulatorMode.Icon />
           <strong>{simulatorMode.message}</strong>
@@ -133,15 +140,15 @@ export default class HomePage extends Component {
   }
   renderFooter() {
     const onClickRandomOne = function () {
-      this.handleDoSimulate(SIMULATOR_MODE.RANDOM, 1);
+      this.handleDoSimulate(SIMULATOR_MODE.RANDOM);
     }.bind(this);
 
     const onClickMaximumLikelihood = function () {
-      this.handleDoSimulate(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
+      this.handleDoSimulate(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD);
     }.bind(this);
 
     const onClickMinimumLikelihood = function () {
-      this.handleDoSimulate(SIMULATOR_MODE.MINIMUM_LIKELIHOOD, 1);
+      this.handleDoSimulate(SIMULATOR_MODE.MINIMUM_LIKELIHOOD);
     }.bind(this);
 
     const onClickRandom = function () {
