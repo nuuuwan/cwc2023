@@ -66,6 +66,7 @@ export default class HomePage extends Component {
       odiIdx,
       koResultIdx,
       historyList,
+      simulatorMode,
     });
   }
 
