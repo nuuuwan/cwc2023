@@ -24,7 +24,7 @@ export default class Format {
   }
 
   static percent(p) {
-    const EPSILON = 0.5 / MIN_NO_CHANCE_N;
+    const EPSILON = 0.1 / MIN_NO_CHANCE_N;
     let s = "";
     if (p < EPSILON) {
       s = EMOJI.LOSER;
