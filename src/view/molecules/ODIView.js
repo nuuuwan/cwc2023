@@ -1,21 +1,21 @@
 import { Paper, Typography } from "@mui/material";
 import MatchDateView from "../atoms/MatchDateView";
 import TeamView from "../atoms/TeamView";
-
+import LockIcon from "@mui/icons-material/Lock";
 export default function ODIView({ odi, winner, odiState, onClickODI }) {
   const onClick = () => {
     onClickODI(odi);
   };
   const opacity = odi.isConcluded ? 0.2 : 1;
   let winnerInner = winner;
-  
+
   if (odiState === 1) {
     winnerInner = odi.team1;
   } else if (odiState === 2) {
     winnerInner = odi.team2;
   }
-  const isStateFlipped = winnerInner !== winner;
-  
+  const isStateFlipped = !!odiState;
+
   return (
     <Paper
       sx={{
@@ -43,6 +43,7 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
         p={odi.getP(odi.team2)}
       />
       <Typography variant="body2">{odi.venue.id}</Typography>
+      {isStateFlipped ? <LockIcon /> : null}
     </Paper>
   );
 }

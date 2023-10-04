@@ -4,11 +4,20 @@ import ODI from "../core/ODI.js";
 import { SIMULATOR_MODE } from "../analytics/SimulatorMode.js";
 import { VENUE } from "../core/Venue.js";
 export default class Simulator {
-  constructor(mode) {
+  constructor(mode, odiStateIdx) {
     this.mode = mode;
+    this.odiStateIdx = odiStateIdx;
   }
 
   getWinner(odi) {
+    const state = this.odiStateIdx[odi.id];
+    if (state === 1) {
+      return odi.team1;
+    }
+    if (state === 2) {
+      return odi.team2;
+    }
+
     switch (this.mode) {
       case SIMULATOR_MODE.RANDOM:
         return odi.randomWinner;

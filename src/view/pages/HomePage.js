@@ -32,14 +32,12 @@ export default class HomePage extends Component {
     const cumInvPWinner = null;
     const odiIdx = null;
     const koResultIdx = null;
-    const historyList = [];
     const odiStateIdx = {};
     this.state = {
       resultIdx,
       cumInvPWinner,
       odiIdx,
       koResultIdx,
-      historyList,
       odiStateIdx,
     };
 
@@ -48,20 +46,20 @@ export default class HomePage extends Component {
   }
 
   componentDidMount() {
-    this.buildHistory();
     this.handleDoSimulate(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
   }
 
   buildHistory() {
+    const { odiStateIdx } = this.state;
     let historyList = [];
-    const simulator = new Simulator(SIMULATOR_MODE.RANDOM, {});
+    const simulator = new Simulator(SIMULATOR_MODE.RANDOM, odiStateIdx);
     for (let i = 0; i < N_MONTE_CARLO_SIMULATIONS; i++) {
       const { resultIdx, cumInvPWinner } = simulator.simulateGroupStage();
       const { odiIdx, koResultIdx } =
         simulator.simulateKnockOutStage(resultIdx);
       historyList.push({ resultIdx, cumInvPWinner, odiIdx, koResultIdx });
     }
-    this.setState({ historyList });
+    return historyList;
   }
 
   handleDoSimulate(simulatorMode) {
@@ -90,7 +88,7 @@ export default class HomePage extends Component {
       odiStateIdx[odi.id] = 1;
     } else if (odiStateIdx[odi.id] === 1) {
       odiStateIdx[odi.id] = 2;
-    }  else {
+    } else {
       odiStateIdx[odi.id] = 0;
     }
     this.setState({ odiStateIdx });
@@ -117,7 +115,6 @@ export default class HomePage extends Component {
       odiIdx,
       koResultIdx,
       simulatorMode,
-      historyList,
       odiStateIdx,
     } = this.state;
     if (!resultIdx) {
@@ -126,6 +123,9 @@ export default class HomePage extends Component {
 
     const nMatches = 45 + 3; // TODO: Find completed matches
     const perMatchProb = Math.exp(-(Math.log(cumInvPWinner) / nMatches));
+
+    const historyList = this.buildHistory();
+
     return (
       <Box color={simulatorMode.color}>
         <div ref={(ref) => (this.myRefSimulation = ref)}></div>

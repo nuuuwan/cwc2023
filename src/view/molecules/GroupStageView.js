@@ -15,7 +15,12 @@ export default function GroupStageView({ resultIdx, onClickODI, odiStateIdx }) {
 
     currentInner.push(
       <Grid key={"odi-" + odi.id} item>
-        <ODIView odi={odi} winner={resultIdx[odi.id]} onClickODI={onClickODI} odiState={odiStateIdx[odi.id]} />
+        <ODIView
+          odi={odi}
+          winner={resultIdx[odi.id]}
+          onClickODI={onClickODI}
+          odiState={odiStateIdx[odi.id]}
+        />
       </Grid>
     );
 
