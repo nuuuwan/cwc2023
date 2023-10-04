@@ -6,8 +6,8 @@ This repository contains a simulator for the #cwc2023.
 
 ### Betting Odds 
 
-* [OddsChecker](https://www.oddschecker.com/cricket)
-
+* [Match Odds on OddsChecker](https://www.oddschecker.com/cricket)
+* [Winner Odds on OddsChecker](https://www.oddschecker.com/cricket/world-cup/winner)
 
 ### Match History 
 

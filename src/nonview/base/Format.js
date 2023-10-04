@@ -1,4 +1,4 @@
-import { MIN_STATISTICAL_N } from "../constants/STATISTICS.js";
+import { MIN_STATISTICAL_N, MIN_NO_CHANCE_N } from "../constants/STATISTICS.js";
 
 export default class Format {
   static percent(x) {
@@ -13,7 +13,7 @@ export default class Format {
       return "?";
     }
 
-    if (n >= 100) {
+    if (n >= MIN_NO_CHANCE_N) {
       if (p < 0.001) {
         return "❌";
       }
@@ -29,7 +29,7 @@ export default class Format {
     const opacity = span < p ? 1 : 0.25;
 
     return (
-      <span style={{ opacity }}>
+      <span style={{ opacity, color: "#f80" }}>
         {Format.percent(p)}
         <span style={{ fontSize: "80%", whiteSpace: "nowrap", opacity: 0.25 }}>
           {" ± " + Format.percent(span)}
