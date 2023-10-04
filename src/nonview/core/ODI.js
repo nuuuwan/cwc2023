@@ -22,7 +22,6 @@ export default class ODI {
     this.odds2 = odds2;
   }
 
-
   get title() {
     return `${this.team1.label} vs ${this.team2.label}`;
   }
