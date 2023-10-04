@@ -117,4 +117,14 @@ export default class ODI {
     }
     return "#f80";
   }
+
+  getP(team) {
+    if (team === this.team1) {
+      return this.p1;
+    }
+    if (team === this.team2) {
+      return this.p2;
+    }
+    throw new Error("Invalid team");
+  }
 }
