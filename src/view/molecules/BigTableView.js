@@ -8,6 +8,7 @@ import {
   TableRow,
   Paper,
   TableHead,
+  Alert,
 } from "@mui/material";
 import Team from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
@@ -20,17 +21,21 @@ export default function BigTableView({ historyList }) {
     bigTable.getTeamProbs();
 
   return (
-    <Box sx={{ maxWidth: 320 }}>
-      <Typography variant="h4">Big Table (n={n})</Typography>
-
+    <Box sx={{ margin: 1, padding: 1 }}>
+      <Typography variant="h4">#CWC2023 Probabilities (n={n})</Typography>
+      <Alert severity="info">
+        Odds of winning, reaching the final, and reaching the semi-final in the
+        #CWC2023. Results are based on <strong>{n}</strong> Monte Carlo
+        Simulations. 99% confidence intervals are shown.
+      </Alert>
       <TableContainer component={Paper} sx={{ margin: 1, padding: 1 }}>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>Team</TableCell>
               <TableCell align="right">{"p(Winner)"}</TableCell>
-              <TableCell align="right">{"p(Finalist)"}</TableCell>
-              <TableCell align="right">{"p(S-Finalist)"}</TableCell>
+              <TableCell align="right">{"p(Final)"}</TableCell>
+              <TableCell align="right">{"p(SF)"}</TableCell>
             </TableRow>
           </TableHead>
 
@@ -49,13 +54,13 @@ export default function BigTableView({ historyList }) {
                     <TeamView team={team} />
                   </TableCell>
                   <TableCell align="right" sx={{ fontSize: "150%" }}>
-                    {Format.percent(pWinner)}
+                    {Format.binomial(pWinner, n)}
                   </TableCell>
                   <TableCell align="right" sx={{ fontSize: "150%" }}>
-                    {Format.percent(pFinalist)}
+                    {Format.binomial(pFinalist, n)}
                   </TableCell>
                   <TableCell align="right" sx={{ fontSize: "150%" }}>
-                    {Format.percent(pSemiFinalist)}
+                    {Format.binomial(pSemiFinalist, n)}
                   </TableCell>
                 </TableRow>
               );
