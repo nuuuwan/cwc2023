@@ -20,14 +20,14 @@ export default function ODIView({ odi, winner }) {
       <MatchDateView matchDate={odi.date} />
 
       <TeamView
-        team={odi.favorite}
-        isWinner={odi.favorite.id === winner.id}
-        p={odi.getP(odi.favorite)}
+        team={odi.team1}
+        isWinner={odi.team1.id === winner.id}
+        p={odi.getP(odi.team1)}
       />
       <TeamView
-        team={odi.notFavorite}
-        isWinner={odi.notFavorite.id === winner.id}
-        p={odi.getP(odi.notFavorite)}
+        team={odi.team2}
+        isWinner={odi.team2.id === winner.id}
+        p={odi.getP(odi.team2)}
       />
 
       <Typography variant="caption">{odi.venue.name}</Typography>
