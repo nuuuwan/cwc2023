@@ -26,6 +26,14 @@ export default class Format {
   static percent(p) {
     const EPSILON = 0.1 / MIN_NO_CHANCE_N;
     let s = "";
+    const color = Format.getPercentColor(p);
+    let background = color + "1",
+      borderRadius = "50%",
+      padding = 3,
+      borderColor = color,
+      borderStyle = "solid",
+      borderWidth = 1;
+
     if (p < EPSILON) {
       s = EMOJI.LOSER;
     } else if (p > 1 - EPSILON) {
@@ -36,10 +44,25 @@ export default class Format {
 
         maximumFractionDigits: 0,
       });
+      padding = 0;
+      borderColor = background = "#fff0";
     }
 
-    const color = Format.getPercentColor(p);
-    return <span style={{ color }}>{s}</span>;
+    return (
+      <span
+        style={{
+          color,
+          background,
+          borderRadius,
+          padding,
+          borderColor,
+          borderStyle,
+          borderWidth,
+        }}
+      >
+        {s}
+      </span>
+    );
   }
 
   static matchDate(date) {
