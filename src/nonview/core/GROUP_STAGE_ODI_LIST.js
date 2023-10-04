@@ -450,7 +450,7 @@ export const GROUP_STAGE_ODI_LIST = [
     TEAM.ENG,
     TEAM.NZL,
     VENUE.Ahmedabad,
-    TEAM.ENG,
+    null,
     1.45,
     2.68
   ),
