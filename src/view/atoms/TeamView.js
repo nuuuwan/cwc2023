@@ -9,10 +9,10 @@ export default function TeamView({ team, isWinner, p }) {
 
   return (
     <Box>
-      <Typography variant="h6">
+      <Typography variant="body1">
         {team.emoji + " "}
         {team.id}
-        <span style={{ fontSize: "80%" }}>{pStr}</span>
+        <span style={{ fontSize: "67%" }}>{pStr}</span>
         {" " + emoji}
       </Typography>
     </Box>

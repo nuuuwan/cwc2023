@@ -16,8 +16,8 @@ export const STYLE = {
     right: 0,
     overflowY: "scroll",
     overflowX: "hidden",
-    paddingLeft: 2,
-    paddingRight: 5,
+    paddingLeft: 1,
+    paddingRight: 3,
   },
   FOOTER: {
     position: "fixed",

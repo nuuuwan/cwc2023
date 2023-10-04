@@ -6,7 +6,7 @@ export default class Format {
   static percent(x) {
     return x.toLocaleString(undefined, {
       style: "percent",
-     
+
       maximumFractionDigits: 0,
     });
   }
@@ -30,20 +30,12 @@ export default class Format {
     const q = 1 - p;
     const stdev = Math.sqrt(n * p * q);
     const span = (3 * stdev) / n;
-    const mean = n * p;
     const opacity = span < p ? 1 : 0.25;
 
-    const style = { fontSize: "80%", whiteSpace: "nowrap", opacity: 0.25 };
-
+   
     return (
       <div style={{ opacity, color: "#f80" }}>
-        <div>
-          {Format.percent(p)}
-          <span style={style}>{" ± " + Format.percent(span)}</span>
-        </div>
-        <div style={style}>
-          {Format.int(mean)} 
-        </div>
+        {Format.percent(p)}
       </div>
     );
   }
@@ -58,8 +50,11 @@ export default class Format {
 
   static int(x) {
     if (x > 1_000) {
-      return (x / 1_000).toLocaleString(undefined, {maximumSignificantDigits:2}) + 'K';
+      return (
+        (x / 1_000).toLocaleString(undefined, { maximumSignificantDigits: 2 }) +
+        "K"
+      );
     }
-    return (x ).toLocaleString(undefined, {maximumSignificantDigits:2}) ;
+    return x.toLocaleString(undefined, { maximumSignificantDigits: 2 });
   }
 }

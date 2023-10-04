@@ -7,13 +7,14 @@ export default function ODIView({ odi, winner }) {
   return (
     <Paper
       sx={{
-        margin: 0.2,
-        padding: 1,
+        margin: 0.5,
+        padding: 0.5,
         borderColor: odi.getColor(winner),
         borderStyle: "solid",
-        borderWidth: 6,
-        borderRadius: 6,
+        borderWidth: 2,
+        borderRadius: 2,
         opacity,
+        width: 90,
       }}
     >
       <MatchDateView matchDate={odi.date} />
