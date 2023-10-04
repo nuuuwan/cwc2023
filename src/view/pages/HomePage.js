@@ -19,7 +19,7 @@ import Simulator from "../../nonview/analytics/Simulator.js";
 import KnockOutStageView from "../molecules/KnockOutStageView";
 import BigTableView from "../molecules/BigTableView";
 import { UPDATE_DATE } from "../../nonview/constants/VERSION.js";
-import { SimulatorMode } from "../../nonview/analytics/Simulator.js";
+import { SIMULATOR_MODE } from "../../nonview/analytics/SimulatorMode.js";
 import React from "react";
 import Format from "../../nonview/base/Format.js";
 
@@ -47,7 +47,7 @@ export default class HomePage extends Component {
   }
 
   componentDidMount() {
-    this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD, 1);
+    this.handleOnClickDice(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
   }
 
   handleOnClickDice(simulatorMode, nIncr) {
@@ -64,7 +64,7 @@ export default class HomePage extends Component {
       odiIdx = koResult.odiIdx;
       koResultIdx = koResult.koResultIdx;
 
-      if (simulatorMode === SimulatorMode.RANDOM) {
+      if (simulatorMode === SIMULATOR_MODE.RANDOM) {
         historyList.push({ resultIdx, cumInvPWinner, odiIdx, koResultIdx });
       }
     }
@@ -106,40 +106,15 @@ export default class HomePage extends Component {
       return <CircularProgress />;
     }
 
-    let message, subMessage, Icon, color;
-
-    switch (simulatorMode) {
-      case SimulatorMode.RANDOM:
-        message = "Random Outcome ";
-        subMessage =
-          "That is, if the outcome of each match is randomly selected based on passed outcomes. ";
-        Icon = CasinoIcon;
-        color = "#f80";
-        break;
-      case SimulatorMode.MAXIMUM_LIKELIHOOD:
-        message = "Most likely Outcome ";
-        subMessage = "That is, if every match is won by the favourite. ";
-        Icon = ThumbUpIcon;
-        color = "#080";
-        break;
-      case SimulatorMode.MINIMUM_LIKELIHOOD:
-        message = "Least likely Outcome ";
-        subMessage = "That is, if every match is won by the underdog. ";
-        Icon = ThumbDownIcon;
-        color = "#f00";
-        break;
-      default:
-        throw new Error(`Invalid mode: ${simulatorMode}`);
-    }
     const nMatches = 45 + 3; // TODO: Find completed matches
     const perMatchProb = Math.exp(-(Math.log(cumInvPWinner) / nMatches));
     return (
       <Box>
-        <Typography variant="h6" color={color}>
-          <Icon />
-          <strong>{message}</strong>
+        <Typography variant="h6" color={simulatorMode.color}>
+          <simulatorMode.Icon />
+          <strong>{simulatorMode.message}</strong>
           <br />
-          {subMessage}
+          {simulatorMode.subMessage}
           <br />
           The likelihood of this exact sequence of results is about
           <strong> 1 in {" " + Format.int(cumInvPWinner)}</strong>, or on
@@ -156,19 +131,19 @@ export default class HomePage extends Component {
   }
   renderFooter() {
     const onClickRandomOne = function () {
-      this.handleOnClickDice(SimulatorMode.RANDOM, 1);
+      this.handleOnClickDice(SIMULATOR_MODE.RANDOM, 1);
     }.bind(this);
 
     const onClickMaximumLikelihood = function () {
-      this.handleOnClickDice(SimulatorMode.MAXIMUM_LIKELIHOOD, 1);
+      this.handleOnClickDice(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
     }.bind(this);
 
     const onClickMinimumLikelihood = function () {
-      this.handleOnClickDice(SimulatorMode.MINIMUM_LIKELIHOOD, 1);
+      this.handleOnClickDice(SIMULATOR_MODE.MINIMUM_LIKELIHOOD, 1);
     }.bind(this);
 
     const onClickRandom = function () {
-      this.handleOnClickDice(SimulatorMode.RANDOM, N_RETRY);
+      this.handleOnClickDice(SIMULATOR_MODE.RANDOM, N_RETRY);
       this.myRefBigTable.scrollIntoView({ behavior: "smooth" });
     }.bind(this);
 

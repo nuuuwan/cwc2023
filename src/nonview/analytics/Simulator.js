@@ -1,12 +1,7 @@
 import { GROUP_STAGE_ODI_LIST } from "../core/GROUP_STAGE_ODI_LIST.js";
 import GroupStatePointsTable from "./GroupStatePointsTable.js";
 import ODI from "../core/ODI.js";
-
-export const SimulatorMode = {
-  RANDOM: "RANDOM",
-  MAXIMUM_LIKELIHOOD: "MAXIMUM_LIKELIHOOD",
-  MINIMUM_LIKELIHOOD: "MINIMUM_LIKELIHOOD",
-};
+import { SIMULATOR_MODE } from "../analytics/SimulatorMode.js";
 
 export default class Simulator {
   constructor(mode) {
@@ -15,11 +10,11 @@ export default class Simulator {
 
   getWinner(odi) {
     switch (this.mode) {
-      case SimulatorMode.RANDOM:
+      case SIMULATOR_MODE.RANDOM:
         return odi.randomWinner;
-      case SimulatorMode.MAXIMUM_LIKELIHOOD:
+      case SIMULATOR_MODE.MAXIMUM_LIKELIHOOD:
         return odi.maximumLikelihoodWinner;
-      case SimulatorMode.MINIMUM_LIKELIHOOD:
+      case SIMULATOR_MODE.MINIMUM_LIKELIHOOD:
         return odi.minimumLikelihoodWinner;
       default:
         throw new Error(`Invalid mode: ${this.mode}`);
