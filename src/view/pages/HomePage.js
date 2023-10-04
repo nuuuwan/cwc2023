@@ -24,7 +24,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const N_RETRY = 1_000;
+const N_RETRY = 100;
 export default class HomePage extends Component {
   constructor() {
     super();

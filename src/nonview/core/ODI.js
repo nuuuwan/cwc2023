@@ -4,29 +4,66 @@ import Format from "../base/Format";
 import MatchDate from "./MatchDate";
 
 export default class ODI {
-  constructor(id, date, team1, team2, venue, winner = null) {
+  constructor(
+    id,
+    date,
+    team1,
+    team2,
+    venue,
+    winner = null,
+    odds1 = null,
+    odds2 = null
+  ) {
     this.id = id;
     this.date = new MatchDate(date);
     this.team1 = new Team(team1);
     this.team2 = new Team(team2);
     this.venue = new Venue(venue);
     this.winner = winner ? new Team(winner) : null;
+    this.odds1 = odds1;
+    this.odds2 = odds2;
   }
 
   get title() {
     return `${this.team1.label} vs ${this.team2.label}`;
   }
 
-  get pBoth() {
+  get pBothWinner() {
     return this.team1.pWinner + this.team2.pWinner;
   }
 
+  get p1Winner() {
+    return this.team1.pWinner / this.pBothWinner;
+  }
+
+  get p2Winner() {
+    return this.team2.pWinner / this.pBothWinner;
+  }
+
+  get p1Odds() {
+    return this.odds2 / (this.odds1 + this.odds2);
+  }
+
+  get p2Odds() {
+    return this.odds1 / (this.odds1 + this.odds2);
+  }
+
+  get hasOdds() {
+    return this.odds1 !== null && this.odds2 !== null;
+  }
+
   get p1() {
-    return this.team1.pWinner / this.pBoth;
+    if (this.hasOdds) {
+      return this.p1Odds;
+    }
+    return this.p1Winner;
   }
 
   get p2() {
-    return this.team2.pWinner / this.pBoth;
+    if (this.hasOdds) {
+      return this.p2Odds;
+    }
+    return this.p2Winner;
   }
 
   get odds() {
