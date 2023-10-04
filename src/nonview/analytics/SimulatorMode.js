@@ -1,7 +1,7 @@
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import CasinoIcon from "@mui/icons-material/Casino";
-
+import Format from "../base/Format.js";
 export default class SimulatorMode {
   constructor(id, message, subMessage, color, Icon) {
     this.id = id;
@@ -17,21 +17,21 @@ export const SIMULATOR_MODE = {
     "RANDOM",
     "Random Outcome",
     "if the outcome of each match is randomly selected based on passed outcomes",
-    "#f80",
+    Format.getPercentColor(0.5),
     CasinoIcon
   ),
   MAXIMUM_LIKELIHOOD: new SimulatorMode(
     "MAXIMUM_LIKELIHOOD",
     "Most likely outcome",
     "if every match is won by the favourite.",
-    "#080",
+    Format.getPercentColor(0.9),
     ThumbUpIcon
   ),
   MINIMUM_LIKELIHOOD: new SimulatorMode(
     "MINIMUM_LIKELIHOOD",
     "Least likely Outcome",
     "if every match is won by the underdog.",
-    "#f00",
+    Format.getPercentColor(0.1),
     ThumbDownIcon
   ),
 };

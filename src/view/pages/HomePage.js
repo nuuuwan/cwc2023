@@ -50,31 +50,27 @@ export default class HomePage extends Component {
     this.handleOnClickDice(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
   }
 
-  handleOnClickDice(simulatorMode, nIncr) {
-    let { historyList } = this.state;
-    const simulator = new Simulator(simulatorMode);
-
-    let resultIdx, cumInvPWinner, odiIdx, koResultIdx;
-    for (let i = 0; i < nIncr; i++) {
-      const gResult = simulator.simulateGroupStage();
-      resultIdx = gResult.resultIdx;
-      cumInvPWinner = gResult.cumInvPWinner;
-
-      const koResult = simulator.simulateKnockOutStage(resultIdx);
-      odiIdx = koResult.odiIdx;
-      koResultIdx = koResult.koResultIdx;
-
-      if (simulatorMode === SIMULATOR_MODE.RANDOM) {
-        historyList.push({ resultIdx, cumInvPWinner, odiIdx, koResultIdx });
-      }
+  buildHistory() {
+    let historyList = [];
+    const simulator = new Simulator(SIMULATOR_MODE.RANDOM);
+    for (let i = 0; i < N_RETRY; i++) {
+      const {resultIdx, cumInvPWinner} = simulator.simulateGroupStage();
+      const {odiIdx, koResultIdx} = simulator.simulateKnockOutStage(resultIdx);
+      historyList.push({ resultIdx, cumInvPWinner, odiIdx, koResultIdx });
     }
+    this.setState({ historyList });
+  }
+
+  handleOnClickDice(simulatorMode, nIncr) {
+    const simulator = new Simulator(simulatorMode);
+    const {resultIdx, cumInvPWinner} = simulator.simulateGroupStage();
+    const {odiIdx, koResultIdx} = simulator.simulateKnockOutStage(resultIdx);
 
     this.setState({
       resultIdx,
       cumInvPWinner,
       odiIdx,
       koResultIdx,
-      historyList,
       simulatorMode,
     });
   }
@@ -147,7 +143,6 @@ export default class HomePage extends Component {
     }.bind(this);
 
     const onClickRandom = function () {
-      this.handleOnClickDice(SIMULATOR_MODE.RANDOM, N_RETRY);
       this.myRefBigTable.scrollIntoView({ behavior: "smooth" });
     }.bind(this);
 

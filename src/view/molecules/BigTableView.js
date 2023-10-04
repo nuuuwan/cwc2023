@@ -79,7 +79,7 @@ export default function BigTableView({ historyList }) {
   return (
     <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
       <Typography variant="h5">
-        #CWC2023 Probabilities (n={Format.int(n)})
+        #CWC2023 Probabilities
       </Typography>
       {n < MIN_STATISTICAL_N ? (
         <Alert severity="warning">
