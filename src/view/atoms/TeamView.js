@@ -8,14 +8,7 @@ export default function TeamView({ team, isWinner, p }) {
   const pStr = p ? " " + Format.percent(p) : "";
 
   return (
-    <Box
-      sx={{
-        background: team.color + "08",
-        borderRadius: 3,
-        padding: 1,
-        margin: 0.5,
-      }}
-    >
+    <Box>
       <Typography variant="h6">
         {team.emoji + " "}
         {team.id}

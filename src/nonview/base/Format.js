@@ -29,20 +29,21 @@ export default class Format {
     const q = 1 - p;
     const stdev = Math.sqrt(n * p * q);
     const span = (3 * stdev) / n;
-
+    const mean = n * p;
     const opacity = span < p ? 1 : 0.25;
 
-    const renderedCI = (
-      <span style={{ fontSize: "80%", whiteSpace: "nowrap", opacity: 0.25 }}>
-        {" ± " + Format.percent(span)}
-      </span>
-    );
+    const style = { fontSize: "80%", whiteSpace: "nowrap", opacity: 0.25 };
 
     return (
-      <span style={{ opacity, color: "#f80" }}>
-        {Format.percent(p)}
-        {renderedCI}
-      </span>
+      <div style={{ opacity, color: "#f80" }}>
+        <div>
+          {Format.percent(p)}
+          <span style={style}>{" ± " + Format.percent(span)}</span>
+        </div>
+        <div style={style}>
+          {Format.int(mean)} of {Format.int(n)}
+        </div>
+      </div>
     );
   }
 

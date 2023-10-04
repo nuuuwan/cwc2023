@@ -114,8 +114,8 @@ export default class HomePage extends Component {
         <KnockOutStageView odiIdx={odiIdx} koResultIdx={koResultIdx} />
         <GroupStageView resultIdx={resultIdx} />
 
-        <BigTableView historyList={historyList} />
         <div ref={(ref) => (this.myRefBigTable = ref)}></div>
+        <BigTableView historyList={historyList} />
       </Box>
     );
   }
