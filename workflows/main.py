@@ -59,5 +59,5 @@ def open_files():
 
 
 if __name__ == '__main__':
-    # open_files()
+    open_files()
     generate_group_stage_odi_list()
