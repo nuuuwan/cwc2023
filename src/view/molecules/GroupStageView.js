@@ -2,7 +2,9 @@ import { GROUP_STAGE_ODI_LIST } from "../../nonview/core/GROUP_STAGE_ODI_LIST.js
 
 import ODIView from "./ODIView.js";
 import { Grid, Box, Typography, Paper } from "@mui/material";
-const SX_PAPER = { padding: 0.5, margin: 1, background: "#ccc1" };
+const SX_PAPER = { padding: 0.5, margin: 0.5, background: "#ccc1" };
+const SX_GRID = { margin: 0.5, padding: 0.5 };
+
 export default function GroupStageView({ resultIdx }) {
   let inner = [];
   let iItem = 0;
@@ -21,7 +23,7 @@ export default function GroupStageView({ resultIdx }) {
       inner.push(
         <Paper key={"paper-" + iItem} sx={SX_PAPER} elevation={0}>
           <Typography variant="h6">Week {week}</Typography>
-          <Grid container spacing={1}>
+          <Grid container sx={SX_GRID}>
             {currentInner}
           </Grid>
         </Paper>
@@ -34,7 +36,7 @@ export default function GroupStageView({ resultIdx }) {
     inner.push(
       <Paper key={"grid-" + iItem} sx={SX_PAPER} elevation={0}>
         <Typography variant="h6">Week {week}</Typography>
-        <Grid container spacing={1}>
+        <Grid container sx={SX_GRID}>
           {currentInner}
         </Grid>
       </Paper>

@@ -110,14 +110,13 @@ export default class HomePage extends Component {
     const perMatchProb = Math.exp(-(Math.log(cumInvPWinner) / nMatches));
     return (
       <Box>
-
         <Typography variant="h6" color={simulatorMode.color}>
           <simulatorMode.Icon />
           <strong>{simulatorMode.message}</strong>
           <br />
-          </Typography>
-          <Typography variant="body1" color={simulatorMode.color}>
-          {'That is ' + simulatorMode.subMessage}
+        </Typography>
+        <Typography variant="body1" color={simulatorMode.color}>
+          {"That is " + simulatorMode.subMessage}
           <br />
           The likelihood of this exact sequence of results is about
           <br />
