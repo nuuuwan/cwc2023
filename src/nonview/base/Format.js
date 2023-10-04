@@ -10,6 +10,16 @@ export default class Format {
     if (n < 30) {
       return "?";
     }
+
+    if (n >= 100) {
+      if (p < 0.001) {
+        return "❌";
+      }
+      if (p > 0.999) {
+        return "✔️";
+      }
+    }
+
     const q = 1 - p;
     const stdev = Math.sqrt(n * p * q);
     const span = (3 * stdev) / n;
