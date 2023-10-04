@@ -32,12 +32,7 @@ export default class Format {
     const span = (3 * stdev) / n;
     const opacity = span < p ? 1 : 0.25;
 
-   
-    return (
-      <div style={{ opacity, color: "#f80" }}>
-        {Format.percent(p)}
-      </div>
-    );
+    return <div style={{ opacity, color: "#f80" }}>{Format.percent(p)}</div>;
   }
 
   static matchDate(date) {

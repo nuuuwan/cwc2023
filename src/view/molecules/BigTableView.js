@@ -6,7 +6,6 @@ import {
   TableCell,
   TableContainer,
   TableRow,
-  Paper,
   TableHead,
   Alert,
 } from "@mui/material";
@@ -26,9 +25,9 @@ function BigTableInnerView({
       <Alert severity="info">
         Odds of winning, reaching the final, and reaching the semi-final in the
         #CWC2023. Results are based on <strong>{Format.int(n)}</strong> Monte
-        Carlo Simulations. 
+        Carlo Simulations.
       </Alert>
-      <TableContainer component={Paper} sx={{ margin: 1, padding: 1 }}>
+      <TableContainer component={Box} sx={{ marginTop: 1, padding: 0 }}>
         <Table>
           <TableHead>
             <TableRow>
