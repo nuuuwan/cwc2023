@@ -41,11 +41,11 @@ export default class ODI {
   }
 
   get p1Odds() {
-    return this.odds2 / (this.odds1 + this.odds2);
+    return 1 / this.odds1 / (1 / this.odds1 + 1 / this.odds2);
   }
 
   get p2Odds() {
-    return this.odds1 / (this.odds1 + this.odds2);
+    return 1 / this.odds2 / (1 / this.odds1 + 1 / this.odds2);
   }
 
   get hasOdds() {

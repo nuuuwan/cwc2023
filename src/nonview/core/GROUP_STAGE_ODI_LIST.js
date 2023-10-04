@@ -68,6 +68,7 @@ export const GROUP_STAGE_ODI_LIST = [
     "Bangladesh",
     "Dharamshala",
     null,
+
     2.2,
     1.73
   ),
