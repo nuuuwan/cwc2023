@@ -40,4 +40,19 @@ export default class Team {
     const winnerEmoji = winner.id === this.id ? EMOJI.WINNER : "";
     return this.label + " " + winnerEmoji;
   }
+
+  static emptyDict() {
+    return {
+      NLD: 0,
+      AFG: 0,
+      BGD: 0,
+      IND: 0,
+      NZL: 0,
+      PAK: 0,
+      LKA: 0,
+      AUS: 0,
+      ZAF: 0,
+      ENG: 0,
+    }
+  }
 }

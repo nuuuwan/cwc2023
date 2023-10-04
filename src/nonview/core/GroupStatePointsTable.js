@@ -15,18 +15,7 @@ export default class GroupStagewinsTable {
           idx[winner.id] += 1 + randomTerm;
           return idx;
         },
-        {
-          NLD: 0,
-          AFG: 0,
-          BGD: 0,
-          IND: 0,
-          NZL: 0,
-          PAK: 0,
-          LKA: 0,
-          AUS: 0,
-          ZAF: 0,
-          ENG: 0,
-        }
+        Team.emptyDict(),
       )
     )
       .sort(function ([alpha3A, winsA], [alpha3B, winsB]) {
