@@ -2,7 +2,7 @@ import { GROUP_STAGE_ODI_LIST } from "../core/GROUP_STAGE_ODI_LIST.js";
 import GroupStatePointsTable from "./GroupStatePointsTable.js";
 import ODI from "../core/ODI.js";
 import { SIMULATOR_MODE } from "../analytics/SimulatorMode.js";
-
+import { VENUE } from "../core/Venue.js";
 export default class Simulator {
   constructor(mode) {
     this.mode = mode;
@@ -42,17 +42,17 @@ export default class Simulator {
 
     const odiSemiFinal1 = new ODI(
       "SF 1",
-      "2023-11-15",
+      new Date("2023-11-15 14:00"),
       teams[0],
       teams[3],
-      "Mumbai"
+      VENUE.Mumbai
     );
     const odiSemiFinal2 = new ODI(
       "SF 2",
-      "2023-11-16",
+      new Date("2023-11-16 14:00"),
       teams[1],
       teams[2],
-      "Kolkata"
+      VENUE.Kolkata
     );
 
     const winnerSemiFinal1 = this.getWinner(odiSemiFinal1);
@@ -60,10 +60,10 @@ export default class Simulator {
 
     const odiFinal = new ODI(
       "Final",
-      "2023-11-19",
+      new Date("2023-11-19 14:00"),
       winnerSemiFinal1,
       winnerSemiFinal2,
-      "Ahmedabad"
+      VENUE.Ahmedabad
     );
     const winnerFinal = this.getWinner(odiFinal);
 
