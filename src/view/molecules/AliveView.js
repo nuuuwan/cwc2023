@@ -15,7 +15,7 @@ export default function AliveView({ n, teamIDToWinner }) {
   return front.map(function (teamID) {
     const team = TEAM[teamID];
     return (
-      <span key={"team-" + teamID} style={{ fontSize: "110%", padding: 2 }}>
+      <span key={"team-" + teamID} style={{ fontSize: "120%", padding: 1 }}>
         {" "}
         {team.emoji}
       </span>
