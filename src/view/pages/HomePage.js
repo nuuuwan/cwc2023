@@ -13,7 +13,10 @@ import React from "react";
 import HomePageFooter from "../molecules/HomePageFooter";
 import HomePageHeader from "../molecules/HomePageHeader";
 import BigTable from "../../nonview/analytics/BigTable.js";
-import { VERSION_DATETIME } from "../../nonview/constants/VERSION.js";
+import {
+  VERSION_DATETIME,
+  LAST_COMMIT_MESSAGE,
+} from "../../nonview/constants/VERSION.js";
 import Format from "../../nonview/base/Format.js";
 
 export default class HomePage extends Component {
@@ -54,7 +57,8 @@ export default class HomePage extends Component {
       <Box color={simulatorMode.color}>
         <div ref={(ref) => (this.myRefSimulation = ref)}></div>
         <Typography variant="caption" sx={{ opacity: 0.1 }}>
-          Last Updated <strong>{Format.timeStamp(VERSION_DATETIME)}</strong>
+          Last Updated <strong>{Format.timeStamp(VERSION_DATETIME)}</strong>- "
+          {LAST_COMMIT_MESSAGE}"
         </Typography>
 
         <Grid container direction="row" alignItems="center">
