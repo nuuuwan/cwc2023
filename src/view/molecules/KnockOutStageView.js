@@ -1,7 +1,7 @@
 import ODIView from "./ODIView.js";
 import { Grid, Box, Typography } from "@mui/material";
 import React from "react";
-import Screenshottable from "./Screenshottable.js";
+import ScreenShottable from "./ScreenShottable.js";
 
 function renderGroup(entries, odiIdx, odiStateIdx) {
   const onClickODIDummy = function () {};
@@ -33,7 +33,7 @@ export default function KnockOutStageView({
   const final = entries.slice(2, 3);
   const semiFinals = entries.slice(0, 2);
   return (
-    <Screenshottable label="knock-out-stage">
+    <ScreenShottable label="knock-out-stage">
       <Box>
         <Typography variant="h5">Knock-out Stage</Typography>
         {renderGroup(final, simulator.stats.odiIdx, odiStateIdx, onClickODI)}
@@ -44,6 +44,6 @@ export default function KnockOutStageView({
           onClickODI
         )}
       </Box>
-    </Screenshottable>
+    </ScreenShottable>
   );
 }

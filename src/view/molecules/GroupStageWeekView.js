@@ -1,6 +1,6 @@
 import ODIView from "./ODIView.js";
 import { Grid, Typography, Box } from "@mui/material";
-import Screenshottable from "./Screenshottable.js";
+import ScreenShottable from "./ScreenShottable.js";
 import { EMOJI } from "../../nonview/constants/EMOJI.js";
 const SX_PAPER = { padding: 1, margin: 0.5 };
 const SX_GRID = { margin: 1, padding: 0.5 };
@@ -23,7 +23,7 @@ export default function GroupStageWeekView({
   odiStateIdx,
 }) {
   return (
-    <Screenshottable
+    <ScreenShottable
       label={`group-state-week-${week}`}
       tweetBody={getTweetBody(week, odiList)}
     >
@@ -44,6 +44,6 @@ export default function GroupStageWeekView({
           })}
         </Grid>
       </Box>
-    </Screenshottable>
+    </ScreenShottable>
   );
 }
