@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import HomePage from "./view/pages/HomePage";
 import "./App.css";
 
-const FONT_FAMILY = "Alegreya Sans; Carlito;  Advent Pro; Bubbler One";
+const FONT_FAMILY = "Akshar; Abel;  Actor";
 const THEME = createTheme({
   palette: {
     primary: {
@@ -25,7 +25,7 @@ const THEME = createTheme({
   },
   typography: {
     fontFamily: [FONT_FAMILY, "sans-serif"].join(","),
-    fontSize: 11,
+    fontSize: 12,
   },
 });
 
