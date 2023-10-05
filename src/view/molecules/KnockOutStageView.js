@@ -35,9 +35,8 @@ export default function KnockOutStageView({
   return (
     <Screenshottable label="knock-out-stage">
       <Box>
-        <Typography variant="h5">Final</Typography>
+        <Typography variant="h5">Knock-out Stage</Typography>
         {renderGroup(final, simulator.stats.odiIdx, odiStateIdx, onClickODI)}
-        <Typography variant="h5">Semi-Finals</Typography>
         {renderGroup(
           semiFinals,
           simulator.stats.odiIdx,

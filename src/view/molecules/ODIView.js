@@ -49,7 +49,11 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
         }}
         onClick={onClick}
       >
+        <Typography variant="body2" sx={{ opacity: 0.5, fontSize: "60%" }}>
+          {odi.id}
+        </Typography>
         <MatchDateView date={odi.date} />
+
         <TeamView
           team={odi.team1}
           isWinner={odi.team1.id === winnerInner.id}
