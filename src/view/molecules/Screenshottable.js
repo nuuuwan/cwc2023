@@ -23,7 +23,7 @@ export default function Screenshottable({ label, tweetBody, children }) {
   return (
     <div style={{ width: "fit-content" }}>
       <div ref={ref}>{children}</div>
-      <Grid container justifyContent="flex-end" sx={{ paddingRight: 1 }}>
+      <Grid container justifyContent="flex-end" sx={{ paddingRight: 2 }}>
         <Tooltip title="Download Image">
           <IconButton onClick={onClick}>
             <CloudDownloadIcon sx={{ color: "#ccc" }} />
