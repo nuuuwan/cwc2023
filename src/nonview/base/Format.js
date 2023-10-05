@@ -3,6 +3,17 @@ import { EPSILON } from "../constants/STATISTICS.js";
 import { EMOJI } from "../constants/EMOJI.js";
 
 export default class Format {
+  static timeStamp(date) {
+    return date.toLocaleString(undefined, {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      //
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    });
+  }
   static getPercentColor(p) {
     if (p <= 0.2) {
       return "#f00";
