@@ -13,7 +13,7 @@ import TeamView from "../atoms/TeamView.js";
 import Format from "../../nonview/base/Format.js";
 
 import React from "react";
-import ScreenShottable from "./ScreenShottable.js";
+import ScreenShot from "./ScreenShot.js";
 import { TEAM } from "../../nonview/core/Team.js";
 function getTweetTeamIDToXLines(title, n, teamIDToX) {
   let lines = [title];
@@ -107,11 +107,11 @@ function BigTableInnerView({ bigTable }) {
 
 export default function BigTableView({ bigTable }) {
   return (
-    <ScreenShottable label="big-table" tweetBody={getTweetBody(bigTable)}>
+    <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable)}>
       <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
         <Typography variant="h5">#CWC23 Probabilities</Typography>
         <BigTableInnerView bigTable={bigTable} />
       </Box>
-    </ScreenShottable>
+    </ScreenShot>
   );
 }

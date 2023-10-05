@@ -4,7 +4,7 @@ import React from "react";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import TweetButton from "./TweetButton.js";
 
-export default function ScreenShottable({ label, tweetBody, children }) {
+export default function ScreenShot({ label, tweetBody, children }) {
   const ref = React.useRef(null);
 
   const takeScreenshot = useScreenshot()[1];
