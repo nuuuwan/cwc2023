@@ -29,7 +29,7 @@ function BigTableInnerView({ bigTable }) {
     <Box>
       <Alert severity="info">
         Odds of winning, reaching the final, and reaching the semi-final in the
-        #CWC2023. Results are based on <strong>{Format.int(n)}</strong> Monte
+        #CWC23. Results are based on <strong>{Format.int(n)}</strong> Monte
         Carlo Simulations.
       </Alert>
       <TableContainer component={Box} sx={{ marginTop: 1, padding: 0 }}>
@@ -95,7 +95,7 @@ export default function BigTableView({ bigTable }) {
   return (
     <Screenshottable label="big-table">
       <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
-        <Typography variant="h5">#CWC2023 Probabilities</Typography>
+        <Typography variant="h5">#CWC23 Probabilities</Typography>
         <BigTableInnerView bigTable={bigTable} />
       </Box>
     </Screenshottable>

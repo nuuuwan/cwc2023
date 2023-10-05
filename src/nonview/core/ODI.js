@@ -1,5 +1,5 @@
 import Format from "../base/Format";
-import { START_WEEK } from "../constants/CWC2023_DATETIME";
+import { START_WEEK } from "../constants/CWC23_DATETIME";
 export default class ODI {
   constructor(
     id,

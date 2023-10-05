@@ -1,7 +1,7 @@
 import { TEAM_ID_TO_P_WINNER } from "../constants/TEAM_ID_TO_P_WINNER.js";
 import { TEAM_ID_TO_EMOJI } from "../constants/TEAM_ID_TO_EMOJI.js";
 import { TEAM_ID_TO_COLOR } from "../constants/TEAM_ID_TO_COLOR.js";
-import { CWC2023_TEAM_ID_LIST } from "../constants/CWC2023_TEAM_ID_LIST.js";
+import { CWC23_TEAM_ID_LIST } from "../constants/CWC23_TEAM_ID_LIST.js";
 
 export default class Team {
   constructor(id) {
@@ -21,14 +21,14 @@ export default class Team {
   }
 
   static initTeamIDToX(defaultValue) {
-    return CWC2023_TEAM_ID_LIST.reduce((acc, teamID) => {
+    return CWC23_TEAM_ID_LIST.reduce((acc, teamID) => {
       acc[teamID] = defaultValue;
       return acc;
     }, {});
   }
 
   static getTeamIdx() {
-    return CWC2023_TEAM_ID_LIST.reduce((idx, teamID) => {
+    return CWC23_TEAM_ID_LIST.reduce((idx, teamID) => {
       idx[teamID] = new Team(teamID);
       return idx;
     }, {});

@@ -4,7 +4,7 @@ import Simulator from "./Simulator.js";
 import { SIMULATOR_MODE } from "./SimulatorMode.js";
 import { N_MONTE_CARLO_SIMULATIONS } from "../constants/STATISTICS.js";
 import Statistics from "../base/Statistics.js";
-import { CWC2023_TEAM_ID_LIST } from "../constants/CWC2023_TEAM_ID_LIST.js";
+import { CWC23_TEAM_ID_LIST } from "../constants/CWC23_TEAM_ID_LIST.js";
 export const PERCENTILES = [
   0.0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 1.0,
 ];
@@ -106,7 +106,7 @@ export default class BigTable {
     }
 
     // Order
-    const orderedTeamIDs = CWC2023_TEAM_ID_LIST.sort(function (teamA, teamB) {
+    const orderedTeamIDs = CWC23_TEAM_ID_LIST.sort(function (teamA, teamB) {
       const dWinner = teamIDToWinner[teamB] - teamIDToWinner[teamA];
       if (dWinner !== 0) {
         return dWinner;

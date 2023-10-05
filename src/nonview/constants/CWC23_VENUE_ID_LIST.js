@@ -1,4 +1,4 @@
-export const CWC2023_VENUE_ID_LIST = [
+export const CWC23_VENUE_ID_LIST = [
   "Ahmedabad",
   "Bengaluru",
   "Chennai",

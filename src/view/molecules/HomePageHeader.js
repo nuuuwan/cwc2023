@@ -7,7 +7,7 @@ export default function HomePageHeader({ bigTable }) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            #CWC2023
+            #CWC23
           </Typography>
           <AliveView bigTable={bigTable} />
         </Toolbar>

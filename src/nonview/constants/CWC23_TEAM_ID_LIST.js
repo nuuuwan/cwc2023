@@ -1,4 +1,4 @@
-export const CWC2023_TEAM_ID_LIST = [
+export const CWC23_TEAM_ID_LIST = [
   "AFG",
   "AUS",
   "BGD",

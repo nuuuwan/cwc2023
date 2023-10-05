@@ -2,7 +2,9 @@ import { useScreenshot } from "use-react-screenshot";
 import { Grid, Tooltip, IconButton } from "@mui/material";
 import React from "react";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-export default function Screenshottable({ label, children }) {
+import TweetButton from "./TweetButton.js";
+
+export default function Screenshottable({ label, tweetContent, children }) {
   const ref = React.useRef(null);
 
   const takeScreenshot = useScreenshot()[1];
@@ -27,6 +29,7 @@ export default function Screenshottable({ label, children }) {
             <CloudDownloadIcon sx={{ color: "#ccc" }} />
           </IconButton>
         </Tooltip>
+        <TweetButton tweetBody={label}/>
       </Grid>
     </div>
   );
