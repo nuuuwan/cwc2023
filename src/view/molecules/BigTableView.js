@@ -33,7 +33,7 @@ function getTweetBody(bigTable) {
     getTweetTeamIDToXLines("🥇Probability of Winning🏆", n, teamIDToWinner),
     ["..."],
     getTweetTeamIDToXLines(
-      "🥇Probability of Reaching Finals",
+      "🥇🥈Probability of Reaching Finals",
       n,
       teamIDToFinalist
     ),
