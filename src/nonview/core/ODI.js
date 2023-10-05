@@ -25,6 +25,7 @@ export default class ODI {
     return this.date.getTime() / 1000.0;
   }
 
+  // Basic
   get weekAbsolute() {
     const SECONDS_IN_DAY = 86_400;
     return parseInt((this.ut + 3 * SECONDS_IN_DAY) / (7 * SECONDS_IN_DAY));
@@ -42,18 +43,16 @@ export default class ODI {
     return !!this.winner;
   }
 
-  get pBothWinner() {
-    return this.team1.pWinner + this.team2.pWinner;
-  }
-
+  // Probabilities
   get p1Winner() {
-    return this.team1.pWinner / this.pBothWinner;
+    return this.team1.pWinner / (this.team1.pWinner + this.team2.pWinner);
   }
 
   get p2Winner() {
-    return this.team2.pWinner / this.pBothWinner;
+    return this.team2.pWinner / (this.team1.pWinner + this.team2.pWinner);
   }
 
+  // Odds
   get p1Odds() {
     return 1 / this.odds1 / (1 / this.odds1 + 1 / this.odds2);
   }
@@ -66,6 +65,7 @@ export default class ODI {
     return this.odds1 !== null && this.odds2 !== null;
   }
 
+  // Combine Probabilities and Odds
   get p1() {
     if (this.hasWinner) {
       return this.winner === this.team1 ? 1 : 0;
@@ -86,10 +86,7 @@ export default class ODI {
     return this.p2Winner;
   }
 
-  get odds() {
-    return `${Format.percent(this.p1)} to ${Format.percent(this.p2)}`;
-  }
-
+  // Predict Winner
   get randomWinner() {
     if (this.winner) {
       return this.winner;
@@ -110,23 +107,6 @@ export default class ODI {
     if (this.winner) {
       return this.winner;
     }
-    return this.p1 > this.p2 ? this.team2 : this.team1;
-  }
-
-  getOther(winner) {
-    if (winner === this.team1) {
-      return this.team2;
-    }
-    if (winner === this.team2) {
-      return this.team1;
-    }
-    throw new Error("Invalid winner");
-  }
-
-  get favorite() {
-    return this.p1 > this.p2 ? this.team1 : this.team2;
-  }
-  get notFavorite() {
     return this.p1 > this.p2 ? this.team2 : this.team1;
   }
 
