@@ -12,7 +12,7 @@ export default function TeamView({ team, isWinner, p }) {
     <Typography variant="body1">
       {team.emoji + " "}
       {team.id}{" "}
-      <span style={{ fontSize: "50%" }}>{p ? Format.percent(p) : null}</span>
+      <span style={{ fontSize: "75%" }}>{p ? Format.percent(p) : null}</span>
       {" " + emoji}
     </Typography>
   );
