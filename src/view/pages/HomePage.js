@@ -97,7 +97,6 @@ export default class HomePage extends Component {
     );
   }
   render() {
-    console.debug("render");
     const { simulatorMode, odiStateIdx } = this.state;
     const simulator = new Simulator(simulatorMode, odiStateIdx);
     const bigTable = new BigTable(odiStateIdx);
