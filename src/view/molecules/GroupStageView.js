@@ -9,11 +9,13 @@ const SX_PAPER = { padding: 0.5, margin: 0.5 };
 const SX_GRID = { margin: 0.5, padding: 0.5 };
 
 function getTweetContent(week, odiList) {
-  let lines = [`Week ${week} - Predictions`];
+  let lines = [`Week ${week} - Predictions`, ""];
   for (let odi of odiList.slice().reverse()) {
-    const line = `${odi.favoriteTeam.twitterName} ${EMOJI.WINNER} vs. ${odi.underdogTeam.twitterName}`;
+    const line = `${odi.favoriteTeam.twitterName} ${EMOJI.WINNER} - ${odi.underdogTeam.twitterName}`;
     lines.push(line);
   }
+  lines.push("");
+
   return lines.join("\n");
 }
 
