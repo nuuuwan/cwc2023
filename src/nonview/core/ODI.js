@@ -1,5 +1,5 @@
 import Format from "../base/Format";
-
+import { START_WEEK } from "../constants/CWC2023_DATETIME";
 export default class ODI {
   constructor(
     id,
@@ -19,6 +19,19 @@ export default class ODI {
     this.winner = winner ? winner : null;
     this.odds1 = odds1;
     this.odds2 = odds2;
+  }
+
+  get ut() {
+    return this.date.getTime() / 1000.0;
+  }
+
+  get weekAbsolute() {
+    const SECONDS_IN_DAY = 86_400;
+    return parseInt((this.ut + 3 * SECONDS_IN_DAY) / (7 * SECONDS_IN_DAY));
+  }
+
+  get week() {
+    return this.weekAbsolute - START_WEEK + 1;
   }
 
   get title() {
@@ -134,5 +147,16 @@ export default class ODI {
       return this.p2;
     }
     throw new Error("Invalid team");
+  }
+
+  static groupByWeek(odiList) {
+    return odiList.reduce(function (weekToODIList, odi) {
+      const week = odi.week;
+      if (!weekToODIList[week]) {
+        weekToODIList[week] = [];
+      }
+      weekToODIList[week].push(odi);
+      return weekToODIList;
+    }, {});
   }
 }
