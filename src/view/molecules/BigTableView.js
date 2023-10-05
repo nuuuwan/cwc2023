@@ -12,6 +12,9 @@ import Team from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
 import Format from "../../nonview/base/Format.js";
 
+import React from "react";
+import Screenshottable from "./Screenshottable.js";
+
 function BigTableInnerView({
   n,
   teamIDToWinner,
@@ -82,15 +85,17 @@ export default function BigTableView({
   teamIDToTotalPosition,
 }) {
   return (
-    <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
-      <Typography variant="h5">#CWC2023 Probabilities</Typography>
-      <BigTableInnerView
-        n={n}
-        teamIDToWinner={teamIDToWinner}
-        teamIDToFinalist={teamIDToFinalist}
-        teamIDToSemiFinalist={teamIDToSemiFinalist}
-        teamIDToTotalPosition={teamIDToTotalPosition}
-      />
-    </Box>
+    <Screenshottable label="big-table">
+      <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
+        <Typography variant="h5">#CWC2023 Probabilities</Typography>
+        <BigTableInnerView
+          n={n}
+          teamIDToWinner={teamIDToWinner}
+          teamIDToFinalist={teamIDToFinalist}
+          teamIDToSemiFinalist={teamIDToSemiFinalist}
+          teamIDToTotalPosition={teamIDToTotalPosition}
+        />
+      </Box>
+    </Screenshottable>
   );
 }
