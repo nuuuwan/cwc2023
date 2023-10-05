@@ -29,7 +29,7 @@ export default function Screenshottable({ label, tweetContent, children }) {
             <CloudDownloadIcon sx={{ color: "#ccc" }} />
           </IconButton>
         </Tooltip>
-        <TweetButton tweetBody={tweetContent} />
+        {tweetContent ? <TweetButton tweetBody={tweetContent} /> : null}
       </Grid>
     </div>
   );
