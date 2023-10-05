@@ -23,20 +23,19 @@ function renderGroup(entries, odiIdx, odiStateIdx) {
 }
 
 export default function KnockOutStageView({
-  odiIdx,
-  koResultIdx,
+  simulator,
   odiStateIdx,
   onClickODI,
 }) {
-  const entries = Object.entries(koResultIdx).reverse();
+  const entries = Object.entries(simulator.stats.koResultIdx).reverse();
   const final = entries.slice(0, 1);
   const semiFinals = entries.slice(1, 3);
   return (
     <Box>
       <Typography variant="h5">Final</Typography>
-      {renderGroup(final, odiIdx, odiStateIdx, onClickODI)}
+      {renderGroup(final, simulator.stats.odiIdx, odiStateIdx, onClickODI)}
       <Typography variant="h5">Semi-Finals</Typography>
-      {renderGroup(semiFinals, odiIdx, odiStateIdx, onClickODI)}
+      {renderGroup(semiFinals, simulator.stats.odiIdx, odiStateIdx, onClickODI)}
     </Box>
   );
 }

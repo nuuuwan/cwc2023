@@ -10,7 +10,6 @@ import BigTableView from "../molecules/BigTableView";
 
 import { SIMULATOR_MODE } from "../../nonview/analytics/SimulatorMode.js";
 import React from "react";
-import { N_MONTE_CARLO_SIMULATIONS } from "../../nonview/constants/STATISTICS.js";
 import HomePageFooter from "../molecules/HomePageFooter";
 import HomePageHeader from "../molecules/HomePageHeader";
 import BigTable from "../../nonview/analytics/BigTable.js";
@@ -31,17 +30,6 @@ export default class HomePage extends Component {
 
   componentDidMount() {
     this.handleDoSimulate(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
-  }
-
-  buildHistory() {
-    const { odiStateIdx } = this.state;
-    let historyList = [];
-    const simulator = new Simulator(SIMULATOR_MODE.RANDOM, odiStateIdx);
-    for (let i = 0; i < N_MONTE_CARLO_SIMULATIONS; i++) {
-      const {resultIdx, cumInvPWinner, odiIdx, koResultIdx} = simulator.simulate();
-      historyList.push({ resultIdx, cumInvPWinner, odiIdx, koResultIdx });
-    }
-    return historyList;
   }
 
   handleDoSimulate(simulatorMode) {
@@ -65,21 +53,10 @@ export default class HomePage extends Component {
     });
   }
 
-  renderHeader(n, teamIDToWinner) {
-    return <HomePageHeader n={n} teamIDToWinner={teamIDToWinner} />;
+  renderHeader(bigTable) {
+    return <HomePageHeader bigTable={bigTable} />;
   }
-  renderBody(
-    resultIdx,
-    odiIdx,
-    koResultIdx,
-    simulatorMode,
-    odiStateIdx,
-    n,
-    teamIDToWinner,
-    teamIDToFinalist,
-    teamIDToSemiFinalist,
-    teamIDToTotalPosition
-  ) {
+  renderBody(simulatorMode, odiStateIdx, simulator, bigTable) {
     return (
       <Box color={simulatorMode.color}>
         <div ref={(ref) => (this.myRefSimulation = ref)}></div>
@@ -103,25 +80,18 @@ export default class HomePage extends Component {
         </Typography>
 
         <KnockOutStageView
-          odiIdx={odiIdx}
-          koResultIdx={koResultIdx}
+          simulator={simulator}
           odiStateIdx={odiStateIdx}
           onClickODI={this.handleOnClickODI.bind(this)}
         />
         <GroupStageView
-          resultIdx={resultIdx}
+          simulator={simulator}
           odiStateIdx={odiStateIdx}
           onClickODI={this.handleOnClickODI.bind(this)}
         />
 
         <div ref={(ref) => (this.myRefBigTable = ref)}></div>
-        <BigTableView
-          n={n}
-          teamIDToWinner={teamIDToWinner}
-          teamIDToFinalist={teamIDToFinalist}
-          teamIDToSemiFinalist={teamIDToSemiFinalist}
-          teamIDToTotalPosition={teamIDToTotalPosition}
-        />
+        <BigTableView bigTable={bigTable} />
       </Box>
     );
   }
@@ -136,34 +106,13 @@ export default class HomePage extends Component {
   render() {
     const { simulatorMode, odiStateIdx } = this.state;
     const simulator = new Simulator(simulatorMode, odiStateIdx);
-    const { resultIdx, odiIdx, koResultIdx } = simulator.simulate();
-
-    const historyList = this.buildHistory();
-    const bigTable = new BigTable(historyList);
-    const {
-      n,
-      teamIDToWinner,
-      teamIDToFinalist,
-      teamIDToSemiFinalist,
-      teamIDToTotalPosition,
-    } = bigTable.getTeamProbs();
+    const bigTable = new BigTable(odiStateIdx);
 
     return (
       <Box sx={STYLE.ALL}>
-        <Box sx={STYLE.HEADER}>{this.renderHeader(n, teamIDToWinner)}</Box>
+        <Box sx={STYLE.HEADER}>{this.renderHeader(bigTable)}</Box>
         <Box sx={STYLE.BODY}>
-          {this.renderBody(
-            resultIdx,
-            odiIdx,
-            koResultIdx,
-            simulatorMode,
-            odiStateIdx,
-            n,
-            teamIDToWinner,
-            teamIDToFinalist,
-            teamIDToSemiFinalist,
-            teamIDToTotalPosition
-          )}
+          {this.renderBody(simulatorMode, odiStateIdx, simulator, bigTable)}
         </Box>
         <Box sx={STYLE.FOOTER}>{this.renderFooter()}</Box>
       </Box>

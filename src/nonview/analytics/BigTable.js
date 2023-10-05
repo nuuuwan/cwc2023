@@ -1,17 +1,32 @@
 import Team from "../core/Team.js";
 import Dict from "../base/Dict.js";
+import Simulator from "./Simulator.js";
+import { SIMULATOR_MODE } from "./SimulatorMode.js";
+import { N_MONTE_CARLO_SIMULATIONS } from "../constants/STATISTICS.js";
+
 export default class BigTable {
-  constructor(historyList) {
-    this.historyList = historyList;
+  constructor(odiStateIdx) {
+    this.stats = this.getStats(odiStateIdx);
   }
 
-  getTeamProbs() {
-    const n = this.historyList.length;
+  buildHistory(odiStateIdx) {
+    let historyList = [];
+
+    for (let i = 0; i < N_MONTE_CARLO_SIMULATIONS; i++) {
+      const simulator = new Simulator(SIMULATOR_MODE.RANDOM, odiStateIdx);
+      historyList.push(simulator.stats);
+    }
+    return historyList;
+  }
+
+  getStats(odiStateIdx) {
+    const historyList = this.buildHistory(odiStateIdx);
+    const n = historyList.length;
     let teamIDToWinner = Team.initTeamIDToX(0);
     let teamIDToFinalist = Team.initTeamIDToX(0);
     let teamIDToSemiFinalist = Team.initTeamIDToX(0);
     let teamIDToTotalPosition = Team.initTeamIDToX(0);
-    for (let history of this.historyList) {
+    for (let history of historyList) {
       const { koResultIdx, odiIdx, resultIdx } = history;
 
       // Winner

@@ -1,7 +1,7 @@
 import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 import AliveView from "./AliveView";
 
-export default function HomePageHeader({ n, teamIDToWinner }) {
+export default function HomePageHeader({ bigTable }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -9,7 +9,7 @@ export default function HomePageHeader({ n, teamIDToWinner }) {
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             #CWC2023
           </Typography>
-          <AliveView n={n} teamIDToWinner={teamIDToWinner} />
+          <AliveView bigTable={bigTable} />
         </Toolbar>
       </AppBar>
     </Box>

@@ -7,6 +7,7 @@ export default class Simulator {
   constructor(mode, odiStateIdx) {
     this.mode = mode;
     this.odiStateIdx = odiStateIdx;
+    this.stats = this.getStats();
   }
 
   getWinner(odi) {
@@ -94,10 +95,9 @@ export default class Simulator {
     return { odiIdx, koResultIdx };
   }
 
-  simulate() {
+  getStats() {
     const { resultIdx, cumInvPWinner } = this.simulateGroupStage();
     const { odiIdx, koResultIdx } = this.simulateKnockOutStage(resultIdx);
     return { resultIdx, cumInvPWinner, odiIdx, koResultIdx };
   }
-
 }

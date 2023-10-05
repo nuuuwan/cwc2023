@@ -11,7 +11,7 @@ const SX_GRID = { margin: 0.5, padding: 0.5 };
 function GroupStageWeekView({
   week,
   odiList,
-  resultIdx,
+  simulator,
   onClickODI,
   odiStateIdx,
 }) {
@@ -25,7 +25,7 @@ function GroupStageWeekView({
               <Grid key={"odi-" + odi.id} item>
                 <ODIView
                   odi={odi}
-                  winner={resultIdx[odi.id]}
+                  winner={simulator.stats.resultIdx[odi.id]}
                   onClickODI={onClickODI}
                   odiState={odiStateIdx[odi.id]}
                 />
@@ -38,7 +38,7 @@ function GroupStageWeekView({
   );
 }
 
-export default function GroupStageView({ resultIdx, onClickODI, odiStateIdx }) {
+export default function GroupStageView({ simulator, onClickODI, odiStateIdx }) {
   return (
     <Box>
       <Typography variant="h5">Group Stage</Typography>
@@ -50,7 +50,7 @@ export default function GroupStageView({ resultIdx, onClickODI, odiStateIdx }) {
               key={"week-" + week}
               week={week}
               odiList={odiList}
-              resultIdx={resultIdx}
+              simulator={simulator}
               odiStateIdx={odiStateIdx}
               onClickODI={onClickODI}
             />

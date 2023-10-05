@@ -15,13 +15,15 @@ import Format from "../../nonview/base/Format.js";
 import React from "react";
 import Screenshottable from "./Screenshottable.js";
 
-function BigTableInnerView({
-  n,
-  teamIDToWinner,
-  teamIDToFinalist,
-  teamIDToSemiFinalist,
-  teamIDToTotalPosition,
-}) {
+function BigTableInnerView({ bigTable }) {
+  const {
+    n,
+    teamIDToWinner,
+    teamIDToFinalist,
+    teamIDToSemiFinalist,
+    teamIDToTotalPosition,
+  } = bigTable.stats;
+
   return (
     <Box>
       <Alert severity="info">
@@ -77,24 +79,12 @@ function BigTableInnerView({
   );
 }
 
-export default function BigTableView({
-  n,
-  teamIDToWinner,
-  teamIDToFinalist,
-  teamIDToSemiFinalist,
-  teamIDToTotalPosition,
-}) {
+export default function BigTableView({ bigTable }) {
   return (
     <Screenshottable label="big-table">
       <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
         <Typography variant="h5">#CWC2023 Probabilities</Typography>
-        <BigTableInnerView
-          n={n}
-          teamIDToWinner={teamIDToWinner}
-          teamIDToFinalist={teamIDToFinalist}
-          teamIDToSemiFinalist={teamIDToSemiFinalist}
-          teamIDToTotalPosition={teamIDToTotalPosition}
-        />
+        <BigTableInnerView bigTable={bigTable} />
       </Box>
     </Screenshottable>
   );
