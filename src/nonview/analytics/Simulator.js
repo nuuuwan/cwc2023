@@ -93,4 +93,11 @@ export default class Simulator {
 
     return { odiIdx, koResultIdx };
   }
+
+  simulate() {
+    const { resultIdx, cumInvPWinner } = this.simulateGroupStage();
+    const { odiIdx, koResultIdx } = this.simulateKnockOutStage(resultIdx);
+    return { resultIdx, cumInvPWinner, odiIdx, koResultIdx };
+  }
+
 }

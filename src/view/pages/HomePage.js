@@ -38,9 +38,7 @@ export default class HomePage extends Component {
     let historyList = [];
     const simulator = new Simulator(SIMULATOR_MODE.RANDOM, odiStateIdx);
     for (let i = 0; i < N_MONTE_CARLO_SIMULATIONS; i++) {
-      const { resultIdx, cumInvPWinner } = simulator.simulateGroupStage();
-      const { odiIdx, koResultIdx } =
-        simulator.simulateKnockOutStage(resultIdx);
+      const {resultIdx, cumInvPWinner, odiIdx, koResultIdx} = simulator.simulate();
       historyList.push({ resultIdx, cumInvPWinner, odiIdx, koResultIdx });
     }
     return historyList;
@@ -138,8 +136,7 @@ export default class HomePage extends Component {
   render() {
     const { simulatorMode, odiStateIdx } = this.state;
     const simulator = new Simulator(simulatorMode, odiStateIdx);
-    const { resultIdx } = simulator.simulateGroupStage();
-    const { odiIdx, koResultIdx } = simulator.simulateKnockOutStage(resultIdx);
+    const { resultIdx, odiIdx, koResultIdx } = simulator.simulate();
 
     const historyList = this.buildHistory();
     const bigTable = new BigTable(historyList);
