@@ -120,12 +120,7 @@ export default class BigTable {
       }
       const dSemiFinalist =
         teamIDToSemiFinalist[teamB] - teamIDToSemiFinalist[teamA];
-      if (dSemiFinalist !== 0) {
-        return dSemiFinalist;
-      }
-      const dMedianPosition =
-        pctlToTeamIDToPosition[0.5][teamA] - teamIDToMedianPosition[0.5][teamB];
-      return dMedianPosition;
+      return dSemiFinalist;
     });
 
     // (Sort)
