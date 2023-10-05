@@ -4,9 +4,18 @@ import ODIView from "./ODIView.js";
 import { Grid, Box, Typography, Paper } from "@mui/material";
 import ODI from "../../nonview/core/ODI.js";
 import Screenshottable from "../molecules/Screenshottable.js";
-
+import { EMOJI } from "../../nonview/constants/EMOJI.js";
 const SX_PAPER = { padding: 0.5, margin: 0.5 };
 const SX_GRID = { margin: 0.5, padding: 0.5 };
+
+function getTweetContent(week, odiList) {
+  let lines = [`Week ${week} - Predictions`];
+  for (let odi of odiList.slice().reverse()) {
+    const line = `${odi.favoriteTeam.twitterName} ${EMOJI.WINNER} vs. ${odi.underdogTeam.twitterName}`;
+    lines.push(line);
+  }
+  return lines.join("\n");
+}
 
 function GroupStageWeekView({
   week,
@@ -16,7 +25,10 @@ function GroupStageWeekView({
   odiStateIdx,
 }) {
   return (
-    <Screenshottable label={`group-state-week-${week}`}>
+    <Screenshottable
+      label={`group-state-week-${week}`}
+      tweetContent={getTweetContent(week, odiList)}
+    >
       <Paper sx={SX_PAPER} elevation={0}>
         <Typography variant="h6">Week {week}</Typography>
         <Grid container sx={SX_GRID}>

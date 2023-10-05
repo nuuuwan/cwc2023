@@ -12,6 +12,10 @@ export default class Team {
     return TEAM_ID_TO_EMOJI[this.id];
   }
 
+  get twitterName() {
+    return this.emoji + " #" + this.id;
+  }
+
   get pWinner() {
     return TEAM_ID_TO_P_WINNER[this.id];
   }
