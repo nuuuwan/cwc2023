@@ -47,8 +47,21 @@ export default class Format {
     );
   }
 
+  static percentText(p) {
+    if (p < EPSILON) {
+      return EMOJI.LOSER;
+    }
+
+    if (p > 1 - EPSILON) {
+      return EMOJI.WINNER;
+    }
+    return p.toLocaleString(undefined, {
+      style: "percent",
+      maximumFractionDigits: 0,
+    });
+  }
+
   static percent(p) {
-    let s = "";
     const color = Format.getPercentColor(p);
     let background = color + "1",
       borderRadius = "50%",
@@ -57,16 +70,9 @@ export default class Format {
       borderStyle = "solid",
       borderWidth = 1;
 
-    if (p < EPSILON) {
-      s = EMOJI.LOSER;
-    } else if (p > 1 - EPSILON) {
-      s = EMOJI.WINNER;
-    } else {
-      s = p.toLocaleString(undefined, {
-        style: "percent",
+    const s = Format.percentText(p);
 
-        maximumFractionDigits: 0,
-      });
+    if (EPSILON <= p && p <= 1 - EPSILON) {
       padding = 0;
       borderColor = background = "#fff0";
     }

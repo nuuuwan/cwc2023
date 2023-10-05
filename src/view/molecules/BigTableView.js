@@ -14,6 +14,38 @@ import Format from "../../nonview/base/Format.js";
 
 import React from "react";
 import Screenshottable from "./Screenshottable.js";
+import { TEAM } from "../../nonview/core/Team.js";
+function getTweetTeamIDToXLines(title, n, teamIDToX) {
+  let lines = [title];
+  for (let [teamID, nX] of Object.entries(teamIDToX)) {
+    const team = TEAM[teamID];
+    const line = team.twitterName + " " + Format.percentText(nX / n);
+    lines.push(line);
+  }
+  return lines;
+}
+
+function getTweetBody(bigTable) {
+  const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
+    bigTable.stats;
+
+  let lines = [].concat(
+    getTweetTeamIDToXLines("🥇Probability of Winning🏆", n, teamIDToWinner),
+    ["..."],
+    getTweetTeamIDToXLines(
+      "🥇Probability of Reaching Finals",
+      n,
+      teamIDToFinalist
+    ),
+    ["..."],
+    getTweetTeamIDToXLines(
+      "✔️Probability of Qualifying passed Group Stage",
+      n,
+      teamIDToSemiFinalist
+    )
+  );
+  return lines.join("\n");
+}
 
 function BigTableInnerView({ bigTable }) {
   const {
@@ -39,7 +71,7 @@ function BigTableInnerView({ bigTable }) {
               <TableCell align="right">{"Winner"}</TableCell>
               <TableCell align="right">{"Final"}</TableCell>
               <TableCell align="right">{"SF"}</TableCell>
-              </TableRow>
+            </TableRow>
           </TableHead>
 
           <TableBody>
@@ -48,8 +80,7 @@ function BigTableInnerView({ bigTable }) {
               const pWinner = teamIDToWinner[teamID] / n;
               const pFinalist = teamIDToFinalist[teamID] / n;
               const pSemiFinalist = teamIDToSemiFinalist[teamID] / n;
-              
-         
+
               return (
                 <TableRow key={teamID}>
                   <TableCell component="th" scope="row">
@@ -76,7 +107,7 @@ function BigTableInnerView({ bigTable }) {
 
 export default function BigTableView({ bigTable }) {
   return (
-    <Screenshottable label="big-table">
+    <Screenshottable label="big-table" tweetBody={getTweetBody(bigTable)}>
       <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
         <Typography variant="h5">#CWC23 Probabilities</Typography>
         <BigTableInnerView bigTable={bigTable} />

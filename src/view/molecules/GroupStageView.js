@@ -8,13 +8,12 @@ import { EMOJI } from "../../nonview/constants/EMOJI.js";
 const SX_PAPER = { padding: 0.5, margin: 0.5 };
 const SX_GRID = { margin: 0.5, padding: 0.5 };
 
-function getTweetContent(week, odiList) {
-  let lines = [`Week ${week} - Predictions`, ""];
+function getTweetBody(week, odiList) {
+  let lines = [`Week ${week} - Predictions`];
   for (let odi of odiList.slice().reverse()) {
     const line = `${odi.favoriteTeam.twitterName} ${EMOJI.WINNER} - ${odi.underdogTeam.twitterName}`;
     lines.push(line);
   }
-  lines.push("");
 
   return lines.join("\n");
 }
@@ -29,7 +28,7 @@ function GroupStageWeekView({
   return (
     <Screenshottable
       label={`group-state-week-${week}`}
-      tweetContent={getTweetContent(week, odiList)}
+      tweetBody={getTweetBody(week, odiList)}
     >
       <Paper sx={SX_PAPER} elevation={0}>
         <Typography variant="h6">Week {week}</Typography>

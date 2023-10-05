@@ -4,7 +4,7 @@ import React from "react";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import TweetButton from "./TweetButton.js";
 
-export default function Screenshottable({ label, tweetContent, children }) {
+export default function Screenshottable({ label, tweetBody, children }) {
   const ref = React.useRef(null);
 
   const takeScreenshot = useScreenshot()[1];
@@ -29,7 +29,7 @@ export default function Screenshottable({ label, tweetContent, children }) {
             <CloudDownloadIcon sx={{ color: "#ccc" }} />
           </IconButton>
         </Tooltip>
-        {tweetContent ? <TweetButton tweetBody={tweetContent} /> : null}
+        {tweetBody ? <TweetButton tweetBody={tweetBody} /> : null}
       </Grid>
     </div>
   );

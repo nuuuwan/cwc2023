@@ -4,6 +4,7 @@ export default function TweetButton({ tweetBody }) {
   const onClick = function () {
     const tweetText = [
       tweetBody,
+      "",
       "#CWC23 @CricketWorldCup",
       "https://nuuuwan.github.io/cwc23",
     ].join("\n");
