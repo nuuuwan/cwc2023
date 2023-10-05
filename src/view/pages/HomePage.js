@@ -23,16 +23,9 @@ export default class HomePage extends Component {
       simulatorMode: SIMULATOR_MODE.MAXIMUM_LIKELIHOOD,
       odiStateIdx: {},
     };
-
-    this.myRefBigTable = React.createRef();
-    this.myRefSimulation = React.createRef();
   }
 
-  componentDidMount() {
-    this.handleDoSimulate(SIMULATOR_MODE.MAXIMUM_LIKELIHOOD, 1);
-  }
-
-  handleDoSimulate(simulatorMode) {
+  setSimulatorMode(simulatorMode) {
     this.setState({
       simulatorMode,
     });
@@ -99,11 +92,12 @@ export default class HomePage extends Component {
     return (
       <HomePageFooter
         myRefBigTable={this.myRefBigTable}
-        handleDoSimulate={this.handleDoSimulate.bind(this)}
+        handleDoSimulate={this.setSimulatorMode.bind(this)}
       />
     );
   }
   render() {
+    console.debug("render");
     const { simulatorMode, odiStateIdx } = this.state;
     const simulator = new Simulator(simulatorMode, odiStateIdx);
     const bigTable = new BigTable(odiStateIdx);

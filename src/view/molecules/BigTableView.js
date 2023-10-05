@@ -21,8 +21,8 @@ function BigTableInnerView({ bigTable }) {
     teamIDToWinner,
     teamIDToFinalist,
     teamIDToSemiFinalist,
-    teamIDToTotalPosition,
     pctlToTeamIDToPosition,
+    orderedTeamIDs,
   } = bigTable.stats;
 
   return (
@@ -45,47 +45,45 @@ function BigTableInnerView({ bigTable }) {
           </TableHead>
 
           <TableBody>
-            {Object.keys(teamIDToTotalPosition)
-              .reverse()
-              .map(function (teamID) {
-                const team = new Team(teamID);
-                const pWinner = teamIDToWinner[teamID] / n;
-                const pFinalist = teamIDToFinalist[teamID] / n;
-                const pSemiFinalist = teamIDToSemiFinalist[teamID] / n;
-                // const eRank = teamIDToTotalPosition[teamID] / n;
-                const minPosition = pctlToTeamIDToPosition[0.0][teamID];
-                const maxPosition = pctlToTeamIDToPosition[1.0][teamID];
+            {orderedTeamIDs.map(function (teamID) {
+              const team = new Team(teamID);
+              const pWinner = teamIDToWinner[teamID] / n;
+              const pFinalist = teamIDToFinalist[teamID] / n;
+              const pSemiFinalist = teamIDToSemiFinalist[teamID] / n;
+              // const eRank = teamIDToTotalPosition[teamID] / n;
+              const minPosition = pctlToTeamIDToPosition[0.0][teamID];
+              const maxPosition = pctlToTeamIDToPosition[1.0][teamID];
 
-                let position;
-                if (minPosition === maxPosition) {
-                  position = minPosition;
-                } else {
-                  position = (
-                    <span>
-                      {Format.rank(minPosition)} to {Format.rank(maxPosition)}
-                    </span>
-                  );
-                }
-                return (
-                  <TableRow key={teamID}>
-                    <TableCell component="th" scope="row">
-                      <TeamView team={team} />
-                    </TableCell>
-                    <TableCell align="right" sx={{ fontSize: "100%" }}>
-                      {Format.percent(pWinner)}
-                    </TableCell>
-                    <TableCell align="right" sx={{ fontSize: "100%" }}>
-                      {Format.percent(pFinalist)}
-                    </TableCell>
-                    <TableCell align="right" sx={{ fontSize: "100%" }}>
-                      {Format.percent(pSemiFinalist)}
-                    </TableCell>
-                    <TableCell align="right" sx={{ fontSize: "100%" }}>
-                      {position}
-                    </TableCell>
-                  </TableRow>
+              let position;
+              if (minPosition === maxPosition) {
+                position = minPosition;
+              } else {
+                position = (
+                  <span>
+                    {Format.rank(minPosition)} to {Format.rank(maxPosition)}
+                  </span>
                 );
-              })}
+              }
+              return (
+                <TableRow key={teamID}>
+                  <TableCell component="th" scope="row">
+                    <TeamView team={team} />
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontSize: "100%" }}>
+                    {Format.percent(pWinner)}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontSize: "100%" }}>
+                    {Format.percent(pFinalist)}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontSize: "100%" }}>
+                    {Format.percent(pSemiFinalist)}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontSize: "100%" }}>
+                    {position}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>

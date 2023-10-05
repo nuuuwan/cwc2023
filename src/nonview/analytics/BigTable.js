@@ -4,7 +4,7 @@ import Simulator from "./Simulator.js";
 import { SIMULATOR_MODE } from "./SimulatorMode.js";
 import { N_MONTE_CARLO_SIMULATIONS } from "../constants/STATISTICS.js";
 import Statistics from "../base/Statistics.js";
-
+import { CWC2023_TEAM_ID_LIST } from "../constants/CWC2023_TEAM_ID_LIST.js";
 export const PERCENTILES = [
   0.0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 1.0,
 ];
@@ -105,7 +105,27 @@ export default class BigTable {
       );
     }
 
-    // Sort
+    // Order
+    const orderedTeamIDs = CWC2023_TEAM_ID_LIST.sort(function (teamA, teamB) {
+      const dWinner = teamIDToWinner[teamB] - teamIDToWinner[teamA];
+      if (dWinner !== 0) {
+        return dWinner;
+      }
+      const dFinalist = teamIDToFinalist[teamB] - teamIDToFinalist[teamA];
+      if (dFinalist !== 0) {
+        return dFinalist;
+      }
+      const dSemiFinalist =
+        teamIDToSemiFinalist[teamB] - teamIDToSemiFinalist[teamA];
+      if (dSemiFinalist !== 0) {
+        return dSemiFinalist;
+      }
+      const dMedianPosition =
+        pctlToTeamIDToPosition[0.5][teamA] - teamIDToMedianPosition[0.5][teamB];
+      return dMedianPosition;
+    });
+
+    // (Sort)
     teamIDToWinner = Dict.sortByValue(teamIDToWinner);
     teamIDToFinalist = Dict.sortByValue(teamIDToFinalist);
     teamIDToSemiFinalist = Dict.sortByValue(teamIDToSemiFinalist);
@@ -119,6 +139,7 @@ export default class BigTable {
       teamIDToTotalPosition,
       teamIDToPositionList,
       pctlToTeamIDToPosition,
+      orderedTeamIDs,
     };
   }
 }
