@@ -34,6 +34,19 @@ export default class Format {
     return "#008";
   }
 
+  static rank(rank) {
+    const color = Format.getPercentColor((10 - rank) / 9);
+    return (
+      <span
+        style={{
+          color,
+        }}
+      >
+        {rank}
+      </span>
+    );
+  }
+
   static percent(p) {
     let s = "";
     const color = Format.getPercentColor(p);

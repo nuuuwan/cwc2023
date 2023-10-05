@@ -22,6 +22,8 @@ function BigTableInnerView({ bigTable }) {
     teamIDToFinalist,
     teamIDToSemiFinalist,
     teamIDToTotalPosition,
+    teamIDTo5thPctlPosition,
+    teamIDTo95thPctlPosition,
   } = bigTable.stats;
 
   return (
@@ -29,7 +31,7 @@ function BigTableInnerView({ bigTable }) {
       <Alert severity="info">
         Odds of winning, reaching the final, and reaching the semi-final in the
         #CWC2023. Results are based on <strong>{Format.int(n)}</strong> Monte
-        Carlo Simulations.
+        Carlo Simulations. The Position statistic is a 90% confidence interval.
       </Alert>
       <TableContainer component={Box} sx={{ marginTop: 1, padding: 0 }}>
         <Table>
@@ -39,7 +41,7 @@ function BigTableInnerView({ bigTable }) {
               <TableCell align="right">{"Winner"}</TableCell>
               <TableCell align="right">{"Final"}</TableCell>
               <TableCell align="right">{"SF"}</TableCell>
-              <TableCell align="right">{"eRank"}</TableCell>
+              <TableCell align="right">{"Position"}</TableCell>
             </TableRow>
           </TableHead>
 
@@ -51,7 +53,20 @@ function BigTableInnerView({ bigTable }) {
                 const pWinner = teamIDToWinner[teamID] / n;
                 const pFinalist = teamIDToFinalist[teamID] / n;
                 const pSemiFinalist = teamIDToSemiFinalist[teamID] / n;
-                const eRank = teamIDToTotalPosition[teamID] / n;
+                // const eRank = teamIDToTotalPosition[teamID] / n;
+                const minPosition = teamIDTo5thPctlPosition[teamID];
+                const maxPosition = teamIDTo95thPctlPosition[teamID];
+
+                let position;
+                if (minPosition === maxPosition) {
+                  position = minPosition;
+                } else {
+                  position = (
+                    <span>
+                      {Format.rank(minPosition)} - {Format.rank(maxPosition)}
+                    </span>
+                  );
+                }
                 return (
                   <TableRow key={teamID}>
                     <TableCell component="th" scope="row">
@@ -67,7 +82,7 @@ function BigTableInnerView({ bigTable }) {
                       {Format.percent(pSemiFinalist)}
                     </TableCell>
                     <TableCell align="right" sx={{ fontSize: "100%" }}>
-                      {Format.float(eRank)}
+                      {position}
                     </TableCell>
                   </TableRow>
                 );

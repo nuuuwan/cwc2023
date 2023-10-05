@@ -3,6 +3,7 @@ import Dict from "../base/Dict.js";
 import Simulator from "./Simulator.js";
 import { SIMULATOR_MODE } from "./SimulatorMode.js";
 import { N_MONTE_CARLO_SIMULATIONS } from "../constants/STATISTICS.js";
+import Statistics from "../base/Statistics.js";
 
 export default class BigTable {
   constructor(odiStateIdx) {
@@ -21,11 +22,14 @@ export default class BigTable {
 
   getStats(odiStateIdx) {
     const historyList = this.buildHistory(odiStateIdx);
+
     const n = historyList.length;
     let teamIDToWinner = Team.initTeamIDToX(0);
     let teamIDToFinalist = Team.initTeamIDToX(0);
     let teamIDToSemiFinalist = Team.initTeamIDToX(0);
     let teamIDToTotalPosition = Team.initTeamIDToX(0);
+    let teamIDToPositionList = {};
+
     for (let history of historyList) {
       const { koResultIdx, odiIdx, resultIdx } = history;
 
@@ -53,7 +57,7 @@ export default class BigTable {
         teamIDToSemiFinalist[semiFinalist.id] += 1;
       }
 
-      // Total Points
+      // Total Points / Positions
       let teamIDToPoints = Team.initTeamIDToX(0);
       for (let team of Object.values(resultIdx)) {
         teamIDToPoints[team.id] += 1;
@@ -63,8 +67,40 @@ export default class BigTable {
 
       for (let iOrder in orderedTeamIDs) {
         const teamID = orderedTeamIDs[iOrder];
-        teamIDToTotalPosition[teamID] += parseInt(iOrder) + 1;
+        const position = parseInt(iOrder) + 1;
+        teamIDToTotalPosition[teamID] += position;
+
+        if (!teamIDToPositionList[teamID]) {
+          teamIDToPositionList[teamID] = [];
+        }
+        teamIDToPositionList[teamID].push(position);
       }
+    }
+
+    let teamIDToMedianPosition = {};
+    let teamIDTo5thPctlPosition = {};
+    let teamIDTo10thPctlPosition = {};
+    let teamIDTo90thPctlPosition = {};
+    let teamIDTo95thPctlPosition = {};
+
+    for (let [teamID, positionList] of Object.entries(teamIDToPositionList)) {
+      teamIDToMedianPosition[teamID] = Statistics.median(positionList);
+      teamIDTo5thPctlPosition[teamID] = Statistics.percentile(
+        positionList,
+        0.05
+      );
+      teamIDTo10thPctlPosition[teamID] = Statistics.percentile(
+        positionList,
+        0.1
+      );
+      teamIDTo90thPctlPosition[teamID] = Statistics.percentile(
+        positionList,
+        0.9
+      );
+      teamIDTo95thPctlPosition[teamID] = Statistics.percentile(
+        positionList,
+        0.95
+      );
     }
 
     // Sort
@@ -72,6 +108,12 @@ export default class BigTable {
     teamIDToFinalist = Dict.sortByValue(teamIDToFinalist);
     teamIDToSemiFinalist = Dict.sortByValue(teamIDToSemiFinalist);
     teamIDToTotalPosition = Dict.sortByValue(teamIDToTotalPosition);
+    teamIDToMedianPosition = Dict.sortByValue(teamIDToMedianPosition);
+
+    teamIDTo5thPctlPosition = Dict.sortByValue(teamIDTo5thPctlPosition);
+    teamIDTo10thPctlPosition = Dict.sortByValue(teamIDTo10thPctlPosition);
+    teamIDTo90thPctlPosition = Dict.sortByValue(teamIDTo90thPctlPosition);
+    teamIDTo95thPctlPosition = Dict.sortByValue(teamIDTo95thPctlPosition);
 
     return {
       n,
@@ -79,6 +121,12 @@ export default class BigTable {
       teamIDToFinalist,
       teamIDToSemiFinalist,
       teamIDToTotalPosition,
+      teamIDToPositionList,
+      teamIDToMedianPosition,
+      teamIDTo5thPctlPosition,
+      teamIDTo10thPctlPosition,
+      teamIDTo90thPctlPosition,
+      teamIDTo95thPctlPosition,
     };
   }
 }
