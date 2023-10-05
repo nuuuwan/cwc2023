@@ -50,10 +50,15 @@ export default class HomePage extends Component {
   }
   renderBody(simulatorMode, odiStateIdx, simulator, bigTable) {
     return (
-      <Box color={simulatorMode.color}>
+      <Box>
         <div ref={(ref) => (this.myRefSimulation = ref)}></div>
 
-        <Grid container direction="row" alignItems="center">
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          sx={{ color: simulatorMode.color }}
+        >
           <Grid item>
             <simulatorMode.Icon />
           </Grid>

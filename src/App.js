@@ -9,7 +9,7 @@ const FONT_FAMILY =
 const THEME = createTheme({
   palette: {
     primary: {
-      main: "#800",
+      main: "#ccc",
     },
     secondary: {
       main: "#f80",

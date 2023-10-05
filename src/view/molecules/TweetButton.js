@@ -15,7 +15,7 @@ export default function TweetButton({ tweetBody }) {
   };
   return (
     <Tooltip title="Tweet">
-      <IconButton onClick={onClick} color="primary">
+      <IconButton onClick={onClick}>
         <TwitterIcon sx={{ color: "#ccc" }} />
       </IconButton>
     </Tooltip>
