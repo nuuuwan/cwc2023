@@ -6,7 +6,8 @@ export default class Statistics {
   static percentile(xList, p) {
     xList.sort((a, b) => a - b);
     const n = xList.length;
-    const i = Math.floor(p * n);
+    // 0.0 -> 0, 1.0 -> n - 1
+    const i = Math.floor(p * (n - 1));
     return xList[i];
   }
 }

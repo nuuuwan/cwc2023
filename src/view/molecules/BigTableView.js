@@ -22,8 +22,7 @@ function BigTableInnerView({ bigTable }) {
     teamIDToFinalist,
     teamIDToSemiFinalist,
     teamIDToTotalPosition,
-    teamIDTo5thPctlPosition,
-    teamIDTo95thPctlPosition,
+    pctlToTeamIDToPosition,
   } = bigTable.stats;
 
   return (
@@ -31,7 +30,7 @@ function BigTableInnerView({ bigTable }) {
       <Alert severity="info">
         Odds of winning, reaching the final, and reaching the semi-final in the
         #CWC2023. Results are based on <strong>{Format.int(n)}</strong> Monte
-        Carlo Simulations. The Position statistic is a 90% confidence interval.
+        Carlo Simulations.
       </Alert>
       <TableContainer component={Box} sx={{ marginTop: 1, padding: 0 }}>
         <Table>
@@ -54,8 +53,8 @@ function BigTableInnerView({ bigTable }) {
                 const pFinalist = teamIDToFinalist[teamID] / n;
                 const pSemiFinalist = teamIDToSemiFinalist[teamID] / n;
                 // const eRank = teamIDToTotalPosition[teamID] / n;
-                const minPosition = teamIDTo5thPctlPosition[teamID];
-                const maxPosition = teamIDTo95thPctlPosition[teamID];
+                const minPosition = pctlToTeamIDToPosition[0.0][teamID];
+                const maxPosition = pctlToTeamIDToPosition[1.0][teamID];
 
                 let position;
                 if (minPosition === maxPosition) {
@@ -63,7 +62,7 @@ function BigTableInnerView({ bigTable }) {
                 } else {
                   position = (
                     <span>
-                      {Format.rank(minPosition)} - {Format.rank(maxPosition)}
+                      {Format.rank(minPosition)} to {Format.rank(maxPosition)}
                     </span>
                   );
                 }

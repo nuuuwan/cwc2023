@@ -5,6 +5,10 @@ import { SIMULATOR_MODE } from "./SimulatorMode.js";
 import { N_MONTE_CARLO_SIMULATIONS } from "../constants/STATISTICS.js";
 import Statistics from "../base/Statistics.js";
 
+export const PERCENTILES = [
+  0.0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 1.0,
+];
+
 export default class BigTable {
   constructor(odiStateIdx) {
     this.stats = this.getStats(odiStateIdx);
@@ -78,28 +82,26 @@ export default class BigTable {
     }
 
     let teamIDToMedianPosition = {};
-    let teamIDTo5thPctlPosition = {};
-    let teamIDTo10thPctlPosition = {};
-    let teamIDTo90thPctlPosition = {};
-    let teamIDTo95thPctlPosition = {};
+    let pctlToTeamIDToPosition = {};
+
+    for (let pctl of PERCENTILES) {
+      pctlToTeamIDToPosition[pctl] = {};
+    }
 
     for (let [teamID, positionList] of Object.entries(teamIDToPositionList)) {
       teamIDToMedianPosition[teamID] = Statistics.median(positionList);
-      teamIDTo5thPctlPosition[teamID] = Statistics.percentile(
-        positionList,
-        0.05
-      );
-      teamIDTo10thPctlPosition[teamID] = Statistics.percentile(
-        positionList,
-        0.1
-      );
-      teamIDTo90thPctlPosition[teamID] = Statistics.percentile(
-        positionList,
-        0.9
-      );
-      teamIDTo95thPctlPosition[teamID] = Statistics.percentile(
-        positionList,
-        0.95
+
+      for (let pctl of PERCENTILES) {
+        pctlToTeamIDToPosition[pctl][teamID] = Statistics.percentile(
+          positionList,
+          pctl
+        );
+      }
+    }
+
+    for (let pctl of PERCENTILES) {
+      pctlToTeamIDToPosition[pctl] = Dict.sortByValue(
+        pctlToTeamIDToPosition[pctl]
       );
     }
 
@@ -108,12 +110,6 @@ export default class BigTable {
     teamIDToFinalist = Dict.sortByValue(teamIDToFinalist);
     teamIDToSemiFinalist = Dict.sortByValue(teamIDToSemiFinalist);
     teamIDToTotalPosition = Dict.sortByValue(teamIDToTotalPosition);
-    teamIDToMedianPosition = Dict.sortByValue(teamIDToMedianPosition);
-
-    teamIDTo5thPctlPosition = Dict.sortByValue(teamIDTo5thPctlPosition);
-    teamIDTo10thPctlPosition = Dict.sortByValue(teamIDTo10thPctlPosition);
-    teamIDTo90thPctlPosition = Dict.sortByValue(teamIDTo90thPctlPosition);
-    teamIDTo95thPctlPosition = Dict.sortByValue(teamIDTo95thPctlPosition);
 
     return {
       n,
@@ -122,11 +118,7 @@ export default class BigTable {
       teamIDToSemiFinalist,
       teamIDToTotalPosition,
       teamIDToPositionList,
-      teamIDToMedianPosition,
-      teamIDTo5thPctlPosition,
-      teamIDTo10thPctlPosition,
-      teamIDTo90thPctlPosition,
-      teamIDTo95thPctlPosition,
+      pctlToTeamIDToPosition,
     };
   }
 }
