@@ -1,4 +1,4 @@
-import { Grid, Box, Paper, Typography } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 import MatchDateView from "../atoms/MatchDateView";
 import TeamView from "../atoms/TeamView";
 import LockIcon from "@mui/icons-material/Lock";
@@ -34,7 +34,7 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
 
   return (
     <Box>
-      <Paper
+      <Box
         sx={{
           margin: 0.5,
           padding: 0.5,
@@ -65,7 +65,7 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
           p={odi.getP(odi.underdogTeam)}
         />
         <Typography variant="body2">{odi.venue.id}</Typography>
-      </Paper>
+      </Box>
 
       <Grid container justifyContent="flex-end">
         {isStateFlipped ? <LockIcon sx={{ color: COLOR_FLIPPED }} /> : null}
