@@ -21,7 +21,6 @@ function BigTableInnerView({ bigTable }) {
     teamIDToWinner,
     teamIDToFinalist,
     teamIDToSemiFinalist,
-    pctlToTeamIDToPosition,
     orderedTeamIDs,
   } = bigTable.stats;
 
@@ -40,8 +39,7 @@ function BigTableInnerView({ bigTable }) {
               <TableCell align="right">{"Winner"}</TableCell>
               <TableCell align="right">{"Final"}</TableCell>
               <TableCell align="right">{"SF"}</TableCell>
-              <TableCell align="right">{"Position"}</TableCell>
-            </TableRow>
+              </TableRow>
           </TableHead>
 
           <TableBody>
@@ -50,20 +48,8 @@ function BigTableInnerView({ bigTable }) {
               const pWinner = teamIDToWinner[teamID] / n;
               const pFinalist = teamIDToFinalist[teamID] / n;
               const pSemiFinalist = teamIDToSemiFinalist[teamID] / n;
-              // const eRank = teamIDToTotalPosition[teamID] / n;
-              const minPosition = pctlToTeamIDToPosition[0.0][teamID];
-              const maxPosition = pctlToTeamIDToPosition[1.0][teamID];
-
-              let position;
-              if (minPosition === maxPosition) {
-                position = minPosition;
-              } else {
-                position = (
-                  <span>
-                    {Format.rank(minPosition)} to {Format.rank(maxPosition)}
-                  </span>
-                );
-              }
+              
+         
               return (
                 <TableRow key={teamID}>
                   <TableCell component="th" scope="row">
@@ -77,9 +63,6 @@ function BigTableInnerView({ bigTable }) {
                   </TableCell>
                   <TableCell align="right" sx={{ fontSize: "100%" }}>
                     {Format.percent(pSemiFinalist)}
-                  </TableCell>
-                  <TableCell align="right" sx={{ fontSize: "100%" }}>
-                    {position}
                   </TableCell>
                 </TableRow>
               );
