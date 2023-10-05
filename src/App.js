@@ -4,7 +4,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import HomePage from "./view/pages/HomePage";
 import "./App.css";
 
-const FONT_FAMILY = "  Alegreya Sans; Carlito;  Advent Pro; Bubbler One";
+const FONT_FAMILY =
+  "Alegreya Sans; Carlito;  Advent Pro; Bubbler One";
 const THEME = createTheme({
   palette: {
     primary: {
