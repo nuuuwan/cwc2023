@@ -114,6 +114,17 @@ export default class ODI {
     return !!this.winner;
   }
 
+  // Favourites and Underdogs
+  get favoriteTeam() {
+    return this.p1 > this.p2 ? this.team1 : this.team2;
+  }
+
+  get underdogTeam() {
+    return this.p1 > this.p2 ? this.team2 : this.team1;
+  }
+
+  // Other
+
   getColor(winner) {
     const pWinner = winner === this.team1 ? this.p1 : this.p2;
     return Format.getPercentColor(pWinner);
