@@ -20,9 +20,9 @@ export default function Screenshottable({ label, children }) {
   };
 
   return (
-    <div ref={ref} style={{ width: "fit-content" }}>
-      {children}
-      <Grid container justifyContent="flex-end">
+    <div style={{ width: "fit-content" }}>
+      <div ref={ref}>{children}</div>
+      <Grid container justifyContent="flex-end" sx={{ paddingRight: 1 }}>
         <Tooltip title="Download Image">
           <IconButton onClick={onClick} color="primary">
             <FileDownloadIcon />
