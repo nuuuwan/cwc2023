@@ -50,7 +50,7 @@ export default class HomePage extends Component {
   }
   renderBody(simulatorMode, odiStateIdx, simulator, bigTable) {
     return (
-      <Box>
+      <Box sx={{ maxWidth: 540, margin: "auto" }}>
         <div ref={(ref) => (this.myRefSimulation = ref)}></div>
 
         <Grid
