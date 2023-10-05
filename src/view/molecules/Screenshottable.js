@@ -25,7 +25,7 @@ export default function Screenshottable({ label, children }) {
       <Grid container justifyContent="flex-end" sx={{ paddingRight: 1 }}>
         <Tooltip title="Download Image">
           <IconButton onClick={onClick} color="primary">
-            <FileDownloadIcon />
+            <FileDownloadIcon sx={{color: "#ccc"}} />
           </IconButton>
         </Tooltip>
       </Grid>
