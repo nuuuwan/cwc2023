@@ -29,9 +29,9 @@ export default function KnockOutStageView({
   odiStateIdx,
   onClickODI,
 }) {
-  const entries = Object.entries(simulator.stats.koResultIdx).reverse();
-  const final = entries.slice(0, 1);
-  const semiFinals = entries.slice(1, 3);
+  const entries = Object.entries(simulator.stats.koResultIdx);
+  const final = entries.slice(2, 3);
+  const semiFinals = entries.slice(0, 2);
   return (
     <Screenshottable label="knock-out-stage">
       <Box>
