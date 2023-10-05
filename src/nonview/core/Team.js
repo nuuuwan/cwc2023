@@ -18,7 +18,7 @@ export default class Team {
   }
 
   get twitterName() {
-    return this.emoji + " #" + this.name.replaceAll(" ", "");
+    return this.emoji + " #" + this.id;
   }
 
   get pWinner() {
