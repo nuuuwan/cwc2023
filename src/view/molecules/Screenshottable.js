@@ -1,8 +1,7 @@
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { useScreenshot } from "use-react-screenshot";
 import { Grid, Tooltip, IconButton } from "@mui/material";
 import React from "react";
-
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 export default function Screenshottable({ label, children }) {
   const ref = React.useRef(null);
 
@@ -25,7 +24,7 @@ export default function Screenshottable({ label, children }) {
       <Grid container justifyContent="flex-end" sx={{ paddingRight: 1 }}>
         <Tooltip title="Download Image">
           <IconButton onClick={onClick} color="primary">
-            <FileDownloadIcon sx={{ color: "#ccc" }} />
+            <CloudDownloadIcon sx={{ color: "#ccc" }} />
           </IconButton>
         </Tooltip>
       </Grid>
