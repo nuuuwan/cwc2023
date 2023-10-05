@@ -41,7 +41,7 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
           borderStyle: "solid",
           borderWidth: 4,
           borderRadius: 2,
-          width: 80,
+          width: 85,
 
           borderColor: odi.getColor(winnerInner) + "c",
           background,
