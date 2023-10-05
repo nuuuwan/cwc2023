@@ -86,6 +86,9 @@ export default class BigTable {
 
     for (let pctl of PERCENTILES) {
       pctlToTeamIDToPosition[pctl] = {};
+      for (let teamID in CWC23_TEAM_ID_LIST) {
+        pctlToTeamIDToPosition[pctl][teamID] = null;
+      }
     }
 
     for (let [teamID, positionList] of Object.entries(teamIDToPositionList)) {

@@ -10,9 +10,9 @@ export const GROUP_STAGE_ODI_LIST = [
     TEAM.ENG,
     TEAM.NZL,
     VENUE.Ahmedabad,
+    TEAM.NZL,
     null,
-    1.45,
-    2.68
+    null
   ),
   new ODI(
     "ODI 02",
@@ -22,7 +22,7 @@ export const GROUP_STAGE_ODI_LIST = [
     VENUE.Hyderabad,
     null,
     1.04,
-    10.37
+    11.05
   ),
   new ODI(
     "ODI 03",
@@ -32,7 +32,7 @@ export const GROUP_STAGE_ODI_LIST = [
     VENUE.Dharamshala,
     null,
     2.14,
-    1.67
+    1.68
   ),
   new ODI(
     "ODI 04",
@@ -42,7 +42,7 @@ export const GROUP_STAGE_ODI_LIST = [
     VENUE.Delhi,
     null,
     1.44,
-    2.69
+    2.72
   ),
   new ODI(
     "ODI 05",
@@ -51,7 +51,7 @@ export const GROUP_STAGE_ODI_LIST = [
     TEAM.IND,
     VENUE.Chennai,
     null,
-    2.25,
+    2.29,
     1.61
   ),
   new ODI(
@@ -61,8 +61,8 @@ export const GROUP_STAGE_ODI_LIST = [
     TEAM.NLD,
     VENUE.Hyderabad,
     null,
-    1.11,
-    6
+    1.1,
+    6.35
   ),
   new ODI(
     "ODI 07",
@@ -71,8 +71,8 @@ export const GROUP_STAGE_ODI_LIST = [
     TEAM.ENG,
     VENUE.Dharamshala,
     null,
-    4.1,
-    1.22
+    3.98,
+    1.23
   ),
   new ODI(
     "ODI 08",
@@ -81,8 +81,8 @@ export const GROUP_STAGE_ODI_LIST = [
     TEAM.LKA,
     VENUE.Hyderabad,
     null,
-    1.52,
-    2.46
+    1.44,
+    2.7
   ),
   new ODI(
     "ODI 09",
@@ -91,8 +91,8 @@ export const GROUP_STAGE_ODI_LIST = [
     TEAM.IND,
     VENUE.Delhi,
     null,
-    5.6,
-    1.13
+    4.95,
+    1.16
   ),
   new ODI(
     "ODI 10",
@@ -101,8 +101,8 @@ export const GROUP_STAGE_ODI_LIST = [
     TEAM.ZAF,
     VENUE.Lucknow,
     null,
-    1.59,
-    2.3
+    1.61,
+    2.26
   ),
   new ODI(
     "ODI 11",
