@@ -1,5 +1,7 @@
 import Format from "../base/Format";
 import { START_WEEK } from "../constants/CWC23_DATETIME";
+import { ODI_ID_TO_TEAM_ID_TO_ODDS } from "../data/ODI_ID_TO_TEAM_ID_TO_ODDS";
+import { ODI_ID_TO_WINNER } from "../data/ODI_ID_TO_WINNER";
 
 function pWinnerToPMatch(p1Winner, p2Winner) {
   const f = (x) => x + 0.6;
@@ -8,32 +10,26 @@ function pWinnerToPMatch(p1Winner, p2Winner) {
 }
 
 export default class ODI {
-  constructor(
-    id,
-    date,
-    team1,
-    team2,
-    venue,
-    winner = null,
-    odds1 = null,
-    odds2 = null
-  ) {
+  constructor(id, date, team1, team2, venue) {
     this.id = id;
     this.date = date;
     this.team1 = team1;
     this.team2 = team2;
     this.venue = venue;
-    this.winner = winner ? winner : null;
-    this.odds1 = odds1;
-    this.odds2 = odds2;
   }
 
-  get ut() {
-    return this.date.getTime() / 1000.0;
-  }
-
+  // Names & Flags
   get twitterName() {
     return `${this.favoriteTeam.emoji}${this.underdogTeam.emoji} #${this.favoriteTeam.twitterHandleText}vs${this.underdogTeam.twitterHandleText}`;
+  }
+
+  get title() {
+    return `${this.team1.label} vs ${this.team2.label}`;
+  }
+
+  // Date/Time
+  get ut() {
+    return this.date.getTime() / 1000.0;
   }
 
   // Basic
@@ -46,11 +42,13 @@ export default class ODI {
     return this.weekAbsolute - START_WEEK + 1;
   }
 
-  get title() {
-    return `${this.team1.label} vs ${this.team2.label}`;
+  // Result
+
+  get winner() {
+    return ODI_ID_TO_WINNER[this.id];
   }
 
-  get hasWinner() {
+  get isConcluded() {
     return !!this.winner;
   }
 
@@ -64,6 +62,19 @@ export default class ODI {
   }
 
   // Odds
+
+  get hasOdds() {
+    return !!ODI_ID_TO_TEAM_ID_TO_ODDS[this.id];
+  }
+
+  get odds1() {
+    return ODI_ID_TO_TEAM_ID_TO_ODDS[this.id][this.team1.id];
+  }
+
+  get odds2() {
+    return ODI_ID_TO_TEAM_ID_TO_ODDS[this.id][this.team2.id];
+  }
+
   get p1Odds() {
     return 1 / this.odds1 / (1 / this.odds1 + 1 / this.odds2);
   }
@@ -72,11 +83,7 @@ export default class ODI {
     return 1 / this.odds2 / (1 / this.odds1 + 1 / this.odds2);
   }
 
-  get hasOdds() {
-    return this.odds1 !== null && this.odds2 !== null;
-  }
-
-  // Combine Probabilities and Odds
+  // Combined Probabilities
   get p1() {
     if (this.hasOdds) {
       return this.p1Odds;
@@ -113,10 +120,6 @@ export default class ODI {
     return this.p1 > this.p2 ? this.team2 : this.team1;
   }
 
-  get isConcluded() {
-    return !!this.winner;
-  }
-
   // Favourites and Underdogs
   get favoriteTeam() {
     return this.p1 > this.p2 ? this.team1 : this.team2;
@@ -142,6 +145,8 @@ export default class ODI {
     }
     throw new Error("Invalid team");
   }
+
+  // static odiList methods
 
   static groupByWeek(odiList) {
     return odiList.reduce(function (weekToODIList, odi) {
