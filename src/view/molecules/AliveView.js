@@ -16,7 +16,7 @@ export default function AliveView({ bigTable }) {
   return front.map(function (teamID) {
     const team = TEAM[teamID];
     return (
-      <span key={"team-" + teamID} style={{ fontSize: "120%", padding: 1 }}>
+      <span key={"team-" + teamID} style={{ fontSize: "100%", padding: 1 }}>
         {" "}
         {team.emoji}
       </span>

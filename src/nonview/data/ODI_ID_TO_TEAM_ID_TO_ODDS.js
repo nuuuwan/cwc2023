@@ -1,6 +1,6 @@
 import { TEAM } from "../core/Team";
 export const ODI_ID_TO_TEAM_ID_TO_ODDS = {
-  "ODI 01": { [TEAM.ENG.id]: 1.4, [TEAM.NZL.id]: 2.8 },
+  "ODI 01": { [TEAM.ENG.id]: 1.8, [TEAM.NZL.id]: 2.2 },
   "ODI 02": { [TEAM.PAK.id]: 1.04, [TEAM.NLD.id]: 11.05 },
   "ODI 03": { [TEAM.AFG.id]: 2.14, [TEAM.BGD.id]: 1.68 },
   "ODI 04": { [TEAM.ZAF.id]: 1.44, [TEAM.LKA.id]: 2.72 },
