@@ -15,6 +15,9 @@ import Format from "../../nonview/base/Format.js";
 import React from "react";
 import ScreenShot from "./ScreenShot.js";
 import { TEAM } from "../../nonview/core/Team.js";
+import { TEAM_ID_TO_P_WINNER_START } from "../../nonview/constants/TEAM_ID_TO_P_WINNER_START.js";
+import DirectionView from "../atoms/DirectionView.js";
+
 function getTweetTeamIDToXLines(title, n, teamIDToX) {
   let lines = [title];
   for (let [teamID, nX] of Object.entries(teamIDToX)) {
@@ -67,32 +70,40 @@ function BigTableInnerView({ bigTable }) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Team</TableCell>
-              <TableCell align="right">{"Winner"}</TableCell>
-              <TableCell align="right">{"Final"}</TableCell>
-              <TableCell align="right">{"SF"}</TableCell>
+              <TableCell align="center"></TableCell>
+              <TableCell align="center">Team</TableCell>
+              <TableCell align="center">{"Winner"}</TableCell>
+              <TableCell align="center">{"Final"}</TableCell>
+              <TableCell align="center">{"SF"}</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {orderedTeamIDs.map(function (teamID) {
+            {orderedTeamIDs.map(function (teamID, iTeam) {
               const team = new Team(teamID);
               const pWinner = teamIDToWinner[teamID] / n;
               const pFinalist = teamIDToFinalist[teamID] / n;
               const pSemiFinalist = teamIDToSemiFinalist[teamID] / n;
 
+              const pWinnerStart = TEAM_ID_TO_P_WINNER_START[teamID];
+              const dPWinner = pWinner - pWinnerStart;
+
               return (
                 <TableRow key={teamID}>
-                  <TableCell component="th" scope="row">
+                  <TableCell align="center" component="th" scope="row">
+                    {Format.rank(iTeam + 1)}
+                  </TableCell>
+                  <TableCell align="center" component="th" scope="row">
                     <TeamView team={team} />
                   </TableCell>
-                  <TableCell align="right" sx={{ fontSize: "100%" }}>
+                  <TableCell align="center" sx={{ fontSize: "100%" }}>
                     {Format.percent(pWinner)}
+                    <DirectionView dP={dPWinner} />
                   </TableCell>
-                  <TableCell align="right" sx={{ fontSize: "100%" }}>
+                  <TableCell align="center" sx={{ fontSize: "100%" }}>
                     {Format.percent(pFinalist)}
                   </TableCell>
-                  <TableCell align="right" sx={{ fontSize: "100%" }}>
+                  <TableCell align="center" sx={{ fontSize: "100%" }}>
                     {Format.percent(pSemiFinalist)}
                   </TableCell>
                 </TableRow>
