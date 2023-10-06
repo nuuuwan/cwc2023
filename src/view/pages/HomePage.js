@@ -53,8 +53,8 @@ export default class HomePage extends Component {
     });
   }
 
-  renderHeader(bigTable) {
-    return <HomePageHeader bigTable={bigTable} />;
+  renderHeader(bigTable, odiStateIdx) {
+    return <HomePageHeader bigTable={bigTable} odiStateIdx={odiStateIdx} />;
   }
 
   renderBodyInner(simulatorMode, odiStateIdx, simulator, bigTable) {
@@ -110,7 +110,7 @@ export default class HomePage extends Component {
 
     return (
       <Box sx={STYLE.ALL}>
-        <Box sx={STYLE.HEADER}>{this.renderHeader(bigTable)}</Box>
+        <Box sx={STYLE.HEADER}>{this.renderHeader(bigTable, odiStateIdx)}</Box>
         <Box sx={STYLE.BODY}>
           {this.renderBody(simulatorMode, odiStateIdx, simulator, bigTable)}
         </Box>
