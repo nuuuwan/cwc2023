@@ -6,7 +6,7 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  Alert,
+  Typography,
 } from "@mui/material";
 import React from "react";
 import BigTable from "../../nonview/statistics/BigTable.js";
@@ -31,9 +31,9 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
 
   return (
     <Box>
-      <Alert severity="info">
-        Odds qualifying passed the group stage in the #CWC23.
-      </Alert>
+      <Typography variant="h6">
+        Odds qualifying passed the group stage
+      </Typography>
       <TableContainer component={Box} sx={{ marginTop: 1, padding: 0 }}>
         <Table>
           <TableHead>

@@ -47,6 +47,23 @@ function getTweetBody(bigTable) {
   return lines.join("\n");
 }
 
+function BigTableInfo({ bigTable }) {
+  const { n } = bigTable.stats;
+
+  return (
+    <Alert severity="info" sx={{ margin: 1 }}>
+      Odds of winning, reaching the final, and qualifying passed the group stage
+      in the #CWC23. Results are based on <strong>{Format.int(n)}</strong> Monte
+      Carlo Simulations.
+      <br />
+      <br />
+      <DirectionView dP={-1} />
+      <DirectionView dP={1} /> indicate each team's progress since the start of
+      the tournament.
+    </Alert>
+  );
+}
+
 function BigTableInnerView({ bigTable }) {
   const {
     n,
@@ -58,16 +75,6 @@ function BigTableInnerView({ bigTable }) {
 
   return (
     <Box>
-      <Alert severity="info">
-        Odds of winning, reaching the final, and qualifying passed the group
-        stage in the #CWC23. Results are based on{" "}
-        <strong>{Format.int(n)}</strong> Monte Carlo Simulations.
-        <br />
-        <br />
-        <DirectionView dP={-1} />
-        <DirectionView dP={1} /> indicate each team's progress since the start
-        of the tournament.
-      </Alert>
       <TableContainer component={Box} sx={{ marginTop: 1, padding: 0 }}>
         <Table>
           <TableHead>
@@ -124,6 +131,7 @@ export default function BigTableView({ bigTable }) {
       <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
         <Typography variant="h5">#CWC23 Probabilities</Typography>
         <BigTableInnerView bigTable={bigTable} />
+        <BigTableInfo bigTable={bigTable} />
       </Box>
     </ScreenShot>
   );
