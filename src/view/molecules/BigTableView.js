@@ -79,11 +79,19 @@ function BigTableInnerView({ bigTable }) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center">Team</TableCell>
-              <TableCell align="center">{"Winner"}</TableCell>
-              <TableCell align="center">{"Final"}</TableCell>
-              <TableCell align="center">{"Qualify"}</TableCell>
+              <TableCell size="small" align="center"></TableCell>
+              <TableCell size="small" align="center">
+                Team
+              </TableCell>
+              <TableCell size="small" align="center">
+                {"Winner"}
+              </TableCell>
+              <TableCell size="small" align="center">
+                {"Final"}
+              </TableCell>
+              <TableCell size="small" align="center">
+                {"Qualify"}
+              </TableCell>
             </TableRow>
           </TableHead>
 
@@ -99,20 +107,42 @@ function BigTableInnerView({ bigTable }) {
 
               return (
                 <TableRow key={teamID}>
-                  <TableCell align="center" component="th" scope="row">
+                  <TableCell
+                    size="small"
+                    align="center"
+                    component="th"
+                    scope="row"
+                  >
                     {Format.rank(iTeam + 1)}
                   </TableCell>
-                  <TableCell align="center" component="th" scope="row">
+                  <TableCell
+                    size="small"
+                    align="center"
+                    component="th"
+                    scope="row"
+                  >
                     <TeamView team={team} />
                   </TableCell>
-                  <TableCell align="center" sx={{ fontSize: "100%" }}>
+                  <TableCell
+                    size="small"
+                    align="center"
+                    sx={{ fontSize: "100%" }}
+                  >
                     {Format.percent(pWinner)}
                     <DirectionView dP={dPWinner} />
                   </TableCell>
-                  <TableCell align="center" sx={{ fontSize: "100%" }}>
+                  <TableCell
+                    size="small"
+                    align="center"
+                    sx={{ fontSize: "100%" }}
+                  >
                     {Format.percent(pFinalist)}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontSize: "100%" }}>
+                  <TableCell
+                    size="small"
+                    align="center"
+                    sx={{ fontSize: "100%" }}
+                  >
                     {Format.percent(pSemiFinalist)}
                   </TableCell>
                 </TableRow>

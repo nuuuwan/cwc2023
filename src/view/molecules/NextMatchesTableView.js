@@ -39,20 +39,24 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center">Before</TableCell>
-              <TableCell align="center" colSpan={nResults}>
+              <TableCell size="small" align="center"></TableCell>
+              <TableCell size="small" align="center" colSpan={nResults}>
                 After Result
               </TableCell>
-              <TableCell align="center"></TableCell>
+              <TableCell size="small" align="center"></TableCell>
             </TableRow>
             <TableRow>
-              <TableCell align="center">Team</TableCell>
-              <TableCell align="center"></TableCell>
+              <TableCell size="small" align="center">
+                Team
+              </TableCell>
               {Object.keys(resultToStats).map(function (resultID) {
                 const teamIDList = resultID.split(":");
                 return (
-                  <TableCell align="center" key={"result-" + resultID}>
+                  <TableCell
+                    size="small"
+                    align="center"
+                    key={"result-" + resultID}
+                  >
                     {teamIDList.map(function (teamID) {
                       return (
                         <TeamView key={"team-" + teamID} team={TEAM[teamID]} />
@@ -61,7 +65,9 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
                   </TableCell>
                 );
               })}
-              <TableCell align="center">In Play</TableCell>
+              <TableCell size="small" align="center">
+                In Play
+              </TableCell>
             </TableRow>
           </TableHead>
 
@@ -74,12 +80,8 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
               let isTeamInPlay = false;
               return (
                 <TableRow key={teamID}>
-                  <TableCell align="center">
+                  <TableCell size="small" align="center">
                     <TeamView team={team} />
-                  </TableCell>
-
-                  <TableCell align="center">
-                    {Format.percent(pSemiFinalistBefore)}
                   </TableCell>
 
                   {Object.entries(resultToStats).map(function ([
@@ -101,6 +103,7 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
 
                     return (
                       <TableCell
+                        size="small"
                         align="center"
                         key={"result-" + resultID}
                         sx={{ opacity }}
@@ -110,7 +113,7 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
                       </TableCell>
                     );
                   })}
-                  <TableCell align="center">
+                  <TableCell size="small" align="center">
                     <span style={{ fontSize: "150%" }}>
                       {isTeamInPlay ? EMOJI.IN_PLAY : ""}
                     </span>
