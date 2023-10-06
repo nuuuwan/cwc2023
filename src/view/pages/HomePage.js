@@ -14,6 +14,7 @@ import HomePageFooter from "../molecules/HomePageFooter";
 import HomePageHeader from "../molecules/HomePageHeader";
 import BigTable from "../../nonview/analytics/BigTable.js";
 import VersionView from "../molecules/VersionView";
+import NextMatchesView from "../molecules/NextMatchesView";
 
 export default class HomePage extends Component {
   constructor() {
@@ -51,8 +52,9 @@ export default class HomePage extends Component {
   renderBody(simulatorMode, odiStateIdx, simulator, bigTable) {
     return (
       <Box sx={{ maxWidth: 540, margin: "auto" }}>
-        <div ref={(ref) => (this.myRefSimulation = ref)}></div>
-
+        <NextMatchesView bigTable={bigTable} />
+        <BigTableView bigTable={bigTable} />
+        
         <Grid
           container
           direction="row"
@@ -85,7 +87,7 @@ export default class HomePage extends Component {
         />
 
         <div ref={(ref) => (this.myRefBigTable = ref)}></div>
-        <BigTableView bigTable={bigTable} />
+  
         <VersionView />
       </Box>
     );
@@ -93,7 +95,6 @@ export default class HomePage extends Component {
   renderFooter() {
     return (
       <HomePageFooter
-        myRefBigTable={this.myRefBigTable}
         handleDoSimulate={this.setSimulatorMode.bind(this)}
       />
     );

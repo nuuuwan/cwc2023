@@ -3,7 +3,7 @@ import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 
 import { SIMULATOR_MODE } from "../../nonview/analytics/SimulatorMode.js";
 
-export default function HomePageFooter({ myRefBigTable, handleDoSimulate }) {
+export default function HomePageFooter({ handleDoSimulate }) {
   const simulatorButtons = Object.values(SIMULATOR_MODE).map(function (
     simulatorMode
   ) {
