@@ -3,16 +3,16 @@ import { STYLE } from "./HomePageStyle";
 import { Box, Typography, Grid } from "@mui/material";
 
 import GroupStageView from "../molecules/GroupStageView";
-import Simulator from "../../nonview/analytics/Simulator.js";
+import Simulator from "../../nonview/statistics/Simulator.js";
 
 import KnockOutStageView from "../molecules/KnockOutStageView";
 import BigTableView from "../molecules/BigTableView";
 
-import { SIMULATOR_MODE } from "../../nonview/analytics/SimulatorMode.js";
+import { SIMULATOR_MODE } from "../../nonview/statistics/SimulatorMode.js";
 import React from "react";
 import HomePageFooter from "../molecules/HomePageFooter";
 import HomePageHeader from "../molecules/HomePageHeader";
-import BigTable from "../../nonview/analytics/BigTable.js";
+import BigTable from "../../nonview/statistics/BigTable.js";
 import VersionView from "../molecules/VersionView";
 import NextMatchesView from "../molecules/NextMatchesView";
 

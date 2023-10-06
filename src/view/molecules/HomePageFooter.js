@@ -1,7 +1,7 @@
 import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 
-import { SIMULATOR_MODE } from "../../nonview/analytics/SimulatorMode.js";
+import { SIMULATOR_MODE } from "../../nonview/statistics/SimulatorMode.js";
 
 export default function HomePageFooter({ handleDoSimulate }) {
   const simulatorButtons = Object.values(SIMULATOR_MODE).map(function (
