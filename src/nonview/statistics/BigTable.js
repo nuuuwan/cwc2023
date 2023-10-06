@@ -12,7 +12,7 @@ export const PERCENTILES = [
 export default class BigTable {
   constructor(odiStateIdx) {
     const historyList = BigTable.buildHistory(odiStateIdx);
-    this.stats = BigTable.getStats(historyList, odiStateIdx);
+    this.stats = BigTable.getStats(historyList);
   }
 
   static buildHistory(odiStateIdx) {
@@ -25,7 +25,7 @@ export default class BigTable {
     return historyList;
   }
 
-  static getStats(historyList, odiStateIdx) {
+  static getStats(historyList) {
     
     const n = historyList.length;
     let teamIDToWinner = Team.initTeamIDToX(0);
