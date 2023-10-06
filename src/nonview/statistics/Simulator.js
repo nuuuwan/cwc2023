@@ -32,18 +32,16 @@ export default class Simulator {
   }
 
   simulateGroupStage() {
-    const { resultIdx, cumInvPWinner } = GROUP_STAGE_ODI_LIST.reduce(
-      function ({ resultIdx, cumInvPWinner }, odi) {
+    const { resultIdx } = GROUP_STAGE_ODI_LIST.reduce(
+      function ({ resultIdx }, odi) {
         const winner = this.getWinner(odi);
-        const pWinner = odi.getP(winner);
         resultIdx[odi.id] = winner;
-        cumInvPWinner *= 1 / pWinner;
-
-        return { resultIdx, cumInvPWinner };
+       
+        return { resultIdx };
       }.bind(this),
-      { resultIdx: {}, cumInvPWinner: 1 }
+      { resultIdx: {}}
     );
-    return { resultIdx, cumInvPWinner };
+    return { resultIdx };
   }
 
   simulateKnockOutStage(resultIdx) {
@@ -96,8 +94,8 @@ export default class Simulator {
   }
 
   getStats() {
-    const { resultIdx, cumInvPWinner } = this.simulateGroupStage();
+    const { resultIdx } = this.simulateGroupStage();
     const { odiIdx, koResultIdx } = this.simulateKnockOutStage(resultIdx);
-    return { resultIdx, cumInvPWinner, odiIdx, koResultIdx };
+    return { resultIdx, odiIdx, koResultIdx };
   }
 }
