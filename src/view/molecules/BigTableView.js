@@ -128,7 +128,7 @@ function BigTableInnerView({ bigTable }) {
 export default function BigTableView({ bigTable }) {
   return (
     <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable)}>
-      <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
+      <Box>
         <Typography variant="h5">#CWC23 Probabilities</Typography>
         <BigTableInnerView bigTable={bigTable} />
         <BigTableInfo bigTable={bigTable} />

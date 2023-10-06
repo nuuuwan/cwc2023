@@ -10,7 +10,7 @@ export default class SimulatorPage extends Component {
   render() {
     const { simulatorMode, simulator, odiStateIdx, onClickODI } = this.props;
     return (
-      <Box sx={{ margin: 1, padding: 1 }}>
+      <Box>
         <Typography variant="h5" sx={{ color: simulatorMode.color }}>
           #CWC23 {simulatorMode.message}
           <simulatorMode.Icon sx={{ marginLeft: 0.5, fontSize: "70%" }} />

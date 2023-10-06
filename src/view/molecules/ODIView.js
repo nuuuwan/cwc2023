@@ -36,8 +36,8 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
     <Box>
       <Box
         sx={{
-          margin: 0.5,
-          padding: 0.5,
+          margin: 0.25,
+          padding: 0.25,
           borderStyle: "solid",
           borderWidth: 4,
           borderRadius: 3,
