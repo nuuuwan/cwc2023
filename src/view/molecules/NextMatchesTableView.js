@@ -15,7 +15,8 @@ import TeamView from "../atoms/TeamView.js";
 import Team from "../../nonview/core/Team.js";
 import Format from "../../nonview/base/Format.js";
 import DirectionView from "../atoms/DirectionView.js";
-
+import { P_IS_IN_PLAY } from "../../nonview/constants/STATISTICS.js";
+import { EMOJI } from "../../nonview/constants/EMOJI.js";
 export default function NextMatchesTableView({ bigTable, odiList }) {
   const resultToHistoryList = BigTable.splitHistory(
     bigTable.historyList,
@@ -42,6 +43,7 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
               <TableCell align="center" colSpan={nResults}>
                 After Result
               </TableCell>
+              <TableCell align="center"></TableCell>
             </TableRow>
             <TableRow>
               <TableCell align="center">Team</TableCell>
@@ -58,6 +60,7 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
                   </TableCell>
                 );
               })}
+              <TableCell align="center"></TableCell>
             </TableRow>
           </TableHead>
 
@@ -67,13 +70,14 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
               const pSemiFinalistBefore =
                 teamIDToSemiFinalistBefore[teamID] / nBefore;
 
+              let isTeamInPlay = false;
               return (
                 <TableRow key={teamID}>
-                  <TableCell align="center" component="th" scope="row">
+                  <TableCell align="center">
                     <TeamView team={team} />
                   </TableCell>
 
-                  <TableCell align="center" component="th" scope="row">
+                  <TableCell align="center">
                     {Format.percent(pSemiFinalistBefore)}
                   </TableCell>
 
@@ -88,7 +92,11 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
                     const pSemiFinalistAfter =
                       teamIDToSemiFinalistAfter[teamID] / nAfter;
                     const dP = pSemiFinalistAfter - pSemiFinalistBefore;
-                    const opacity = Math.abs(dP) > 0.095 ? 1 : 0.25;
+                    const isResultInPlay = Math.abs(dP) > P_IS_IN_PLAY;
+                    const opacity = isResultInPlay ? 1 : 0.25;
+                    if (isResultInPlay) {
+                      isTeamInPlay = true;
+                    }
 
                     return (
                       <TableCell
@@ -101,6 +109,11 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
                       </TableCell>
                     );
                   })}
+                  <TableCell align="center">
+                    <span style={{ fontSize: "150%" }}>
+                      {isTeamInPlay ? EMOJI.IN_PLAY : ""}
+                    </span>
+                  </TableCell>
                 </TableRow>
               );
             })}

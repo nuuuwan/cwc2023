@@ -11,7 +11,7 @@ const SX_GRID = { margin: 1, padding: 0.5 };
 const N_NEXT_MATCHES = 2;
 
 function getTweetBody(bigTable, odiList) {
-  let lines = [`Next ${N_NEXT_MATCHES} Matches`];
+  let lines = [];
   lines.push("What are the implications of ");
   lines.push(odiList.map((odi) => odi.twitterName).join(" & ") + "?");
   return lines.join("\n");
@@ -25,7 +25,7 @@ export default function NextMatchesView({ bigTable, simulator, odiStateIdx }) {
   return (
     <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable, odiList)}>
       <Box sx={{ margin: 1, padding: 1 }}>
-        <Typography variant="h5">Next {N_NEXT_MATCHES} Matches</Typography>
+        <Typography variant="h5">Next Matches</Typography>
 
         <Grid container sx={SX_GRID}>
           {odiList.map(function (odi) {

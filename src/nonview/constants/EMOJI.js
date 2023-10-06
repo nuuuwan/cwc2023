@@ -4,4 +4,8 @@ export const EMOJI = {
   //
   UP: "▲",
   DOWN: "▼",
+
+  //
+
+  IN_PLAY: "🏏",
 };
