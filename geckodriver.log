@@ -62,3 +62,24 @@ m@https://s0.2mdn.net/dfp/2156948/5129076418/1662132697740/lottie.min.js:1:33434
 
 Dynamically enable window occlusion 1
 JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+1696601967609	geckodriver	INFO	Listening on 127.0.0.1:65375
+1696601970666	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "65376" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ASUS\\AppData\\Local\\Temp\\rust_mozprofile81400l"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1696601971154	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1696601971226	Marionette	INFO	Listening on port 65384
+WebDriver BiDi listening on ws://127.0.0.1:65376
+Read port: 65384
+1696601971362	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://127.0.0.1:65376/devtools/browser/18885745-6316-49a7-bde0-f39f9ec7bd3f
+JavaScript warning: https://pagead2.googlesyndication.com/bg/YeTNF82ErcXtSc42GSWrie2SEIEL8DxR64dbf1nZkSc.js line 2 > eval line 3531 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1696601978581	Marionette	INFO	Stopped listening on port 65384
+JavaScript warning: https://static.oddschecker.com/OC/js/build/prod/third-party/bundle.tracing.min.3p.1.2.js, line 2: Script terminated by timeout at:
+sentryWrapped@https://static.oddschecker.com/OC/js/build/prod/third-party/bundle.tracing.min.3p.1.2.js:2:59972
+
+Dynamically enable window occlusion 1
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.

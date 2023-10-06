@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from utils import File, Log
-from TEAM_ID_TO_NAME import TEAM_ID_TO_NAME
+from workflows.TEAM_NAME_TO_ID import TEAM_NAME_TO_ID
 
 URL = 'https://www.oddschecker.com/cricket/world-cup/winner'
 TEAM_ID_TO_P_WINNER_JS = os.path.join(
