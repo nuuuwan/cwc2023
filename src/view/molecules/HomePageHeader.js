@@ -13,7 +13,7 @@ export default function HomePageHeader({ bigTable, odiStateIdx }) {
       <AppBar position="static" sx={{ background: winner.color }}>
         <Toolbar>
           <Typography
-            variant="h4"
+            variant="h5"
             component="div"
             sx={{ flexGrow: 1 }}
             onClick={onClickRefresh}
@@ -21,7 +21,7 @@ export default function HomePageHeader({ bigTable, odiStateIdx }) {
             #CWC23
             {nLocks > 0 ? (
               <Badge badgeContent={nLocks} color="primary">
-                <LockIcon color="#fff" />
+                <LockIcon fontSize="small" color="#fff" />
               </Badge>
             ) : null}
           </Typography>
