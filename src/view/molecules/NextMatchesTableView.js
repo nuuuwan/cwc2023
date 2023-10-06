@@ -61,7 +61,7 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
                   </TableCell>
                 );
               })}
-              <TableCell align="center"></TableCell>
+              <TableCell align="center">In Play</TableCell>
             </TableRow>
           </TableHead>
 
