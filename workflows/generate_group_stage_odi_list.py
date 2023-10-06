@@ -1,9 +1,7 @@
 import os
-import webbrowser
 
 from utils import CSVFile, File, Log
 
-EXCEL_PATH = os.path.abspath(os.path.join('data', 'cwc2023.odds.xlsx'))
 ODI_LIST_CSV_PATH = os.path.abspath(
     os.path.join('data', 'cwc2023.group_stage.odi_list.csv')
 )
@@ -47,19 +45,5 @@ def generate_group_stage_odi_list():
     log.info(f'Write {len(lines)} lines to {ODI_LIST_JS_PATH}')
 
 
-def open_files():
-    for path in [EXCEL_PATH, ODI_LIST_CSV_PATH]:
-        os.startfile(path)
-
-    for url in [
-        'https://www.cricketworldcup.com/fixtures',
-        'https://www.oddschecker.com/cricket',
-        'https://www.oddschecker.com/cricket/world-cup/winner',
-        'https://www.oddsportal.com/cricket/world/icc-world-cup/',
-    ]:
-        webbrowser.open(url)
-
-
 if __name__ == '__main__':
-    open_files()
     generate_group_stage_odi_list()
