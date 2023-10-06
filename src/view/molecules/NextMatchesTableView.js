@@ -18,16 +18,17 @@ import DirectionView from "../atoms/DirectionView.js";
 import { P_IS_IN_PLAY } from "../../nonview/constants/STATISTICS.js";
 import { EMOJI } from "../../nonview/constants/EMOJI.js";
 export default function NextMatchesTableView({ bigTable, odiList }) {
-  const resultToHistoryList = BigTable.splitHistory(
+  const resultToStats = BigTable.splitHistoryStats(
     bigTable.historyList,
     odiList
   );
+
   const {
     orderedTeamIDs: orderedTeamIDsBefore,
     teamIDToSemiFinalist: teamIDToSemiFinalistBefore,
     n: nBefore,
   } = bigTable.stats;
-  const nResults = Object.keys(resultToHistoryList).length;
+  const nResults = Object.keys(resultToStats).length;
 
   return (
     <Box>
@@ -48,7 +49,7 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
             <TableRow>
               <TableCell align="center">Team</TableCell>
               <TableCell align="center"></TableCell>
-              {Object.keys(resultToHistoryList).map(function (resultID) {
+              {Object.keys(resultToStats).map(function (resultID) {
                 const teamIDList = resultID.split(":");
                 return (
                   <TableCell align="center" key={"result-" + resultID}>
@@ -81,14 +82,14 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
                     {Format.percent(pSemiFinalistBefore)}
                   </TableCell>
 
-                  {Object.entries(resultToHistoryList).map(function ([
+                  {Object.entries(resultToStats).map(function ([
                     resultID,
-                    resultHistoryList,
+                    resultStats,
                   ]) {
                     const {
                       n: nAfter,
                       teamIDToSemiFinalist: teamIDToSemiFinalistAfter,
-                    } = BigTable.getStats(resultHistoryList);
+                    } = resultStats;
                     const pSemiFinalistAfter =
                       teamIDToSemiFinalistAfter[teamID] / nAfter;
                     const dP = pSemiFinalistAfter - pSemiFinalistBefore;

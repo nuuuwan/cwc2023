@@ -36,11 +36,26 @@ export default class BigTable {
       }
       resultToHistoryList[resultId].push(history);
     }
-    return Object.fromEntries(
+    const sortedResultToHistoryList = Object.fromEntries(
       Object.entries(resultToHistoryList).sort(
         (a, b) => b[1].length - a[1].length
       )
     );
+    return sortedResultToHistoryList;
+  }
+
+  static splitHistoryStats(historyList, odiList) {
+    const resultToHistoryList = BigTable.splitHistory(historyList, odiList);
+    const resultToStats = Object.fromEntries(
+      Object.entries(resultToHistoryList).map(function ([
+        resultID,
+        historyList,
+      ]) {
+        const stats = BigTable.getStats(historyList);
+        return [resultID, stats];
+      })
+    );
+    return resultToStats;
   }
 
   static getStats(historyList) {
