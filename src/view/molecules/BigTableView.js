@@ -59,9 +59,9 @@ function BigTableInnerView({ bigTable }) {
   return (
     <Box>
       <Alert severity="info">
-        Odds of winning, reaching the final, and reaching the semi-final in the
-        #CWC23. Results are based on <strong>{Format.int(n)}</strong> Monte
-        Carlo Simulations.
+        Odds of winning, reaching the final, and qualifying passed the group
+        stage in the #CWC23. Results are based on{" "}
+        <strong>{Format.int(n)}</strong> Monte Carlo Simulations.
         <br />
         <br />
         <DirectionView dP={-1} />
@@ -76,7 +76,7 @@ function BigTableInnerView({ bigTable }) {
               <TableCell align="center">Team</TableCell>
               <TableCell align="center">{"Winner"}</TableCell>
               <TableCell align="center">{"Final"}</TableCell>
-              <TableCell align="center">{"SF"}</TableCell>
+              <TableCell align="center">{"Qualify"}</TableCell>
             </TableRow>
           </TableHead>
 

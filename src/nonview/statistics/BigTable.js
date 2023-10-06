@@ -25,16 +25,22 @@ export default class BigTable {
     return historyList;
   }
 
-  static splitHistory(historyList, odiID) {
+  static splitHistory(historyList, odiList) {
     let resultToHistoryList = {};
     for (let history of historyList) {
-      const result = history.resultIdx[odiID].id;
-      if (!resultToHistoryList[result]) {
-        resultToHistoryList[result] = [];
+      const resultId = odiList
+        .map((odi) => history.resultIdx[odi.id].id)
+        .join(":");
+      if (!resultToHistoryList[resultId]) {
+        resultToHistoryList[resultId] = [];
       }
-      resultToHistoryList[result].push(history);
+      resultToHistoryList[resultId].push(history);
     }
-    return resultToHistoryList;
+    return Object.fromEntries(
+      Object.entries(resultToHistoryList).sort(
+        (a, b) => b[1].length - a[1].length
+      )
+    );
   }
 
   static getStats(historyList) {

@@ -32,6 +32,10 @@ export default class ODI {
     return this.date.getTime() / 1000.0;
   }
 
+  get twitterName() {
+    return `${this.favoriteTeam.emoji}${this.underdogTeam.emoji} #${this.favoriteTeam.twitterHandleText}vs${this.underdogTeam.twitterHandleText}`;
+  }
+
   // Basic
   get weekAbsolute() {
     const SECONDS_IN_DAY = 86_400;

@@ -51,7 +51,7 @@ export default class HomePage extends Component {
   }
   renderBody(simulatorMode, odiStateIdx, simulator, bigTable) {
     return (
-      <Box sx={{ maxWidth: 540, margin: "auto" }}>
+      <Box>
         <NextMatchesView
           simulator={simulator}
           odiStateIdx={odiStateIdx}
