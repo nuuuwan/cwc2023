@@ -27,6 +27,7 @@ export default class HomePage extends Component {
 
   setSimulatorMode(simulatorMode) {
     this.setState({
+      pageName: PAGE.SIMULATOR.name,
       simulatorMode,
     });
   }
@@ -46,34 +47,60 @@ export default class HomePage extends Component {
     });
   }
 
+  setPage(pageName) {
+    this.setState({
+      pageName,
+    });
+  }
+
   renderHeader(bigTable) {
     return <HomePageHeader bigTable={bigTable} />;
   }
+
+  renderBodyInner(simulatorMode, odiStateIdx, simulator, bigTable) {
+    switch (this.state.pageName) {
+      case PAGE.PROBABILITY.name:
+        return <ProbabilityPage bigTable={bigTable} />;
+      case PAGE.NEXT_MATCHES.name:
+        return (
+          <NextMatchesPage
+            simulator={simulator}
+            odiStateIdx={odiStateIdx}
+            bigTable={bigTable}
+            onClickODI={this.handleOnClickODI.bind(this)}
+          />
+        );
+      case PAGE.SIMULATOR.name:
+        return (
+          <SimulatorPage
+            simulatorMode={simulatorMode}
+            simulator={simulator}
+            odiStateIdx={odiStateIdx}
+            onClickODI={this.handleOnClickODI.bind(this)}
+          />
+        );
+      default:
+        throw new Error("Unknown page name: " + this.state.pageName);
+    }
+  }
+
   renderBody(simulatorMode, odiStateIdx, simulator, bigTable) {
     return (
       <Box>
-        <ProbabilityPage bigTable={bigTable} />
-        <NextMatchesPage
-          simulator={simulator}
-          odiStateIdx={odiStateIdx}
-          bigTable={bigTable}
-          onClickODI={this.handleOnClickODI.bind(this)}
-        />
-
-        <SimulatorPage
-          simulatorMode={simulatorMode}
-          simulator={simulator}
-          odiStateIdx={odiStateIdx}
-          onClickODI={this.handleOnClickODI.bind(this)}
-        />
-
+        {this.renderBodyInner(simulatorMode, odiStateIdx, simulator, bigTable)}
         <VersionView />
       </Box>
     );
   }
   renderFooter() {
+    const { simulatorMode, pageName } = this.state;
     return (
-      <HomePageFooter handleDoSimulate={this.setSimulatorMode.bind(this)} />
+      <HomePageFooter
+        handleDoSimulate={this.setSimulatorMode.bind(this)}
+        handleSetPage={this.setPage.bind(this)}
+        pageName={pageName}
+        simulatorMode={simulatorMode}
+      />
     );
   }
   render() {

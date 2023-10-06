@@ -13,13 +13,6 @@ export default class SimulatorMode {
 }
 
 export const SIMULATOR_MODE = {
-  MAXIMUM_LIKELIHOOD: new SimulatorMode(
-    "MAXIMUM_LIKELIHOOD",
-    "Most likely outcome",
-    "if every match is won by the favourite.",
-    Format.getPercentColor(0.9),
-    ThumbUpIcon
-  ),
   MINIMUM_LIKELIHOOD: new SimulatorMode(
     "MINIMUM_LIKELIHOOD",
     "Least likely Outcome",
@@ -33,5 +26,12 @@ export const SIMULATOR_MODE = {
     "if the outcome of each match is randomly selected based on passed outcomes",
     Format.getPercentColor(0.5),
     CasinoIcon
+  ),
+  MAXIMUM_LIKELIHOOD: new SimulatorMode(
+    "MAXIMUM_LIKELIHOOD",
+    "Most likely outcome",
+    "if every match is won by the favourite.",
+    Format.getPercentColor(0.9),
+    ThumbUpIcon
   ),
 };
