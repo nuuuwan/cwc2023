@@ -1,20 +1,18 @@
 import { Component } from "react";
 import { STYLE } from "./HomePageStyle";
-import { Box, Typography, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 
-import GroupStageView from "../molecules/GroupStageView";
 import Simulator from "../../nonview/statistics/Simulator.js";
 
-import KnockOutStageView from "../molecules/KnockOutStageView";
-import BigTableView from "../molecules/BigTableView";
-
+import SimulatorPage from "./SimulatorPage";
+import NextMatchesPage from "./NextMatchesPage";
 import { SIMULATOR_MODE } from "../../nonview/statistics/SimulatorMode.js";
 import React from "react";
 import HomePageFooter from "../molecules/HomePageFooter";
 import HomePageHeader from "../molecules/HomePageHeader";
 import BigTable from "../../nonview/statistics/BigTable.js";
 import VersionView from "../molecules/VersionView";
-import NextMatchesView from "../molecules/NextMatchesView";
+import ProbabilityPage from "./ProbabilityPage";
 
 export default class HomePage extends Component {
   constructor() {
@@ -52,46 +50,20 @@ export default class HomePage extends Component {
   renderBody(simulatorMode, odiStateIdx, simulator, bigTable) {
     return (
       <Box>
-        <BigTableView bigTable={bigTable} />
-        <NextMatchesView
+        <ProbabilityPage bigTable={bigTable} />
+        <NextMatchesPage
           simulator={simulator}
           odiStateIdx={odiStateIdx}
           bigTable={bigTable}
           onClickODI={this.handleOnClickODI.bind(this)}
         />
 
-        <Grid
-          container
-          direction="row"
-          alignItems="center"
-          sx={{ color: simulatorMode.color }}
-        >
-          <Grid item>
-            <simulatorMode.Icon />
-          </Grid>
-          <Grid item>
-            <Typography variant="h5">
-              <strong>{simulatorMode.message}</strong>
-            </Typography>
-          </Grid>
-        </Grid>
-
-        <Typography variant="body1" color={simulatorMode.color}>
-          {"That is " + simulatorMode.subMessage + " "}
-        </Typography>
-
-        <KnockOutStageView
+        <SimulatorPage
+          simulatorMode={simulatorMode}
           simulator={simulator}
           odiStateIdx={odiStateIdx}
           onClickODI={this.handleOnClickODI.bind(this)}
         />
-        <GroupStageView
-          simulator={simulator}
-          odiStateIdx={odiStateIdx}
-          onClickODI={this.handleOnClickODI.bind(this)}
-        />
-
-        <div ref={(ref) => (this.myRefBigTable = ref)}></div>
 
         <VersionView />
       </Box>
