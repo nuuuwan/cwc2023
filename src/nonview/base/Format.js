@@ -55,6 +55,11 @@ export default class Format {
     if (p > 1 - EPSILON) {
       return EMOJI.WINNER;
     }
+
+    if (p < 0.005) {
+      return '<0.5%';
+    }
+
     return p.toLocaleString(undefined, {
       style: "percent",
       maximumFractionDigits: 0,
