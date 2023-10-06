@@ -1,5 +1,13 @@
 import Format from "../base/Format";
 import { START_WEEK } from "../constants/CWC23_DATETIME";
+
+
+function pWinnerToPMatch(p1Winner, p2Winner) {
+  const f = (x) => x + 0.5;
+  const q = f(p1Winner) / (f(p1Winner) + f(p2Winner));
+  return q
+}
+
 export default class ODI {
   constructor(
     id,
@@ -70,14 +78,14 @@ export default class ODI {
     if (this.hasOdds) {
       return this.p1Odds;
     }
-    return this.p1Winner;
+    return pWinnerToPMatch(this.p1Winner, this.p2Winner);
   }
 
   get p2() {
     if (this.hasOdds) {
       return this.p2Odds;
     }
-    return this.p2Winner;
+    return pWinnerToPMatch(this.p2Winner, this.p1Winner);
   }
 
   // Predict Winner
@@ -85,9 +93,7 @@ export default class ODI {
     if (this.winner) {
       return this.winner;
     }
-    const f = (x) => x + 0.5;
-    const q = f(this.p1) / (f(this.p1) + f(this.p2));
-    return Math.random() < q ? this.team1 : this.team2;
+    return Math.random() < this.p1 ? this.team1 : this.team2;
   }
 
   get maximumLikelihoodWinner() {
