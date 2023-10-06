@@ -20,15 +20,15 @@ export default class Format {
     }
 
     if (p <= 0.4) {
-      return "#f80";
+      return "#fc0";
     }
 
     if (p <= 0.6) {
-      return "#080";
+      return "#0c0";
     }
 
     if (p <= 0.8) {
-      return "#088";
+      return "#0c8";
     }
 
     return "#008";
