@@ -5,7 +5,7 @@ import KnockOutStageView from "../molecules/KnockOutStageView";
 import CasinoIcon from "@mui/icons-material/Casino";
 
 export default class SimulatorPage extends Component {
- static name = "SimulatorPage";
+  static name = "SimulatorPage";
   static Icon = CasinoIcon;
   render() {
     const { simulatorMode, simulator, odiStateIdx, onClickODI } = this.props;
