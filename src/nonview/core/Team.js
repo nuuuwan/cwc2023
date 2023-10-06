@@ -3,6 +3,7 @@ import { TEAM_ID_TO_EMOJI } from "../constants/TEAM_ID_TO_EMOJI.js";
 import { TEAM_ID_TO_COLOR } from "../constants/TEAM_ID_TO_COLOR.js";
 import { CWC23_TEAM_ID_LIST } from "../constants/CWC23_TEAM_ID_LIST.js";
 import { TEAM_ID_TO_NAME } from "../constants/TEAM_ID_TO_NAME.js";
+import { TEAM_ID_TO_TWITTER_HANDLE_TEXT } from "../constants/TEAM_ID_TO_TWITTER_HANDLE_TEXT.js";
 
 export default class Team {
   constructor(id) {
@@ -17,8 +18,15 @@ export default class Team {
     return TEAM_ID_TO_NAME[this.id];
   }
 
+  get twitterHandleText() {
+    return TEAM_ID_TO_TWITTER_HANDLE_TEXT[this.id];
+  }
+
+  get twitterHandle() {
+    return "#" + this.twitterHandleText;
+  }
   get twitterName() {
-    return this.emoji + " #" + this.id;
+    return this.emoji + " " + this.twitterHandle;
   }
 
   get pWinner() {

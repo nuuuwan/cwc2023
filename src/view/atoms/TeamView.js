@@ -11,7 +11,7 @@ export default function TeamView({ team, isWinner, p }) {
   return (
     <Typography variant="body1">
       {team.emoji + " "}
-      {team.id}{" "}
+      {team.twitterHandleText}{" "}
       <span style={{ fontSize: "75%" }}>{p ? Format.percent(p) : null}</span>
       {" " + emoji}
     </Typography>
