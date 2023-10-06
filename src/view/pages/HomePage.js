@@ -13,6 +13,7 @@ import HomePageHeader from "../molecules/HomePageHeader";
 import BigTable from "../../nonview/statistics/BigTable.js";
 import VersionView from "../molecules/VersionView";
 import ProbabilityPage from "./ProbabilityPage";
+import { PAGE } from "./PAGE.js";
 
 export default class HomePage extends Component {
   constructor() {
@@ -20,6 +21,7 @@ export default class HomePage extends Component {
     this.state = {
       simulatorMode: SIMULATOR_MODE.MAXIMUM_LIKELIHOOD,
       odiStateIdx: {},
+      pageName: PAGE.PROBABILITY.name,
     };
   }
 
