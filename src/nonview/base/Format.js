@@ -20,7 +20,7 @@ export default class Format {
     }
 
     if (p <= 0.4) {
-      return "#fc0";
+      return "#f80";
     }
 
     if (p <= 0.6) {
@@ -28,7 +28,7 @@ export default class Format {
     }
 
     if (p <= 0.8) {
-      return "#0c8";
+      return "#088";
     }
 
     return "#008";
