@@ -2,7 +2,7 @@ import Format from "../base/Format";
 import { START_WEEK } from "../constants/CWC23_DATETIME";
 
 function pWinnerToPMatch(p1Winner, p2Winner) {
-  const f = (x) => x + 0.5;
+  const f = (x) => x + 0.6;
   const q = f(p1Winner) / (f(p1Winner) + f(p2Winner));
   return q;
 }
