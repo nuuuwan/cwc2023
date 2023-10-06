@@ -144,4 +144,12 @@ export default class ODI {
       return weekToODIList;
     }, {});
   }
+
+  static getUnplayedMatches(odiList) {
+    return odiList.filter((odi) => !odi.isConcluded);
+  }
+
+  static getNextMatches(odiList, n) {
+    return ODI.getUnplayedMatches(odiList).slice(0, n);
+  }
 }

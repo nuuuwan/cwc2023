@@ -52,9 +52,13 @@ export default class HomePage extends Component {
   renderBody(simulatorMode, odiStateIdx, simulator, bigTable) {
     return (
       <Box sx={{ maxWidth: 540, margin: "auto" }}>
-        <NextMatchesView bigTable={bigTable} />
+        <NextMatchesView
+          simulator={simulator}
+          odiStateIdx={odiStateIdx}
+          bigTable={bigTable}
+        />
         <BigTableView bigTable={bigTable} />
-        
+
         <Grid
           container
           direction="row"
@@ -87,16 +91,14 @@ export default class HomePage extends Component {
         />
 
         <div ref={(ref) => (this.myRefBigTable = ref)}></div>
-  
+
         <VersionView />
       </Box>
     );
   }
   renderFooter() {
     return (
-      <HomePageFooter
-        handleDoSimulate={this.setSimulatorMode.bind(this)}
-      />
+      <HomePageFooter handleDoSimulate={this.setSimulatorMode.bind(this)} />
     );
   }
   render() {
