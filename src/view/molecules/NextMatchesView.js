@@ -11,9 +11,9 @@ const SX_GRID = { margin: 1, padding: 0.5 };
 const N_NEXT_MATCHES = 2;
 
 function getTweetBody(bigTable, odiList) {
-    let lines = [`Next ${N_NEXT_MATCHES} Matches`];
-lines.push('What are the implications of ')
-lines.push(odiList.map((odi) => odi.twitterName).join(' & ') + '?')
+  let lines = [`Next ${N_NEXT_MATCHES} Matches`];
+  lines.push("What are the implications of ");
+  lines.push(odiList.map((odi) => odi.twitterName).join(" & ") + "?");
   return lines.join("\n");
 }
 
@@ -21,7 +21,6 @@ export default function NextMatchesView({ bigTable, simulator, odiStateIdx }) {
   const onClickODI = () => {};
 
   const odiList = ODI.getNextMatches(GROUP_STAGE_ODI_LIST, N_NEXT_MATCHES);
-
 
   return (
     <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable, odiList)}>

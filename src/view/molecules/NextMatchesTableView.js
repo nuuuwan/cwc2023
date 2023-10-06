@@ -21,25 +21,27 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
     bigTable.historyList,
     odiList
   );
-  const { orderedTeamIDs: orderedTeamIDsBefore, teamIDToSemiFinalist: teamIDToSemiFinalistBefore, n: nBefore } = bigTable.stats;
+  const {
+    orderedTeamIDs: orderedTeamIDsBefore,
+    teamIDToSemiFinalist: teamIDToSemiFinalistBefore,
+    n: nBefore,
+  } = bigTable.stats;
   const nResults = Object.keys(resultToHistoryList).length;
 
   return (
     <Box>
-
-<Alert severity="info">
-        Odds qualifying passed the group
-        stage in the #CWC23. 
+      <Alert severity="info">
+        Odds qualifying passed the group stage in the #CWC23.
       </Alert>
       <TableContainer component={Box} sx={{ marginTop: 1, padding: 0 }}>
         <Table>
-
-        <TableHead>
-    
+          <TableHead>
             <TableRow>
-            <TableCell align="center"></TableCell>
+              <TableCell align="center"></TableCell>
               <TableCell align="center">Before</TableCell>
-              <TableCell align="center" colSpan={nResults}>After Result</TableCell>
+              <TableCell align="center" colSpan={nResults}>
+                After Result
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell align="center">Team</TableCell>
@@ -62,7 +64,8 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
           <TableBody>
             {orderedTeamIDsBefore.map(function (teamID, iTeam) {
               const team = new Team(teamID);
-              const pSemiFinalistBefore = teamIDToSemiFinalistBefore[teamID] / nBefore;
+              const pSemiFinalistBefore =
+                teamIDToSemiFinalistBefore[teamID] / nBefore;
 
               return (
                 <TableRow key={teamID}>
@@ -71,21 +74,28 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
                   </TableCell>
 
                   <TableCell align="center" component="th" scope="row">
-                  {Format.percent(pSemiFinalistBefore)}
+                    {Format.percent(pSemiFinalistBefore)}
                   </TableCell>
 
                   {Object.entries(resultToHistoryList).map(function ([
                     resultID,
                     resultHistoryList,
                   ]) {
-                    const {n: nAfter, teamIDToSemiFinalist: teamIDToSemiFinalistAfter} = BigTable.getStats(resultHistoryList);
-                    const pSemiFinalistAfter = teamIDToSemiFinalistAfter[teamID] / nAfter;
+                    const {
+                      n: nAfter,
+                      teamIDToSemiFinalist: teamIDToSemiFinalistAfter,
+                    } = BigTable.getStats(resultHistoryList);
+                    const pSemiFinalistAfter =
+                      teamIDToSemiFinalistAfter[teamID] / nAfter;
                     const dP = pSemiFinalistAfter - pSemiFinalistBefore;
                     const opacity = Math.abs(dP) > 0.095 ? 1 : 0.25;
-                
-                    
+
                     return (
-                      <TableCell align="center" key={"result-" + resultID} sx={{opacity}}>
+                      <TableCell
+                        align="center"
+                        key={"result-" + resultID}
+                        sx={{ opacity }}
+                      >
                         {Format.percent(pSemiFinalistAfter)}
                         <DirectionView dP={dP} />
                       </TableCell>
