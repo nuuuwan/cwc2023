@@ -40,7 +40,7 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
           padding: 0.5,
           borderStyle: "solid",
           borderWidth: 4,
-          borderRadius: 2,
+          borderRadius: 3,
           width: 85,
 
           borderColor: odi.getColor(winnerInner) + "c",
