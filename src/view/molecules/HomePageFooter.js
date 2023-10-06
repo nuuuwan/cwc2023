@@ -41,7 +41,7 @@ export default function HomePageFooter({
       handleSetPage(page.name);
     };
 
-    const Icon = page.icon;
+    const Icon = page.Icon;
 
     const isActive = activePageName === page.name;
     const iconColor = getIconColor(isActive);
