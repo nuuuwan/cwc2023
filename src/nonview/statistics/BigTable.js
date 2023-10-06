@@ -11,8 +11,8 @@ export const PERCENTILES = [
 
 export default class BigTable {
   constructor(odiStateIdx) {
-    const historyList = BigTable.buildHistory(odiStateIdx);
-    this.stats = BigTable.getStats(historyList);
+    this.historyList = BigTable.buildHistory(odiStateIdx);
+    this.stats = BigTable.getStats(this.historyList);
   }
 
   static buildHistory(odiStateIdx) {
@@ -23,6 +23,18 @@ export default class BigTable {
       historyList.push(simulator.stats);
     }
     return historyList;
+  }
+
+  static splitHistory(historyList, odiID) {
+    let resultToHistoryList = {};
+    for (let history of historyList) {
+      const result = history.resultIdx[odiID].id;
+      if (!resultToHistoryList[result]) {
+        resultToHistoryList[result] = [];
+      }
+      resultToHistoryList[result].push(history);
+    }
+    return resultToHistoryList;
   }
 
   static getStats(historyList) {
