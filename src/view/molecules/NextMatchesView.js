@@ -14,7 +14,7 @@ function getTweetBody(bigTable) {
   return "";
 }
 
-export default function NextMatchesView({ bigTable,simulator, odiStateIdx }) {
+export default function NextMatchesView({ bigTable, simulator, odiStateIdx }) {
   const onClickODI = () => {};
 
   const odiList = ODI.getNextMatches(GROUP_STAGE_ODI_LIST, N_NEXT_MATCHES);
@@ -26,12 +26,11 @@ export default function NextMatchesView({ bigTable,simulator, odiStateIdx }) {
 
         <Grid container sx={SX_GRID}>
           {odiList.map(function (odi) {
-
             const resultToHistoryList = BigTable.splitHistory(
               bigTable.historyList,
               odi.id
             );
-            console.debug({resultToHistoryList});
+            console.debug({ resultToHistoryList });
 
             return (
               <Grid key={"odi-" + odi.id} item>

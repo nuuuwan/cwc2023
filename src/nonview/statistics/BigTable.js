@@ -38,7 +38,6 @@ export default class BigTable {
   }
 
   static getStats(historyList) {
-    
     const n = historyList.length;
     let teamIDToWinner = Team.initTeamIDToX(0);
     let teamIDToFinalist = Team.initTeamIDToX(0);

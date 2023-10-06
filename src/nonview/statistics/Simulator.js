@@ -36,10 +36,10 @@ export default class Simulator {
       function ({ resultIdx }, odi) {
         const winner = this.getWinner(odi);
         resultIdx[odi.id] = winner;
-       
+
         return { resultIdx };
       }.bind(this),
-      { resultIdx: {}}
+      { resultIdx: {} }
     );
     return { resultIdx };
   }
