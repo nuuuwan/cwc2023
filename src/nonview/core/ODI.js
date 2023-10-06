@@ -67,9 +67,6 @@ export default class ODI {
 
   // Combine Probabilities and Odds
   get p1() {
-    if (this.hasWinner) {
-      return this.winner === this.team1 ? 1 : 0;
-    }
     if (this.hasOdds) {
       return this.p1Odds;
     }
@@ -77,9 +74,6 @@ export default class ODI {
   }
 
   get p2() {
-    if (this.hasWinner) {
-      return this.winner === this.team2 ? 1 : 0;
-    }
     if (this.hasOdds) {
       return this.p2Odds;
     }
