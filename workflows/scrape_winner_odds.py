@@ -4,24 +4,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from utils import File, Log
+from TEAM_ID_TO_NAME import TEAM_ID_TO_NAME
 
 URL = 'https://www.oddschecker.com/cricket/world-cup/winner'
 TEAM_ID_TO_P_WINNER_JS = os.path.join(
     'src', 'nonview', 'constants', 'TEAM_ID_TO_P_WINNER.js'
 )
-
-TEAM_NAME_TO_ID = {
-    'Afghanistan': 'AFG',
-    'Australia': 'AUS',
-    'Bangladesh': 'BGD',
-    'England': 'ENG',
-    'India': 'IND',
-    'Netherlands': 'NLD',
-    'New Zealand': 'NZL',
-    'Pakistan': 'PAK',
-    'South Africa': 'ZAF',
-    'Sri Lanka': 'LKA',
-}
 
 
 log = Log('scrape_winner_odds')
