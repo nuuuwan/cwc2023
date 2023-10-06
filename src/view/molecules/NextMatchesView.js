@@ -17,9 +17,12 @@ function getTweetBody(bigTable, odiList) {
   return lines.join("\n");
 }
 
-export default function NextMatchesView({ bigTable, simulator, odiStateIdx }) {
-  const onClickODI = () => {};
-
+export default function NextMatchesView({
+  bigTable,
+  simulator,
+  odiStateIdx,
+  onClickODI,
+}) {
   const odiList = ODI.getNextMatches(GROUP_STAGE_ODI_LIST, N_NEXT_MATCHES);
 
   return (

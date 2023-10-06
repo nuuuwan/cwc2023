@@ -57,6 +57,7 @@ export default class HomePage extends Component {
           simulator={simulator}
           odiStateIdx={odiStateIdx}
           bigTable={bigTable}
+          onClickODI={this.handleOnClickODI.bind(this)}
         />
 
         <Grid
