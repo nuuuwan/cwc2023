@@ -11,10 +11,11 @@ export const PERCENTILES = [
 
 export default class BigTable {
   constructor(odiStateIdx) {
-    this.stats = this.getStats(odiStateIdx);
+    const historyList = BigTable.buildHistory(odiStateIdx);
+    this.stats = BigTable.getStats(historyList, odiStateIdx);
   }
 
-  buildHistory(odiStateIdx) {
+  static buildHistory(odiStateIdx) {
     let historyList = [];
 
     for (let i = 0; i < N_MONTE_CARLO_SIMULATIONS; i++) {
@@ -24,9 +25,8 @@ export default class BigTable {
     return historyList;
   }
 
-  getStats(odiStateIdx) {
-    const historyList = this.buildHistory(odiStateIdx);
-
+  static getStats(historyList, odiStateIdx) {
+    
     const n = historyList.length;
     let teamIDToWinner = Team.initTeamIDToX(0);
     let teamIDToFinalist = Team.initTeamIDToX(0);
