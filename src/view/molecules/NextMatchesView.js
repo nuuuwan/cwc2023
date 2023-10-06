@@ -7,7 +7,7 @@ import ODIView from "./ODIView.js";
 import { GROUP_STAGE_ODI_LIST } from "../../nonview/core/GROUP_STAGE_ODI_LIST.js";
 
 const SX_GRID = { margin: 1, padding: 0.5 };
-const N_MEXT_MATCHES = 3;
+const N_NEXT_MATCHES = 3;
 
 function getTweetBody(bigTable) {
   return "";
@@ -16,12 +16,12 @@ function getTweetBody(bigTable) {
 export default function NextMatchesView({ bigTable, simulator, odiStateIdx }) {
   const onClickODI = () => {};
 
-  const odiList = ODI.getNextMatches(GROUP_STAGE_ODI_LIST, N_MEXT_MATCHES);
+  const odiList = ODI.getNextMatches(GROUP_STAGE_ODI_LIST, N_NEXT_MATCHES);
 
   return (
     <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable)}>
       <Box sx={{ margin: 1, padding: 1, maxWidth: 480 }}>
-        <Typography variant="h5">Next Matches</Typography>
+        <Typography variant="h5">Next {N_NEXT_MATCHES} Matches</Typography>
 
         <Grid container sx={SX_GRID}>
           {odiList.map(function (odi) {
