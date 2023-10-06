@@ -57,7 +57,7 @@ export default class Format {
     }
 
     if (p < 0.005) {
-      return '<0.5%';
+      return "<0.5%";
     }
 
     return p.toLocaleString(undefined, {

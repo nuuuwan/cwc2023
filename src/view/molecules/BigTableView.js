@@ -33,14 +33,10 @@ function getTweetBody(bigTable) {
     bigTable.stats;
 
   let lines = [].concat(
-    ['#CWC2023 Probabilities',''],
+    ["#CWC2023 Probabilities", ""],
     getTweetTeamIDToXLines("Winning 🏆", n, teamIDToWinner),
     [""],
-    getTweetTeamIDToXLines(
-      "Reaching Finals 🥇🥈",
-      n,
-      teamIDToFinalist
-    ),
+    getTweetTeamIDToXLines("Reaching Finals 🥇🥈", n, teamIDToFinalist),
     [""],
     getTweetTeamIDToXLines(
       "Qualifying passed Group Stage ✔️",
