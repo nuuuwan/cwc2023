@@ -52,12 +52,13 @@ export default class HomePage extends Component {
   renderBody(simulatorMode, odiStateIdx, simulator, bigTable) {
     return (
       <Box>
+           <BigTableView bigTable={bigTable} />
         <NextMatchesView
           simulator={simulator}
           odiStateIdx={odiStateIdx}
           bigTable={bigTable}
         />
-        <BigTableView bigTable={bigTable} />
+     
 
         <Grid
           container
