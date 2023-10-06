@@ -4,7 +4,7 @@ import ScreenShot from "./ScreenShot.js";
 
 import ODI from "../../nonview/core/ODI.js";
 import ODIView from "./ODIView.js";
-import { GROUP_STAGE_ODI_LIST } from "../../nonview/core/GROUP_STAGE_ODI_LIST.js";
+import { GROUP_STAGE_ODI_LIST } from "../../nonview/data/GROUP_STAGE_ODI_LIST.js";
 import NextMatchesTableView from "./NextMatchesTableView.js";
 
 const SX_GRID = { margin: 1, padding: 0.5 };

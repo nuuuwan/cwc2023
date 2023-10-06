@@ -1,4 +1,4 @@
-import { GROUP_STAGE_ODI_LIST } from "../core/GROUP_STAGE_ODI_LIST.js";
+import { GROUP_STAGE_ODI_LIST } from "../data/GROUP_STAGE_ODI_LIST.js";
 import GroupStatePointsTable from "./GroupStatePointsTable.js";
 import ODI from "../core/ODI.js";
 import { SIMULATOR_MODE } from "../statistics/SimulatorMode.js";

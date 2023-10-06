@@ -1,4 +1,4 @@
-import { GROUP_STAGE_ODI_LIST } from "../../nonview/core/GROUP_STAGE_ODI_LIST.js";
+import { GROUP_STAGE_ODI_LIST } from "../../nonview/data/GROUP_STAGE_ODI_LIST.js";
 
 import { Box, Typography } from "@mui/material";
 import ODI from "../../nonview/core/ODI.js";

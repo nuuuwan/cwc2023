@@ -1,4 +1,4 @@
-import { TEAM_ID_TO_P_WINNER } from "../constants/TEAM_ID_TO_P_WINNER.js";
+import { TEAM_ID_TO_P_WINNER } from "../data/TEAM_ID_TO_P_WINNER.js";
 import { TEAM_ID_TO_EMOJI } from "../constants/TEAM_ID_TO_EMOJI.js";
 import { TEAM_ID_TO_COLOR } from "../constants/TEAM_ID_TO_COLOR.js";
 import { CWC23_TEAM_ID_LIST } from "../constants/CWC23_TEAM_ID_LIST.js";

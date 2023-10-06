@@ -15,7 +15,7 @@ import Format from "../../nonview/base/Format.js";
 import React from "react";
 import ScreenShot from "./ScreenShot.js";
 import { TEAM } from "../../nonview/core/Team.js";
-import { TEAM_ID_TO_P_WINNER_START } from "../../nonview/constants/TEAM_ID_TO_P_WINNER_START.js";
+import { TEAM_ID_TO_P_WINNER_START } from "../../nonview/data/TEAM_ID_TO_P_WINNER_START.js";
 import DirectionView from "../atoms/DirectionView.js";
 
 function getTweetTeamIDToXLines(title, n, teamIDToX) {
