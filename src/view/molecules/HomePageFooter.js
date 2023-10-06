@@ -1,21 +1,8 @@
 import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import TableRowsIcon from "@mui/icons-material/TableRows";
+
 import { SIMULATOR_MODE } from "../../nonview/statistics/SimulatorMode.js";
 import { PAGE } from "../pages/PAGE.js";
-
-function getPageIconpage(page) {
-  switch (page.name) {
-    case PAGE.PROBABILITY.name:
-      return TableRowsIcon;
-
-    case PAGE.NEXT_MATCHES.name:
-      return CalendarMonthIcon;
-    default:
-      throw new Error("Unknown page name: " + page.name);
-  }
-}
 
 function getIconColor(isActive) {
   return isActive ? "#000" : "#ccc";
@@ -54,7 +41,7 @@ export default function HomePageFooter({
       handleSetPage(page.name);
     };
 
-    const Icon = getPageIconpage(page);
+    const Icon = page.icon;
 
     const isActive = activePageName === page.name;
     const iconColor = getIconColor(isActive);

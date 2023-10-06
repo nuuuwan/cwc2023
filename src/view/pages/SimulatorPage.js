@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { Box, Typography } from "@mui/material";
 import GroupStageView from "../molecules/GroupStageView";
 import KnockOutStageView from "../molecules/KnockOutStageView";
-
+import CasinoIcon from "@mui/icons-material/Casino";
 export default class SimulatorPage extends Component {
-  get name() {
-    return "SimulatorPage";
-  }
+  static name = "SimulatorPage";
+  static icon = CasinoIcon;
   render() {
     const { simulatorMode, simulator, odiStateIdx, onClickODI } = this.props;
     return (
