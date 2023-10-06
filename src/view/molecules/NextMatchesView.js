@@ -22,7 +22,6 @@ export default function NextMatchesView({ bigTable, simulator, odiStateIdx }) {
 
   const odiList = ODI.getNextMatches(GROUP_STAGE_ODI_LIST, N_NEXT_MATCHES);
 
-  const { orderedTeamIDs } = bigTable.stats;
 
   return (
     <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable, odiList)}>
