@@ -15,7 +15,7 @@ import React from "react";
 import { TEAM_ID_TO_P_WINNER_START } from "../../nonview/data/TEAM_ID_TO_P_WINNER_START.js";
 import DirectionView from "../atoms/DirectionView.js";
 
-export default function BigTableTableView({ bigTable }) {
+export default function BigTableTableView({ bigTable, onClickTeam }) {
   const {
     n,
     teamIDToWinner,
@@ -56,6 +56,10 @@ export default function BigTableTableView({ bigTable }) {
               const pWinnerStart = TEAM_ID_TO_P_WINNER_START[teamID];
               const dPWinner = pWinner - pWinnerStart;
 
+              const onClickInner = function () {
+                onClickTeam(team);
+              };
+
               return (
                 <TableRow key={teamID}>
                   <TableCell
@@ -71,6 +75,7 @@ export default function BigTableTableView({ bigTable }) {
                     align="center"
                     component="th"
                     scope="row"
+                    onClick={onClickInner}
                   >
                     <TeamView team={team} />
                   </TableCell>

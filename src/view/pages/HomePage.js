@@ -21,11 +21,13 @@ export default class HomePage extends Component {
     const simulatorMode = SIMULATOR_MODE.MAXIMUM_LIKELIHOOD;
     const odiStateIdx = {};
     const pageName = PAGE.PROBABILITY.name;
+    const selectedTeam = null;
 
     this.state = {
       simulatorMode,
       odiStateIdx,
       pageName,
+      selectedTeam,
     };
 
     this.simulator = new Simulator(simulatorMode, odiStateIdx);
@@ -60,6 +62,16 @@ export default class HomePage extends Component {
     });
   }
 
+  handleOnClickTeam(team) {
+    this.simulator = this.bigTable.getMostProbableTeamWin(team);
+
+    this.setState({
+      simulatorMode: SIMULATOR_MODE.RANDOM,
+      pageName: PAGE.SIMULATOR.name,
+      selectedTeam: team,
+    });
+  }
+
   setPage(pageName) {
     this.setState({
       pageName,
@@ -73,7 +85,12 @@ export default class HomePage extends Component {
   renderBodyInner(simulatorMode, odiStateIdx, simulator, bigTable) {
     switch (this.state.pageName) {
       case PAGE.PROBABILITY.name:
-        return <ProbabilityPage bigTable={bigTable} />;
+        return (
+          <ProbabilityPage
+            bigTable={bigTable}
+            onClickTeam={this.handleOnClickTeam.bind(this)}
+          />
+        );
       case PAGE.NEXT_MATCHES.name:
         return (
           <NextMatchesPage

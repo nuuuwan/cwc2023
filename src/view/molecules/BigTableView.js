@@ -56,12 +56,12 @@ function BigTableInfo({ bigTable }) {
   );
 }
 
-export default function BigTableView({ bigTable }) {
+export default function BigTableView({ bigTable, onClickTeam }) {
   return (
     <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable)}>
       <Box>
         <Typography variant="h5">#CWC23 Probabilities</Typography>
-        <BigTableTableView bigTable={bigTable} />
+        <BigTableTableView bigTable={bigTable} onClickTeam={onClickTeam} />
         <BigTableInfo bigTable={bigTable} />
       </Box>
     </ScreenShot>
