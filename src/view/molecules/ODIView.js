@@ -54,16 +54,19 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
         </Typography>
         <MatchDateView date={odi.date} />
 
-        <TeamView
-          team={odi.favoriteTeam}
-          isWinner={odi.favoriteTeam.id === winnerInner.id}
-          p={odi.getP(odi.favoriteTeam)}
-        />
-        <TeamView
-          team={odi.underdogTeam}
-          isWinner={odi.underdogTeam.id === winnerInner.id}
-          p={odi.getP(odi.underdogTeam)}
-        />
+        <Box textAlign="left" sx={{ marginLeft: 1 }}>
+          <TeamView
+            team={odi.favoriteTeam}
+            isWinner={odi.favoriteTeam.id === winnerInner.id}
+            p={odi.getP(odi.favoriteTeam)}
+          />
+          <TeamView
+            team={odi.underdogTeam}
+            isWinner={odi.underdogTeam.id === winnerInner.id}
+            p={odi.getP(odi.underdogTeam)}
+          />
+        </Box>
+
         <Typography variant="body2">{odi.venue.id}</Typography>
       </Box>
 
