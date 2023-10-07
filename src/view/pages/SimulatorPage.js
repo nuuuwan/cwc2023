@@ -20,7 +20,7 @@ export default class SimulatorPage extends Component {
 
     const renderedRank = (
       <Typography variant="body1">
-        More likely than {Format.percent(1 - pRank)} of outcomes.
+        More likely than {Format.percent(1 - pRank)} of possible sequences.
       </Typography>
     );
 
@@ -38,7 +38,7 @@ export default class SimulatorPage extends Component {
         </Typography>
 
         <Alert severity="info" sx={{ textAlign: "left", margin: 1 }}>
-          The odds of this sequence of outcomes happening is{" "}
+          The probability of this exact sequence of outcomes is{" "}
           <span style={{ color }}>{logStr}</span>.{renderedRank}
         </Alert>
 
