@@ -60,6 +60,10 @@ export default class Format {
       return "<0.5%";
     }
 
+    if (p > 0.995) {
+      return ">99.5%";
+    }
+
     return p.toLocaleString(undefined, {
       style: "percent",
       maximumFractionDigits: 0,
