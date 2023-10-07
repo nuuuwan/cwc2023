@@ -103,7 +103,7 @@ export default class Format {
     );
   }
 
-  static percentWithColor(p, pColor) {
+  static percentWithColor(p, pColor, opacity) {
     const color = Format.getPercentColor(pColor);
 
     const s = Format.percentText(p);
@@ -112,6 +112,7 @@ export default class Format {
       <span
         style={{
           color,
+          opacity,
         }}
       >
         {s}
@@ -120,7 +121,7 @@ export default class Format {
   }
 
   static percent(p) {
-    return Format.percentWithColor(p, p);
+    return Format.percentWithColor(p, p, 1.0);
   }
 
   static percentWithColorOverride(p, dP) {
@@ -129,8 +130,9 @@ export default class Format {
       0,
       Math.min(1, (dP + MAX_ABS_P) / (2.0 * MAX_ABS_P))
     );
+    const opacity =Math.max(0.1, 2 * Math.abs(dP) / MAX_ABS_P);
 
-    return Format.percentWithColor(p, pColor);
+    return Format.percentWithColor(p, pColor, opacity);
   }
 
   // Rank
