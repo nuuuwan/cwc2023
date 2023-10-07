@@ -176,7 +176,10 @@ export default class BigTable {
     }
 
     // Order
-    const orderedTeamIDs = CWC23_TEAM_ID_LIST.sort(function (teamA, teamB) {
+    const orderedTeamIDs = CWC23_TEAM_ID_LIST.slice().sort(function (
+      teamA,
+      teamB
+    ) {
       const dWinner = teamIDToWinner[teamB] - teamIDToWinner[teamA];
       if (dWinner !== 0) {
         return dWinner;
