@@ -17,30 +17,30 @@ export default class BigTable {
   constructor(odiStateIdx) {
     console.time("BigTable.constructor");
 
-    this.historyList = BigTable.buildHistory(odiStateIdx);
-    this.stats = BigTable.getStats(this.historyList);
+    this.simulatorStatsList = BigTable.buildHistory(odiStateIdx);
+    this.stats = BigTable.getStats(this.simulatorStatsList);
 
     this.nextODIList = ODI.getNextMatches(GROUP_STAGE_ODI_LIST, N_NEXT_MATCHES);
     this.resultToStats = BigTable.splitHistoryStats(
-      this.historyList,
+      this.simulatorStatsList,
       this.nextODIList
     );
     console.timeEnd("BigTable.constructor");
   }
 
   static buildHistory(odiStateIdx) {
-    let historyList = [];
+    let simulatorStatsList = [];
 
     for (let i = 0; i < N_MONTE_CARLO_SIMULATIONS; i++) {
       const simulator = new Simulator(SIMULATOR_MODE.RANDOM, odiStateIdx);
-      historyList.push(simulator.stats);
+      simulatorStatsList.push(simulator.stats);
     }
-    return historyList;
+    return simulatorStatsList;
   }
 
-  static splitHistory(historyList, odiList) {
+  static splitHistory(simulatorStatsList, odiList) {
     let resultToHistoryList = {};
-    for (let history of historyList) {
+    for (let history of simulatorStatsList) {
       const resultId = odiList
         .map((odi) => history.resultIdx[odi.id].id)
         .join(":");
@@ -57,29 +57,29 @@ export default class BigTable {
     return sortedResultToHistoryList;
   }
 
-  static splitHistoryStats(historyList, odiList) {
-    const resultToHistoryList = BigTable.splitHistory(historyList, odiList);
+  static splitHistoryStats(simulatorStatsList, odiList) {
+    const resultToHistoryList = BigTable.splitHistory(simulatorStatsList, odiList);
     const resultToStats = Object.fromEntries(
       Object.entries(resultToHistoryList).map(function ([
         resultID,
-        historyList,
+        simulatorStatsList,
       ]) {
-        const stats = BigTable.getStats(historyList);
+        const stats = BigTable.getStats(simulatorStatsList);
         return [resultID, stats];
       })
     );
     return resultToStats;
   }
 
-  static getStats(historyList) {
-    const n = historyList.length;
+  static getStats(simulatorStatsList) {
+    const n = simulatorStatsList.length;
     let teamIDToWinner = Team.initTeamIDToX(0);
     let teamIDToFinalist = Team.initTeamIDToX(0);
     let teamIDToSemiFinalist = Team.initTeamIDToX(0);
     let teamIDToTotalPosition = Team.initTeamIDToX(0);
     let teamIDToPositionList = {};
 
-    for (let history of historyList) {
+    for (let history of simulatorStatsList) {
       const { koResultIdx, odiIdx, resultIdx } = history;
 
       // Winner
