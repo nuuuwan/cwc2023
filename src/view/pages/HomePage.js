@@ -44,17 +44,18 @@ export default class HomePage extends Component {
   }
 
   handleOnClickODI(odi) {
-    let { odiStateIdx } = this.state;
+    let { simulatorMode, odiStateIdx } = this.state;
 
     if (!odiStateIdx[odi.id]) {
       odiStateIdx[odi.id] = 1;
     } else if (odiStateIdx[odi.id] === 1) {
       odiStateIdx[odi.id] = 2;
     } else {
-      delete  odiStateIdx[odi.id];
+      delete odiStateIdx[odi.id];
     }
 
     this.bigTable = new BigTable(odiStateIdx);
+    this.simulator = new Simulator(simulatorMode, odiStateIdx);
 
     this.setState({
       odiStateIdx,
