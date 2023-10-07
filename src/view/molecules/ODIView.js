@@ -54,7 +54,7 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
         </Typography>
         <MatchDateView date={odi.date} />
 
-        <Box textAlign="left" sx={{ marginLeft: 0.5 }}>
+        <Box textAlign="left" sx={{ marginLeft: 0.2 }}>
           <TeamView
             team={odi.favoriteTeam}
             isWinner={odi.favoriteTeam.id === winnerInner.id}
