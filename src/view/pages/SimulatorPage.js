@@ -12,7 +12,6 @@ export default class SimulatorPage extends Component {
   render() {
     const { simulatorMode, simulator, odiStateIdx, onClickODI, bigTable } =
       this.props;
-    console.debug({ simulator });
     const { sumLogPWinner } = simulator.stats;
     const invPWinner = Math.exp(-sumLogPWinner);
     const logStr = `1 in ${Format.int(invPWinner)}`;
