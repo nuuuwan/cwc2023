@@ -35,9 +35,10 @@ export default class Format {
   }
 
   static getPercentColor(p) {
-    const h = parseInt(240 * p);
+    const h = parseInt(300 * p);
     const s = parseInt(100);
-    const l = parseInt((1 - p) * 60 + 20);
+    const [MIN_L, MAX_L] = [20, 60];
+    const l = parseInt((1 - p) * (MAX_L - MIN_L) + MIN_L);
     return `hsl(${h},${s}%,${l}%)`;
   }
 

@@ -4,8 +4,8 @@ import TeamView from "../atoms/TeamView";
 import LockIcon from "@mui/icons-material/Lock";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
-const COLOR_FLIPPED = "#0003";
-const COLOR_CONCLUDED = "#0001";
+const COLOR_FLIPPED = "#00000018";
+const COLOR_CONCLUDED = "#00000010";
 
 export default function ODIView({ odi, winner, odiState, onClickODI }) {
   const onClick = () => {
