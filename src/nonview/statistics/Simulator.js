@@ -32,22 +32,30 @@ export default class Simulator {
   }
 
   simulateGroupStage() {
-    const { resultIdx, sumLogPWinner } = GROUP_STAGE_ODI_LIST.reduce(
-      function ({ resultIdx, sumLogPWinner }, odi) {
-        const winner = this.getWinner(odi);
-        const pWinner = odi.getP(winner);
-        const logPWinner = Math.log(pWinner);
-        sumLogPWinner += logPWinner;
-        resultIdx[odi.id] = winner;
+    const { resultIdx, sumLogPWinner, nUpsets, nMajorUpsets } =
+      GROUP_STAGE_ODI_LIST.reduce(
+        function ({ resultIdx, sumLogPWinner, nUpsets, nMajorUpsets }, odi) {
+          const winner = this.getWinner(odi);
+          const pWinner = odi.getP(winner);
+          const logPWinner = Math.log(pWinner);
 
-        return { resultIdx, sumLogPWinner };
-      }.bind(this),
-      { resultIdx: {}, sumLogPWinner: 0 }
-    );
-    return { resultIdx, sumLogPWinner };
+          if (pWinner < 0.2) {
+            nMajorUpsets += 1;
+          } else if (pWinner < 0.4) {
+            nUpsets += 1;
+          }
+
+          sumLogPWinner += logPWinner;
+          resultIdx[odi.id] = winner;
+
+          return { resultIdx, sumLogPWinner, nUpsets, nMajorUpsets };
+        }.bind(this),
+        { resultIdx: {}, sumLogPWinner: 0, nUpsets: 0, nMajorUpsets: 0 }
+      );
+    return { resultIdx, sumLogPWinner, nUpsets, nMajorUpsets };
   }
 
-  simulateKnockOutStage({ resultIdx, sumLogPWinner }) {
+  simulateKnockOutStage({ resultIdx, sumLogPWinner, nMajorUpsets, nUpsets }) {
     const pointsTable = new GroupStatePointsTable(resultIdx);
     const teams = pointsTable.getTeams();
 
@@ -92,22 +100,44 @@ export default class Simulator {
       [odiSemiFinal2.id]: winnerSemiFinal2,
       [odiFinal.id]: winnerFinal,
     };
+    for (const pWinner of [
+      odiFinal.getP(winnerFinal),
+      odiSemiFinal1.getP(winnerSemiFinal1),
+      odiSemiFinal2.getP(winnerSemiFinal2),
+    ]) {
+      sumLogPWinner += Math.log(pWinner);
+      if (pWinner < 0.2) {
+        nMajorUpsets += 1;
+      } else if (pWinner < 0.4) {
+        nUpsets += 1;
+      }
+    }
 
-    sumLogPWinner +=
-      Math.log(odiFinal.getP(winnerFinal)) +
-      Math.log(odiSemiFinal1.getP(winnerSemiFinal1)) +
-      Math.log(odiSemiFinal2.getP(winnerSemiFinal2));
-
-    return { odiIdx, koResultIdx, sumLogPWinner };
+    return { odiIdx, koResultIdx, sumLogPWinner, nUpsets, nMajorUpsets };
   }
 
   getStats() {
-    const { resultIdx, sumLogPWinner: sumLogPWinnerGroupStage } =
-      this.simulateGroupStage();
-    const { odiIdx, koResultIdx, sumLogPWinner } = this.simulateKnockOutStage({
+    const {
       resultIdx,
       sumLogPWinner: sumLogPWinnerGroupStage,
-    });
-    return { resultIdx, odiIdx, koResultIdx, sumLogPWinner };
+      nUpsets: nUpsetsGroupStage,
+      nMajorUpsets: nMajorUpsetsGroupStage,
+    } = this.simulateGroupStage();
+
+    const { odiIdx, koResultIdx, sumLogPWinner, nUpsets, nMajorUpsets } =
+      this.simulateKnockOutStage({
+        resultIdx,
+        sumLogPWinner: sumLogPWinnerGroupStage,
+        nUpsets: nUpsetsGroupStage,
+        nMajorUpsets: nMajorUpsetsGroupStage,
+      });
+    return {
+      resultIdx,
+      odiIdx,
+      koResultIdx,
+      sumLogPWinner,
+      nUpsets,
+      nMajorUpsets,
+    };
   }
 }

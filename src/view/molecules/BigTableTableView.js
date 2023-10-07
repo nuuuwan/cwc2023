@@ -76,6 +76,7 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
                     component="th"
                     scope="row"
                     onClick={onClickInner}
+                    sx={{ cursor: "pointer" }}
                   >
                     <TeamView team={team} />
                   </TableCell>

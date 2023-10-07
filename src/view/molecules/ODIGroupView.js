@@ -23,7 +23,7 @@ export default function ODIGroupView({
         if (odi.isGroupStage) {
           winner = simulator.stats.resultIdx[odi.id];
           onClickODICustom = onClickODI;
-          cursor = "grab";
+          cursor = "pointer";
         } else {
           winner = simulator.stats.koResultIdx[odi.id];
           onClickODICustom = onClickODIDummy;
