@@ -130,7 +130,7 @@ export default class Format {
       0,
       Math.min(1, (dP + MAX_ABS_P) / (2.0 * MAX_ABS_P))
     );
-    const opacity =Math.max(0.1, 2 * Math.abs(dP) / MAX_ABS_P);
+    const opacity = Math.max(0.1, (2 * Math.abs(dP)) / MAX_ABS_P);
 
     return Format.percentWithColor(p, pColor, opacity);
   }
