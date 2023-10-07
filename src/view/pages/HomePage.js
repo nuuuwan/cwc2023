@@ -51,14 +51,13 @@ export default class HomePage extends Component {
     } else if (odiStateIdx[odi.id] === 1) {
       odiStateIdx[odi.id] = 2;
     } else {
-      odiStateIdx[odi.id] = 0;
+      delete  odiStateIdx[odi.id];
     }
 
     this.bigTable = new BigTable(odiStateIdx);
 
     this.setState({
       odiStateIdx,
-      simulatorMode: SIMULATOR_MODE.MAXIMUM_LIKELIHOOD,
     });
   }
 
