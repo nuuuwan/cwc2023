@@ -3,12 +3,17 @@ import { Box, Typography } from "@mui/material";
 import GroupStageView from "../molecules/GroupStageView";
 import KnockOutStageView from "../molecules/KnockOutStageView";
 import CasinoIcon from "@mui/icons-material/Casino";
+import Format from "../../nonview/base/Format";
 
 export default class SimulatorPage extends Component {
   static name = "SimulatorPage";
   static Icon = CasinoIcon;
   render() {
     const { simulatorMode, simulator, odiStateIdx, onClickODI } = this.props;
+    const { sumLogPWinner } = simulator.stats;
+    const invPWinner = Math.exp(-sumLogPWinner);
+    const logStr = `1 in ${Format.int(invPWinner)}`;
+
     return (
       <Box>
         <Typography variant="h5" sx={{ color: simulatorMode.color }}>
@@ -18,6 +23,10 @@ export default class SimulatorPage extends Component {
 
         <Typography variant="body1" color={simulatorMode.color}>
           {"That is " + simulatorMode.subMessage + " "}
+        </Typography>
+
+        <Typography variant="body1" color={simulatorMode.color}>
+          {logStr}
         </Typography>
 
         <KnockOutStageView
