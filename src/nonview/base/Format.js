@@ -14,32 +14,50 @@ export default class Format {
       second: "numeric",
     });
   }
-  static getPercentColorOld(p) {
-    if (p <= 0.2) {
-      return "#f00";
-    }
 
-    if (p <= 0.4) {
-      return "#f80";
+  static getPercentColorFromBands(p, colorList) {
+    const nColor = colorList.length;
+    for (let i in colorList) {
+      const limit = (1.0 * (parseInt(i) + 1)) / nColor;
+      if (p <= limit) {
+        return colorList[i];
+      }
     }
-
-    if (p <= 0.6) {
-      return "#0c0";
-    }
-
-    if (p <= 0.8) {
-      return "#088";
-    }
-
-    return "#008";
+    return colorList[nColor - 1];
   }
 
-  static getPercentColor(p) {
+  static getPercentColor1(p) {
+    return Format.getPercentColorFromBands(p, [
+      "#f00",
+      "#fa0",
+      "#0a0",
+      "#08f",
+      "#80f",
+    ]);
+  }
+
+  static getPercentColor2(p) {
     const h = parseInt(300 * p);
     const s = parseInt(100);
     const [MIN_L, MAX_L] = [20, 60];
     const l = parseInt((1 - p) * (MAX_L - MIN_L) + MIN_L);
     return `hsl(${h},${s}%,${l}%)`;
+  }
+
+  static getPercentColor3(p) {
+    return Format.getPercentColorFromBands(p, [
+      "#f00",
+      "#f80",
+      "#cc0",
+      "#0a0",
+      "#08f",
+      "#80f",
+      "#808",
+    ]);
+  }
+
+  static getPercentColor(p) {
+    return Format.getPercentColor1(p);
   }
 
   static rank(rank) {
