@@ -35,7 +35,7 @@ export default function NextMatchesTableView({ bigTable, odiList }) {
       <Typography variant="h6">
         Odds qualifying passed the group stage
       </Typography>
-      <TableContainer component={Box} sx={{ marginTop: 1, padding: 0 }}>
+      <TableContainer component={Box}>
         <Table>
           <TableHead>
             <TableRow>

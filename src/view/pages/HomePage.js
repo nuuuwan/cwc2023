@@ -86,7 +86,7 @@ export default class HomePage extends Component {
 
   renderBody(simulatorMode, odiStateIdx, simulator, bigTable) {
     return (
-      <Box sx={{ margin: 0.5, padding: 0.25, marginLeft: 1, maxWidth: 600 }}>
+      <Box sx={STYLE.BODY_INNER}>
         {this.renderBodyInner(simulatorMode, odiStateIdx, simulator, bigTable)}
         <VersionView />
       </Box>

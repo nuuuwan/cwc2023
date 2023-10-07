@@ -21,7 +21,7 @@ export default function ScreenShot({ label, tweetBody, children }) {
   };
 
   return (
-    <div style={{ width: "fit-content" }}>
+    <div>
       <div ref={ref}>{children}</div>
       <Grid container justifyContent="flex-end" sx={{ paddingRight: 2 }}>
         <Tooltip title="Download Image">

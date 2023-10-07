@@ -75,7 +75,7 @@ function BigTableInnerView({ bigTable }) {
 
   return (
     <Box>
-      <TableContainer component={Box} sx={{ marginTop: 1, padding: 0 }}>
+      <TableContainer component={Box}>
         <Table>
           <TableHead>
             <TableRow>

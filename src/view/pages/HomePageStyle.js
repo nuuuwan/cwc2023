@@ -19,6 +19,12 @@ export const STYLE = {
     paddingLeft: 1,
     paddingRight: 2,
   },
+  BODY_INNER: {
+    maxWidth: 640,
+    margin: "auto",
+    padding: 0.25,
+    textAlign: "center",
+  },
   FOOTER: {
     position: "fixed",
     bottom: 0,
