@@ -49,7 +49,7 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
         }}
         onClick={onClick}
       >
-        <Typography variant="body2" sx={{ opacity: 0.5, fontSize: "60%" }}>
+        <Typography variant="body2" sx={{ color: "#ccc", fontSize: "60%" }}>
           {odi.id}
         </Typography>
         <MatchDateView date={odi.date} />
@@ -67,7 +67,9 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
           />
         </Box>
 
-        <Typography variant="body2">{odi.venue.id}</Typography>
+        <Typography variant="body2" sx={{ color: "#ccc" }}>
+          {odi.venue.id}
+        </Typography>
       </Box>
 
       <Grid container justifyContent="flex-end">
