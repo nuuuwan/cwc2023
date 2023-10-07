@@ -8,10 +8,16 @@ import {
   VERSION_DATETIME,
   LAST_COMMIT_MESSAGE,
 } from "../../nonview/constants/VERSION.js";
-
+import HelpIcon from "@mui/icons-material/Help";
 export default function VersionView() {
   const onClickBugs = function () {
     const URL = "https://github.com/nuuuwan/cwc2023/issues";
+    window.open(URL, "_blank");
+  };
+
+  const onClickHelp = function () {
+    const URL =
+      "https://medium.com/on-arts/2023-cricket-world-cup-c588a699b5f6";
     window.open(URL, "_blank");
   };
 
@@ -25,6 +31,9 @@ export default function VersionView() {
           </IconButton>
           <IconButton onClick={onClickBugs}>
             <PestControlIcon />
+          </IconButton>
+          <IconButton onClick={onClickHelp}>
+            <HelpIcon />
           </IconButton>
         </Box>
       </Typography>
