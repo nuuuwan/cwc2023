@@ -17,7 +17,7 @@ export default class BigTable {
   constructor(odiStateIdx) {
     console.time("BigTable.constructor");
 
-    this.simulatorStatsList = BigTable.buildHistory(odiStateIdx);
+    this.simulatorStatsList = BigTable.buildSimulatorStatsList(odiStateIdx);
     this.stats = BigTable.getStats(this.simulatorStatsList);
 
     this.nextODIList = ODI.getNextMatches(GROUP_STAGE_ODI_LIST, N_NEXT_MATCHES);
@@ -28,14 +28,20 @@ export default class BigTable {
     console.timeEnd("BigTable.constructor");
   }
 
-  static buildHistory(odiStateIdx) {
+  static buildSimulatorStatsList(odiStateIdx) {
     let simulatorStatsList = [];
 
     for (let i = 0; i < N_MONTE_CARLO_SIMULATIONS; i++) {
       const simulator = new Simulator(SIMULATOR_MODE.RANDOM, odiStateIdx);
       simulatorStatsList.push(simulator.stats);
     }
-    return simulatorStatsList;
+
+    const sortedSimulatorStatsList = simulatorStatsList.sort(
+      function(statA, statB) {
+        return statB.sumLogPWinner - statA.sumLogPWinner;
+      }
+    )
+    return sortedSimulatorStatsList;
   }
 
   static splitHistory(simulatorStatsList, odiList) {
@@ -185,4 +191,6 @@ export default class BigTable {
       orderedTeamIDs,
     };
   }
+
+  
 }
