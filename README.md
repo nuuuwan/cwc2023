@@ -1,6 +1,6 @@
 # 2023 ICC Men's ODI Cricket World Cup
 
-This repository contains a simulator for the #cwc2023. 
+This repository implementes a [simulator for the #cwc2023](https://nuuuwan.github.io/cwc2023). 
 
 ## Data Sources 
 
