@@ -18,6 +18,11 @@ export default class ODI {
     this.venue = venue;
   }
 
+  // ID/Stage
+  get isGroupStage() {
+    return this.id.startsWith("ODI");
+  }
+
   // Names & Flags
   get twitterName() {
     return `${this.favoriteTeam.emoji}${this.underdogTeam.emoji} #${this.favoriteTeam.twitterHandleText}vs${this.underdogTeam.twitterHandleText}`;

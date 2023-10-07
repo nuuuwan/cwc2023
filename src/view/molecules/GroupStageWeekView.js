@@ -1,9 +1,8 @@
-import ODIView from "./ODIView.js";
-import { Grid, Typography, Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import ScreenShot from "./ScreenShot.js";
 import { EMOJI } from "../../nonview/constants/EMOJI.js";
+import ODIGroupView from "./ODIGroupView.js";
 const SX_PAPER = { padding: 1, margin: 0.5 };
-const SX_GRID = { margin: 1, padding: 0.5 };
 
 function getTweetBody(week, odiList) {
   let lines = [`Week ${week} - Predictions`];
@@ -29,20 +28,12 @@ export default function GroupStageWeekView({
     >
       <Box sx={SX_PAPER}>
         <Typography variant="h6">Week {week}</Typography>
-        <Grid container sx={SX_GRID}>
-          {odiList.map(function (odi) {
-            return (
-              <Grid key={"odi-" + odi.id} item>
-                <ODIView
-                  odi={odi}
-                  winner={simulator.stats.resultIdx[odi.id]}
-                  onClickODI={onClickODI}
-                  odiState={odiStateIdx[odi.id]}
-                />
-              </Grid>
-            );
-          })}
-        </Grid>
+        <ODIGroupView
+          odiList={odiList}
+          simulator={simulator}
+          onClickODI={onClickODI}
+          odiStateIdx={odiStateIdx}
+        />
       </Box>
     </ScreenShot>
   );
