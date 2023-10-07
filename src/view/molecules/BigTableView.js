@@ -5,7 +5,6 @@ import Format from "../../nonview/base/Format.js";
 import React from "react";
 import ScreenShot from "./ScreenShot.js";
 import { TEAM } from "../../nonview/core/Team.js";
-import DirectionView from "../atoms/DirectionView.js";
 
 import BigTableTableView from "./BigTableTableView.js";
 
@@ -45,9 +44,7 @@ function BigTableInfo({ bigTable }) {
     <Alert severity="info" sx={{ textAlign: "left", margin: 1 }}>
       Odds of winning, reaching the final, and qualifying passed the group stage
       in the #CWC23. Results are based on <strong>{Format.int(n)}</strong> Monte
-      Carlo Simulations. <DirectionView dP={-1} />
-      <DirectionView dP={1} /> indicate each team's progress since the start of
-      the tournament.
+      Carlo Simulations.
     </Alert>
   );
 }

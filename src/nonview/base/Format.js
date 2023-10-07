@@ -1,17 +1,8 @@
 import { EPSILON } from "../constants/STATISTICS.js";
-
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
 export default class Format {
-  static timeStamp(date) {
-    return date.toLocaleString(undefined, {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      //
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-    });
-  }
+  // Percent
 
   static getPercentColorFromBands(p, colorList) {
     const nColor = colorList.length;
@@ -58,19 +49,6 @@ export default class Format {
     return Format.getPercentColor1(p);
   }
 
-  static rank(rank) {
-    const color = Format.getPercentColor((10 - rank) / 9);
-    return (
-      <span
-        style={{
-          color,
-        }}
-      >
-        {rank}
-      </span>
-    );
-  }
-
   static percentText(p) {
     if (p < EPSILON) {
       return "0%";
@@ -94,8 +72,39 @@ export default class Format {
     });
   }
 
-  static percent(p) {
+  static percentWithIcon(p) {
     const color = Format.getPercentColor(p);
+    const s = Format.percentText(p);
+
+    let Icon;
+    if (p < EPSILON) {
+      Icon = CancelIcon;
+    } else if (p > 1 - EPSILON) {
+      Icon = CheckCircleIcon;
+    }
+
+    return (
+      <span
+        style={{
+          color,
+        }}
+      >
+        <span style={{ display: "inline-block" }}>{s}</span>
+
+        <span style={{ display: "inline-block", width: "6px" }}>
+          {Icon && (
+            <Icon
+              sx={{ fontSize: "80%", marginLeft: 0.5, marginTop: 0.1 }}
+              color={color}
+            />
+          )}
+        </span>
+      </span>
+    );
+  }
+
+  static percentWithColor(p, pColor) {
+    const color = Format.getPercentColor(pColor);
 
     const s = Format.percentText(p);
 
@@ -110,6 +119,49 @@ export default class Format {
     );
   }
 
+  static percent(p) {
+    return Format.percentWithColor(p, p);
+  }
+
+  static percentWithColorOverride(p, dP) {
+    const MAX_ABS_P = 0.2;
+    const pColor = Math.max(
+      0,
+      Math.min(1, (dP + MAX_ABS_P) / (2.0 * MAX_ABS_P))
+    );
+
+    return Format.percentWithColor(p, pColor);
+  }
+
+  // Rank
+
+  static rank(rank) {
+    const color = Format.getPercentColor((10 - rank) / 9);
+    return (
+      <span
+        style={{
+          color,
+        }}
+      >
+        {rank}
+      </span>
+    );
+  }
+
+  // Date/Time
+
+  static timeStamp(date) {
+    return date.toLocaleString(undefined, {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      //
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    });
+  }
+
   static matchDate(date) {
     return date.toLocaleString(undefined, {
       month: "short",
@@ -117,6 +169,8 @@ export default class Format {
       weekday: "short",
     });
   }
+
+  // Numbers
 
   static float(x) {
     return x.toLocaleString(undefined, {

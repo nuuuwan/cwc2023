@@ -12,8 +12,6 @@ import TeamView from "../atoms/TeamView.js";
 import Format from "../../nonview/base/Format.js";
 
 import React from "react";
-import { TEAM_ID_TO_P_WINNER_START } from "../../nonview/data/TEAM_ID_TO_P_WINNER_START.js";
-import DirectionView from "../atoms/DirectionView.js";
 
 export default function BigTableTableView({ bigTable, onClickTeam }) {
   const {
@@ -53,9 +51,6 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
               const pFinalist = teamIDToFinalist[teamID] / n;
               const pSemiFinalist = teamIDToSemiFinalist[teamID] / n;
 
-              const pWinnerStart = TEAM_ID_TO_P_WINNER_START[teamID];
-              const dPWinner = pWinner - pWinnerStart;
-
               const onClickInner = function () {
                 onClickTeam(team);
               };
@@ -85,22 +80,21 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
                     align="center"
                     sx={{ fontSize: "100%" }}
                   >
-                    {Format.percent(pWinner)}
-                    <DirectionView dP={dPWinner} />
+                    {Format.percentWithIcon(pWinner)}
                   </TableCell>
                   <TableCell
                     size="small"
                     align="center"
                     sx={{ fontSize: "100%" }}
                   >
-                    {Format.percent(pFinalist)}
+                    {Format.percentWithIcon(pFinalist)}
                   </TableCell>
                   <TableCell
                     size="small"
                     align="center"
                     sx={{ fontSize: "100%" }}
                   >
-                    {Format.percent(pSemiFinalist)}
+                    {Format.percentWithIcon(pSemiFinalist)}
                   </TableCell>
                 </TableRow>
               );
