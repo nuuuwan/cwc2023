@@ -12,7 +12,7 @@ log = Log('main')
 
 
 def open_files():
-    for path in [ODI_LIST_CSV_PATH]:
+    for path in [ODI_LIST_XLSX_PATH]:
         os.startfile(path)
 
     for url in [
