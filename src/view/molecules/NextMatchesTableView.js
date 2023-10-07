@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import BigTable from "../../nonview/statistics/BigTable.js";
 import { TEAM } from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
 import Team from "../../nonview/core/Team.js";
@@ -17,17 +16,13 @@ import Format from "../../nonview/base/Format.js";
 import DirectionView from "../atoms/DirectionView.js";
 import { P_IS_IN_PLAY } from "../../nonview/constants/STATISTICS.js";
 import { EMOJI } from "../../nonview/constants/EMOJI.js";
-export default function NextMatchesTableView({ bigTable, odiList }) {
-  const resultToStats = BigTable.splitHistoryStats(
-    bigTable.historyList,
-    odiList
-  );
-
+export default function NextMatchesTableView({ bigTable }) {
   const {
     orderedTeamIDs: orderedTeamIDsBefore,
     teamIDToSemiFinalist: teamIDToSemiFinalistBefore,
     n: nBefore,
   } = bigTable.stats;
+  const { resultToStats } = bigTable;
   const nResults = Object.keys(resultToStats).length;
 
   return (

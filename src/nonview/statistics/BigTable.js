@@ -5,14 +5,27 @@ import { SIMULATOR_MODE } from "./SimulatorMode.js";
 import { N_MONTE_CARLO_SIMULATIONS } from "../constants/STATISTICS.js";
 import Statistics from "../base/Statistics.js";
 import { CWC23_TEAM_ID_LIST } from "../constants/CWC23_TEAM_ID_LIST.js";
+import { GROUP_STAGE_ODI_LIST } from "../data/GROUP_STAGE_ODI_LIST.js";
+import ODI from "../core/ODI.js";
+
 export const PERCENTILES = [
   0.0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 1.0,
 ];
+const N_NEXT_MATCHES = 2;
 
 export default class BigTable {
   constructor(odiStateIdx) {
+    console.time("BigTable.constructor");
+
     this.historyList = BigTable.buildHistory(odiStateIdx);
     this.stats = BigTable.getStats(this.historyList);
+
+    this.nextODIList = ODI.getNextMatches(GROUP_STAGE_ODI_LIST, N_NEXT_MATCHES);
+    this.resultToStats = BigTable.splitHistoryStats(
+      this.historyList,
+      this.nextODIList
+    );
+    console.timeEnd("BigTable.constructor");
   }
 
   static buildHistory(odiStateIdx) {

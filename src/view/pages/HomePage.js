@@ -18,14 +18,23 @@ import { PAGE } from "./PAGE.js";
 export default class HomePage extends Component {
   constructor() {
     super();
+    const simulatorMode = SIMULATOR_MODE.MAXIMUM_LIKELIHOOD;
+    const odiStateIdx = {};
+    const pageName = PAGE.PROBABILITY.name;
+
     this.state = {
-      simulatorMode: SIMULATOR_MODE.MAXIMUM_LIKELIHOOD,
-      odiStateIdx: {},
-      pageName: PAGE.PROBABILITY.name,
+      simulatorMode,
+      odiStateIdx,
+      pageName,
     };
+
+    this.simulator = new Simulator(simulatorMode, odiStateIdx);
+    this.bigTable = new BigTable(odiStateIdx);
   }
 
   setSimulatorMode(simulatorMode) {
+    this.simulator = new Simulator(simulatorMode, this.state.odiStateIdx);
+
     this.setState({
       pageName: PAGE.SIMULATOR.name,
       simulatorMode,
@@ -34,6 +43,7 @@ export default class HomePage extends Component {
 
   handleOnClickODI(odi) {
     let { odiStateIdx } = this.state;
+
     if (!odiStateIdx[odi.id]) {
       odiStateIdx[odi.id] = 1;
     } else if (odiStateIdx[odi.id] === 1) {
@@ -41,6 +51,9 @@ export default class HomePage extends Component {
     } else {
       odiStateIdx[odi.id] = 0;
     }
+
+    this.bigTable = new BigTable(odiStateIdx);
+
     this.setState({
       odiStateIdx,
       simulatorMode: SIMULATOR_MODE.MAXIMUM_LIKELIHOOD,
@@ -105,14 +118,19 @@ export default class HomePage extends Component {
   }
   render() {
     const { simulatorMode, odiStateIdx } = this.state;
-    const simulator = new Simulator(simulatorMode, odiStateIdx);
-    const bigTable = new BigTable(odiStateIdx);
 
     return (
       <Box sx={STYLE.ALL}>
-        <Box sx={STYLE.HEADER}>{this.renderHeader(bigTable, odiStateIdx)}</Box>
+        <Box sx={STYLE.HEADER}>
+          {this.renderHeader(this.bigTable, odiStateIdx)}
+        </Box>
         <Box sx={STYLE.BODY}>
-          {this.renderBody(simulatorMode, odiStateIdx, simulator, bigTable)}
+          {this.renderBody(
+            simulatorMode,
+            odiStateIdx,
+            this.simulator,
+            this.bigTable
+          )}
         </Box>
         <Box sx={STYLE.FOOTER}>{this.renderFooter()}</Box>
       </Box>

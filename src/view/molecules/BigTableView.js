@@ -64,7 +64,7 @@ function BigTableInfo({ bigTable }) {
   );
 }
 
-function BigTableInnerView({ bigTable }) {
+function BigTableTableView({ bigTable }) {
   const {
     n,
     teamIDToWinner,
@@ -160,7 +160,7 @@ export default function BigTableView({ bigTable }) {
     <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable)}>
       <Box>
         <Typography variant="h5">#CWC23 Probabilities</Typography>
-        <BigTableInnerView bigTable={bigTable} />
+        <BigTableTableView bigTable={bigTable} />
         <BigTableInfo bigTable={bigTable} />
       </Box>
     </ScreenShot>
