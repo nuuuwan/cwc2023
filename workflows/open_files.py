@@ -4,15 +4,15 @@ import webbrowser
 from utils import Log
 
 EXCEL_PATH = os.path.abspath(os.path.join('data', 'cwc2023.odds.xlsx'))
-ODI_LIST_CSV_PATH = os.path.abspath(
-    os.path.join('data', 'cwc2023.group_stage.odi_list.csv')
+ODI_LIST_XLSX_PATH = os.path.abspath(
+    os.path.join('data', 'cwc2023.group_stage.odi_list.xlsx')
 )
 
 log = Log('main')
 
 
 def open_files():
-    for path in [EXCEL_PATH, ODI_LIST_CSV_PATH]:
+    for path in [ODI_LIST_CSV_PATH]:
         os.startfile(path)
 
     for url in [

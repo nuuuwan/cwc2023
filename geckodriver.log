@@ -83,3 +83,27 @@ sentryWrapped@https://static.oddschecker.com/OC/js/build/prod/third-party/bundle
 
 Dynamically enable window occlusion 1
 JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+1696657433818	geckodriver	INFO	Listening on 127.0.0.1:58998
+1696657436869	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "58999" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ASUS\\AppData\\Local\\Temp\\rust_mozprofile7jsuPt"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1696657437319	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1696657437398	Marionette	INFO	Listening on port 59009
+WebDriver BiDi listening on ws://127.0.0.1:58999
+Read port: 59009
+1696657437552	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://127.0.0.1:58999/devtools/browser/4eaf2d54-3a75-43c9-a6f2-b6e34f88852f
+JavaScript warning: https://pagead2.googlesyndication.com/bg/YeTNF82ErcXtSc42GSWrie2SEIEL8DxR64dbf1nZkSc.js line 2 > eval line 3045 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1696657443196	Marionette	INFO	Stopped listening on port 59009
+JavaScript warning: https://tpc.googlesyndication.com/sodar/sodar2/225/runner.html, line 26: Script terminated by timeout at:
+ra/</<@https://tpc.googlesyndication.com/sodar/sodar2/225/runner.html:26:93
+
+JavaScript warning: https://tpc.googlesyndication.com/sodar/sodar2.js, line 36: Script terminated by timeout at:
+Ia/</</h.port1.onmessage@https://tpc.googlesyndication.com/sodar/sodar2.js:36:208
+
+Dynamically enable window occlusion 1
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
