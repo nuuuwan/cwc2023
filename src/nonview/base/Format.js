@@ -14,7 +14,7 @@ export default class Format {
       second: "numeric",
     });
   }
-  static getPercentColor(p) {
+  static getPercentColorOld(p) {
     if (p <= 0.2) {
       return "#f00";
     }
@@ -32,6 +32,13 @@ export default class Format {
     }
 
     return "#008";
+  }
+
+  static getPercentColor(p) {
+    const h = parseInt(240 * p);
+    const s = parseInt(100);
+    const l = parseInt((1 - p) * 60 + 20);
+    return `hsl(${h},${s}%,${l}%)`;
   }
 
   static rank(rank) {
