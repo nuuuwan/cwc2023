@@ -20,7 +20,7 @@ export const STYLE = {
     paddingRight: 2,
   },
   BODY_INNER: {
-    maxWidth: 640,
+    maxWidth: 600,
     margin: "auto",
     padding: 0.25,
     textAlign: "center",
