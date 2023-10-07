@@ -1,7 +1,5 @@
 import { EPSILON } from "../constants/STATISTICS.js";
 
-import { EMOJI } from "../constants/EMOJI.js";
-
 export default class Format {
   static timeStamp(date) {
     return date.toLocaleString(undefined, {
@@ -75,11 +73,11 @@ export default class Format {
 
   static percentText(p) {
     if (p < EPSILON) {
-      return EMOJI.LOSER;
+      return "0%";
     }
 
     if (p > 1 - EPSILON) {
-      return EMOJI.WINNER;
+      return "100%";
     }
 
     if (p < 0.005) {
@@ -98,30 +96,13 @@ export default class Format {
 
   static percent(p) {
     const color = Format.getPercentColor(p);
-    let background = color + "1",
-      borderRadius = "50%",
-      padding = 3,
-      borderColor = color,
-      borderStyle = "solid",
-      borderWidth = 1;
 
     const s = Format.percentText(p);
-
-    if (EPSILON <= p && p <= 1 - EPSILON) {
-      padding = 0;
-      borderColor = background = "#fff0";
-    }
 
     return (
       <span
         style={{
           color,
-          background,
-          borderRadius,
-          padding,
-          borderColor,
-          borderStyle,
-          borderWidth,
         }}
       >
         {s}

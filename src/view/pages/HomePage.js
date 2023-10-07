@@ -90,6 +90,7 @@ export default class HomePage extends Component {
             simulator={simulator}
             odiStateIdx={odiStateIdx}
             onClickODI={this.handleOnClickODI.bind(this)}
+            bigTable={bigTable}
           />
         );
       default:

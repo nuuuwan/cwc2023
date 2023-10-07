@@ -42,11 +42,12 @@ function BigTableInfo({ bigTable }) {
   const { n } = bigTable.stats;
 
   return (
-    <Alert severity="info" sx={{ margin: 1 }}>
+    <Alert severity="info" sx={{ textAlign: "left", margin: 1 }}>
       Odds of winning, reaching the final, and qualifying passed the group stage
-      in the #CWC23. Results are based on <strong>{Format.int(n)}</strong> Monte
-      Carlo Simulations.
+      in the #CWC23.
       <br />
+      Results are based on <strong>{Format.int(n)}</strong> Monte Carlo
+      Simulations.
       <br />
       <DirectionView dP={-1} />
       <DirectionView dP={1} /> indicate each team's progress since the start of

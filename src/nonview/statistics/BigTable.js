@@ -28,6 +28,14 @@ export default class BigTable {
     console.timeEnd("BigTable.constructor");
   }
 
+  getOutcomeRank(simulator) {
+    const { sumLogPWinner } = simulator.stats;
+    const rank = this.simulatorStatsList.filter(function (history) {
+      return history.sumLogPWinner > sumLogPWinner;
+    }).length;
+    return rank;
+  }
+
   static buildSimulatorStatsList(odiStateIdx) {
     let simulatorStatsList = [];
 
@@ -36,11 +44,12 @@ export default class BigTable {
       simulatorStatsList.push(simulator.stats);
     }
 
-    const sortedSimulatorStatsList = simulatorStatsList.sort(
-      function(statA, statB) {
-        return statB.sumLogPWinner - statA.sumLogPWinner;
-      }
-    )
+    const sortedSimulatorStatsList = simulatorStatsList.sort(function (
+      statA,
+      statB
+    ) {
+      return statB.sumLogPWinner - statA.sumLogPWinner;
+    });
     return sortedSimulatorStatsList;
   }
 
@@ -64,7 +73,10 @@ export default class BigTable {
   }
 
   static splitHistoryStats(simulatorStatsList, odiList) {
-    const resultToHistoryList = BigTable.splitHistory(simulatorStatsList, odiList);
+    const resultToHistoryList = BigTable.splitHistory(
+      simulatorStatsList,
+      odiList
+    );
     const resultToStats = Object.fromEntries(
       Object.entries(resultToHistoryList).map(function ([
         resultID,
@@ -191,6 +203,4 @@ export default class BigTable {
       orderedTeamIDs,
     };
   }
-
-  
 }

@@ -16,21 +16,21 @@ export const SIMULATOR_MODE = {
   MINIMUM_LIKELIHOOD: new SimulatorMode(
     "MINIMUM_LIKELIHOOD",
     "Least likely Outcome",
-    "if every match is won by the underdog.",
+    "Underdog wins every match",
     Format.getPercentColor(0.1),
     ThumbDownIcon
   ),
   RANDOM: new SimulatorMode(
     "RANDOM",
     "Random Outcome",
-    "if the outcome of each match is randomly selected based on passed outcomes",
+    "Outcome selected randomly.",
     Format.getPercentColor(0.5),
     CasinoIcon
   ),
   MAXIMUM_LIKELIHOOD: new SimulatorMode(
     "MAXIMUM_LIKELIHOOD",
     "Most likely outcome",
-    "if every match is won by the favourite.",
+    "Favourite wins every match.",
     Format.getPercentColor(0.9),
     ThumbUpIcon
   ),
