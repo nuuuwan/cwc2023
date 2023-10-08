@@ -4,8 +4,8 @@ import { onClickRefresh } from "../Common.js";
 import { TEAM } from "../../nonview/core/Team.js";
 import LockIcon from "@mui/icons-material/Lock";
 export default function HomePageHeader({ bigTable, odiStateIdx }) {
-  const { teamIDToWinner } = bigTable.stats;
-  const winner = TEAM[Object.keys(teamIDToWinner)[0]];
+  const { teamIDToSemiFinalist } = bigTable.stats;
+  const winner = TEAM[Object.keys(teamIDToSemiFinalist)[0]];
   const nLocks = Object.keys(odiStateIdx).length;
 
   return (
