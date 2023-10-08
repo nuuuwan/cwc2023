@@ -30,7 +30,7 @@ def get_team_id_to_odds() -> dict[str, float]:
     options.add_argument('-headless')
     driver = webdriver.Firefox(options=options)
     driver.get(URL)
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(30)
 
     screenshot_path = os.path.join('screenshot.team_id_to_p_winner.png')
     driver.save_screenshot(screenshot_path)
