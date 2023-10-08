@@ -20,7 +20,7 @@ export default function NextMatchesView({
   onClickODI,
 }) {
   return (
-    <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable)}>
+    <ScreenShot label="next-matches" tweetBody={getTweetBody(bigTable)}>
       <Box>
         <Typography variant="h5">#CWC23 Next Up</Typography>
 
