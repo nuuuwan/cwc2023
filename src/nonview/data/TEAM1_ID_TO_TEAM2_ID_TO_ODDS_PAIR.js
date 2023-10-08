@@ -5,21 +5,21 @@ import { TEAM } from "../core/Team.js";
 
 export const TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR = {
   [TEAM.IND.id]: {
-    [TEAM.AUS.id]: [1.60, 2.31],
+    [TEAM.AUS.id]: [1.6, 2.31],
     [TEAM.AFG.id]: [1.09, 7.24],
     [TEAM.PAK.id]: [1.61, 2.29],
-},
+  },
   [TEAM.NZL.id]: {
     [TEAM.NLD.id]: [1.06, 9.26],
     [TEAM.BGD.id]: [1.59, 2.36],
-},
+  },
   [TEAM.ENG.id]: {
     [TEAM.BGD.id]: [1.19, 4.54],
-},
+  },
   [TEAM.PAK.id]: {
     [TEAM.LKA.id]: [1.44, 2.74],
-},
+  },
   [TEAM.AUS.id]: {
-    [TEAM.ZAF.id]: [1.67, 2.20],
-},
+    [TEAM.ZAF.id]: [1.67, 2.2],
+  },
 };

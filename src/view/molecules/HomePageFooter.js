@@ -9,19 +9,19 @@ function getIconColor(isActive) {
 }
 
 export default function HomePageFooter({
-  handleDoSimulate,
-  handleSetPage,
+  handleSetSimulatorModeID,
+  handleSetPageName,
   pageName: activePageName,
-  simulatorMode: activeSimulatorMode,
+  simulatorModeID: activeSimulatorModeID,
 }) {
   const simulatorButtons = Object.values(SIMULATOR_MODE).map(function (
     simulatorMode
   ) {
     const onClick = function () {
-      handleDoSimulate(simulatorMode);
+      handleSetSimulatorModeID(simulatorMode.id);
     };
     const isActive =
-      activeSimulatorMode === simulatorMode &&
+      activeSimulatorModeID === simulatorMode.id &&
       activePageName === PAGE.SIMULATOR.name;
     const iconColor = getIconColor(isActive);
 
@@ -38,7 +38,7 @@ export default function HomePageFooter({
     page
   ) {
     const onClick = function () {
-      handleSetPage(page.name);
+      handleSetPageName(page.name);
     };
 
     const Icon = page.Icon;

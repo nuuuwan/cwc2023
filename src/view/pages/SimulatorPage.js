@@ -5,7 +5,7 @@ import KnockOutStageView from "../molecules/KnockOutStageView";
 import CasinoIcon from "@mui/icons-material/Casino";
 import Format from "../../nonview/base/Format";
 import { N_MONTE_CARLO_SIMULATIONS } from "../../nonview/constants/STATISTICS";
-
+import { SIMULATOR_MODE } from "../../nonview/statistics/SimulatorMode";
 const COLOR_MAJOR_UPSET = Format.getPercentColor(0.2);
 const COLOR_MINOR_UPSET = Format.getPercentColor(0.4);
 
@@ -13,8 +13,9 @@ export default class SimulatorPage extends Component {
   static name = "SimulatorPage";
   static Icon = CasinoIcon;
   render() {
-    const { simulatorMode, simulator, odiStateIdx, onClickODI, bigTable } =
+    const { simulatorModeID, simulator, odiStateIdx, onClickODI, bigTable } =
       this.props;
+    const simulatorMode = SIMULATOR_MODE[simulatorModeID];
 
     const { sumLogPWinner, nMajorUpsets, nUpsets } = simulator.stats;
     const invPWinner = Math.exp(-sumLogPWinner);

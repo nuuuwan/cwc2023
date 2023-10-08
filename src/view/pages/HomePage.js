@@ -14,37 +14,55 @@ import BigTable from "../../nonview/statistics/BigTable.js";
 import VersionView from "../molecules/VersionView";
 import ProbabilityPage from "./ProbabilityPage";
 import { PAGE } from "./PAGE.js";
+import URLContext from "../../nonview/base/URLContext";
 
 export default class HomePage extends Component {
   constructor() {
     super();
-    const simulatorMode = SIMULATOR_MODE.MAXIMUM_LIKELIHOOD;
+
     const odiStateIdx = {};
-    const pageName = PAGE.PROBABILITY.name;
     const selectedTeam = null;
 
+    let context = URLContext.getContext();
+    const simulatorModeID =
+      context.simulatorModeID || SIMULATOR_MODE.MAXIMUM_LIKELIHOOD.id;
+    const pageName = context.pageName || PAGE.PROBABILITY.name;
+
+    context = { pageName, simulatorModeID };
+    URLContext.setContext(context);
+
     this.state = {
-      simulatorMode,
+      simulatorModeID,
       odiStateIdx,
       pageName,
       selectedTeam,
     };
 
-    this.simulator = new Simulator(simulatorMode, odiStateIdx);
+    this.simulator = new Simulator(
+      SIMULATOR_MODE[simulatorModeID],
+      odiStateIdx
+    );
     this.bigTable = new BigTable(odiStateIdx);
   }
 
-  setSimulatorMode(simulatorMode) {
-    this.simulator = new Simulator(simulatorMode, this.state.odiStateIdx);
+  setSimulatorModeID(simulatorModeID) {
+    this.simulator = new Simulator(
+      SIMULATOR_MODE[simulatorModeID],
+      this.state.odiStateIdx
+    );
+    const pageName = PAGE.SIMULATOR.name;
+
+    const context = { pageName, simulatorModeID };
+    URLContext.setContext(context);
 
     this.setState({
-      pageName: PAGE.SIMULATOR.name,
-      simulatorMode,
+      pageName,
+      simulatorModeID,
     });
   }
 
   handleOnClickODI(odi) {
-    let { simulatorMode, odiStateIdx } = this.state;
+    let { simulatorModeID, odiStateIdx } = this.state;
 
     if (!odiStateIdx[odi.id]) {
       odiStateIdx[odi.id] = 1;
@@ -55,7 +73,10 @@ export default class HomePage extends Component {
     }
 
     this.bigTable = new BigTable(odiStateIdx);
-    this.simulator = new Simulator(simulatorMode, odiStateIdx);
+    this.simulator = new Simulator(
+      SIMULATOR_MODE[simulatorModeID],
+      odiStateIdx
+    );
 
     this.setState({
       odiStateIdx,
@@ -64,15 +85,23 @@ export default class HomePage extends Component {
 
   handleOnClickTeam(team) {
     this.simulator = this.bigTable.getMostProbableTeamWin(team);
+    const pageName = PAGE.SIMULATOR.name;
+
+    const context = { pageName };
+    URLContext.setContext(context);
 
     this.setState({
-      simulatorMode: SIMULATOR_MODE.RANDOM,
-      pageName: PAGE.SIMULATOR.name,
+      simulatorModeID: SIMULATOR_MODE.RANDOM.id,
+      pageName,
       selectedTeam: team,
     });
   }
 
-  setPage(pageName) {
+  setPageName(pageName) {
+    const { simulatorModeID } = this.state;
+    const context = { pageName, simulatorModeID };
+    URLContext.setContext(context);
+
     this.setState({
       pageName,
     });
@@ -82,7 +111,7 @@ export default class HomePage extends Component {
     return <HomePageHeader bigTable={bigTable} odiStateIdx={odiStateIdx} />;
   }
 
-  renderBodyInner(simulatorMode, odiStateIdx, simulator, bigTable) {
+  renderBodyInner(simulatorModeID, odiStateIdx, simulator, bigTable) {
     switch (this.state.pageName) {
       case PAGE.PROBABILITY.name:
         return (
@@ -103,7 +132,7 @@ export default class HomePage extends Component {
       case PAGE.SIMULATOR.name:
         return (
           <SimulatorPage
-            simulatorMode={simulatorMode}
+            simulatorModeID={simulatorModeID}
             simulator={simulator}
             odiStateIdx={odiStateIdx}
             onClickODI={this.handleOnClickODI.bind(this)}
@@ -115,27 +144,32 @@ export default class HomePage extends Component {
     }
   }
 
-  renderBody(simulatorMode, odiStateIdx, simulator, bigTable) {
+  renderBody(simulatorModeID, odiStateIdx, simulator, bigTable) {
     return (
       <Box sx={STYLE.BODY_INNER}>
-        {this.renderBodyInner(simulatorMode, odiStateIdx, simulator, bigTable)}
+        {this.renderBodyInner(
+          simulatorModeID,
+          odiStateIdx,
+          simulator,
+          bigTable
+        )}
         <VersionView />
       </Box>
     );
   }
   renderFooter() {
-    const { simulatorMode, pageName } = this.state;
+    const { simulatorModeID, pageName } = this.state;
     return (
       <HomePageFooter
-        handleDoSimulate={this.setSimulatorMode.bind(this)}
-        handleSetPage={this.setPage.bind(this)}
+        handleSetSimulatorModeID={this.setSimulatorModeID.bind(this)}
+        handleSetPageName={this.setPageName.bind(this)}
         pageName={pageName}
-        simulatorMode={simulatorMode}
+        simulatorModeID={simulatorModeID}
       />
     );
   }
   render() {
-    const { simulatorMode, odiStateIdx } = this.state;
+    const { simulatorModeID, odiStateIdx } = this.state;
 
     return (
       <Box sx={STYLE.ALL}>
@@ -144,7 +178,7 @@ export default class HomePage extends Component {
         </Box>
         <Box sx={STYLE.BODY}>
           {this.renderBody(
-            simulatorMode,
+            simulatorModeID,
             odiStateIdx,
             this.simulator,
             this.bigTable
