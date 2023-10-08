@@ -16,7 +16,6 @@ TEAM_ID_TO_P_WINNER_JS = os.path.join(
 log = Log('update_team_id_to_p_winner')
 
 
-
 def scrape_values_list() -> list[list[str]]:
     log.debug('scrape_values_list')
     options = Options()
