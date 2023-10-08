@@ -32,13 +32,14 @@ def get_team_id_to_odds() -> dict[str, float]:
     driver.get(URL)
     driver.implicitly_wait(10)
 
+    driver.save_screenshot('screenshot.team_id_to_p_winner.png')
+
     try:
         table_body = driver.find_element(By.CLASS_NAME, 'eventTable')
     except Exception as e:
         log.error(e)
-        driver.save_screenshot('screenshot.png')
         driver.quit()
-        return {}       
+        return {}
 
     team_id_to_odds = {}
     for tr in table_body.find_elements(By.TAG_NAME, 'tr'):
@@ -55,7 +56,7 @@ def get_team_id_to_odds() -> dict[str, float]:
                 continue
             odds = parse_fractional_odd(value)
             odds_list.append(odds)
-        
+
         if len(odds_list) == 0:
             odds_avg = 10_000
         else:
