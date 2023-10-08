@@ -23,6 +23,7 @@ jobs:
 
     - name: Run pipeline.py
       run: |
+        export PYTHONPATH="$PYTHONPATH:./workflows"
         python workflows/update_data.py
 
     - name: Checkout repo branch master
