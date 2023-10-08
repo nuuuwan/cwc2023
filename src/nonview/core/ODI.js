@@ -1,6 +1,6 @@
 import Format from "../base/Format";
 import { START_WEEK } from "../constants/CWC23_DATETIME";
-import { ODI_ID_TO_TEAM_ID_TO_ODDS } from "../data/ODI_ID_TO_TEAM_ID_TO_ODDS";
+import { TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR } from "../data/TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR";
 import { ODI_ID_TO_WINNER } from "../data/ODI_ID_TO_WINNER";
 
 function pWinnerToPMatch(p1Winner, p2Winner) {
@@ -68,16 +68,29 @@ export default class ODI {
 
   // Odds
 
+  get oddsPair() {
+    if (TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR[this.team1.id] && TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR[this.team1.id][this.team2.id]) {
+      return TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR[this.team1.id][this.team2.id];
+    } 
+
+    if (TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR[this.team2.id] && TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR[this.team2.id][this.team1.id]) {
+     const pair =  TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR[this.team2.id][this.team1.id];
+      return [pair[1], pair[0]];
+    }
+
+    return null;
+  }
+
   get hasOdds() {
-    return !!ODI_ID_TO_TEAM_ID_TO_ODDS[this.id];
+    return !!this.oddsPair;
   }
 
   get odds1() {
-    return ODI_ID_TO_TEAM_ID_TO_ODDS[this.id][this.team1.id];
+    return this.oddsPair[0];
   }
 
   get odds2() {
-    return ODI_ID_TO_TEAM_ID_TO_ODDS[this.id][this.team2.id];
+    return this.oddsPair[1];
   }
 
   get p1Odds() {
