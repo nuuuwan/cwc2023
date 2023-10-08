@@ -4,12 +4,16 @@ This repository implementes a [simulator for the #cwc2023](https://nuuuwan.githu
 
 ## Data Sources 
 
+### Match Results 
+
+* [CricBuzz](https://www.cricbuzz.com/cricket-series/6732/icc-cricket-world-cup-2023/matches)
+
 ### Betting Odds 
 
-* [Match Odds on OddsChecker](https://www.oddschecker.com/cricket)
-* [Match Odds on OddsPortal](https://www.oddsportal.com/cricket/world/icc-world-cup/)
+* [OddsChecker - Match Odds](https://www.oddschecker.com/cricket)
+* [OddsPortal - Match Odds](https://www.oddsportal.com/cricket/world/icc-world-cup/)
 
-* [Winner Odds on OddsChecker](https://www.oddschecker.com/cricket/world-cup/winner)
+* [OddsChecker - Winner Odds](https://www.oddschecker.com/cricket/world-cup/winner)
 
 ### Match History 
 
