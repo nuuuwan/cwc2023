@@ -10,6 +10,10 @@ import {
 import Team from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
 import Format from "../../nonview/base/Format.js";
+import {
+  PACK_RATIO,
+  MIN_P_FOR_PACK,
+} from "../../nonview/constants/STATISTICS.js";
 
 import React from "react";
 
@@ -17,6 +21,8 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
   const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
     bigTable.stats;
 
+  let pSemiFinalistPrev = null;
+  let iPack = 0;
   return (
     <Box>
       <TableContainer component={Box}>
@@ -47,12 +53,31 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
               const pFinalist = teamIDToFinalist[teamID] / n;
               const pSemiFinalist = teamIDToSemiFinalist[teamID] / n;
 
+              const ratio = pSemiFinalistPrev / pSemiFinalist;
+              pSemiFinalistPrev = pSemiFinalist;
+              if (ratio > PACK_RATIO && pSemiFinalistPrev > MIN_P_FOR_PACK) {
+                iPack += 1;
+              }
+              const background = [
+                "#fff",
+                "#eee",
+                "#ddd",
+                "#ccc",
+                "#bbb",
+                //
+                "#aaa",
+                "#999",
+                "#888",
+                "#777",
+                "#666",
+              ][iPack];
+
               const onClickInner = function () {
                 onClickTeam(team);
               };
 
               return (
-                <TableRow key={teamID}>
+                <TableRow key={teamID} sx={{ background }}>
                   <TableCell
                     size="small"
                     align="center"
