@@ -24,8 +24,8 @@ def parse_fractional_odd(s: str) -> float:
     return (1.0 * int(numerator) / int(denominator)) + 1
 
 
-def get_team_id_to_odds() -> dict[str, float]:
-    log.debug('get_team_id_to_odds')
+def scrape_values_list() -> list[list[str]]:
+    log.debug('scrape_values_list')
     options = Options()
     options.add_argument('-headless')
     driver = webdriver.Firefox(options=options)
@@ -43,10 +43,20 @@ def get_team_id_to_odds() -> dict[str, float]:
         driver.quit()
         return {}
 
-    team_id_to_odds = {}
+    values_list = []
     for tr in table_body.find_elements(By.TAG_NAME, 'tr'):
         values = [td.text for td in tr.find_elements(By.TAG_NAME, 'td')]
         log.debug(str(values))
+        values_list.append(values)
+
+    driver.quit()
+    return values_list
+
+
+def get_team_id_to_odds(values_list: list[list[str]]) -> dict[str, float]:
+    log.debug('get_team_id_to_odds')
+    team_id_to_odds = {}
+    for values in values_list:
         team_name = values[0]
         if team_name not in TEAM_NAME_TO_ID:
             continue
@@ -66,7 +76,6 @@ def get_team_id_to_odds() -> dict[str, float]:
         team_id_to_odds[team_id] = odds_avg
         log.debug(f'{team_id}: {odds_avg}')
 
-    driver.quit()
     return team_id_to_odds
 
 
@@ -108,7 +117,8 @@ def write(team_id_to_p_winner: dict[str, float]):
 
 
 def main():
-    team_id_to_odds = get_team_id_to_odds()
+    values_list = scrape_values_list()
+    team_id_to_odds = get_team_id_to_odds(values_list)
     if len(team_id_to_odds) == 10:
         team_id_to_p_winner = get_team_id_to_p_winner(team_id_to_odds)
         write(team_id_to_p_winner)
