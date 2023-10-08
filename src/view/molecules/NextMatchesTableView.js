@@ -94,10 +94,7 @@ export default function NextMatchesTableView({ bigTable }) {
                   })}
                   <TableCell size="small" align="center">
                     <span style={{ fontSize: "150%" }}>
-                      {Format.percentWithColorOverride(
-                        swing,
-                        (2 * (0.2 - Math.min(0.2, swing))) / 0.2 - 1
-                      )}
+                      {Format.percentWithColorOverride(swing, swing)}
                     </span>
                   </TableCell>
                 </TableRow>

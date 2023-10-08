@@ -20,7 +20,7 @@ export default class HomePage extends Component {
     super();
     const simulatorMode = SIMULATOR_MODE.MAXIMUM_LIKELIHOOD;
     const odiStateIdx = {};
-    const pageName = PAGE.PROBABILITY.name;
+    const pageName = PAGE.NEXT_MATCHES.name;
     const selectedTeam = null;
 
     this.state = {

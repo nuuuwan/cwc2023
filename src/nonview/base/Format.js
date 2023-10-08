@@ -50,22 +50,6 @@ export default class Format {
   }
 
   static percentText(p) {
-    if (p < EPSILON) {
-      return "0%";
-    }
-
-    if (p > 1 - EPSILON) {
-      return "100%";
-    }
-
-    if (p < 0.005) {
-      return "<0.5%";
-    }
-
-    if (p > 0.995) {
-      return ">99.5%";
-    }
-
     return p.toLocaleString(undefined, {
       style: "percent",
       maximumFractionDigits: 0,
