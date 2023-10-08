@@ -32,11 +32,14 @@ def get_team_id_to_odds() -> dict[str, float]:
     driver.get(URL)
     driver.implicitly_wait(10)
 
-    table_body = driver.find_element(By.ID, 't1')
+    table_body = driver.find_element(By.CLASS_NAME, 'eventTable')
     team_id_to_odds = {}
     for tr in table_body.find_elements(By.TAG_NAME, 'tr'):
         values = [td.text for td in tr.find_elements(By.TAG_NAME, 'td')]
+        log.debug(str(values))
         team_name = values[0]
+        if team_name not in TEAM_NAME_TO_ID:
+            continue
         team_id = TEAM_NAME_TO_ID[team_name]
 
         odds_list = []
@@ -45,8 +48,11 @@ def get_team_id_to_odds() -> dict[str, float]:
                 continue
             odds = parse_fractional_odd(value)
             odds_list.append(odds)
-
-        odds_avg = sum(odds_list) / len(odds_list)
+        
+        if len(odds_list) == 0:
+            odds_avg = 10_000
+        else:
+            odds_avg = sum(odds_list) / len(odds_list)
         team_id_to_odds[team_id] = odds_avg
         log.debug(f'{team_id}: {odds_avg}')
 
