@@ -1,0 +1,41 @@
+name: Update Data (Manual)
+
+on: workflow_dispatch
+
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install build
+
+    - name: Run pipeline.py
+      run: |
+        python workflows/update_data.py
+
+    - name: Checkout repo branch master
+      uses: actions/checkout@v2
+      with:
+        ref: 'master'
+        token: "${{ secrets.PAGES_TOKEN }}"
+
+    - name: Copy data, and push to repo branch master
+      run: |
+        git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
+        git config --global user.name "${{ secrets.GIT_USER_NAME }}"
+        
+        git add .
+        git commit -m "Update Data (Manual) $(date)"
+        git push origin master
