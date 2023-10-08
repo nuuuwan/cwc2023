@@ -20,7 +20,11 @@ export default class BigTable {
     this.simulatorList = BigTable.buildSimulatorList(odiStateIdx);
     this.stats = BigTable.getStats(this.simulatorList);
 
-    this.nextODIList = ODI.getNextMatches(GROUP_STAGE_ODI_LIST, N_NEXT_MATCHES);
+    this.nextODIList = ODI.getNextMatches(
+      GROUP_STAGE_ODI_LIST,
+      N_NEXT_MATCHES,
+      odiStateIdx
+    );
     this.resultToStats = BigTable.splitHistoryStats(
       this.simulatorList,
       this.nextODIList

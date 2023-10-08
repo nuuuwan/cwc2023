@@ -184,11 +184,11 @@ export default class ODI {
     }, {});
   }
 
-  static getUnplayedMatches(odiList) {
-    return odiList.filter((odi) => !odi.isConcluded);
+  static getUnplayedMatches(odiList, odiStateIdx) {
+    return odiList.filter((odi) => !odi.isConcluded && !odiStateIdx[odi.id]);
   }
 
-  static getNextMatches(odiList, n) {
-    return ODI.getUnplayedMatches(odiList).slice(0, n);
+  static getNextMatches(odiList, n, odiStateIdx) {
+    return ODI.getUnplayedMatches(odiList, odiStateIdx).slice(0, n);
   }
 }

@@ -20,15 +20,17 @@ export default function ODIGroupView({
     >
       {odiList.map(function (odi) {
         let winner, onClickODICustom, cursor;
-        if (odi.isGroupStage) {
-          winner = simulator.stats.resultIdx[odi.id];
+        if (onClickODI) {
           onClickODICustom = onClickODI;
           cursor = "pointer";
         } else {
-          winner = simulator.stats.koResultIdx[odi.id];
           onClickODICustom = onClickODIDummy;
           cursor = "default";
         }
+
+        winner =
+          simulator.stats.resultIdx[odi.id] ||
+          simulator.stats.koResultIdx[odi.id];
 
         return (
           <Grid key={"odi-" + odi.id} item sx={{ cursor }}>

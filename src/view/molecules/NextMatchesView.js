@@ -27,7 +27,6 @@ export default function NextMatchesView({
         <ODIGroupView
           odiList={bigTable.nextODIList}
           simulator={simulator}
-          onClickODI={onClickODI}
           odiStateIdx={odiStateIdx}
         />
 
