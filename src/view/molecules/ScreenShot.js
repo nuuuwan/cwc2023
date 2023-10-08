@@ -22,7 +22,7 @@ export default function ScreenShot({ label, tweetBody, children }) {
 
   return (
     <div>
-      <div ref={ref} id="label">{children}</div>
+      <div ref={ref} id={label}>{children}</div>
       <Grid container justifyContent="flex-end" sx={{ paddingRight: 2 }}>
         <Tooltip title="Download Image">
           <IconButton onClick={onClick}>
