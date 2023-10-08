@@ -32,6 +32,8 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
     background = COLOR_FLIPPED;
   }
 
+  const winnerColor = odi.getColor(winnerInner);
+
   return (
     <Box>
       <Box
@@ -43,7 +45,7 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
           borderRadius: 3,
           width: 85,
 
-          borderColor: odi.getColor(winnerInner),
+          borderColor: winnerColor,
           background,
           opacity,
         }}
@@ -73,9 +75,9 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
       </Box>
 
       <Grid container justifyContent="flex-end">
-        {isStateFlipped ? <LockIcon sx={{ color: COLOR_FLIPPED }} /> : null}
+        {isStateFlipped ? <LockIcon sx={{ color: winnerColor }} /> : null}
         {odi.isConcluded ? (
-          <CheckCircleOutlineIcon sx={{ color: COLOR_CONCLUDED }} />
+          <CheckCircleOutlineIcon sx={{ color: winnerColor }} />
         ) : null}
       </Grid>
     </Box>
