@@ -32,7 +32,14 @@ def get_team_id_to_odds() -> dict[str, float]:
     driver.get(URL)
     driver.implicitly_wait(10)
 
-    table_body = driver.find_element(By.CLASS_NAME, 'eventTable')
+    try:
+        table_body = driver.find_element(By.CLASS_NAME, 'eventTable')
+    except Exception as e:
+        log.error(e)
+        driver.save_screenshot('screenshot.png')
+        driver.quit()
+        return {}       
+
     team_id_to_odds = {}
     for tr in table_body.find_elements(By.TAG_NAME, 'tr'):
         values = [td.text for td in tr.find_elements(By.TAG_NAME, 'td')]
@@ -99,8 +106,9 @@ def write(team_id_to_p_winner: dict[str, float]):
 
 def main():
     team_id_to_odds = get_team_id_to_odds()
-    team_id_to_p_winner = get_team_id_to_p_winner(team_id_to_odds)
-    write(team_id_to_p_winner)
+    if len(team_id_to_odds) == 10:
+        team_id_to_p_winner = get_team_id_to_p_winner(team_id_to_odds)
+        write(team_id_to_p_winner)
 
 
 if __name__ == '__main__':
