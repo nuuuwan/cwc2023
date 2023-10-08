@@ -26,7 +26,7 @@ export default function NextMatchesTableView({ bigTable }) {
 
   return (
     <Box>
-      <Typography variant="h6">
+      <Typography variant="subtitle1">
         Odds qualifying passed the group stage
       </Typography>
       <TableContainer component={Box}>

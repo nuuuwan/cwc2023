@@ -22,7 +22,7 @@ export default function NextMatchesView({
   return (
     <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable)}>
       <Box>
-        <Typography variant="h5">#CWC23 Next Matches</Typography>
+        <Typography variant="h5">#CWC23 Next Up</Typography>
 
         <ODIGroupView
           odiList={bigTable.nextODIList}
