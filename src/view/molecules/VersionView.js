@@ -3,39 +3,58 @@ import React from "react";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import PestControlIcon from "@mui/icons-material/PestControl";
 import Format from "../../nonview/base/Format.js";
-import { onClickRefresh } from "../Common.js";
+import StorageIcon from "@mui/icons-material/Storage";
 import {
   VERSION_DATETIME,
   LAST_COMMIT_MESSAGE,
 } from "../../nonview/constants/VERSION.js";
 import HelpIcon from "@mui/icons-material/Help";
-export default function VersionView() {
-  const onClickBugs = function () {
-    const URL = "https://github.com/nuuuwan/cwc2023/issues";
-    window.open(URL, "_blank");
-  };
+import FeedIcon from "@mui/icons-material/Feed";
 
-  const onClickHelp = function () {
-    const URL =
-      "https://medium.com/on-arts/2023-cricket-world-cup-c588a699b5f6";
-    window.open(URL, "_blank");
-  };
+const URL_INFO_LIST = [
+  {
+    url: "https://nuuuwan.github.io/cwc2023/",
+    Icon: RefreshIcon,
+  },
+  {
+    url: "https://github.com/nuuuwan/cwc2023/issues",
+    Icon: PestControlIcon,
+  },
+  {
+    url: "https://medium.com/on-arts/2023-cricket-world-cup-c588a699b5f6",
+    Icon: HelpIcon,
+  },
+  {
+    url: "https://github.com/nuuuwan/cwc2023/actions/workflows/update_data-cron.yml",
+    Icon: StorageIcon,
+  },
+  {
+    url: "https://www.google.com/search?client=firefox-b-d&q=cricket+world+cup",
+    Icon: FeedIcon,
+  },
+];
+
+export default function VersionView() {
+  const renderedIconButtons = URL_INFO_LIST.map(function (
+    { url, Icon },
+    iIconButton
+  ) {
+    const onClick = function () {
+      window.open(url, "_blank");
+    };
+
+    return (
+      <IconButton onClick={onClick} key={"icon-button-" + iIconButton}>
+        <Icon />
+      </IconButton>
+    );
+  });
 
   return (
     <Box sx={{ margin: 2, marginTop: 10, textAlign: "center" }}>
       <Typography variant="caption">
         {Format.timeStamp(VERSION_DATETIME)} -{" " + LAST_COMMIT_MESSAGE}
-        <Box>
-          <IconButton onClick={onClickRefresh}>
-            <RefreshIcon />
-          </IconButton>
-          <IconButton onClick={onClickBugs}>
-            <PestControlIcon />
-          </IconButton>
-          <IconButton onClick={onClickHelp}>
-            <HelpIcon />
-          </IconButton>
-        </Box>
+        <Box>{renderedIconButtons}</Box>
       </Typography>
     </Box>
   );
