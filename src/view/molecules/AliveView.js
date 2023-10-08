@@ -1,11 +1,11 @@
 import { TEAM } from "../../nonview/core/Team.js";
 import { EPSILON } from "../../nonview/constants/STATISTICS.js";
 export default function AliveView({ bigTable }) {
-  const { n, orderedTeamIDs, teamIDToWinner } = bigTable.stats;
+  const { n, orderedTeamIDs, teamIDToSemiFinalist } = bigTable.stats;
   let back = [],
     front = [];
   for (let teamID of orderedTeamIDs.slice().reverse()) {
-    const pWinner = teamIDToWinner[teamID] / n;
+    const pWinner = teamIDToSemiFinalist[teamID] / n;
     if (pWinner < EPSILON) {
       back.push(teamID);
     } else {

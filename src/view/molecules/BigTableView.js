@@ -24,15 +24,16 @@ function getTweetBody(bigTable) {
 
   let lines = [].concat(
     ["#CWC2023 Probabilities", ""],
-    getTweetTeamIDToXLines("Winning 🏆", n, teamIDToWinner),
-    [""],
-    getTweetTeamIDToXLines("Reaching Finals 🥇🥈", n, teamIDToFinalist),
-    [""],
     getTweetTeamIDToXLines(
       "Qualifying passed Group Stage ✔️",
       n,
       teamIDToSemiFinalist
-    )
+    ),
+    getTweetTeamIDToXLines("Reaching Finals 🥇🥈", n, teamIDToFinalist),
+    [""],
+
+    getTweetTeamIDToXLines("Winning 🏆", n, teamIDToWinner),
+    [""]
   );
   return lines.join("\n");
 }
@@ -42,9 +43,9 @@ function BigTableInfo({ bigTable }) {
 
   return (
     <Alert severity="info" sx={{ textAlign: "left", margin: 1 }}>
-      Odds of winning, reaching the final, and qualifying passed the group stage
-      in the #CWC23. Results are based on <strong>{Format.int(n)}</strong> Monte
-      Carlo Simulations.
+      Qualifying passed the group stage, Reaching the final, and Winning the
+      final in the #CWC23. Results are based on <strong>{Format.int(n)}</strong>{" "}
+      Monte Carlo Simulations.
     </Alert>
   );
 }

@@ -14,13 +14,8 @@ import Format from "../../nonview/base/Format.js";
 import React from "react";
 
 export default function BigTableTableView({ bigTable, onClickTeam }) {
-  const {
-    n,
-    teamIDToWinner,
-    teamIDToFinalist,
-    teamIDToSemiFinalist,
-    orderedTeamIDs,
-  } = bigTable.stats;
+  const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
+    bigTable.stats;
 
   return (
     <Box>
@@ -33,19 +28,20 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
                 Team
               </TableCell>
               <TableCell size="small" align="center">
-                {"Winner"}
+                {"Qualify"}
               </TableCell>
               <TableCell size="small" align="center">
                 {"Final"}
               </TableCell>
+
               <TableCell size="small" align="center">
-                {"Qualify"}
+                {"Winner"}
               </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {orderedTeamIDs.map(function (teamID, iTeam) {
+            {Object.keys(teamIDToSemiFinalist).map(function (teamID, iTeam) {
               const team = new Team(teamID);
               const pWinner = teamIDToWinner[teamID] / n;
               const pFinalist = teamIDToFinalist[teamID] / n;
@@ -75,13 +71,15 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
                   >
                     <TeamView team={team} />
                   </TableCell>
+
                   <TableCell
                     size="small"
                     align="center"
                     sx={{ fontSize: "100%" }}
                   >
-                    {Format.percentWithIcon(pWinner)}
+                    {Format.percentWithIcon(pSemiFinalist)}
                   </TableCell>
+
                   <TableCell
                     size="small"
                     align="center"
@@ -89,12 +87,13 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
                   >
                     {Format.percentWithIcon(pFinalist)}
                   </TableCell>
+
                   <TableCell
                     size="small"
                     align="center"
                     sx={{ fontSize: "100%" }}
                   >
-                    {Format.percentWithIcon(pSemiFinalist)}
+                    {Format.percentWithIcon(pWinner)}
                   </TableCell>
                 </TableRow>
               );
