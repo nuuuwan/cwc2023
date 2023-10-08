@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from utils import File, Log, Time, TimeFormat
 
+from workflows import odds_utils
 from workflows.TEAM_NAME_TO_ID import TEAM_NAME_TO_ID
 
 URL = 'https://www.oddsportal.com' + '/cricket/world/icc-world-cup/outrights/'
@@ -47,14 +48,27 @@ def scrape_values_list() -> list[list[str]]:
     return values_list
 
 
-def get_team_id_to_odds(values_list: list[list[str]]) -> dict[str, float]:
+def get_team_id_to_raw_odds(values_list: list[list[str]]) -> dict[str, str]:
     log.debug('get_team_id_to_odds')
-    team_id_to_odds = {}
+    team_id_to_raw_odds = {}
     for values in values_list:
         team_name = values[0]
         team_id = TEAM_NAME_TO_ID[team_name]
-        odds = float(values[2])
-        team_id_to_odds[team_id] = odds
+        odds = values[2]
+        team_id_to_raw_odds[team_id] = odds
+    log.info(str(team_id_to_raw_odds))
+    return team_id_to_raw_odds
+
+
+def get_team_id_to_odds(team_id_to_raw_odds: dict[str, str]):
+    team_id_to_odds = dict(
+        list(
+            map(
+                lambda x: (x[0], odds_utils.parse_odds(x[1])),
+                team_id_to_raw_odds.items(),
+            )
+        )
+    )
     log.info(str(team_id_to_odds))
     return team_id_to_odds
 
@@ -99,7 +113,9 @@ def write(team_id_to_p_winner: dict[str, float]):
 
 def main():
     values_list = scrape_values_list()
-    team_id_to_odds = get_team_id_to_odds(values_list)
+    team_id_to_raw_odds = get_team_id_to_raw_odds(values_list)
+    team_id_to_odds = get_team_id_to_odds(team_id_to_raw_odds)
+
     if len(team_id_to_odds) == 10:
         team_id_to_p_winner = get_team_id_to_p_winner(team_id_to_odds)
         write(team_id_to_p_winner)

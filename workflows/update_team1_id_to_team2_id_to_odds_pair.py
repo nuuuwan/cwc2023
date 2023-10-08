@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from utils import File, Log, Time, TimeFormat
 
+from workflows import odds_utils
 from workflows.TEAM_NAME_TO_ID import TEAM_NAME_TO_ID
 
 URL = 'https://www.oddsportal.com' + '/cricket/world/icc-world-cup/'
@@ -61,8 +62,8 @@ def get_team1_id_to_team2_id_to_odds_pair(
         team2_name = values[3]
         team1_id = TEAM_NAME_TO_ID[team1_name]
         team2_id = TEAM_NAME_TO_ID[team2_name]
-        team1_odds = float(values[4])
-        team2_odds = float(values[5])
+        team1_odds = odds_utils.parse_odds(values[4])
+        team2_odds = odds_utils.parse_odds(values[5])
 
         if team1_odds > team2_odds:
             team2_id, team1_id = team1_id, team2_id
