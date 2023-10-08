@@ -79,7 +79,7 @@ def write(odi_id_to_winner_id: dict[str, float]):
         line = f'  "{odi_id}": TEAM.{winner_id},'
         log.debug(line)
         lines.append(line)
-    lines.append('};')
+    lines.extend(['};', ''])
     File(ODI_ID_TO_WINNER_JS).write_lines(lines)
     n_matches = len(odi_id_to_winner_id.keys())
     log.info(f'Wrote {n_matches} matches to {ODI_ID_TO_WINNER_JS}')

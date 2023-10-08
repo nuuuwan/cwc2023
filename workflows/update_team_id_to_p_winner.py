@@ -109,7 +109,7 @@ def write(team_id_to_p_winner: dict[str, float]):
         line = f'  {team_id}: {p:.6f}, // {p:.0%}'
         log.debug(line)
         lines.append(line)
-    lines.append('};')
+    lines.extend(['};', ''])
     File(TEAM_ID_TO_P_WINNER_JS).write_lines(lines)
     n_odds = len(team_id_to_p_winner.keys())
     log.info(f'Wrote {n_odds} probs to {TEAM_ID_TO_P_WINNER_JS}')
