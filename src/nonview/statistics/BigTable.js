@@ -25,7 +25,29 @@ export default class BigTable {
       this.simulatorList,
       this.nextODIList
     );
+    this.teamIDToSwing = BigTable.getTeamIDToSwing(this.resultToStats);
     console.timeEnd("BigTable.constructor");
+  }
+
+  static getTeamIDToSwing(resultToStats) {
+    return Object.fromEntries(
+      CWC23_TEAM_ID_LIST.map(function (teamID) {
+        const { minP, maxP } = Object.entries(resultToStats).reduce(
+          function ({ minP, maxP }, [resultID, resultStats]) {
+            const { n: nAfter } = resultStats;
+            const p = resultStats.teamIDToSemiFinalist[teamID] / nAfter;
+            minP = Math.min(minP, p);
+            maxP = Math.max(maxP, p);
+            return { minP, maxP };
+          },
+          { minP: 1.0, maxP: 0.0 }
+        );
+        const swing = Math.abs(maxP - minP);
+        return [teamID, swing];
+      }).sort(function ([teamID1, swing1], [teamID2, swing2]) {
+        return swing2 - swing1;
+      })
+    );
   }
 
   getOutcomeRank(simulator) {

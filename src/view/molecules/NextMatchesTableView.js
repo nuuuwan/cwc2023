@@ -13,15 +13,8 @@ import { TEAM } from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
 import Team from "../../nonview/core/Team.js";
 import Format from "../../nonview/base/Format.js";
-import { P_IS_IN_PLAY } from "../../nonview/constants/STATISTICS.js";
-import { EMOJI } from "../../nonview/constants/EMOJI.js";
 export default function NextMatchesTableView({ bigTable }) {
-  const {
-    orderedTeamIDs: orderedTeamIDsBefore,
-    teamIDToSemiFinalist: teamIDToSemiFinalistBefore,
-    n: nBefore,
-  } = bigTable.stats;
-  const { resultToStats } = bigTable;
+  const { resultToStats, teamIDToSwing } = bigTable;
   const nResults = Object.keys(resultToStats).length;
 
   return (
@@ -60,18 +53,18 @@ export default function NextMatchesTableView({ bigTable }) {
                 );
               })}
               <TableCell size="small" align="center">
-                In Play
+                Swing
               </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {orderedTeamIDsBefore.map(function (teamID, iTeam) {
+            {Object.entries(teamIDToSwing).map(function (
+              [teamID, swing],
+              iTeam
+            ) {
               const team = new Team(teamID);
-              const pSemiFinalistBefore =
-                teamIDToSemiFinalistBefore[teamID] / nBefore;
 
-              let isTeamInPlay = false;
               return (
                 <TableRow key={teamID}>
                   <TableCell size="small" align="center">
@@ -88,11 +81,6 @@ export default function NextMatchesTableView({ bigTable }) {
                     } = resultStats;
                     const pSemiFinalistAfter =
                       teamIDToSemiFinalistAfter[teamID] / nAfter;
-                    const dP = pSemiFinalistAfter - pSemiFinalistBefore;
-                    const isResultInPlay = Math.abs(dP) > P_IS_IN_PLAY;
-                    if (isResultInPlay) {
-                      isTeamInPlay = true;
-                    }
 
                     return (
                       <TableCell
@@ -100,16 +88,16 @@ export default function NextMatchesTableView({ bigTable }) {
                         align="center"
                         key={"result-" + resultID}
                       >
-                        {Format.percentWithColorOverride(
-                          pSemiFinalistAfter,
-                          dP
-                        )}
+                        {Format.percent(pSemiFinalistAfter)}
                       </TableCell>
                     );
                   })}
                   <TableCell size="small" align="center">
                     <span style={{ fontSize: "150%" }}>
-                      {isTeamInPlay ? EMOJI.IN_PLAY : ""}
+                      {Format.percentWithColorOverride(
+                        swing,
+                        (2 * (0.2 - Math.min(0.2, swing))) / 0.2 - 1
+                      )}
                     </span>
                   </TableCell>
                 </TableRow>
