@@ -17,7 +17,7 @@ const URL_INFO_LIST = [
     Icon: RefreshIcon,
   },
   {
-    url: "https://github.com/nuuuwan/cwc2023/issues",
+    url: "https://github.com/nuuuwan/cwc2023/issues/new",
     Icon: PestControlIcon,
   },
   {
