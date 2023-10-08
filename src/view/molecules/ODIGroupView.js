@@ -7,6 +7,7 @@ export default function ODIGroupView({
   odiStateIdx,
   simulator,
   onClickODI,
+  showWinner,
 }) {
   const onClickODIDummy = () => {};
 
@@ -36,7 +37,7 @@ export default function ODIGroupView({
           <Grid key={"odi-" + odi.id} item sx={{ cursor }}>
             <ODIView
               odi={odi}
-              winner={winner}
+              winner={showWinner ? winner : null}
               onClickODI={onClickODICustom}
               odiState={odiStateIdx[odi.id]}
             />

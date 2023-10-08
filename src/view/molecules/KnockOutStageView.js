@@ -23,12 +23,14 @@ export default function KnockOutStageView({
           odiList={finalODIList}
           simulator={simulator}
           odiStateIdx={odiStateIdx}
+          showWinner={true}
         />
 
         <ODIGroupView
           odiList={semiFinalsODIList}
           simulator={simulator}
           odiStateIdx={odiStateIdx}
+          showWinner={true}
         />
       </Box>
     </ScreenShot>

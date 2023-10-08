@@ -33,6 +33,7 @@ export default function GroupStageWeekView({
           simulator={simulator}
           onClickODI={onClickODI}
           odiStateIdx={odiStateIdx}
+          showWinner={true}
         />
       </Box>
     </ScreenShot>

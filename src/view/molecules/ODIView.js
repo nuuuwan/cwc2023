@@ -59,12 +59,12 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
         <Box textAlign="left" sx={{ marginLeft: 0.2 }}>
           <TeamView
             team={odi.favoriteTeam}
-            isWinner={odi.favoriteTeam.id === winnerInner.id}
+            isWinner={odi.favoriteTeam.id === winnerInner?.id}
             p={odi.getP(odi.favoriteTeam)}
           />
           <TeamView
             team={odi.underdogTeam}
-            isWinner={odi.underdogTeam.id === winnerInner.id}
+            isWinner={odi.underdogTeam.id === winnerInner?.id}
             p={odi.getP(odi.underdogTeam)}
           />
         </Box>
