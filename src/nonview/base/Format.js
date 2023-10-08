@@ -2,8 +2,21 @@ import { EPSILON } from "../constants/STATISTICS.js";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 export default class Format {
-  // Percent
+  // Color
+  static gray(p) {
+    const s = parseInt(255 * (1 - p));
+    return `rgb(${s},${s},${s})`;
+  }
 
+  static grayList(n) {
+    const list = [];
+    for (let i = 0; i < n; i++) {
+      list.push(Format.gray(i / (n - 1)));
+    }
+    return list;
+  }
+
+  // Percent
   static getPercentColorFromBands(p, colorList) {
     const nColor = colorList.length;
     for (let i in colorList) {
@@ -189,3 +202,5 @@ export default class Format {
     return x.toLocaleString(undefined, { maximumSignificantDigits: 2 });
   }
 }
+
+export const COLOR_GRAY_LIST = Format.grayList(20);

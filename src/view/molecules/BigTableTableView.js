@@ -15,6 +15,8 @@ import {
   MIN_P_FOR_PACK,
 } from "../../nonview/constants/STATISTICS.js";
 
+import { COLOR_GRAY_LIST } from "../../nonview/base/Format.js";
+
 import React from "react";
 
 export default function BigTableTableView({ bigTable, onClickTeam }) {
@@ -58,19 +60,7 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
               if (ratio > PACK_RATIO && pSemiFinalistPrev > MIN_P_FOR_PACK) {
                 iPack += 1;
               }
-              const background = [
-                "#fff",
-                "#eee",
-                "#ddd",
-                "#ccc",
-                "#bbb",
-                //
-                "#aaa",
-                "#999",
-                "#888",
-                "#777",
-                "#666",
-              ][iPack];
+              const background = COLOR_GRAY_LIST[iPack];
 
               const onClickInner = function () {
                 onClickTeam(team);
