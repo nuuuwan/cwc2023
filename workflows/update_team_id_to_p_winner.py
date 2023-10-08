@@ -30,6 +30,7 @@ def get_team_id_to_odds() -> dict[str, float]:
     options.add_argument('-headless')
     driver = webdriver.Firefox(options=options)
     driver.get(URL)
+    driver.implicitly_wait(10)
 
     table_body = driver.find_element(By.ID, 't1')
     team_id_to_odds = {}
