@@ -8,7 +8,7 @@ from utils import File, Log, Time, TimeFormat
 from workflows import odds_utils
 from workflows.TEAM_NAME_TO_ID import TEAM_NAME_TO_ID
 
-URL = 'https://www.oddsportal.com' + '/cricket/world/icc-world-cup/outrights/'
+URL = 'https://www.oddsportal.com/cricket/world/icc-world-cup/outrights/'
 TEAM_ID_TO_P_WINNER_JS = os.path.join(
     'src', 'nonview', 'data', 'TEAM_ID_TO_P_WINNER.js'
 )

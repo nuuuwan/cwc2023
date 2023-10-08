@@ -34,7 +34,6 @@ export default class URLContext {
   }
 
   static setContext(context) {
-    console.debug(context);
     const url = URLContext.contextToURL(context);
     URLContext.setURL(url);
   }
