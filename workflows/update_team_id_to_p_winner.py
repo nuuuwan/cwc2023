@@ -32,12 +32,14 @@ def get_team_id_to_odds() -> dict[str, float]:
     driver.get(URL)
     driver.implicitly_wait(10)
 
-    driver.save_screenshot('screenshot.team_id_to_p_winner.png')
+    screenshot_path = os.path.join('screenshot.team_id_to_p_winner.png')
+    driver.save_screenshot(screenshot_path)
+    log.debug(f'Wrote {screenshot_path}')
 
     try:
         table_body = driver.find_element(By.CLASS_NAME, 'eventTable')
     except Exception as e:
-        log.error(e)
+        log.error(str(e))
         driver.quit()
         return {}
 
