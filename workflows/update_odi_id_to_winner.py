@@ -59,6 +59,7 @@ def get_odi_id_to_winner_id(values_list: list[list[str]]) -> dict[str, float]:
         winner_id = TEAM_NAME_TO_ID[winner_name]
         odi_id_to_winner_id[odi_id] = winner_id
         log.debug(f'{odi_id} -> {winner_id}')
+    log.info(str(odi_id_to_winner_id))
     return odi_id_to_winner_id
 
 

@@ -75,6 +75,7 @@ def get_team1_id_to_team2_id_to_odds_pair(
             team2_odds,
         ]
 
+    log.info(str(team1_id_to_team2_id_to_odds_pair))
     return team1_id_to_team2_id_to_odds_pair
 
 

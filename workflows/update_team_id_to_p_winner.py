@@ -92,6 +92,7 @@ def get_team_id_to_p_winner(
         p = q / q_sum
         team_id_to_p_winner[team_id] = p
         log.debug(f'{team_id}: {p}')
+    log.info(str(team_id_to_p_winner))
     return team_id_to_p_winner
 
 
