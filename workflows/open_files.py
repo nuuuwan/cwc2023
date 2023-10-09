@@ -4,7 +4,7 @@ import webbrowser
 from utils import Log
 
 ODI_LIST_XLSX_PATH = os.path.abspath(
-    os.path.join('data', 'cwc2023.group_stage.odi_list.xlsx')
+    os.path.join('data', 'cwc23.group_stage.odi_list.xlsx')
 )
 
 log = Log('main')

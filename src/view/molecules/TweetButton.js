@@ -11,7 +11,7 @@ export default function TweetButton({ tweetBody, setSnackbarMessage }) {
         tweetBody,
         "",
         "#CWC23 @CricketWorldCup #CWC23Simulator",
-        "https://nuuuwan.github.io/cwc2023",
+        "https://nuuuwan.github.io/cwc23",
       ].join("\n");
 
       const url =

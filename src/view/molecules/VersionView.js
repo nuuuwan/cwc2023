@@ -13,7 +13,7 @@ import FeedIcon from "@mui/icons-material/Feed";
 
 const URL_INFO_LIST = [
   {
-    url: "https://nuuuwan.github.io/cwc2023/",
+    url: "https://nuuuwan.github.io/cwc23/",
     Icon: RefreshIcon,
   },
   {
@@ -21,12 +21,12 @@ const URL_INFO_LIST = [
     Icon: HelpIcon,
   },
   {
-    url: "https://github.com/nuuuwan/cwc2023/issues/new",
+    url: "https://github.com/nuuuwan/cwc23/issues/new",
     Icon: PestControlIcon,
   },
 
   {
-    url: "https://github.com/nuuuwan/cwc2023/tree/master/src/nonview/data",
+    url: "https://github.com/nuuuwan/cwc23/tree/master/src/nonview/data",
     Icon: StorageIcon,
   },
   {
