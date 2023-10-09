@@ -13,8 +13,14 @@ export default class SimulatorPage extends Component {
   static name = "SimulatorPage";
   static Icon = CasinoIcon;
   render() {
-    const { simulatorModeID, simulator, odiStateIdx, onClickODI, bigTable } =
-      this.props;
+    const {
+      simulatorModeID,
+      simulator,
+      odiStateIdx,
+      onClickODI,
+      bigTable,
+      setSnackbarMessage,
+    } = this.props;
     const simulatorMode = SIMULATOR_MODE[simulatorModeID];
 
     const { sumLogPWinner, nMajorUpsets, nUpsets } = simulator.stats;
@@ -48,11 +54,13 @@ export default class SimulatorPage extends Component {
           simulator={simulator}
           odiStateIdx={odiStateIdx}
           onClickODI={onClickODI}
+          setSnackbarMessage={setSnackbarMessage}
         />
         <GroupStageView
           simulator={simulator}
           odiStateIdx={odiStateIdx}
           onClickODI={onClickODI}
+          setSnackbarMessage={setSnackbarMessage}
         />
       </Box>
     );

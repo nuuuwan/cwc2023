@@ -20,11 +20,13 @@ export default function GroupStageWeekView({
   simulator,
   onClickODI,
   odiStateIdx,
+  setSnackbarMessage,
 }) {
   return (
     <ScreenShot
       label={`group-state-week-${week}`}
       tweetBody={getTweetBody(week, odiList)}
+      setSnackbarMessage={setSnackbarMessage}
     >
       <Box sx={SX_PAPER}>
         <Typography variant="h6">Week {week}</Typography>

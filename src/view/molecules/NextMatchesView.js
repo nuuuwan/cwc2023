@@ -18,9 +18,14 @@ export default function NextMatchesView({
   simulator,
   odiStateIdx,
   onClickODI,
+  setSnackbarMessage,
 }) {
   return (
-    <ScreenShot label="next-matches" tweetBody={getTweetBody(bigTable)}>
+    <ScreenShot
+      label="next-matches"
+      tweetBody={getTweetBody(bigTable)}
+      setSnackbarMessage={setSnackbarMessage}
+    >
       <Box>
         <Typography variant="h5">#CWC23 Next Up</Typography>
 

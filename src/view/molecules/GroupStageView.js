@@ -4,7 +4,12 @@ import { Box, Typography } from "@mui/material";
 import ODI from "../../nonview/core/ODI.js";
 import GroupStageWeekView from "./GroupStageWeekView.js";
 
-export default function GroupStageView({ simulator, onClickODI, odiStateIdx }) {
+export default function GroupStageView({
+  simulator,
+  onClickODI,
+  odiStateIdx,
+  setSnackbarMessage,
+}) {
   return (
     <Box>
       <Typography variant="h5">Group Stage</Typography>
@@ -19,6 +24,7 @@ export default function GroupStageView({ simulator, onClickODI, odiStateIdx }) {
               simulator={simulator}
               odiStateIdx={odiStateIdx}
               onClickODI={onClickODI}
+              setSnackbarMessage={setSnackbarMessage}
             />
           );
         })}

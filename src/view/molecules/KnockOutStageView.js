@@ -7,6 +7,7 @@ export default function KnockOutStageView({
   simulator,
   odiStateIdx,
   onClickODI,
+  setSnackbarMessage,
 }) {
   const finalODIList = [simulator.stats.odiIdx["Final"]];
   const semiFinalsODIList = [
@@ -15,7 +16,7 @@ export default function KnockOutStageView({
   ];
 
   return (
-    <ScreenShot label="knock-out-stage">
+    <ScreenShot label="knock-out-stage" setSnackbarMessage={setSnackbarMessage}>
       <Box>
         <Typography variant="h5">Knock-out Stage</Typography>
 

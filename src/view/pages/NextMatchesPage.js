@@ -6,13 +6,15 @@ export default class NextMatchesPage extends Component {
   static Icon = CalendarMonthIcon;
 
   render() {
-    const { simulator, odiStateIdx, bigTable, onClickODI } = this.props;
+    const { simulator, odiStateIdx, bigTable, onClickODI, setSnackbarMessage } =
+      this.props;
     return (
       <NextMatchesView
         simulator={simulator}
         odiStateIdx={odiStateIdx}
         bigTable={bigTable}
         onClickODI={onClickODI}
+        setSnackbarMessage={setSnackbarMessage}
       />
     );
   }
