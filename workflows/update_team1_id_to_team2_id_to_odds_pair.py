@@ -104,7 +104,7 @@ def write(team1_id_to_team2_id_to_odds_pair: dict[str, float]):
             lines.append(
                 f'    [TEAM.{team2_id}.id]: [{odds1:.2f}, {odds2:.2f}],'
             )
-        lines.append('},')
+        lines.append('  },')
 
     lines.extend(['};', ''])
     File(team1_id_to_team2_id_to_odds_pair_JS).write_lines(lines)
