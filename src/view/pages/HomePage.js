@@ -190,7 +190,8 @@ export default class HomePage extends Component {
     );
   }
   render() {
-    const { simulatorModeID, odiStateIdx , isSnackbarOpen, snackbarMessage} = this.state;
+    const { simulatorModeID, odiStateIdx, isSnackbarOpen, snackbarMessage } =
+      this.state;
 
     return (
       <Box sx={STYLE.ALL}>
@@ -211,7 +212,6 @@ export default class HomePage extends Component {
           autoHideDuration={1000}
           onClose={this.setSnackbarClosed.bind(this)}
           message={snackbarMessage}
-      
         />
       </Box>
     );

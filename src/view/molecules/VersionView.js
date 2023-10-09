@@ -33,7 +33,6 @@ const URL_INFO_LIST = [
     url: "https://www.google.com/search?client=firefox-b-d&q=cricket+world+cup",
     Icon: FeedIcon,
   },
-  
 ];
 
 export default function VersionView() {

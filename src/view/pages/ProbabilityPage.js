@@ -7,6 +7,12 @@ export default class ProbabilityPage extends Component {
 
   render() {
     const { bigTable, onClickTeam, setSnackbarMessage } = this.props;
-    return <BigTableView bigTable={bigTable} onClickTeam={onClickTeam} setSnackbarMessage={setSnackbarMessage} />;
+    return (
+      <BigTableView
+        bigTable={bigTable}
+        onClickTeam={onClickTeam}
+        setSnackbarMessage={setSnackbarMessage}
+      />
+    );
   }
 }
