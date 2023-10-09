@@ -6,7 +6,7 @@ import React from "react";
 import DateX from "../../nonview/base/DateX.js";
 
 const SX_PAPER = { padding: 1, margin: 0.5 };
-const T_SCROLL_DELAY = 1_000;
+const T_SCROLL_DELAY = 200;
 function getTweetBody(week, odiList) {
   let lines = [`Week ${week} - Predictions`];
   for (let odi of odiList.slice()) {
@@ -28,7 +28,8 @@ export default function GroupStageWeekView({
   let refThis = React.createRef();
 
   setTimeout(function () {
-    if (parseInt(week) === DateX.now().week) {
+    const isCurrentWeek = parseInt(week) === DateX.now().week;
+    if (refThis && isCurrentWeek) {
       refThis.scrollIntoView({ behavior: "smooth" });
     }
   }, T_SCROLL_DELAY);
