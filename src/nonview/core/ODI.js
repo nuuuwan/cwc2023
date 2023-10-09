@@ -5,7 +5,7 @@ import { ODI_ID_TO_WINNER } from "../data/ODI_ID_TO_WINNER";
 import DateX from "../base/DateX";
 
 function pWinnerToPMatch(p1Winner, p2Winner) {
-  const f = (x) => x + 0.75;
+  const f = (x) => x + 0.25;
   const q = f(p1Winner) / (f(p1Winner) + f(p2Winner));
   return q;
 }
