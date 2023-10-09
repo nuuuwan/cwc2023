@@ -6,7 +6,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import React from "react";
 const COLOR_FLIPPED = "#00000018";
 const COLOR_CONCLUDED = "#00000010";
-const T_SCROLL_DELAY = 1_000;
+
 export default function ODIView({ odi, winner, odiState, onClickODI }) {
   const onClick = () => {
     if (!odi.isConcluded) {
@@ -34,20 +34,8 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
 
   const winnerColor = odi.getColor(winnerInner);
 
-  let refThis = React.createRef();
-
-  setTimeout(function () {
-    if (odi.isToday && refThis) {
-      refThis.scrollIntoView({ behavior: "smooth" });
-    }
-  }, T_SCROLL_DELAY);
-
   return (
-    <div
-      ref={(ref) => {
-        refThis = ref;
-      }}
-    >
+    <Box>
       <Box
         sx={{
           margin: 0.25,
@@ -92,6 +80,6 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
           <CheckCircleOutlineIcon sx={{ color: winnerColor }} />
         ) : null}
       </Grid>
-    </div>
+    </Box>
   );
 }
