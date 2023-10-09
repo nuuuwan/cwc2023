@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { STYLE } from "./HomePageStyle";
-import { Box } from "@mui/material";
+import { Box, Snackbar } from "@mui/material";
 
 import Simulator from "../../nonview/statistics/Simulator.js";
 
@@ -31,11 +31,16 @@ export default class HomePage extends Component {
     context = { pageName, simulatorModeID };
     URLContext.setContext(context);
 
+    const isSnackbarOpen = false;
+    const snackbarMessage = "";
+
     this.state = {
       simulatorModeID,
       odiStateIdx,
       pageName,
       selectedTeam,
+      isSnackbarOpen,
+      snackbarMessage,
     };
 
     this.simulator = new Simulator(
@@ -58,6 +63,19 @@ export default class HomePage extends Component {
     this.setState({
       pageName,
       simulatorModeID,
+    });
+  }
+
+  setSnackbarClosed() {
+    this.setState({
+      isSnackbarOpen: false,
+    });
+  }
+
+  setSnackbarMessage(snackbarMessage) {
+    this.setState({
+      snackbarMessage,
+      isSnackbarOpen: true,
     });
   }
 
@@ -118,6 +136,7 @@ export default class HomePage extends Component {
           <ProbabilityPage
             bigTable={bigTable}
             onClickTeam={this.handleOnClickTeam.bind(this)}
+            setSnackbarMessage={this.setSnackbarMessage.bind(this)}
           />
         );
       case PAGE.NEXT_MATCHES.name:
@@ -127,6 +146,7 @@ export default class HomePage extends Component {
             odiStateIdx={odiStateIdx}
             bigTable={bigTable}
             onClickODI={this.handleOnClickODI.bind(this)}
+            setSnackbarMessage={this.setSnackbarMessage.bind(this)}
           />
         );
       case PAGE.SIMULATOR.name:
@@ -137,6 +157,7 @@ export default class HomePage extends Component {
             odiStateIdx={odiStateIdx}
             onClickODI={this.handleOnClickODI.bind(this)}
             bigTable={bigTable}
+            setSnackbarMessage={this.setSnackbarMessage.bind(this)}
           />
         );
       default:
@@ -169,7 +190,7 @@ export default class HomePage extends Component {
     );
   }
   render() {
-    const { simulatorModeID, odiStateIdx } = this.state;
+    const { simulatorModeID, odiStateIdx , isSnackbarOpen, snackbarMessage} = this.state;
 
     return (
       <Box sx={STYLE.ALL}>
@@ -185,6 +206,13 @@ export default class HomePage extends Component {
           )}
         </Box>
         <Box sx={STYLE.FOOTER}>{this.renderFooter()}</Box>
+        <Snackbar
+          open={isSnackbarOpen}
+          autoHideDuration={1000}
+          onClose={this.setSnackbarClosed.bind(this)}
+          message={snackbarMessage}
+      
+        />
       </Box>
     );
   }

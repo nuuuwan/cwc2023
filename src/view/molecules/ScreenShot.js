@@ -4,7 +4,7 @@ import React from "react";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import TweetButton from "./TweetButton.js";
 
-export default function ScreenShot({ label, tweetBody, children }) {
+export default function ScreenShot({ label, tweetBody, children, setSnackbarMessage }) {
   const ref = React.useRef(null);
 
   const takeScreenshot = useScreenshot()[1];
@@ -14,10 +14,12 @@ export default function ScreenShot({ label, tweetBody, children }) {
     link.href = image;
     link.download = imageFile;
     link.click();
+    setSnackbarMessage(`Downloaded ${imageFile}`);
   };
 
   const onClick = function () {
     takeScreenshot(ref.current).then(download);
+    
   };
 
   return (

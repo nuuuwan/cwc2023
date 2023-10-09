@@ -50,9 +50,9 @@ function BigTableInfo({ bigTable }) {
   );
 }
 
-export default function BigTableView({ bigTable, onClickTeam }) {
+export default function BigTableView({ bigTable, onClickTeam , setSnackbarMessage}) {
   return (
-    <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable)}>
+    <ScreenShot label="big-table" tweetBody={getTweetBody(bigTable)} setSnackbarMessage={setSnackbarMessage}> 
       <Box>
         <Typography variant="h5">#CWC23 Probabilities</Typography>
         <BigTableTableView bigTable={bigTable} onClickTeam={onClickTeam} />

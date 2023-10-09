@@ -6,7 +6,7 @@ export default class ProbabilityPage extends Component {
   static Icon = TableRowsIcon;
 
   render() {
-    const { bigTable, onClickTeam } = this.props;
-    return <BigTableView bigTable={bigTable} onClickTeam={onClickTeam} />;
+    const { bigTable, onClickTeam, setSnackbarMessage } = this.props;
+    return <BigTableView bigTable={bigTable} onClickTeam={onClickTeam} setSnackbarMessage={setSnackbarMessage} />;
   }
 }
