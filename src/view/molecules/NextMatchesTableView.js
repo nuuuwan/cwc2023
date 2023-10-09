@@ -46,7 +46,10 @@ export default function NextMatchesTableView({ bigTable }) {
                   >
                     {teamIDList.map(function (teamID) {
                       return (
-                        <TeamView key={"team-" + teamID} team={TEAM[teamID]} />
+                        <Box key={"team-" + teamID}>
+                          <TeamView team={TEAM[teamID]} />
+                          win
+                        </Box>
                       );
                     })}
                   </TableCell>
