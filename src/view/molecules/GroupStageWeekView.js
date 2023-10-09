@@ -6,7 +6,7 @@ const SX_PAPER = { padding: 1, margin: 0.5 };
 
 function getTweetBody(week, odiList) {
   let lines = [`Week ${week} - Predictions`];
-  for (let odi of odiList.slice().reverse()) {
+  for (let odi of odiList.slice()) {
     const line = `${odi.favoriteTeam.twitterName} ${EMOJI.WINNER} - ${odi.underdogTeam.twitterName}`;
     lines.push(line);
   }
