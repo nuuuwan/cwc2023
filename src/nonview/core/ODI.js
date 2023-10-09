@@ -1,7 +1,8 @@
 import Format from "../base/Format";
-import { START_WEEK } from "../constants/CWC23_DATETIME";
+
 import { TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR } from "../data/TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR";
 import { ODI_ID_TO_WINNER } from "../data/ODI_ID_TO_WINNER";
+import DateX from "../base/DateX";
 
 function pWinnerToPMatch(p1Winner, p2Winner) {
   const f = (x) => x + 0.75;
@@ -16,6 +17,11 @@ export default class ODI {
     this.team1 = team1;
     this.team2 = team2;
     this.venue = venue;
+  }
+
+  // Date
+  get week() {
+    return (new DateX(this.date)).week;
   }
 
   // ID/Stage
@@ -33,19 +39,6 @@ export default class ODI {
   }
 
   // Date/Time
-  get ut() {
-    return this.date.getTime() / 1000.0;
-  }
-
-  // Basic
-  get weekAbsolute() {
-    const SECONDS_IN_DAY = 86_400;
-    return parseInt((this.ut + 3 * SECONDS_IN_DAY) / (7 * SECONDS_IN_DAY));
-  }
-
-  get week() {
-    return this.weekAbsolute - START_WEEK + 1;
-  }
 
   // Result
 
