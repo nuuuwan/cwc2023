@@ -5,8 +5,8 @@ export default function TweetButton({ tweetBody }) {
     const tweetText = [
       tweetBody,
       "",
-      "#CWC23 @CricketWorldCup",
-      "https://nuuuwan.github.io/cwc23",
+      "#CWC23 @CricketWorldCup #CWC23Simulator",
+      "https://nuuuwan.github.io/cwc2023",
     ].join("\n");
 
     const url =
