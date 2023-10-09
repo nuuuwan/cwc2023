@@ -33,6 +33,9 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
   }
 
   const winnerColor = odi.getColor(winnerInner);
+  if (odi.isToday) {
+    console.debug(odi);
+  }
 
   return (
     <Box>

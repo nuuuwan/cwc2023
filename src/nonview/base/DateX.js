@@ -17,6 +17,10 @@ export default class DateX {
     return this.weekAbsolute - START_WEEK + 1;
   }
 
+  get isToday() {
+    return this.date.toDateString() === DateX.now().date.toDateString();
+  }
+
   static now() {
     return new DateX(new Date());
   }
