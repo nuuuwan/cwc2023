@@ -97,7 +97,7 @@ export default function NextMatchesTableView({ bigTable }) {
                   })}
                   <TableCell size="small" align="center">
                     <span style={{ fontSize: "150%" }}>
-                      {Format.percentWithColorOverride(swing, swing)}
+                      {Format.percentChange(swing)}
                     </span>
                   </TableCell>
                 </TableRow>
