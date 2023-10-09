@@ -21,7 +21,7 @@ export default class ODI {
 
   // Date
   get week() {
-    return (new DateX(this.date)).week;
+    return new DateX(this.date).week;
   }
 
   // ID/Stage
