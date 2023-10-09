@@ -37,7 +37,12 @@ export default function ScreenShot({
             <CloudDownloadIcon sx={{ color: "#ccc" }} />
           </IconButton>
         </Tooltip>
-        {tweetBody ? <TweetButton tweetBody={tweetBody} /> : null}
+        {tweetBody ? (
+          <TweetButton
+            tweetBody={tweetBody}
+            setSnackbarMessage={setSnackbarMessage}
+          />
+        ) : null}
       </Grid>
     </div>
   );
