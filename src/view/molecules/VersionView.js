@@ -17,21 +17,23 @@ const URL_INFO_LIST = [
     Icon: RefreshIcon,
   },
   {
-    url: "https://github.com/nuuuwan/cwc2023/issues/new",
-    Icon: PestControlIcon,
-  },
-  {
     url: "https://medium.com/on-arts/2023-cricket-world-cup-c588a699b5f6",
     Icon: HelpIcon,
   },
   {
-    url: "https://github.com/nuuuwan/cwc2023/actions/workflows/update_data-cron.yml",
+    url: "https://github.com/nuuuwan/cwc2023/issues/new",
+    Icon: PestControlIcon,
+  },
+
+  {
+    url: "https://github.com/nuuuwan/cwc2023/tree/master/src/nonview/data",
     Icon: StorageIcon,
   },
   {
     url: "https://www.google.com/search?client=firefox-b-d&q=cricket+world+cup",
     Icon: FeedIcon,
   },
+  
 ];
 
 export default function VersionView() {
