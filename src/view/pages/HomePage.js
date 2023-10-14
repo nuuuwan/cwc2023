@@ -153,6 +153,7 @@ export default class HomePage extends Component {
         return (
           <SimulatorPage
             simulatorModeID={simulatorModeID}
+            setSimulatorModeID={this.setSimulatorModeID.bind(this)}
             simulator={simulator}
             odiStateIdx={odiStateIdx}
             onClickODI={this.handleOnClickODI.bind(this)}
@@ -179,13 +180,11 @@ export default class HomePage extends Component {
     );
   }
   renderFooter() {
-    const { simulatorModeID, pageName } = this.state;
+    const { pageName } = this.state;
     return (
       <HomePageFooter
-        handleSetSimulatorModeID={this.setSimulatorModeID.bind(this)}
         handleSetPageName={this.setPageName.bind(this)}
         pageName={pageName}
-        simulatorModeID={simulatorModeID}
       />
     );
   }

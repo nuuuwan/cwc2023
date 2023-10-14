@@ -28,6 +28,43 @@ export default class SimulatorPage extends Component {
     this.refCurrentWeek.scrollIntoView({ behavior: "smooth" });
   }
 
+  renderMenu() {
+    const { setSimulatorModeID, simulatorModeID } = this.props;
+    const currentWeekButton = (
+      <IconButton onClick={this.handleOnClickCurrentWeek.bind(this)}>
+        <TodayIcon />
+      </IconButton>
+    );
+
+    const simulatorModeButtonList = Object.values(SIMULATOR_MODE).map(function (
+      simulatorMode
+    ) {
+      const onClick = function () {
+        setSimulatorModeID(simulatorMode.id);
+      };
+
+      const Icon = simulatorMode.Icon;
+      const isActive = simulatorModeID === simulatorMode.id;
+      const iconColor = isActive ? simulatorMode.color : "#ccc";
+
+      return (
+        <IconButton
+          key={"simulatorModeButton-" + simulatorMode.id}
+          onClick={onClick}
+        >
+          <Icon sx={{ color: iconColor }} />
+        </IconButton>
+      );
+    });
+
+    return (
+      <Box>
+        {currentWeekButton}
+        {simulatorModeButtonList}
+      </Box>
+    );
+  }
+
   render() {
     const {
       simulatorModeID,
@@ -51,9 +88,7 @@ export default class SimulatorPage extends Component {
         <Typography variant="h5" sx={{ color: simulatorMode.color }}>
           #CWC23 {simulatorMode.message}
           <simulatorMode.Icon sx={{ marginLeft: 0.5, fontSize: "70%" }} />
-          <IconButton onClick={this.handleOnClickCurrentWeek.bind(this)}>
-            <TodayIcon />
-          </IconButton>
+          {this.renderMenu()}
         </Typography>
 
         <Typography variant="subtitle1">
