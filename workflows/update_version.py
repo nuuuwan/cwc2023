@@ -1,6 +1,6 @@
 import os
 
-from utils import File, Log, Time, TimeFormat
+from utils import File, Log, Time
 
 VERSION_JS = os.path.join('src', 'nonview', 'constants', 'VERSION.js')
 log = Log('update_version')

@@ -41,10 +41,13 @@ def scrape_values_list() -> list[list[str]]:
     values_list = []
     for div in div_list:
         values = div.text.split('\n')
-        if len(values) <= 2 or values[2] != '–':
-            continue
-        log.debug(str(values))
-        values_list.append(values)
+        if len(values) > 2 and values[2] == '–':
+            log.debug('future: ' + str(values))
+            values_list.append(values)
+        elif len(values) > 3 and values[3] in [':', '–']:
+            log.debug('now: ' + str(values))
+            values_list.append(values)
+
     driver.quit()
     return values_list
 
@@ -57,13 +60,24 @@ def get_team1_id_to_team2_id_to_odds_pair(
     for values in values_list:
         if values[4] == '-':
             continue
+        if values[2] == '–':
+            team1_name = values[1]
+            team2_name = values[3]
+            odds1_str = values[4]
+            odds2_str = values[5]
+        elif values[3] in [':', '–']:
+            team1_name = values[1]
+            team2_name = values[5]
+            odds1_str = values[8]
+            odds2_str = values[9]
+        else:
+            log.error(str(values))
+            raise Exception('Invalid values')
 
-        team1_name = values[1]
-        team2_name = values[3]
         team1_id = TEAM_NAME_TO_ID[team1_name]
         team2_id = TEAM_NAME_TO_ID[team2_name]
-        team1_odds = odds_utils.parse_odds(values[4])
-        team2_odds = odds_utils.parse_odds(values[5])
+        team1_odds = odds_utils.parse_odds(odds1_str)
+        team2_odds = odds_utils.parse_odds(odds2_str)
 
         if team1_odds > team2_odds:
             team2_id, team1_id = team1_id, team2_id
