@@ -1,6 +1,8 @@
 import { Tooltip, IconButton } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { copyToClipboard } from "../Common.js";
+import Format from "../../nonview/base/Format.js";
+import DateX from "../../nonview/base/DateX.js";
 
 export default function TweetButton({ tweetBody, setSnackbarMessage }) {
   const onClick = function () {
@@ -10,6 +12,7 @@ export default function TweetButton({ tweetBody, setSnackbarMessage }) {
       const tweetText = [
         tweetBody,
         "",
+        Format.timeStamp(DateX.now().date),
         "#CWC23 @CricketWorldCup #CWC23Simulator",
         "https://nuuuwan.github.io/cwc23",
       ].join("\n");
