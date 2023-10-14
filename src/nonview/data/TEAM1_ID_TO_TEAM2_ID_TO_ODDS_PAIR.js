@@ -9,7 +9,7 @@ export const TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR = {
     [TEAM.BGD.id]: [1.19, 4.88],
   },
   [TEAM.ENG.id]: {
-    [TEAM.AFG.id]: [1.10, 6.97],
+    [TEAM.AFG.id]: [1.1, 6.97],
   },
   [TEAM.AUS.id]: {
     [TEAM.LKA.id]: [1.29, 3.58],
