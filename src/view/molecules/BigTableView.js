@@ -29,6 +29,7 @@ function getTweetBody(bigTable) {
       n,
       teamIDToSemiFinalist
     ),
+    [""],
     getTweetTeamIDToXLines("Reaching Finals 🥇🥈", n, teamIDToFinalist),
     [""],
 
