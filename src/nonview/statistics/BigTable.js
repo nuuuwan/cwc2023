@@ -202,17 +202,25 @@ export default class BigTable {
       teamA,
       teamB
     ) {
-      const dWinner = teamIDToWinner[teamB] - teamIDToWinner[teamA];
-      if (dWinner !== 0) {
-        return dWinner;
+      const dSemiFinalist =
+        teamIDToSemiFinalist[teamB] - teamIDToSemiFinalist[teamA];
+      if (dSemiFinalist !== 0) {
+        return dSemiFinalist;
       }
+
       const dFinalist = teamIDToFinalist[teamB] - teamIDToFinalist[teamA];
       if (dFinalist !== 0) {
         return dFinalist;
       }
-      const dSemiFinalist =
-        teamIDToSemiFinalist[teamB] - teamIDToSemiFinalist[teamA];
-      return dSemiFinalist;
+
+      const dWinner = teamIDToWinner[teamB] - teamIDToWinner[teamA];
+      if (dWinner !== 0) {
+        return dWinner;
+      }
+
+      const dTotalPosition =
+        teamIDToTotalPosition[teamA] - teamIDToTotalPosition[teamB];
+      return dTotalPosition;
     });
 
     // (Sort)

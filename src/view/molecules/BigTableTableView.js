@@ -20,8 +20,14 @@ import { COLOR_GRAY_LIST } from "../../nonview/base/Format.js";
 import React from "react";
 
 export default function BigTableTableView({ bigTable, onClickTeam }) {
-  const { n, teamIDToWinner, teamIDToFinalist, teamIDToSemiFinalist } =
-    bigTable.stats;
+  const {
+    n,
+    teamIDToWinner,
+    teamIDToFinalist,
+    teamIDToSemiFinalist,
+    orderedTeamIDs,
+  } = bigTable.stats;
+  console.debug(bigTable.stats);
 
   let pSemiFinalistPrev = null;
   let iPack = 0;
@@ -49,7 +55,7 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
           </TableHead>
 
           <TableBody>
-            {Object.keys(teamIDToSemiFinalist).map(function (teamID, iTeam) {
+            {orderedTeamIDs.map(function (teamID, iTeam) {
               const team = new Team(teamID);
               const pWinner = teamIDToWinner[teamID] / n;
               const pFinalist = teamIDToFinalist[teamID] / n;
