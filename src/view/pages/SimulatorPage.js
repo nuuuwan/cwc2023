@@ -1,17 +1,33 @@
 import React, { Component } from "react";
-import { Box, Typography, Alert } from "@mui/material";
+import { Box, Typography, Alert, IconButton } from "@mui/material";
 import GroupStageView from "../molecules/GroupStageView";
 import KnockOutStageView from "../molecules/KnockOutStageView";
 import CasinoIcon from "@mui/icons-material/Casino";
 import Format from "../../nonview/base/Format";
 import { N_MONTE_CARLO_SIMULATIONS } from "../../nonview/constants/STATISTICS";
 import { SIMULATOR_MODE } from "../../nonview/statistics/SimulatorMode";
+import TodayIcon from "@mui/icons-material/Today";
+
 const COLOR_MAJOR_UPSET = Format.getPercentColor(0.2);
 const COLOR_MINOR_UPSET = Format.getPercentColor(0.4);
 
 export default class SimulatorPage extends Component {
   static name = "SimulatorPage";
   static Icon = CasinoIcon;
+
+  constructor(props) {
+    super(props);
+    this.refCurrentWeek = React.createRef();
+  }
+
+  setRefCurrentWeek(ref) {
+    this.refCurrentWeek = ref;
+  }
+
+  handleOnClickCurrentWeek() {
+    this.refCurrentWeek.scrollIntoView({ behavior: "smooth" });
+  }
+
   render() {
     const {
       simulatorModeID,
@@ -35,6 +51,9 @@ export default class SimulatorPage extends Component {
         <Typography variant="h5" sx={{ color: simulatorMode.color }}>
           #CWC23 {simulatorMode.message}
           <simulatorMode.Icon sx={{ marginLeft: 0.5, fontSize: "70%" }} />
+          <IconButton onClick={this.handleOnClickCurrentWeek.bind(this)}>
+            <TodayIcon />
+          </IconButton>
         </Typography>
 
         <Typography variant="subtitle1">
@@ -61,6 +80,7 @@ export default class SimulatorPage extends Component {
           odiStateIdx={odiStateIdx}
           onClickODI={onClickODI}
           setSnackbarMessage={setSnackbarMessage}
+          setRefCurrentWeek={this.setRefCurrentWeek.bind(this)}
         />
       </Box>
     );

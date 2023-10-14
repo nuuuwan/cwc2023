@@ -21,6 +21,10 @@ export default class DateX {
     return this.date.toDateString() === DateX.now().date.toDateString();
   }
 
+  get isCurrentWeek() {
+    return this.week === DateX.now().week;
+  }
+
   static now() {
     return new DateX(new Date());
   }

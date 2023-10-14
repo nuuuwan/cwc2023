@@ -9,6 +9,7 @@ export default function GroupStageView({
   onClickODI,
   odiStateIdx,
   setSnackbarMessage,
+  setRefCurrentWeek,
 }) {
   return (
     <Box>
@@ -25,6 +26,7 @@ export default function GroupStageView({
               odiStateIdx={odiStateIdx}
               onClickODI={onClickODI}
               setSnackbarMessage={setSnackbarMessage}
+              setRefCurrentWeek={setRefCurrentWeek}
             />
           );
         })}

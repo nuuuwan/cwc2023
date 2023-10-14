@@ -22,23 +22,33 @@ export default function GroupStageWeekView({
   onClickODI,
   odiStateIdx,
   setSnackbarMessage,
+  setRefCurrentWeek,
 }) {
+  const setRef = function (ref) {
+    if (!odiList[0].isCurrentWeek) {
+      return;
+    }
+    setRefCurrentWeek(ref);
+  };
+
   return (
-    <ScreenShot
-      label={`group-state-week-${week}`}
-      tweetBody={getTweetBody(week, odiList)}
-      setSnackbarMessage={setSnackbarMessage}
-    >
-      <Box sx={SX_PAPER}>
-        <Typography variant="h6">Week {week}</Typography>
-        <ODIGroupView
-          odiList={odiList}
-          simulator={simulator}
-          onClickODI={onClickODI}
-          odiStateIdx={odiStateIdx}
-          showWinner={true}
-        />
-      </Box>
-    </ScreenShot>
+    <div ref={setRef}>
+      <ScreenShot
+        label={`group-state-week-${week}`}
+        tweetBody={getTweetBody(week, odiList)}
+        setSnackbarMessage={setSnackbarMessage}
+      >
+        <Box sx={SX_PAPER}>
+          <Typography variant="h6">Week {week}</Typography>
+          <ODIGroupView
+            odiList={odiList}
+            simulator={simulator}
+            onClickODI={onClickODI}
+            odiStateIdx={odiStateIdx}
+            showWinner={true}
+          />
+        </Box>
+      </ScreenShot>
+    </div>
   );
 }

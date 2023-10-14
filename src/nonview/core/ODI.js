@@ -28,6 +28,10 @@ export default class ODI {
     return new DateX(this.date).isToday;
   }
 
+  get isCurrentWeek() {
+    return new DateX(this.date).isCurrentWeek;
+  }
+
   // ID/Stage
   get isGroupStage() {
     return this.id.startsWith("ODI");
