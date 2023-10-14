@@ -68,14 +68,14 @@ export const GROUP_STAGE_ODI_LIST = [
   ),
   new ODI(
     "ODI 10",
-    new Date("2023-10-13 14:00+05:30"),
+    new Date("2023-10-12 14:00+05:30"),
     TEAM.AUS,
     TEAM.ZAF,
     VENUE.Lucknow
   ),
   new ODI(
     "ODI 11",
-    new Date("2023-10-14 14:00+05:30"),
+    new Date("2023-10-13 14:00+05:30"),
     TEAM.BGD,
     TEAM.NZL,
     VENUE.Chennai
