@@ -3,7 +3,7 @@ import ProbabilityPage from "./ProbabilityPage";
 import SimulatorPage from "./SimulatorPage";
 
 export const PAGE = {
-  NEXT_MATCHES: NextMatchesPage,
   PROBABILITY: ProbabilityPage,
+  NEXT_MATCHES: NextMatchesPage,
   SIMULATOR: SimulatorPage,
 };
