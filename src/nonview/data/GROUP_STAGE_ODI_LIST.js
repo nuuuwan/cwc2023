@@ -19,7 +19,7 @@ export const GROUP_STAGE_ODI_LIST = [
   ),
   new ODI(
     "ODI 03",
-    new Date("2023-10-07 10:30"),
+    new Date("2023-10-07 10:30+05:30"),
     TEAM.AFG,
     TEAM.BGD,
     VENUE.Dharamshala
@@ -47,7 +47,7 @@ export const GROUP_STAGE_ODI_LIST = [
   ),
   new ODI(
     "ODI 07",
-    new Date("2023-10-10 10:30"),
+    new Date("2023-10-10 10:30+05:30"),
     TEAM.BGD,
     TEAM.ENG,
     VENUE.Dharamshala
@@ -131,7 +131,7 @@ export const GROUP_STAGE_ODI_LIST = [
   ),
   new ODI(
     "ODI 19",
-    new Date("2023-10-21 10:30"),
+    new Date("2023-10-21 10:30+05:30"),
     TEAM.NLD,
     TEAM.LKA,
     VENUE.Lucknow
@@ -187,7 +187,7 @@ export const GROUP_STAGE_ODI_LIST = [
   ),
   new ODI(
     "ODI 27",
-    new Date("2023-10-28 10:30"),
+    new Date("2023-10-28 10:30+05:30"),
     TEAM.AUS,
     TEAM.NZL,
     VENUE.Dharamshala
@@ -243,7 +243,7 @@ export const GROUP_STAGE_ODI_LIST = [
   ),
   new ODI(
     "ODI 35",
-    new Date("2023-11-04 10:30"),
+    new Date("2023-11-04 10:30+05:30"),
     TEAM.NZL,
     TEAM.PAK,
     VENUE.Bengaluru
@@ -299,7 +299,7 @@ export const GROUP_STAGE_ODI_LIST = [
   ),
   new ODI(
     "ODI 43",
-    new Date("2023-11-11 10:30"),
+    new Date("2023-11-11 10:30+05:30"),
     TEAM.AUS,
     TEAM.BGD,
     VENUE.Pune
