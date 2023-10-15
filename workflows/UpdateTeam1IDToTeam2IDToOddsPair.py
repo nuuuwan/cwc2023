@@ -7,10 +7,6 @@ from workflows.TEAM_NAME_TO_ID import TEAM_NAME_TO_ID
 
 class UpdateTeam1IDToTeam2IDToOddsPair(AbstractUpdateData):
     @property
-    def id(self) -> str:
-        return 'team1_id_to_team2_id_to_odds_pair'
-
-    @property
     def url(self) -> str:
         return 'https://www.oddsportal.com/cricket/world/icc-world-cup/'
 
@@ -78,7 +74,7 @@ class UpdateTeam1IDToTeam2IDToOddsPair(AbstractUpdateData):
         lines = [
             'import { TEAM } from "../core/Team.js";',
             '',
-            'export const TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR = {',
+            f'export const {self.js_var_name} = {{',
         ]
         for (
             team1_id,

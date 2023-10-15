@@ -7,10 +7,6 @@ from workflows.TEAM_NAME_TO_ID import TEAM_NAME_TO_ID
 
 class UpdateTeamIDToPWinner(AbstractUpdateData):
     @property
-    def id(self) -> str:
-        return 'team_id_to_p_winner'
-
-    @property
     def url(self) -> str:
         return (
             'https://www.oddsportal.com'
@@ -83,7 +79,7 @@ class UpdateTeamIDToPWinner(AbstractUpdateData):
             team_id_to_odds
         )
 
-        lines = ['export const TEAM_ID_TO_P_WINNER = {']
+        lines = [f'export const {self.js_var_name} = {{']
         for team_id, p in team_id_to_p_winner.items():
             line = f'  {team_id}: {p:.6f}, // {p:.0%}'
             lines.append(line)

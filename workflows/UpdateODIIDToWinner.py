@@ -6,10 +6,6 @@ from workflows.TEAM_NAME_TO_ID import TEAM_NAME_TO_ID
 
 class UpdateODIIDToWinner(AbstractUpdateData):
     @property
-    def id(self) -> str:
-        return 'odi_id_to_winner'
-
-    @property
     def url(self) -> str:
         return (
             'https://www.cricbuzz.com'
@@ -51,7 +47,7 @@ class UpdateODIIDToWinner(AbstractUpdateData):
             '',
         ]
 
-        lines.append('export const ODI_ID_TO_WINNER = {')
+        lines.append(f'export const {self.js_var_name} = {{')
         for odi_id, winner_id in odi_id_to_winner_id.items():
             line = f'  "{odi_id}": TEAM.{winner_id},'
             lines.append(line)

@@ -6,11 +6,7 @@ from workflows.TEAM_NAME_TO_ID import TEAM_NAME_TO_ID
 
 class UpdatePointsTable(AbstractUpdateData):
     @property
-    def id(self):
-        return 'points_table'
-
-    @property
-    def url(self):
+    def url(self) -> str:
         return 'https://www.cricketworldcup.com/standings'
 
     def parse_values_list(self, driver) -> list[list[str]]:
@@ -62,7 +58,7 @@ class UpdatePointsTable(AbstractUpdateData):
             '',
         ]
 
-        lines.append('export const POINTS_TABLE = [')
+        lines.append(f'export const {self.js_var_name} = [')
         for points in points_table:
             team_id = TEAM_NAME_TO_ID[points['team_name']]
             lines.extend(
