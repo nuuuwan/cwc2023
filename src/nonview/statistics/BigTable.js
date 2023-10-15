@@ -229,6 +229,9 @@ export default class BigTable {
     teamIDToSemiFinalist = Dict.sortByValue(teamIDToSemiFinalist);
     teamIDToTotalPosition = Dict.sortByValue(teamIDToTotalPosition);
 
+    // Ranks
+    const teamIDToSemiFinalistRank = Dict.keyToRank(teamIDToSemiFinalist);
+
     return {
       n,
       teamIDToWinner,
@@ -236,6 +239,9 @@ export default class BigTable {
       teamIDToSemiFinalist,
       teamIDToTotalPosition,
       teamIDToPositionList,
+      //
+      teamIDToSemiFinalistRank,
+      //
       pctlToTeamIDToPosition,
       orderedTeamIDs,
     };
