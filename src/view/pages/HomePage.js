@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { STYLE } from "./HomePageStyle";
-import { Box, Snackbar } from "@mui/material";
+import { Box, CircularProgress, Snackbar } from "@mui/material";
 
 import Simulator from "../../nonview/statistics/Simulator.js";
 
@@ -33,6 +33,9 @@ export default class HomePage extends Component {
     const isSnackbarOpen = false;
     const snackbarMessage = "";
 
+    const simulator = null;
+    const bigTable = null;
+
     this.state = {
       simulatorModeID,
       odiStateIdx,
@@ -40,17 +43,27 @@ export default class HomePage extends Component {
       selectedTeam,
       isSnackbarOpen,
       snackbarMessage,
+      simulator,
+      bigTable,
     };
+  }
 
-    this.simulator = new Simulator(
+  componentDidMount() {
+    const { simulatorModeID, odiStateIdx } = this.state;
+
+    const simulator = new Simulator(
       SIMULATOR_MODE[simulatorModeID],
       odiStateIdx
     );
-    this.bigTable = new BigTable(odiStateIdx);
+    const bigTable = new BigTable(odiStateIdx);
+    this.setState({
+      simulator,
+      bigTable,
+    });
   }
 
   setSimulatorModeID(simulatorModeID) {
-    this.simulator = new Simulator(
+    const simulator = new Simulator(
       SIMULATOR_MODE[simulatorModeID],
       this.state.odiStateIdx
     );
@@ -62,6 +75,7 @@ export default class HomePage extends Component {
     this.setState({
       pageName,
       simulatorModeID,
+      simulator,
     });
   }
 
@@ -89,19 +103,22 @@ export default class HomePage extends Component {
       delete odiStateIdx[odi.id];
     }
 
-    this.bigTable = new BigTable(odiStateIdx);
-    this.simulator = new Simulator(
+    const bigTable = new BigTable(odiStateIdx);
+    const simulator = new Simulator(
       SIMULATOR_MODE[simulatorModeID],
       odiStateIdx
     );
 
     this.setState({
       odiStateIdx,
+      simulator,
+      bigTable,
     });
   }
 
   handleOnClickTeam(team) {
-    this.simulator = this.bigTable.getMostProbableTeamWin(team);
+    const { bigTable } = this.state;
+    const simulator = bigTable.getMostProbableTeamWin(team);
     const pageName = PAGE.SIMULATOR.name;
 
     const context = { pageName };
@@ -111,6 +128,7 @@ export default class HomePage extends Component {
       simulatorModeID: SIMULATOR_MODE.RANDOM.id,
       pageName,
       selectedTeam: team,
+      simulator,
     });
   }
 
@@ -129,6 +147,10 @@ export default class HomePage extends Component {
   }
 
   renderBodyInner(simulatorModeID, odiStateIdx, simulator, bigTable) {
+    if (!bigTable) {
+      return <CircularProgress />;
+    }
+
     switch (this.state.pageName) {
       case PAGE.PROBABILITY.name:
         return (
@@ -188,21 +210,20 @@ export default class HomePage extends Component {
     );
   }
   render() {
-    const { simulatorModeID, odiStateIdx, isSnackbarOpen, snackbarMessage } =
-      this.state;
+    const {
+      simulatorModeID,
+      odiStateIdx,
+      isSnackbarOpen,
+      snackbarMessage,
+      simulator,
+      bigTable,
+    } = this.state;
 
     return (
       <Box sx={STYLE.ALL}>
-        <Box sx={STYLE.HEADER}>
-          {this.renderHeader(this.bigTable, odiStateIdx)}
-        </Box>
+        <Box sx={STYLE.HEADER}>{this.renderHeader(bigTable, odiStateIdx)}</Box>
         <Box sx={STYLE.BODY}>
-          {this.renderBody(
-            simulatorModeID,
-            odiStateIdx,
-            this.simulator,
-            this.bigTable
-          )}
+          {this.renderBody(simulatorModeID, odiStateIdx, simulator, bigTable)}
         </Box>
         <Box sx={STYLE.FOOTER}>{this.renderFooter()}</Box>
         <Snackbar

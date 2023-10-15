@@ -27,7 +27,7 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
     teamIDToSemiFinalist,
     orderedTeamIDs,
   } = bigTable.stats;
-  
+
   let pSemiFinalistPrev = null;
   let iPack = 0;
   return (

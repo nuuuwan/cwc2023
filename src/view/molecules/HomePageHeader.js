@@ -1,4 +1,4 @@
-import { Badge, Box, AppBar, Toolbar, Typography } from "@mui/material";
+import { Badge, Box, AppBar, Toolbar, Typography, CircularProgress } from "@mui/material";
 import AliveView from "./AliveView";
 import { onClickRefresh } from "../Common.js";
 import { TEAM } from "../../nonview/core/Team.js";
@@ -25,8 +25,13 @@ export default function HomePageHeader({ bigTable, odiStateIdx }) {
               </Badge>
             ) : null}
           </Typography>
-
-          <AliveView bigTable={bigTable} />
+          
+          {bigTable? (
+            <AliveView bigTable={bigTable} />
+          ) : (
+            <CircularProgress />  
+          )}
+          
         </Toolbar>
       </AppBar>
     </Box>
