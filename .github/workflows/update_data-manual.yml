@@ -31,6 +31,10 @@ jobs:
       run: |
         export PYTHONPATH="$PYTHONPATH:./workflows"
         python workflows/update_data.py
+
+        npm install -g prettier
+        npm install -g eslint
+
         npx prettier --loglevel error --write src
         npx eslint --fix src
         npx prettier --loglevel error --write src
