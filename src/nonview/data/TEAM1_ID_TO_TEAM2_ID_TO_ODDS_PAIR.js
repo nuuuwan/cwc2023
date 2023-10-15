@@ -14,7 +14,7 @@ export const TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR = {
     [TEAM.PAK.id]: [1.64, 2.27],
   },
   [TEAM.ZAF.id]: {
-    [TEAM.NLD.id]: [1.04, 10.60],
+    [TEAM.NLD.id]: [1.04, 10.6],
   },
   [TEAM.NZL.id]: {
     [TEAM.AFG.id]: [1.25, 4.01],
