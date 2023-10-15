@@ -1,6 +1,9 @@
 import { TEAM } from "../../nonview/core/Team.js";
 import { EPSILON } from "../../nonview/constants/STATISTICS.js";
 export default function AliveView({ bigTable }) {
+  if (!bigTable) {
+    return null;
+  }
   const { n, teamIDToSemiFinalist } = bigTable.stats;
   let front = [];
 
