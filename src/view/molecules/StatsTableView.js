@@ -104,7 +104,7 @@ export default function StatsTableView({
                         align="center"
                         sx={{ fontSize: "100%", borderTop }}
                       >
-                        {Format.percent(stat)}
+                        {Format.percentWithIcon(stat)}
                         {statAnnotate}
                       </TableCell>
                     );
