@@ -73,6 +73,8 @@ export default function StatsTableView({
                 onClickTeam(team);
               };
 
+              const borderTop = iTeam !== 4 ? "none" : "2px dashed #8888";
+
               let statAnnotate = null;
               if (teamIDToStatAnnotate) {
                 statAnnotate = teamIDToStatAnnotate[teamID];
@@ -86,7 +88,7 @@ export default function StatsTableView({
                     component="th"
                     scope="row"
                     onClick={onClickInner}
-                    sx={{ cursor: "pointer" }}
+                    sx={{ cursor: "pointer", borderTop }}
                   >
                     <TeamView team={team} />
                   </TableCell>
@@ -100,7 +102,7 @@ export default function StatsTableView({
                         key={"stat-" + label + "-" + teamID}
                         size="small"
                         align="center"
-                        sx={{ fontSize: "100%" }}
+                        sx={{ fontSize: "100%", borderTop }}
                       >
                         {Format.percent(stat)}
                         {statAnnotate}
