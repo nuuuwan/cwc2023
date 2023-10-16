@@ -19,7 +19,11 @@ import { COLOR_GRAY_LIST } from "../../nonview/base/Format.js";
 
 import React from "react";
 
-export default function StatsTableView({ labelToTeamToStat, onClickTeam }) {
+export default function StatsTableView({
+  labelToTeamToStat,
+  onClickTeam,
+  teamIDToColorOverRide,
+}) {
   const firstLabel = Object.keys(labelToTeamToStat)[0];
   let prevFirstStat = null;
   let iPack = 0;
@@ -58,8 +62,12 @@ export default function StatsTableView({ labelToTeamToStat, onClickTeam }) {
               if (ratio > PACK_RATIO && prevFirstStat > MIN_P_FOR_PACK) {
                 iPack += 1;
               }
-              const background = COLOR_GRAY_LIST[iPack];
-
+              let background = COLOR_GRAY_LIST[iPack];
+              if (teamIDToColorOverRide) {
+                background = teamIDToColorOverRide[teamID];
+              } else {
+                background = COLOR_GRAY_LIST[iPack];
+              }
               const onClickInner = function () {
                 onClickTeam(team);
               };

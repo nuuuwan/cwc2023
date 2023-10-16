@@ -15,7 +15,10 @@ import StatsTableView from "./StatsTableView.js";
 
 export default function NextMatchesTableView({ bigTable }) {
   const { resultToStats } = bigTable;
-  const { teamIDToPSemiFinalist: teamIDToSemiFinalistBefore } = bigTable.stats;
+  const {
+    teamIDToPSemiFinalist: teamIDToSemiFinalistBefore,
+    teamIDToSemiFinalistRank: teamIDToSemiFinalistRankBefore,
+  } = bigTable.stats;
 
   const labelToTeamToStat = {
     Qualify: teamIDToSemiFinalistBefore,
@@ -55,14 +58,36 @@ export default function NextMatchesTableView({ bigTable }) {
                 <StatsTableView labelToTeamToStat={labelToTeamToStat} />
               </TableCell>
               {Object.entries(resultToStats).map(function ([resultID, stats]) {
-                const { teamIDToPSemiFinalist: teamIDToSemiFinalistAfter } =
-                  stats;
+                const {
+                  teamIDToPSemiFinalist: teamIDToSemiFinalistAfter,
+                  teamIDToSemiFinalistRank: teamIDToSemiFinalistRankAfter,
+                } = stats;
                 const labelToTeamToStat = {
                   Qualify: teamIDToSemiFinalistAfter,
                 };
+
+                const teamIDToColorOverRide = Object.fromEntries(
+                  Object.entries(teamIDToSemiFinalistRankAfter).map(function ([
+                    teamID,
+                    positionAfter,
+                  ]) {
+                    const positionBefore =
+                      teamIDToSemiFinalistRankBefore[teamID];
+                    const diffPosition = positionAfter - positionBefore;
+                    let color = "$fff1";
+                    if (diffPosition !== 0) {
+                      color = diffPosition < 0 ? "#0801" : "#f001";
+                    }
+                    return [teamID, color];
+                  })
+                );
+
                 return (
                   <TableCell key={"table-cell-" + resultID} size="small">
-                    <StatsTableView labelToTeamToStat={labelToTeamToStat} />
+                    <StatsTableView
+                      labelToTeamToStat={labelToTeamToStat}
+                      teamIDToColorOverRide={teamIDToColorOverRide}
+                    />
                   </TableCell>
                 );
               })}
