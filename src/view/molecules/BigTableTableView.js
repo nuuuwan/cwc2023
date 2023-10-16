@@ -19,17 +19,15 @@ import { COLOR_GRAY_LIST } from "../../nonview/base/Format.js";
 
 import React from "react";
 
-export default function BigTableTableView({ bigTable, onClickTeam }) {
-  const {
-    n,
-    teamIDToWinner,
-    teamIDToFinalist,
-    teamIDToSemiFinalist,
-    orderedTeamIDs,
-  } = bigTable.stats;
-
-  let pSemiFinalistPrev = null;
+export function StatsTableView({
+  orderedTeamIDs,
+  labelToTeamToStat,
+  onClickTeam,
+}) {
+  const firstLabel = Object.keys(labelToTeamToStat)[0];
+  let prevFirstStat = null;
   let iPack = 0;
+
   return (
     <Box>
       <TableContainer component={Box}>
@@ -40,29 +38,27 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
               <TableCell size="small" align="center">
                 Team
               </TableCell>
-              <TableCell size="small" align="center">
-                {"Qualify"}
-              </TableCell>
-              <TableCell size="small" align="center">
-                {"Final"}
-              </TableCell>
-
-              <TableCell size="small" align="center">
-                {"Winner"}
-              </TableCell>
+              {Object.keys(labelToTeamToStat).map(function (label) {
+                return (
+                  <TableCell
+                    key={"header-" + label}
+                    size="small"
+                    align="center"
+                  >
+                    {label}
+                  </TableCell>
+                );
+              })}
             </TableRow>
           </TableHead>
 
           <TableBody>
             {orderedTeamIDs.map(function (teamID, iTeam) {
               const team = new Team(teamID);
-              const pWinner = teamIDToWinner[teamID] / n;
-              const pFinalist = teamIDToFinalist[teamID] / n;
-              const pSemiFinalist = teamIDToSemiFinalist[teamID] / n;
-
-              const ratio = pSemiFinalistPrev / pSemiFinalist;
-              pSemiFinalistPrev = pSemiFinalist;
-              if (ratio > PACK_RATIO && pSemiFinalistPrev > MIN_P_FOR_PACK) {
+              const firstStat = labelToTeamToStat[firstLabel][teamID];
+              const ratio = prevFirstStat / firstStat;
+              prevFirstStat = firstStat;
+              if (ratio > PACK_RATIO && prevFirstStat > MIN_P_FOR_PACK) {
                 iPack += 1;
               }
               const background = COLOR_GRAY_LIST[iPack];
@@ -91,30 +87,22 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
                   >
                     <TeamView team={team} />
                   </TableCell>
-
-                  <TableCell
-                    size="small"
-                    align="center"
-                    sx={{ fontSize: "100%" }}
-                  >
-                    {Format.percentWithIcon(pSemiFinalist)}
-                  </TableCell>
-
-                  <TableCell
-                    size="small"
-                    align="center"
-                    sx={{ fontSize: "100%" }}
-                  >
-                    {Format.percentWithIcon(pFinalist)}
-                  </TableCell>
-
-                  <TableCell
-                    size="small"
-                    align="center"
-                    sx={{ fontSize: "100%" }}
-                  >
-                    {Format.percentWithIcon(pWinner)}
-                  </TableCell>
+                  {Object.entries(labelToTeamToStat).map(function ([
+                    label,
+                    teamToStat,
+                  ]) {
+                    const stat = teamToStat[teamID];
+                    return (
+                      <TableCell
+                        key={"stat-" + label + "-" + teamID}
+                        size="small"
+                        align="center"
+                        sx={{ fontSize: "100%" }}
+                      >
+                        {Format.percent(stat)}
+                      </TableCell>
+                    );
+                  })}
                 </TableRow>
               );
             })}
@@ -122,5 +110,28 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
         </Table>
       </TableContainer>
     </Box>
+  );
+}
+
+export default function BigTableTableView({ bigTable, onClickTeam }) {
+  const {
+    teamIDToPWinner,
+    teamIDToPFinalist,
+    teamIDToPSemiFinalist,
+    orderedTeamIDs,
+  } = bigTable.stats;
+
+  const labelToTeamToStat = {
+    Qualify: teamIDToPSemiFinalist,
+    Finalist: teamIDToPFinalist,
+    Winner: teamIDToPWinner,
+  };
+
+  return (
+    <StatsTableView
+      orderedTeamIDs={orderedTeamIDs}
+      labelToTeamToStat={labelToTeamToStat}
+      onClickTeam={onClickTeam}
+    />
   );
 }

@@ -232,6 +232,11 @@ export default class BigTable {
     // Ranks
     const teamIDToSemiFinalistRank = Dict.keyToRank(teamIDToSemiFinalist);
 
+    // Probabilities
+    const teamIDToPWinner = Dict.normalize(teamIDToWinner, n);
+    const teamIDToPFinalist = Dict.normalize(teamIDToFinalist, n);
+    const teamIDToPSemiFinalist = Dict.normalize(teamIDToSemiFinalist, n);
+
     return {
       n,
       teamIDToWinner,
@@ -239,6 +244,11 @@ export default class BigTable {
       teamIDToSemiFinalist,
       teamIDToTotalPosition,
       teamIDToPositionList,
+      //
+      teamIDToPWinner,
+      teamIDToPFinalist,
+      teamIDToPSemiFinalist,
+
       //
       teamIDToSemiFinalistRank,
       //
