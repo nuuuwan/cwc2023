@@ -31,7 +31,14 @@ export default function NextMatchesTableView({ bigTable }) {
       </Typography>
 
       <TableContainer component={Box}>
-        <Table>
+        <Table
+          sx={{
+            "& .MuiTableCell-sizeSmall": {
+              padding: 0.5,
+              margin: 0.5,
+            },
+          }}
+        >
           <TableHead>
             <TableRow>
               <TableCell align="center" size="small">
@@ -43,6 +50,7 @@ export default function NextMatchesTableView({ bigTable }) {
                     key={"header-" + resultID}
                     align="center"
                     size="small"
+                    sx={{ margin: 0, padding: 0 }}
                   >
                     If
                     <TeamView team={TEAM[resultID]} />
