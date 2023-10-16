@@ -2,12 +2,8 @@ import React from "react";
 import StatsTableView from "./StatsTableView.js";
 
 export default function BigTableTableView({ bigTable, onClickTeam }) {
-  const {
-    teamIDToPWinner,
-    teamIDToPFinalist,
-    teamIDToPSemiFinalist,
-    orderedTeamIDs,
-  } = bigTable.stats;
+  const { teamIDToPWinner, teamIDToPFinalist, teamIDToPSemiFinalist } =
+    bigTable.stats;
 
   const labelToTeamToStat = {
     Qualify: teamIDToPSemiFinalist,
@@ -17,7 +13,6 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
 
   return (
     <StatsTableView
-      orderedTeamIDs={orderedTeamIDs}
       labelToTeamToStat={labelToTeamToStat}
       onClickTeam={onClickTeam}
     />

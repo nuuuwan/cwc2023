@@ -19,14 +19,12 @@ import { COLOR_GRAY_LIST } from "../../nonview/base/Format.js";
 
 import React from "react";
 
-export default function StatsTableView({
-  orderedTeamIDs,
-  labelToTeamToStat,
-  onClickTeam,
-}) {
+export default function StatsTableView({ labelToTeamToStat, onClickTeam }) {
   const firstLabel = Object.keys(labelToTeamToStat)[0];
   let prevFirstStat = null;
   let iPack = 0;
+
+  const orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
 
   return (
     <Box>
@@ -34,7 +32,6 @@ export default function StatsTableView({
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell size="small" align="center"></TableCell>
               <TableCell size="small" align="center">
                 Team
               </TableCell>
@@ -69,14 +66,6 @@ export default function StatsTableView({
 
               return (
                 <TableRow key={teamID} sx={{ background }}>
-                  <TableCell
-                    size="small"
-                    align="center"
-                    component="th"
-                    scope="row"
-                  >
-                    {Format.rank(iTeam + 1)}
-                  </TableCell>
                   <TableCell
                     size="small"
                     align="center"
