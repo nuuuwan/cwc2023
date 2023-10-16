@@ -23,6 +23,7 @@ export default function StatsTableView({
   labelToTeamToStat,
   onClickTeam,
   teamIDToColorOverRide,
+  teamIDToStatAnnotate,
 }) {
   const firstLabel = Object.keys(labelToTeamToStat)[0];
   let prevFirstStat = null;
@@ -72,6 +73,11 @@ export default function StatsTableView({
                 onClickTeam(team);
               };
 
+              let statAnnotate = null;
+              if (teamIDToStatAnnotate) {
+                statAnnotate = teamIDToStatAnnotate[teamID];
+              }
+
               return (
                 <TableRow key={teamID} sx={{ background }}>
                   <TableCell
@@ -97,6 +103,7 @@ export default function StatsTableView({
                         sx={{ fontSize: "100%" }}
                       >
                         {Format.percent(stat)}
+                        {statAnnotate}
                       </TableCell>
                     );
                   })}

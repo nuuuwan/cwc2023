@@ -12,6 +12,22 @@ import React from "react";
 import { TEAM } from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
 import StatsTableView from "./StatsTableView.js";
+import { EMOJI } from "../../nonview/constants/EMOJI.js";
+
+function RankDiff({ rankDiff }) {
+  if (rankDiff === 0) {
+    return null;
+  }
+  const emoji = rankDiff > 0 ? EMOJI.UP : EMOJI.DOWN;
+  const n = Math.abs(rankDiff);
+  const color = rankDiff > 0 ? "green" : "red";
+  return (
+    <Box component="span" sx={{ color, marginRight: 1 }}>
+      {emoji}
+      {n > 1 ? n : ""}
+    </Box>
+  );
+}
 
 export default function NextMatchesTableView({ bigTable }) {
   const { resultToStats } = bigTable;
@@ -90,11 +106,24 @@ export default function NextMatchesTableView({ bigTable }) {
                   })
                 );
 
+                const teamIDToStatAnnotate = Object.fromEntries(
+                  Object.entries(teamIDToSemiFinalistRankAfter).map(function ([
+                    teamID,
+                    positionAfter,
+                  ]) {
+                    const positionBefore =
+                      teamIDToSemiFinalistRankBefore[teamID];
+                    const diffPosition = positionAfter - positionBefore;
+                    return [teamID, <RankDiff rankDiff={diffPosition} />];
+                  })
+                );
+
                 return (
                   <TableCell key={"table-cell-" + resultID} size="small">
                     <StatsTableView
                       labelToTeamToStat={labelToTeamToStat}
                       teamIDToColorOverRide={teamIDToColorOverRide}
+                      teamIDToStatAnnotate={teamIDToStatAnnotate}
                     />
                   </TableCell>
                 );
