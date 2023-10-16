@@ -113,7 +113,7 @@ export default function NextMatchesTableView({ bigTable }) {
                   ]) {
                     const positionBefore =
                       teamIDToSemiFinalistRankBefore[teamID];
-                    const diffPosition = positionAfter - positionBefore;
+                    const diffPosition = positionBefore - positionAfter;
                     return [teamID, <RankDiff rankDiff={diffPosition} />];
                   })
                 );
