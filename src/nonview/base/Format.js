@@ -165,6 +165,7 @@ export default class Format {
       hour: "numeric",
       minute: "numeric",
       second: "numeric",
+      hour12: false,
       //
       timeZoneName: "short",
     });
@@ -178,6 +179,7 @@ export default class Format {
       //
       hour: "numeric",
       minute: "numeric",
+      hour12: true,
     });
   }
 
