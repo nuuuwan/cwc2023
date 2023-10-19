@@ -1,4 +1,4 @@
-import NextMatchesView from "../molecules/NextMatchesView";
+import NextMatchView from "../molecules/NextMatchView";
 import React, { Component } from "react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 export default class NextMatchesPage extends Component {
@@ -9,7 +9,7 @@ export default class NextMatchesPage extends Component {
     const { simulator, odiStateIdx, bigTable, onClickODI, setSnackbarMessage } =
       this.props;
     return (
-      <NextMatchesView
+      <NextMatchView
         simulator={simulator}
         odiStateIdx={odiStateIdx}
         bigTable={bigTable}

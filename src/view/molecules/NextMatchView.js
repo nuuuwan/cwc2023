@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import ScreenShot from "./ScreenShot.js";
 import ODIGroupView from "./ODIGroupView.js";
-import NextMatchesTableView from "./NextMatchesTableView.js";
+import NextMatchTableView from "./NextMatchTableView.js";
 
 function getTweetBody(bigTable) {
   const { nextODIList } = bigTable;
@@ -12,7 +12,7 @@ function getTweetBody(bigTable) {
   return lines.join("\n");
 }
 
-export default function NextMatchesView({
+export default function NextMatchView({
   bigTable,
   simulator,
   odiStateIdx,
@@ -34,7 +34,7 @@ export default function NextMatchesView({
           odiStateIdx={odiStateIdx}
         />
 
-        <NextMatchesTableView bigTable={bigTable} />
+        <NextMatchTableView bigTable={bigTable} />
       </Box>
     </ScreenShot>
   );

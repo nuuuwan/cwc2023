@@ -29,7 +29,7 @@ function RankDiff({ rankDiff }) {
   );
 }
 
-export default function NextMatchesTableView({ bigTable }) {
+export default function NextMatchTableView({ bigTable }) {
   const { resultToStats } = bigTable;
   const {
     teamIDToPSemiFinalist: teamIDToSemiFinalistBefore,
