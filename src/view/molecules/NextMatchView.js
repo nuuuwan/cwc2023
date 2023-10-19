@@ -18,7 +18,6 @@ export default function NextMatchView({
   odiStateIdx,
   setSnackbarMessage,
 }) {
-  const title = bigTable.nextODIList[0].dateTitle;
   return (
     <ScreenShot
       label="next-matches"
@@ -26,7 +25,10 @@ export default function NextMatchView({
       setSnackbarMessage={setSnackbarMessage}
     >
       <Box>
-        <Typography variant="h5">{title}</Typography>
+        <Typography variant="h5">#CWC23 - Next Match</Typography>
+        <Typography variant="subtitle1">
+          {bigTable.nextODIList[0].dateTitle}
+        </Typography>
 
         <ODIGroupView
           odiList={bigTable.nextODIList}
