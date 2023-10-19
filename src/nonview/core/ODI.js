@@ -28,6 +28,13 @@ export default class ODI {
     return new DateX(this.date).isToday;
   }
 
+  get dateTitle() {
+    const dut = new DateX(this.date).dut;
+    const dutStr = Format.dut(dut);
+    const prefix = dut < 0 ? "Started" : "Starts";
+    return `${prefix} ${dutStr}`;
+  }
+
   get isCurrentWeek() {
     return new DateX(this.date).isCurrentWeek;
   }

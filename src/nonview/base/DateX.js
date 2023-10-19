@@ -8,6 +8,10 @@ export default class DateX {
     return this.date.getTime() / 1000.0;
   }
 
+  get dut() {
+    return this.ut - DateX.now().ut;
+  }
+
   get weekAbsolute() {
     const SECONDS_IN_DAY = 86_400;
     return parseInt((this.ut + 3 * SECONDS_IN_DAY) / (7 * SECONDS_IN_DAY));

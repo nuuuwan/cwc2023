@@ -1,7 +1,7 @@
 import { EPSILON } from "../constants/STATISTICS.js";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-
+import DateX from "./DateX";
 export const DEFAULT_TIME_ZONE = "Asia/Colombo";
 
 export default class Format {
@@ -187,20 +187,37 @@ export default class Format {
     });
   }
 
+  static dutAbs(absDut) {
+    console.debug(absDut);
+    let limit = 60 * 60 * 24 * 7;
+    for (let [v, suffix] of [
+      [7, "week"],
+      [24, "day"],
+      [60, "hour"],
+      [60, "minute"],
+      [60, "second"],
+    ]) {
+      if (absDut >= limit) {
+        const i = Math.round(absDut / limit, 0);
+        const plural = i > 1 ? "s" : "";
+        return `${i} ${suffix}${plural}`;
+      }
+      limit /= v;
+    }
+    throw new Error("Invalid absDut");
+  }
+
+  static dut(dut) {
+    if (dut < 0) {
+      return Format.dutAbs(-dut) + " ago";
+    } else {
+      return `in ${Format.dutAbs(dut)}`;
+    }
+  }
+
   static dateDelta(date) {
-    const ut = date.getTime() / 1000.0;
-    const now = new Date().getTime() / 1000.0;
-    const delta = now - ut;
-    if (delta < 60) {
-      return "just now";
-    }
-    if (delta < 60 * 60) {
-      return `${Math.round(delta / 60)} minutes ago`;
-    }
-    if (delta < 60 * 60 * 24) {
-      return `${Math.round(delta / 60 / 60)} hours ago`;
-    }
-    return `${Math.round(delta / 60 / 60 / 24)} days ago`;
+    const dut = new DateX(date).dut;
+    return Format.dut(dut);
   }
 
   // Numbers

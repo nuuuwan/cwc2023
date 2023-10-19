@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import ScreenShot from "./ScreenShot.js";
-
 import ODIGroupView from "./ODIGroupView.js";
 import NextMatchesTableView from "./NextMatchesTableView.js";
 
@@ -17,9 +16,9 @@ export default function NextMatchesView({
   bigTable,
   simulator,
   odiStateIdx,
-  onClickODI,
   setSnackbarMessage,
 }) {
+  const title = bigTable.nextODIList[0].dateTitle;
   return (
     <ScreenShot
       label="next-matches"
@@ -27,7 +26,7 @@ export default function NextMatchesView({
       setSnackbarMessage={setSnackbarMessage}
     >
       <Box>
-        <Typography variant="h5">#CWC23 Next Up</Typography>
+        <Typography variant="h5">{title}</Typography>
 
         <ODIGroupView
           odiList={bigTable.nextODIList}
