@@ -188,7 +188,6 @@ export default class Format {
   }
 
   static dutAbs(absDut) {
-    console.debug(absDut);
     let limit = 60 * 60 * 24 * 7;
     for (let [v, suffix] of [
       [7, "week"],
