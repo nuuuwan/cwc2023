@@ -1,6 +1,9 @@
 import { EPSILON } from "../constants/STATISTICS.js";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
+
+export const DEFAULT_TIME_ZONE = "Asia/Colombo";
+
 export default class Format {
   // Color
   static gray(p) {
@@ -168,6 +171,7 @@ export default class Format {
       hour12: false,
       //
       timeZoneName: "short",
+      timeZone: DEFAULT_TIME_ZONE,
     });
   }
 
@@ -178,8 +182,8 @@ export default class Format {
       weekday: "short",
       //
       hour: "numeric",
-      minute: "numeric",
       hour12: true,
+      timeZone: DEFAULT_TIME_ZONE,
     });
   }
 
