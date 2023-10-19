@@ -187,6 +187,22 @@ export default class Format {
     });
   }
 
+  static dateDelta(date) {
+    const ut = date.getTime() / 1000.0;
+    const now = new Date().getTime() / 1000.0;
+    const delta = now - ut;
+    if (delta < 60) {
+      return "just now";
+    }
+    if (delta < 60 * 60) {
+      return `${Math.round(delta / 60)} minutes ago`;
+    }
+    if (delta < 60 * 60 * 24) {
+      return `${Math.round(delta / 60 / 60)} hours ago`;
+    }
+    return `${Math.round(delta / 60 / 60 / 24)} days ago`;
+  }
+
   // Numbers
 
   static float(x) {

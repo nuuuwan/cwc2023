@@ -53,10 +53,14 @@ export default function VersionView() {
 
   return (
     <Box sx={{ margin: 2, marginTop: 10, textAlign: "center" }}>
-      <Typography variant="caption">
-        {Format.timeStamp(VERSION_DATETIME)} -{" " + LAST_COMMIT_MESSAGE}
-        <Box>{renderedIconButtons}</Box>
+      <Typography variant="body1" sx={{ fontSize: "50%" }}>
+        {LAST_COMMIT_MESSAGE} - {Format.dateDelta(VERSION_DATETIME)}
       </Typography>
+
+      <Typography variant="caption" color="gray" sx={{ fontSize: "50%" }}>
+        {Format.timeStamp(VERSION_DATETIME)}
+      </Typography>
+      <Box>{renderedIconButtons}</Box>
     </Box>
   );
 }
