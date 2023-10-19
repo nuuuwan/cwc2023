@@ -77,8 +77,8 @@ export default function NextMatchTableView({ bigTable }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell size="small">
+            <TableRow sx={{ border: "none" }}>
+              <TableCell size="small" sx={{ border: "none" }}>
                 <StatsTableView labelToTeamToStat={labelToTeamToStat} />
               </TableCell>
               {Object.entries(resultToStats).map(function ([resultID, stats]) {
@@ -119,7 +119,11 @@ export default function NextMatchTableView({ bigTable }) {
                 );
 
                 return (
-                  <TableCell key={"table-cell-" + resultID} size="small">
+                  <TableCell
+                    key={"table-cell-" + resultID}
+                    size="small"
+                    sx={{ border: "none" }}
+                  >
                     <StatsTableView
                       labelToTeamToStat={labelToTeamToStat}
                       teamIDToColorOverRide={teamIDToColorOverRide}
