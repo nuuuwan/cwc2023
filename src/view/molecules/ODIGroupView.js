@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import ODIView from "./ODIView";
 
-const SX_GRID = { margin: 1, padding: 0.5 };
+const SX_GRID = {};
 export default function ODIGroupView({
   odiList,
   odiStateIdx,
