@@ -3,6 +3,7 @@ import React from "react";
 import ScreenShot from "./ScreenShot.js";
 import ODIGroupView from "./ODIGroupView.js";
 import NextMatchTableView from "./NextMatchTableView.js";
+import DateDeltaView from "../atoms/DateDeltaView.js";
 
 function getTweetBody(bigTable) {
   const { nextODIList } = bigTable;
@@ -27,7 +28,7 @@ export default function NextMatchView({
       <Box>
         <Typography variant="h5">#CWC23 - Next Match</Typography>
         <Typography variant="subtitle1">
-          {bigTable.nextODIList[0].dateTitle}
+          <DateDeltaView date={bigTable.nextODIList[0].date} />
         </Typography>
 
         <ODIGroupView

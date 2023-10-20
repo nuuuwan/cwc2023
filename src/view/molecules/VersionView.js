@@ -10,6 +10,7 @@ import {
 } from "../../nonview/constants/VERSION.js";
 import HelpIcon from "@mui/icons-material/Help";
 import FeedIcon from "@mui/icons-material/Feed";
+import DateDeltaView from "../atoms/DateDeltaView.js";
 
 const URL_INFO_LIST = [
   {
@@ -54,8 +55,9 @@ export default function VersionView() {
   return (
     <Box sx={{ margin: 2, marginTop: 10, textAlign: "center" }}>
       <Typography variant="body1" sx={{ fontSize: "50%" }}>
-        {LAST_COMMIT_MESSAGE} - {Format.dateDelta(VERSION_DATETIME)}
+        {LAST_COMMIT_MESSAGE}
       </Typography>
+      <DateDeltaView date={VERSION_DATETIME} />
 
       <Typography variant="caption" color="gray" sx={{ fontSize: "50%" }}>
         {Format.timeStamp(VERSION_DATETIME)}
