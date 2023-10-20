@@ -192,17 +192,10 @@ export default class Format {
     if (absDut > 3600) {
       sList.push(`${Math.floor(absDut / 3600)}h`);
     }
-    if (absDut > 60) {
-      sList.push(
-        `${Math.floor((absDut % 3600) / 60)
-          .toString()
-          .padStart(2, "0")}m`
-      );
-    }
     sList.push(
-      `${Math.floor(absDut % 60)
+      `${Math.floor((absDut % 3600) / 60)
         .toString()
-        .padStart(2, "0")}s`
+        .padStart(2, "0")}m`
     );
     return sList.join(" ");
   }

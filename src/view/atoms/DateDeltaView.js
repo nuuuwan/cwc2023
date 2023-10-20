@@ -6,7 +6,7 @@ export default function DateDeltaView({ date }) {
   const [time, setTime] = useState(Date.now());
 
   useEffect(() => {
-    const interval = setInterval(() => setTime(Date.now()), 500);
+    const interval = setInterval(() => setTime(Date.now()), 10_000);
     return () => {
       clearInterval(interval);
     };
