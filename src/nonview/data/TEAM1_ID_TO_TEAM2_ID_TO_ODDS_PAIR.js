@@ -6,7 +6,7 @@ import { TEAM } from "../core/Team.js";
 
 export const TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR = {
   [TEAM.AUS.id]: {
-    [TEAM.PAK.id]: [1.51, 2.50],
+    [TEAM.PAK.id]: [1.51, 2.5],
     [TEAM.NLD.id]: [1.03, 10.75],
   },
   [TEAM.LKA.id]: {
