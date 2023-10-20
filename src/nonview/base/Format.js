@@ -188,22 +188,23 @@ export default class Format {
   }
 
   static dutAbs(absDut) {
-    let limit = 60 * 60 * 24 * 7;
-    for (let [v, suffix] of [
-      [7, "week"],
-      [24, "day"],
-      [60, "hour"],
-      [60, "minute"],
-      [60, "second"],
-    ]) {
-      if (absDut >= limit) {
-        const i = Math.round(absDut / limit, 0);
-        const plural = i > 1 ? "s" : "";
-        return `${i} ${suffix}${plural}`;
-      }
-      limit /= v;
+    let sList = [];
+    if (absDut > 3600) {
+      sList.push(`${Math.floor(absDut / 3600)}h`);
     }
-    throw new Error("Invalid absDut");
+    if (absDut > 60) {
+      sList.push(
+        `${Math.floor((absDut % 3600) / 60)
+          .toString()
+          .padStart(2, "0")}m`
+      );
+    }
+    sList.push(
+      `${Math.floor(absDut % 60)
+        .toString()
+        .padStart(2, "0")}s`
+    );
+    return sList.join(" ");
   }
 
   static dut(dut) {
