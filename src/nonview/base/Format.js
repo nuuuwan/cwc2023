@@ -105,9 +105,11 @@ export default class Format {
 
   static percentWithColor(p, pColor, opacity, prefix = "") {
     const color = Format.getPercentColor(pColor);
-
     const s = Format.percentText(p);
+    return Format.textWithColor(prefix + s, color, opacity);
+  }
 
+  static textWithColor(text, color, opacity) {
     return (
       <span
         style={{
@@ -115,7 +117,7 @@ export default class Format {
           opacity,
         }}
       >
-        {prefix + s}
+        {text}
       </span>
     );
   }

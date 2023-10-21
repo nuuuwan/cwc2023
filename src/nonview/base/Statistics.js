@@ -26,4 +26,12 @@ export default class Statistics {
     const i = Math.floor(p * (n - 1));
     return xList[i];
   }
+
+  static sum(xList) {
+    return xList.reduce((a, b) => a + b, 0);
+  }
+
+  static sumOfSquares(xList) {
+    return xList.reduce((a, b) => a + b * b, 0);
+  }
 }

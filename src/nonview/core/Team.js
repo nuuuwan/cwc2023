@@ -53,3 +53,4 @@ export default class Team {
 }
 
 export const TEAM = Team.getTeamIdx();
+export const N_TEAMS = CWC23_TEAM_ID_LIST.length;

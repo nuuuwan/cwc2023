@@ -56,6 +56,7 @@ export default function BigTableView({
   onClickTeam,
   setSnackbarMessage,
 }) {
+  const { nHorses } = bigTable.stats;
   return (
     <ScreenShot
       label="big-table"
@@ -64,6 +65,16 @@ export default function BigTableView({
     >
       <Box>
         <Typography variant="h5">#CWC23 Probabilities</Typography>
+        <Typography variant="caption">
+          <span style={{ fontSize: "200%" }}>
+            {Format.textWithColor(
+              nHorses.toFixed(1),
+              Format.getPercentColor(1.0 / nHorses),
+              1
+            )}
+          </span>
+          {" Horse Race"}
+        </Typography>
         <BigTableTableView bigTable={bigTable} onClickTeam={onClickTeam} />
         <BigTableInfo bigTable={bigTable} />
       </Box>
