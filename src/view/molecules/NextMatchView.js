@@ -4,6 +4,7 @@ import ScreenShot from "./ScreenShot.js";
 import ODIGroupView from "./ODIGroupView.js";
 import NextMatchTableView from "./NextMatchTableView.js";
 import DateDeltaView from "../atoms/DateDeltaView.js";
+import DateX from "../../nonview/base/DateX.js";
 
 function getTweetBody(bigTable) {
   const { nextODIList } = bigTable;
@@ -19,6 +20,9 @@ export default function NextMatchView({
   odiStateIdx,
   setSnackbarMessage,
 }) {
+  const date = bigTable.nextODIList[0].date;
+  const prefix = "Start" + (new DateX(date).dut > 0 ? "s" : "ed") + " ";
+
   return (
     <ScreenShot
       label="next-matches"
@@ -28,7 +32,7 @@ export default function NextMatchView({
       <Box>
         <Typography variant="h5">#CWC23 - Next Match</Typography>
         <Typography variant="subtitle1">
-          <DateDeltaView date={bigTable.nextODIList[0].date} />
+          <DateDeltaView date={date} prefix={prefix} />
         </Typography>
 
         <ODIGroupView
