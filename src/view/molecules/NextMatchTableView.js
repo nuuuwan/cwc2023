@@ -13,9 +13,10 @@ import { TEAM } from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
 import StatsTableView from "./StatsTableView.js";
 import DirectionView from "../atoms/DirectionView.js";
+import Format from "../../nonview/base/Format.js";
 
 export default function NextMatchTableView({ bigTable }) {
-  const { resultToStats } = bigTable;
+  const { resultToStats, maxAbsSwing } = bigTable;
   const {
     teamIDToPSemiFinalist: teamIDToSemiFinalistBefore,
     teamIDToSemiFinalistRank: teamIDToSemiFinalistRankBefore,
@@ -29,6 +30,13 @@ export default function NextMatchTableView({ bigTable }) {
     <Box>
       <Typography variant="subtitle1">
         Positions and Odds qualifying passed the group stage
+      </Typography>
+
+      <Typography variant="caption">
+        <span style={{ fontSize: "200%" }}>
+          {Format.percentWithColorOverride(maxAbsSwing, -maxAbsSwing + 0.05)}
+        </span>
+        {" max swing in odds to qualify"}
       </Typography>
 
       <TableContainer component={Box}>
@@ -86,17 +94,18 @@ export default function NextMatchTableView({ bigTable }) {
                   const pBefore = teamIDToSemiFinalistBefore[teamID];
                   const pAfter = teamIDToSemiFinalistAfter[teamID];
                   const dValue = pAfter - pBefore;
-                  const d =
-                    Math.abs(dValue) < 0.01
-                      ? 0
-                      : positionBefore - positionAfter;
+                  const isSig = Math.abs(dValue) > 0.01;
+
                   const color =
-                    diffPosition !== 0 && Math.abs(dValue) > 0.01
+                    diffPosition !== 0 && isSig
                       ? diffPosition < 0
                         ? "#0802"
                         : "#f002"
                       : "#fff1";
                   teamIDToColorOverRide[teamID] = color;
+
+                  const d = isSig ? positionBefore - positionAfter : 0;
+
                   teamIDToStatAnnotate[teamID] = <DirectionView d={d} />;
                 }
 

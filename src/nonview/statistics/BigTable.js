@@ -30,6 +30,8 @@ export default class BigTable {
       this.nextODIList
     );
     this.teamIDToSwing = BigTable.getTeamIDToSwing(this.resultToStats);
+    const swings = Object.values(this.teamIDToSwing);
+    this.maxAbsSwing = Statistics.maxAbs(swings);
     console.timeEnd("BigTable.constructor");
   }
 
