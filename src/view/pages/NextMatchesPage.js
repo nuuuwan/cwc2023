@@ -19,24 +19,20 @@ export default class NextMatchesPage extends Component {
     return (
       <Box>
         <Typography variant="h5">#CWC23 - Next</Typography>
-      {bigTable.odiStats.nextODIList.map(
-        function(nextODI) {
+        {bigTable.odiStats.nextODIList.map(function (nextODI) {
           return (
             <NextMatchView
-            key={'next-odi-' + nextODI.id}
-            simulator={simulator}
-            odiStateIdx={odiStateIdx}
-            bigTable={bigTable}
-            onClickODI={onClickODI}
-            setSnackbarMessage={setSnackbarMessage}
-            onClickTeam={onClickTeam}
-            nextODI={nextODI}
-          />
-          )
-        }
-      )}
-
-
+              key={"next-odi-" + nextODI.id}
+              simulator={simulator}
+              odiStateIdx={odiStateIdx}
+              bigTable={bigTable}
+              onClickODI={onClickODI}
+              setSnackbarMessage={setSnackbarMessage}
+              onClickTeam={onClickTeam}
+              nextODI={nextODI}
+            />
+          );
+        })}
       </Box>
     );
   }

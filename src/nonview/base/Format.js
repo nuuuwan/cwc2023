@@ -192,8 +192,13 @@ export default class Format {
 
   static dutAbs(absDut) {
     let sList = [];
+
+    if (absDut > 86400) {
+      sList.push(`${Math.floor(absDut / 86400)}d`);
+    }
+
     if (absDut > 3600) {
-      sList.push(`${Math.floor(absDut / 3600)}h`);
+      sList.push(`${Math.floor((absDut % 86400) / 3600)}h`);
     }
     sList.push(
       `${Math.floor((absDut % 3600) / 60)
