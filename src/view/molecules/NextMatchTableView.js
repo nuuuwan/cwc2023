@@ -12,22 +12,7 @@ import React from "react";
 import { TEAM } from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
 import StatsTableView from "./StatsTableView.js";
-import { EMOJI } from "../../nonview/constants/EMOJI.js";
-
-function RankDiff({ rankDiff }) {
-  if (rankDiff === 0) {
-    return null;
-  }
-  const emoji = rankDiff > 0 ? EMOJI.UP : EMOJI.DOWN;
-  const n = Math.abs(rankDiff);
-  const color = rankDiff > 0 ? "green" : "red";
-  return (
-    <Box component="span" sx={{ color, marginRight: 1 }}>
-      {emoji}
-      {n > 1 ? n : ""}
-    </Box>
-  );
-}
+import DirectionView from "../atoms/DirectionView.js";
 
 export default function NextMatchTableView({ bigTable }) {
   const { resultToStats } = bigTable;
@@ -99,7 +84,12 @@ export default function NextMatchTableView({ bigTable }) {
                       teamIDToSemiFinalistRankBefore[teamID];
                     const diffPosition = positionAfter - positionBefore;
                     let color = "$fff1";
-                    if (diffPosition !== 0) {
+
+                    const pBefore = teamIDToSemiFinalistBefore[teamID];
+                    const pAfter = teamIDToSemiFinalistAfter[teamID];
+                    const dValue = pAfter - pBefore;
+
+                    if (diffPosition !== 0 && Math.abs(dValue) > 0.01) {
                       color = diffPosition < 0 ? "#0801" : "#f001";
                     }
                     return [teamID, color];
@@ -114,7 +104,12 @@ export default function NextMatchTableView({ bigTable }) {
                     const positionBefore =
                       teamIDToSemiFinalistRankBefore[teamID];
                     const diffPosition = positionBefore - positionAfter;
-                    return [teamID, <RankDiff rankDiff={diffPosition} />];
+
+                    const pBefore = teamIDToSemiFinalistBefore[teamID];
+                    const pAfter = teamIDToSemiFinalistAfter[teamID];
+                    const dValue = pAfter - pBefore;
+                    const d = Math.abs(dValue) < 0.01 ? 0 : diffPosition;
+                    return [teamID, <DirectionView d={d} />];
                   })
                 );
 
