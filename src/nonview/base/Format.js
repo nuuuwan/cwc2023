@@ -65,6 +65,21 @@ export default class Format {
     return Format.getPercentColor1(p);
   }
 
+  static getPercentChangeColor(dP) {
+    const absDP = Math.abs(dP);
+    let a = "0";
+    if (absDP > 0.1) {
+      a = "4";
+    } else if (absDP > 0.05) {
+      a = "2";
+    } else if (absDP > 0.025) {
+      a = "1";
+    }
+
+    const rgb = dP > 0 ? `#080` : `#f00`;
+    return `${rgb}${a}`;
+  }
+
   static percentText(p) {
     return p.toLocaleString(undefined, {
       style: "percent",
@@ -190,22 +205,26 @@ export default class Format {
     });
   }
 
+  static plural(v, label) {
+    return `${v} ${label}${v > 1 ? "s" : ""}`;
+  }
+
   static dutAbs(absDut) {
     let sList = [];
 
     if (absDut > 86400) {
-      sList.push(`${Math.floor(absDut / 86400)}d`);
+      sList.push(Format.plural(Math.floor(absDut / 86400), "day"));
     }
 
     if (absDut > 3600) {
-      sList.push(`${Math.floor((absDut % 86400) / 3600)}h`);
+      sList.push(Format.plural(Math.floor((absDut % 86400) / 3600), "hr"));
     }
-    sList.push(
-      `${Math.floor((absDut % 3600) / 60)
-        .toString()
-        .padStart(2, "0")}m`
-    );
-    return sList.join(" ");
+    if (absDut > 60) {
+      sList.push(Format.plural(Math.floor((absDut % 3600) / 60), "min"));
+    }
+    sList.push(Format.plural(Math.floor(absDut % 60), "sec"));
+
+    return sList.slice(0, 2).join(", ");
   }
 
   static dut(dut) {

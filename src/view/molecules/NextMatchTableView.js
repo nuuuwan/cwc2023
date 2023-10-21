@@ -12,16 +12,12 @@ import React from "react";
 import { TEAM } from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
 import StatsTableView from "./StatsTableView.js";
-import DirectionView from "../atoms/DirectionView.js";
 import Format from "../../nonview/base/Format.js";
 
 export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
   const { odiToStats } = bigTable.odiStats;
   const { resultToStats, maxAbsSwing } = odiToStats[nextODI.id];
-  const {
-    teamIDToPSemiFinalist: teamIDToSemiFinalistBefore,
-    teamIDToSemiFinalistRank: teamIDToSemiFinalistRankBefore,
-  } = bigTable.stats;
+  const { teamIDToPSemiFinalist: teamIDToSemiFinalistBefore } = bigTable.stats;
 
   const labelToTeamToStat = {
     Qualify: teamIDToSemiFinalistBefore,
@@ -75,10 +71,8 @@ export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
                 />
               </TableCell>
               {Object.entries(resultToStats).map(function ([resultID, stats]) {
-                const {
-                  teamIDToPSemiFinalist: teamIDToSemiFinalistAfter,
-                  teamIDToSemiFinalistRank: teamIDToSemiFinalistRankAfter,
-                } = stats;
+                const { teamIDToPSemiFinalist: teamIDToSemiFinalistAfter } =
+                  stats;
                 const labelToTeamToStat = {
                   Qualify: teamIDToSemiFinalistAfter,
                 };
@@ -86,27 +80,13 @@ export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
                 let teamIDToColorOverRide = {};
                 let teamIDToStatAnnotate = {};
 
-                for (const [teamID, positionAfter] of Object.entries(
-                  teamIDToSemiFinalistRankAfter
+                for (const [teamID, pAfter] of Object.entries(
+                  teamIDToSemiFinalistAfter
                 )) {
-                  const positionBefore = teamIDToSemiFinalistRankBefore[teamID];
-                  const diffPosition = positionAfter - positionBefore;
                   const pBefore = teamIDToSemiFinalistBefore[teamID];
-                  const pAfter = teamIDToSemiFinalistAfter[teamID];
                   const dValue = pAfter - pBefore;
-                  const isSig = Math.abs(dValue) > 0.01;
-
-                  const color =
-                    diffPosition !== 0 && isSig
-                      ? diffPosition < 0
-                        ? "#0802"
-                        : "#f002"
-                      : "#fff1";
+                  const color = Format.getPercentChangeColor(dValue);
                   teamIDToColorOverRide[teamID] = color;
-
-                  const d = isSig ? positionBefore - positionAfter : 0;
-
-                  teamIDToStatAnnotate[teamID] = <DirectionView d={d} />;
                 }
 
                 return (
