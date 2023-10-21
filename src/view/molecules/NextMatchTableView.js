@@ -75,43 +75,20 @@ export default function NextMatchTableView({ bigTable }) {
                   Qualify: teamIDToSemiFinalistAfter,
                 };
 
-                const teamIDToColorOverRide = Object.fromEntries(
-                  Object.entries(teamIDToSemiFinalistRankAfter).map(function ([
-                    teamID,
-                    positionAfter,
-                  ]) {
-                    const positionBefore =
-                      teamIDToSemiFinalistRankBefore[teamID];
-                    const diffPosition = positionAfter - positionBefore;
-                    let color = "$fff1";
-
-                    const pBefore = teamIDToSemiFinalistBefore[teamID];
-                    const pAfter = teamIDToSemiFinalistAfter[teamID];
-                    const dValue = pAfter - pBefore;
-
-                    if (diffPosition !== 0 && Math.abs(dValue) > 0.01) {
-                      color = diffPosition < 0 ? "#0801" : "#f001";
-                    }
-                    return [teamID, color];
-                  })
-                );
-
-                const teamIDToStatAnnotate = Object.fromEntries(
-                  Object.entries(teamIDToSemiFinalistRankAfter).map(function ([
-                    teamID,
-                    positionAfter,
-                  ]) {
-                    const positionBefore =
-                      teamIDToSemiFinalistRankBefore[teamID];
-                    const diffPosition = positionBefore - positionAfter;
-
-                    const pBefore = teamIDToSemiFinalistBefore[teamID];
-                    const pAfter = teamIDToSemiFinalistAfter[teamID];
-                    const dValue = pAfter - pBefore;
-                    const d = Math.abs(dValue) < 0.01 ? 0 : diffPosition;
-                    return [teamID, <DirectionView d={d} />];
-                  })
-                );
+                let teamIDToColorOverRide = {};
+                let teamIDToStatAnnotate = {};
+                
+                for (const [teamID, positionAfter] of Object.entries(teamIDToSemiFinalistRankAfter)) {
+                  const positionBefore = teamIDToSemiFinalistRankBefore[teamID];
+                  const diffPosition = positionAfter - positionBefore;
+                  const pBefore = teamIDToSemiFinalistBefore[teamID];
+                  const pAfter = teamIDToSemiFinalistAfter[teamID];
+                  const dValue = pAfter - pBefore;
+                  const d = Math.abs(dValue) < 0.01 ? 0 : positionBefore - positionAfter;
+                  const color = diffPosition !== 0 && Math.abs(dValue) > 0.01 ? (diffPosition < 0 ? "#0801" : "#f001") : "#fff1";
+                  teamIDToColorOverRide[teamID] = color;
+                  teamIDToStatAnnotate[teamID] = <DirectionView d={d} />;
+                }
 
                 return (
                   <TableCell
