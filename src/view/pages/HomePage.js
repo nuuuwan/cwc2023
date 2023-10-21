@@ -142,11 +142,13 @@ export default class HomePage extends Component {
     });
   }
 
-  renderHeader(bigTable, odiStateIdx) {
+  renderHeader() {
+    const { bigTable, odiStateIdx } = this.state;
     return <HomePageHeader bigTable={bigTable} odiStateIdx={odiStateIdx} />;
   }
 
-  renderBodyInner(simulatorModeID, odiStateIdx, simulator, bigTable) {
+  renderBody() {
+    const { simulatorModeID, odiStateIdx, simulator, bigTable } = this.state;
     if (!bigTable) {
       return <CircularProgress />;
     }
@@ -187,19 +189,6 @@ export default class HomePage extends Component {
     }
   }
 
-  renderBody(simulatorModeID, odiStateIdx, simulator, bigTable) {
-    return (
-      <Box sx={STYLE.BODY_INNER}>
-        {this.renderBodyInner(
-          simulatorModeID,
-          odiStateIdx,
-          simulator,
-          bigTable
-        )}
-        <VersionView />
-      </Box>
-    );
-  }
   renderFooter() {
     const { pageName } = this.state;
     return (
@@ -210,20 +199,16 @@ export default class HomePage extends Component {
     );
   }
   render() {
-    const {
-      simulatorModeID,
-      odiStateIdx,
-      isSnackbarOpen,
-      snackbarMessage,
-      simulator,
-      bigTable,
-    } = this.state;
+    const { isSnackbarOpen, snackbarMessage } = this.state;
 
     return (
       <Box sx={STYLE.ALL}>
-        <Box sx={STYLE.HEADER}>{this.renderHeader(bigTable, odiStateIdx)}</Box>
+        <Box sx={STYLE.HEADER}>{this.renderHeader()}</Box>
         <Box sx={STYLE.BODY}>
-          {this.renderBody(simulatorModeID, odiStateIdx, simulator, bigTable)}
+          <Box sx={STYLE.BODY_INNER}>
+            {this.renderBody()}
+            <VersionView />
+          </Box>
         </Box>
         <Box sx={STYLE.FOOTER}>{this.renderFooter()}</Box>
         <Snackbar
