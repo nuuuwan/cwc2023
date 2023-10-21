@@ -22,17 +22,9 @@ export default function GroupStageWeekView({
   onClickODI,
   odiStateIdx,
   setSnackbarMessage,
-  setRefCurrentWeek,
 }) {
-  const setRef = function (ref) {
-    if (!odiList[0].isCurrentWeek) {
-      return;
-    }
-    setRefCurrentWeek(ref);
-  };
-
   return (
-    <div ref={setRef}>
+    <div>
       <ScreenShot
         label={`group-state-week-${week}`}
         tweetBody={getTweetBody(week, odiList)}

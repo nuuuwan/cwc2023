@@ -6,7 +6,6 @@ import CasinoIcon from "@mui/icons-material/Casino";
 import Format from "../../nonview/base/Format";
 import { N_MONTE_CARLO_SIMULATIONS } from "../../nonview/constants/STATISTICS";
 import { SIMULATOR_MODE } from "../../nonview/statistics/SimulatorMode";
-import TodayIcon from "@mui/icons-material/Today";
 
 const COLOR_MAJOR_UPSET = Format.getPercentColor(0.2);
 const COLOR_MINOR_UPSET = Format.getPercentColor(0.4);
@@ -15,26 +14,8 @@ export default class SimulatorPage extends Component {
   static name = "SimulatorPage";
   static Icon = CasinoIcon;
 
-  constructor(props) {
-    super(props);
-    this.refCurrentWeek = React.createRef();
-  }
-
-  setRefCurrentWeek(ref) {
-    this.refCurrentWeek = ref;
-  }
-
-  handleOnClickCurrentWeek() {
-    this.refCurrentWeek.scrollIntoView({ behavior: "smooth" });
-  }
-
   renderMenu() {
     const { setSimulatorModeID, simulatorModeID } = this.props;
-    const currentWeekButton = (
-      <IconButton onClick={this.handleOnClickCurrentWeek.bind(this)}>
-        <TodayIcon />
-      </IconButton>
-    );
 
     const simulatorModeButtonList = Object.values(SIMULATOR_MODE).map(function (
       simulatorMode
@@ -57,12 +38,7 @@ export default class SimulatorPage extends Component {
       );
     });
 
-    return (
-      <Box>
-        {currentWeekButton}
-        {simulatorModeButtonList}
-      </Box>
-    );
+    return <Box>{simulatorModeButtonList}</Box>;
   }
 
   render() {
@@ -110,7 +86,6 @@ export default class SimulatorPage extends Component {
           odiStateIdx={odiStateIdx}
           onClickODI={onClickODI}
           setSnackbarMessage={setSnackbarMessage}
-          setRefCurrentWeek={this.setRefCurrentWeek.bind(this)}
         />
 
         <KnockOutStageView
@@ -126,7 +101,6 @@ export default class SimulatorPage extends Component {
           odiStateIdx={odiStateIdx}
           onClickODI={onClickODI}
           setSnackbarMessage={setSnackbarMessage}
-          setRefCurrentWeek={this.setRefCurrentWeek.bind(this)}
         />
       </Box>
     );

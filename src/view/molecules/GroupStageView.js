@@ -9,7 +9,6 @@ export default function GroupStageView({
   onClickODI,
   odiStateIdx,
   setSnackbarMessage,
-  setRefCurrentWeek,
   isConcluded,
 }) {
   const suffix = isConcluded ? " (Concluded)" : "";
@@ -27,7 +26,6 @@ export default function GroupStageView({
               odiStateIdx={odiStateIdx}
               onClickODI={onClickODI}
               setSnackbarMessage={setSnackbarMessage}
-              setRefCurrentWeek={setRefCurrentWeek}
             />
           );
         }
