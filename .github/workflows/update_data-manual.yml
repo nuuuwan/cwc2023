@@ -11,14 +11,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 19.x
-
-    - name: Install NPM packages
-      run: npm ci --force
-
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -40,12 +32,6 @@ jobs:
       run: |
         export PYTHONPATH="$PYTHONPATH:./workflows"
         python workflows/update_data.py
-
-    - name: JavaScript lint
-      run: |
-        npx prettier --loglevel error --write src
-        npx eslint --fix src
-        npx prettier --loglevel error --write src
 
     - name: Copy data, and push to repo branch master
       run: |
