@@ -15,7 +15,7 @@ import StatsTableView from "./StatsTableView.js";
 import DirectionView from "../atoms/DirectionView.js";
 import Format from "../../nonview/base/Format.js";
 
-export default function NextMatchTableView({ bigTable }) {
+export default function NextMatchTableView({ bigTable, onClickTeam }) {
   const { resultToStats, maxAbsSwing } = bigTable;
   const {
     teamIDToPSemiFinalist: teamIDToSemiFinalistBefore,
@@ -72,7 +72,10 @@ export default function NextMatchTableView({ bigTable }) {
           <TableBody>
             <TableRow sx={{ border: "none" }}>
               <TableCell size="small" sx={{ border: "none" }}>
-                <StatsTableView labelToTeamToStat={labelToTeamToStat} />
+                <StatsTableView
+                  labelToTeamToStat={labelToTeamToStat}
+                  onClickTeam={onClickTeam}
+                />
               </TableCell>
               {Object.entries(resultToStats).map(function ([resultID, stats]) {
                 const {
@@ -119,6 +122,7 @@ export default function NextMatchTableView({ bigTable }) {
                       labelToTeamToStat={labelToTeamToStat}
                       teamIDToColorOverRide={teamIDToColorOverRide}
                       teamIDToStatAnnotate={teamIDToStatAnnotate}
+                      onClickTeam={onClickTeam}
                     />
                   </TableCell>
                 );

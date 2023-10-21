@@ -169,6 +169,7 @@ export default class HomePage extends Component {
             odiStateIdx={odiStateIdx}
             bigTable={bigTable}
             onClickODI={this.handleOnClickODI.bind(this)}
+            onClickTeam={this.handleOnClickTeam.bind(this)}
             setSnackbarMessage={this.setSnackbarMessage.bind(this)}
           />
         );

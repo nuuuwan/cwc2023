@@ -19,6 +19,7 @@ export default function NextMatchView({
   simulator,
   odiStateIdx,
   setSnackbarMessage,
+  onClickTeam,
 }) {
   const date = bigTable.nextODIList[0].date;
   const prefix = "Start" + (new DateX(date).dut > 0 ? "s" : "ed") + " ";
@@ -41,7 +42,7 @@ export default function NextMatchView({
           odiStateIdx={odiStateIdx}
         />
 
-        <NextMatchTableView bigTable={bigTable} />
+        <NextMatchTableView bigTable={bigTable} onClickTeam={onClickTeam} />
       </Box>
     </ScreenShot>
   );
