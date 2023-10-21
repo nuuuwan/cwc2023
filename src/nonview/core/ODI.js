@@ -181,13 +181,15 @@ export default class ODI {
 
   // static odiList methods
 
-  static groupByWeek(odiList) {
+  static groupByWeek(odiList, isConcluded) {
     return odiList.reduce(function (weekToODIList, odi) {
-      const week = odi.week;
-      if (!weekToODIList[week]) {
-        weekToODIList[week] = [];
+      if (isConcluded === odi.isConcluded) {
+        const week = odi.week;
+        if (!weekToODIList[week]) {
+          weekToODIList[week] = [];
+        }
+        weekToODIList[week].push(odi);
       }
-      weekToODIList[week].push(odi);
       return weekToODIList;
     }, {});
   }

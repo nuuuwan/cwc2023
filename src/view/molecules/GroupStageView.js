@@ -10,13 +10,14 @@ export default function GroupStageView({
   odiStateIdx,
   setSnackbarMessage,
   setRefCurrentWeek,
+  isConcluded,
 }) {
+  const suffix = isConcluded ? " (Concluded)" : "";
   return (
     <Box>
-      <Typography variant="h5">Group Stage</Typography>
-      {Object.entries(ODI.groupByWeek(GROUP_STAGE_ODI_LIST))
-        .reverse()
-        .map(function ([week, odiList]) {
+      <Typography variant="h5">Group Stage{suffix}</Typography>
+      {Object.entries(ODI.groupByWeek(GROUP_STAGE_ODI_LIST, isConcluded)).map(
+        function ([week, odiList]) {
           return (
             <GroupStageWeekView
               key={"week-" + week}
@@ -29,7 +30,8 @@ export default function GroupStageView({
               setRefCurrentWeek={setRefCurrentWeek}
             />
           );
-        })}
+        }
+      )}
     </Box>
   );
 }

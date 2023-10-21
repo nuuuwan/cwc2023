@@ -104,13 +104,24 @@ export default class SimulatorPage extends Component {
           Upsets.
         </Alert>
 
+        <GroupStageView
+          isConcluded={false}
+          simulator={simulator}
+          odiStateIdx={odiStateIdx}
+          onClickODI={onClickODI}
+          setSnackbarMessage={setSnackbarMessage}
+          setRefCurrentWeek={this.setRefCurrentWeek.bind(this)}
+        />
+
         <KnockOutStageView
           simulator={simulator}
           odiStateIdx={odiStateIdx}
           onClickODI={onClickODI}
           setSnackbarMessage={setSnackbarMessage}
         />
+
         <GroupStageView
+          isConcluded={true}
           simulator={simulator}
           odiStateIdx={odiStateIdx}
           onClickODI={onClickODI}
