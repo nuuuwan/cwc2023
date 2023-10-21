@@ -6,8 +6,8 @@ import NextMatchTableView from "./NextMatchTableView.js";
 import DateDeltaView from "../atoms/DateDeltaView.js";
 import DateX from "../../nonview/base/DateX.js";
 
-function getTweetBody(bigTable) {
-  const { nextODIList } = bigTable;
+function getTweetBody(nextODI) {
+  const nextODIList = [nextODI];
   let lines = [];
   lines.push("What are the implications of ");
   lines.push(nextODIList.map((odi) => odi.twitterName).join(" & ") + "?");
@@ -20,29 +20,33 @@ export default function NextMatchView({
   odiStateIdx,
   setSnackbarMessage,
   onClickTeam,
+  nextODI,
 }) {
-  const date = bigTable.nextODIList[0].date;
+  const date = nextODI.date;
   const prefix = "Start" + (new DateX(date).dut > 0 ? "s" : "ed") + " ";
 
   return (
     <ScreenShot
       label="next-matches"
-      tweetBody={getTweetBody(bigTable)}
+      tweetBody={getTweetBody(nextODI)}
       setSnackbarMessage={setSnackbarMessage}
     >
       <Box>
-        <Typography variant="h5">#CWC23 - Next Match</Typography>
         <Typography variant="subtitle1">
           <DateDeltaView date={date} prefix={prefix} />
         </Typography>
 
         <ODIGroupView
-          odiList={bigTable.nextODIList}
+          odiList={[nextODI]}
           simulator={simulator}
           odiStateIdx={odiStateIdx}
         />
 
-        <NextMatchTableView bigTable={bigTable} onClickTeam={onClickTeam} />
+        <NextMatchTableView
+          bigTable={bigTable}
+          onClickTeam={onClickTeam}
+          nextODI={nextODI}
+        />
       </Box>
     </ScreenShot>
   );

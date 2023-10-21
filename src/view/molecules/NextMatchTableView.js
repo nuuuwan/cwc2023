@@ -15,8 +15,9 @@ import StatsTableView from "./StatsTableView.js";
 import DirectionView from "../atoms/DirectionView.js";
 import Format from "../../nonview/base/Format.js";
 
-export default function NextMatchTableView({ bigTable, onClickTeam }) {
-  const { resultToStats, maxAbsSwing } = bigTable;
+export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
+  const { odiToStats } = bigTable.odiStats;
+  const { resultToStats, maxAbsSwing } = odiToStats[nextODI.id];
   const {
     teamIDToPSemiFinalist: teamIDToSemiFinalistBefore,
     teamIDToSemiFinalistRank: teamIDToSemiFinalistRankBefore,
@@ -28,10 +29,6 @@ export default function NextMatchTableView({ bigTable, onClickTeam }) {
 
   return (
     <Box>
-      <Typography variant="subtitle1">
-        Positions and Odds qualifying passed the group stage
-      </Typography>
-
       <Typography variant="caption">
         <span style={{ fontSize: "200%" }}>
           {Format.percentWithColorOverride(maxAbsSwing, -maxAbsSwing + 0.05)}

@@ -8,10 +8,8 @@ import { CWC23_TEAM_ID_LIST } from "../constants/CWC23_TEAM_ID_LIST.js";
 import { GROUP_STAGE_ODI_LIST } from "../data/GROUP_STAGE_ODI_LIST.js";
 import ODI from "../core/ODI.js";
 
-export const PERCENTILES = [
-  0.0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 1.0,
-];
-const N_NEXT_MATCHES = 1;
+export const PERCENTILES = [0.5];
+const N_NEXT_MATCHES = 3;
 
 export default class BigTable {
   constructor(odiStateIdx) {
@@ -19,19 +17,7 @@ export default class BigTable {
 
     this.simulatorList = BigTable.buildSimulatorList(odiStateIdx);
     this.stats = BigTable.getStats(this.simulatorList);
-
-    this.nextODIList = ODI.getNextMatches(
-      GROUP_STAGE_ODI_LIST,
-      N_NEXT_MATCHES,
-      odiStateIdx
-    );
-    this.resultToStats = BigTable.splitHistoryStats(
-      this.simulatorList,
-      this.nextODIList
-    );
-    this.teamIDToSwing = BigTable.getTeamIDToSwing(this.resultToStats);
-    const swings = Object.values(this.teamIDToSwing);
-    this.maxAbsSwing = Statistics.maxAbs(swings);
+    this.odiStats = BigTable.getODIStats(this.simulatorList, odiStateIdx);
     console.timeEnd("BigTable.constructor");
   }
 
@@ -71,6 +57,7 @@ export default class BigTable {
   }
 
   static buildSimulatorList(odiStateIdx) {
+    console.time("BigTable.buildSimulatorList");
     let simulatorList = [];
 
     for (let i = 0; i < N_MONTE_CARLO_SIMULATIONS; i++) {
@@ -81,6 +68,7 @@ export default class BigTable {
     const sortedSimulatorList = simulatorList.sort(function (a, b) {
       return b.stats.sumLogPWinner - a.stats.sumLogPWinner;
     });
+    console.timeEnd("BigTable.buildSimulatorList");
     return sortedSimulatorList;
   }
 
@@ -115,6 +103,32 @@ export default class BigTable {
       })
     );
     return resultToStats;
+  }
+
+  static getODIStats(simulatorList, odiStateIdx) {
+    console.time("BigTable.getODIStats");
+    const nextODIList = ODI.getNextMatches(
+      GROUP_STAGE_ODI_LIST,
+      N_NEXT_MATCHES,
+      odiStateIdx
+    );
+    let odiToStats = {};
+    for (let odi of nextODIList) {
+      const resultToStats = BigTable.splitHistoryStats(simulatorList, [odi]);
+      const teamIDToSwing = BigTable.getTeamIDToSwing(resultToStats);
+      const swings = Object.values(teamIDToSwing);
+      const maxAbsSwing = Statistics.maxAbs(swings);
+      odiToStats[odi.id] = {
+        resultToStats,
+        teamIDToSwing,
+        maxAbsSwing,
+      };
+    }
+    console.timeEnd("BigTable.getODIStats");
+    return {
+      nextODIList,
+      odiToStats,
+    };
   }
 
   static getStats(simulatorList) {
