@@ -182,7 +182,8 @@ export default class Format {
       weekday: "short",
       //
       hour: "numeric",
-      hour12: true,
+      minute: "numeric",
+      hour12: false,
       timeZone: DEFAULT_TIME_ZONE,
     });
   }
