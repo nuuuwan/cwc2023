@@ -77,15 +77,25 @@ export default function NextMatchTableView({ bigTable }) {
 
                 let teamIDToColorOverRide = {};
                 let teamIDToStatAnnotate = {};
-                
-                for (const [teamID, positionAfter] of Object.entries(teamIDToSemiFinalistRankAfter)) {
+
+                for (const [teamID, positionAfter] of Object.entries(
+                  teamIDToSemiFinalistRankAfter
+                )) {
                   const positionBefore = teamIDToSemiFinalistRankBefore[teamID];
                   const diffPosition = positionAfter - positionBefore;
                   const pBefore = teamIDToSemiFinalistBefore[teamID];
                   const pAfter = teamIDToSemiFinalistAfter[teamID];
                   const dValue = pAfter - pBefore;
-                  const d = Math.abs(dValue) < 0.01 ? 0 : positionBefore - positionAfter;
-                  const color = diffPosition !== 0 && Math.abs(dValue) > 0.01 ? (diffPosition < 0 ? "#0802" : "#f002") : "#fff1";
+                  const d =
+                    Math.abs(dValue) < 0.01
+                      ? 0
+                      : positionBefore - positionAfter;
+                  const color =
+                    diffPosition !== 0 && Math.abs(dValue) > 0.01
+                      ? diffPosition < 0
+                        ? "#0802"
+                        : "#f002"
+                      : "#fff1";
                   teamIDToColorOverRide[teamID] = color;
                   teamIDToStatAnnotate[teamID] = <DirectionView d={d} />;
                 }
