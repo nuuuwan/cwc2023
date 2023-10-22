@@ -66,7 +66,7 @@ export default function BigTableView({
       <Box>
         <Typography variant="h5">#CWC23 Probabilities</Typography>
         <Typography variant="caption">
-          <span style={{ fontSize: "200%" , paddingRight: "3px"}}>
+          <span style={{ fontSize: "200%", paddingRight: "3px" }}>
             {Format.textWithColor(
               nHorses.toFixed(1),
               Format.getPercentColor(1.0 / nHorses),

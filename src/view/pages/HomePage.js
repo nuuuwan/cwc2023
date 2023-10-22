@@ -50,6 +50,10 @@ export default class HomePage extends Component {
   }
 
   componentDidMount() {
+    this.refresh();
+  }
+
+  refresh() {
     const { simulatorModeID, odiStateIdx } = this.state;
 
     const simulator = new Simulator(
@@ -145,7 +149,13 @@ export default class HomePage extends Component {
 
   renderHeader() {
     const { bigTable, odiStateIdx } = this.state;
-    return <HomePageHeader bigTable={bigTable} odiStateIdx={odiStateIdx} />;
+    return (
+      <HomePageHeader
+        bigTable={bigTable}
+        odiStateIdx={odiStateIdx}
+        refresh={this.refresh.bind(this)}
+      />
+    );
   }
 
   renderBody() {
