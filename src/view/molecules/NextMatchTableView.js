@@ -11,7 +11,7 @@ import {
 import React from "react";
 import { TEAM } from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
-import StatsTableView from "./StatsTableView.js";
+import StatsTableViewSVG from "./StatsTableViewSVG.js";
 import Format from "../../nonview/base/Format.js";
 
 export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
@@ -65,7 +65,7 @@ export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
           <TableBody>
             <TableRow sx={{ border: "none" }}>
               <TableCell size="small" sx={{ border: "none" }}>
-                <StatsTableView
+                <StatsTableViewSVG
                   labelToTeamToStat={labelToTeamToStat}
                   onClickTeam={onClickTeam}
                 />
@@ -95,7 +95,7 @@ export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
                     size="small"
                     sx={{ border: "none" }}
                   >
-                    <StatsTableView
+                    <StatsTableViewSVG
                       labelToTeamToStat={labelToTeamToStat}
                       teamIDToColorOverRide={teamIDToColorOverRide}
                       teamIDToStatAnnotate={teamIDToStatAnnotate}

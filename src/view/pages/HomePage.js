@@ -26,7 +26,7 @@ export default class HomePage extends Component {
     let context = URLContext.getContext();
     const simulatorModeID =
       context.simulatorModeID || SIMULATOR_MODE.MAXIMUM_LIKELIHOOD.id;
-    const pageName = context.pageName || PAGE.PROBABILITY.name;
+    const pageName = context.pageName || PAGE.NEXT_MATCHES.name;
 
     context = { pageName, simulatorModeID };
     URLContext.setContext(context);

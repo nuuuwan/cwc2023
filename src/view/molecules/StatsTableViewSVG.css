@@ -1,0 +1,12 @@
+svg {
+  margin: auto;
+  display: block;
+}
+
+text {
+  font-family: "Akshar", sans-serif;
+  fill: #000;
+  stroke: none;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
