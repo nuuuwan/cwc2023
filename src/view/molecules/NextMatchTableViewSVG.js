@@ -76,7 +76,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
   const orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
   const nTeams = orderedTeamIDs.length;
 
-  const [WIDTH_PER_LABEL, HEIGHT_PER_TEAM] = [32, 32];
+  const [WIDTH_PER_LABEL, HEIGHT_PER_TEAM] = [40, 32];
   const columnsPerGroup = nLabels + 2;
   const width = 3 * columnsPerGroup * WIDTH_PER_LABEL;
   const height = (nTeams + 3) * HEIGHT_PER_TEAM;
