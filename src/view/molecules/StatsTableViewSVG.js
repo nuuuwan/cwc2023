@@ -37,7 +37,16 @@ export default function StatsTableViewSVG({
       <g>
         {orderedTeamIDs.map(function (teamID, iTeam) {
           const team = new Team(teamID);
-          const lineStrokeColor = iTeam !== 4 ? "none" : "#8888";
+
+          let lineStrokeColor = "#cccc";
+          let strokeDasharray = "";
+          if (iTeam === 0) {
+            lineStrokeColor = "#888";
+          } else if (iTeam === 4) {
+            lineStrokeColor = "#888";
+            strokeDasharray = "5,5";
+          }
+
           const color = teamIDToColor ? teamIDToColor[teamID] : "white";
           return (
             <g key={teamID}>
@@ -47,7 +56,6 @@ export default function StatsTableViewSVG({
                 width={px(2) - px(0)}
                 height={py(1) - py(0)}
                 fill={color}
-                fillOpacity={0.1}
               />
               <line
                 x1={px(0)}
@@ -55,8 +63,8 @@ export default function StatsTableViewSVG({
                 x2={px(2)}
                 y2={py(iTeam + 1)}
                 stroke={lineStrokeColor}
-                strokeWidth={2}
-                strokeDasharray="5,5"
+                strokeWidth={1}
+                strokeDasharray={strokeDasharray}
               />
               <g>
                 <text x={px(0.5)} y={py(iTeam + 1.5)}>

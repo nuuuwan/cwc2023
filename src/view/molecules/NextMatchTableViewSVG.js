@@ -27,8 +27,18 @@ function NextMatchForTeam({
     const pBefore = teamIDToSemiFinalistBefore[teamID];
     const diffP = pAfter - pBefore;
     let color = "white";
-    if (Math.abs(diffP) > 0.01) {
-      color = diffP > 0 ? "green" : "red";
+    const absDiffP = Math.abs(diffP);
+    if (absDiffP > 0.01) {
+      color = diffP > 0 ? "#080" : "#f00";
+      let a = "0";
+      if (absDiffP > 0.2) {
+        a = "4";
+      } else if (absDiffP > 0.1) {
+        a = "2";
+      } else if (absDiffP > 0.05) {
+        a = "1";
+      }
+      color += a;
     }
     teamIDToColor[teamID] = color;
   }
@@ -92,7 +102,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
         continue;
       }
       const diffP = pAfter - pBefore;
-      if (Math.abs(diffP) < 0.01) {
+      if (Math.abs(diffP) < 0.00001) {
         continue;
       }
       const color = diffRank < 0 ? "#080" : "#f00";
