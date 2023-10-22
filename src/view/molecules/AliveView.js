@@ -1,7 +1,7 @@
 import { TEAM } from "../../nonview/core/Team.js";
 
 const MIN_OPACITY = 0;
-const MAX_P = 0.25;
+const MAX_P = 0.1;
 
 export default function AliveView({ bigTable }) {
   if (!bigTable) {
