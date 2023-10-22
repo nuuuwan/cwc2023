@@ -78,7 +78,6 @@ export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
                 };
 
                 let teamIDToColorOverRide = {};
-                let teamIDToStatAnnotate = {};
 
                 for (const [teamID, pAfter] of Object.entries(
                   teamIDToSemiFinalistAfter
