@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import ScreenShot from "./ScreenShot.js";
 import ODIGroupView from "./ODIGroupView.js";
-import NextMatchTableView from "./NextMatchTableView.js";
+import NextMatchTableViewSVG from "./NextMatchTableViewSVG.js";
 import DateDeltaView from "../atoms/DateDeltaView.js";
 import DateX from "../../nonview/base/DateX.js";
 
@@ -42,7 +42,7 @@ export default function NextMatchView({
           odiStateIdx={odiStateIdx}
         />
 
-        <NextMatchTableView
+        <NextMatchTableViewSVG
           bigTable={bigTable}
           onClickTeam={onClickTeam}
           nextODI={nextODI}

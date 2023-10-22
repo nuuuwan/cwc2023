@@ -11,7 +11,7 @@ import {
 import React from "react";
 import { TEAM } from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
-import StatsTableViewSVG from "./StatsTableViewSVG.js";
+import StatsTableView from "./StatsTableView.js";
 import Format from "../../nonview/base/Format.js";
 
 export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
@@ -65,7 +65,7 @@ export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
           <TableBody>
             <TableRow sx={{ border: "none" }}>
               <TableCell size="small" sx={{ border: "none" }}>
-                <StatsTableViewSVG
+                <StatsTableView
                   labelToTeamToStat={labelToTeamToStat}
                   onClickTeam={onClickTeam}
                 />
@@ -85,7 +85,7 @@ export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
                 )) {
                   const pBefore = teamIDToSemiFinalistBefore[teamID];
                   const dValue = pAfter - pBefore;
-                  const color = Format.getPercentChangeColor(dValue);
+                  const color = dValue > 0 ? "green" : "red";
                   teamIDToColorOverRide[teamID] = color;
                 }
 
@@ -95,10 +95,8 @@ export default function NextMatchTableView({ bigTable, onClickTeam, nextODI }) {
                     size="small"
                     sx={{ border: "none" }}
                   >
-                    <StatsTableViewSVG
+                    <StatsTableView
                       labelToTeamToStat={labelToTeamToStat}
-                      teamIDToColorOverRide={teamIDToColorOverRide}
-                      teamIDToStatAnnotate={teamIDToStatAnnotate}
                       onClickTeam={onClickTeam}
                     />
                   </TableCell>
