@@ -2,7 +2,6 @@ import Team from "../../nonview/core/Team.js";
 import Format from "../../nonview/base/Format.js";
 import React from "react";
 
-
 export default function StatsTableViewSVG({
   labelToTeamToStat,
   px,

@@ -4,7 +4,7 @@ import { TEAM } from "../../nonview/core/Team.js";
 import StatsTableViewSVG from "./StatsTableViewSVG.js";
 import Format from "../../nonview/base/Format.js";
 
-import './NextMatchTableViewSVG.css';
+import "./NextMatchTableViewSVG.css";
 
 function NextMatchForTeam({
   resultID,
