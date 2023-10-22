@@ -12,7 +12,7 @@ import React from "react";
 
 import "./StatsTableViewSVG.css";
 
-const [WIDTH_PER_LABEL, HEIGHT_PER_TEAM] = [64, 32];
+const [WIDTH_PER_LABEL, HEIGHT_PER_TEAM] = [48, 32];
 
 export default function StatsTableViewSVG({
   labelToTeamToStat,
@@ -82,7 +82,7 @@ export default function StatsTableViewSVG({
               onClickTeam(team);
             };
 
-            const borderTop = iTeam !== 4 ? "none" : "2px dashed #8888";
+            const lineStrokeColor = iTeam !== 4 ? "none" : "#8888";
 
             return (
               <g key={teamID}>
@@ -93,7 +93,15 @@ export default function StatsTableViewSVG({
                   height={HEIGHT_PER_TEAM}
                   fill={background}
                   onClick={onClickInner}
-                  style={{ borderTop }}
+                />
+                <line
+                  x1={px(0)}
+                  y1={py(iTeam + 1)}
+                  x2={px(2)}
+                  y2={py(iTeam + 1)}
+                  stroke={lineStrokeColor}
+                  strokeWidth={2}
+                  strokeDasharray="5,5"
                 />
                 <g>
                   <text x={px(0.5)} y={py(iTeam + 1.5)}>
@@ -110,6 +118,7 @@ export default function StatsTableViewSVG({
                       <text
                         x={px(1.5 + labels.indexOf(label))}
                         y={py(iTeam + 1.5)}
+                        style={{ fill: Format.getPercentColor(stat) }}
                       >
                         {Format.percentText(stat)}
                       </text>
