@@ -1,19 +1,20 @@
 import { TEAM } from "../../nonview/core/Team.js";
 
 const MIN_OPACITY = 0;
+const MAX_P = 0.25;
 
 export default function AliveView({ bigTable }) {
   if (!bigTable) {
     return null;
   }
-  const { n, teamIDToSemiFinalist } = bigTable.stats;
+  const { teamIDToPWinner: teamIDToP } = bigTable.stats;
 
-  return Object.entries(teamIDToSemiFinalist)
+  return Object.entries(teamIDToP)
     .reverse()
-    .map(function ([teamID, nQualify]) {
-      const pQualify = nQualify / n;
+    .map(function ([teamID, p]) {
       const team = TEAM[teamID];
-      const opacity = pQualify * (1 - MIN_OPACITY) + MIN_OPACITY;
+      const q = Math.min(p, MAX_P) / MAX_P;
+      const opacity = (1 - MIN_OPACITY) * q + MIN_OPACITY;
       return (
         <span
           key={"team-" + teamID}
