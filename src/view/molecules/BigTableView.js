@@ -66,14 +66,14 @@ export default function BigTableView({
       <Box>
         <Typography variant="h5">#CWC23 Probabilities</Typography>
         <Typography variant="caption">
-          <span style={{ fontSize: "200%" }}>
+          <span style={{ fontSize: "200%" , paddingRight: "3px"}}>
             {Format.textWithColor(
               nHorses.toFixed(1),
               Format.getPercentColor(1.0 / nHorses),
               1
             )}
           </span>
-          {" Horse Race"}
+          Horse Race
         </Typography>
         <BigTableTableView bigTable={bigTable} onClickTeam={onClickTeam} />
         <BigTableInfo bigTable={bigTable} />
