@@ -9,7 +9,7 @@ import { GROUP_STAGE_ODI_LIST } from "../data/GROUP_STAGE_ODI_LIST.js";
 import ODI from "../core/ODI.js";
 
 export const PERCENTILES = [0.5];
-const N_NEXT_MATCHES = 1;
+const N_NEXT_MATCHES = 5;
 
 export default class BigTable {
   constructor(odiStateIdx) {

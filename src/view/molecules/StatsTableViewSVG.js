@@ -3,7 +3,12 @@ import Format from "../../nonview/base/Format.js";
 import React from "react";
 import "./StatsTableViewSVG.css";
 
-export default function StatsTableViewSVG({ labelToTeamToStat, px, py }) {
+export default function StatsTableViewSVG({
+  labelToTeamToStat,
+  px,
+  py,
+  teamIDToColor,
+}) {
   const labels = Object.keys(labelToTeamToStat);
   const firstLabel = labels[0];
   const orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
@@ -33,9 +38,17 @@ export default function StatsTableViewSVG({ labelToTeamToStat, px, py }) {
         {orderedTeamIDs.map(function (teamID, iTeam) {
           const team = new Team(teamID);
           const lineStrokeColor = iTeam !== 4 ? "none" : "#8888";
-
+          const color = teamIDToColor ? teamIDToColor[teamID] : "white";
           return (
             <g key={teamID}>
+              <rect
+                x={px(0)}
+                y={py(iTeam + 1)}
+                width={px(2) - px(0)}
+                height={py(1) - py(0)}
+                fill={color}
+                fillOpacity={0.1}
+              />
               <line
                 x1={px(0)}
                 y1={py(iTeam + 1)}
