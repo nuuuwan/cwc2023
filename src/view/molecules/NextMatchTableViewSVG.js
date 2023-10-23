@@ -49,7 +49,9 @@ function NextMatchForTeam({
     <g key={"table-cell-" + resultID}>
       <StatsTableViewSVG
         labelToTeamToStat={labelToTeamToStat}
-        px={(x) => px(x) + (1 + iResults) * columnsPerGroup * WIDTH_PER_LABEL}
+        px={(x) =>
+          px(x) + (1 + (1 + iResults) * columnsPerGroup) * WIDTH_PER_LABEL
+        }
         py={(y) => py(y) + HEIGHT_PER_TEAM}
         teamIDToColor={teamIDToColor}
       />
@@ -80,7 +82,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
 
   const [SVG_WIDTH, SVG_HEIGHT] = [400, 400];
 
-  const columnsPerGroup = nLabels + 2;
+  const columnsPerGroup = nLabels + 3; // PAD Team Label PAD
   const nGroups = 3;
   const nCols = columnsPerGroup * nGroups;
   const nRows = nTeams + 3;
@@ -115,10 +117,10 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
       }
       const color = diffRank < 0 ? "#080" : "#f00";
 
-      const x1 = px(1 + columnsPerGroup * 1 + (iResult - 1));
+      const x1 = px(2 + columnsPerGroup * 1 + (iResult - 1));
       const y1 = py(rankBefore + 1.5);
 
-      const x2 = px(1 + columnsPerGroup * iResult - (iResult - 1));
+      const x2 = px(2 + columnsPerGroup * iResult - (iResult - 1));
       const y2 = py(rankAfter + 1.5);
 
       const x12 = (x1 * 2 + x2 * 1) / 3;
@@ -153,17 +155,17 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
         {lines}
         <g>
           <g>
-            <text x={px(1 + columnsPerGroup * 0)} y={py(0.5)}>
+            <text x={px(2 + columnsPerGroup * 0)} y={py(0.5)}>
               {"If " + team1.label + " wins"}
             </text>
           </g>
           <g>
-            <text x={px(1 + columnsPerGroup)} y={py(0.5)}>
+            <text x={px(2 + columnsPerGroup * 1)} y={py(0.5)}>
               Before
             </text>
           </g>
           <g>
-            <text x={px(1 + columnsPerGroup * 2)} y={py(0.5)}>
+            <text x={px(2 + columnsPerGroup * 2)} y={py(0.5)}>
               {"If " + team2.label + " wins"}
             </text>
           </g>
@@ -184,7 +186,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
           <g>
             <StatsTableViewSVG
               labelToTeamToStat={labelToTeamToStat}
-              px={(x) => px(x) + columnsPerGroup * WIDTH_PER_LABEL}
+              px={(x) => px(x) + (1 + columnsPerGroup) * WIDTH_PER_LABEL}
               py={(y) => py(y) + HEIGHT_PER_TEAM}
             />
           </g>

@@ -9,4 +9,5 @@ text {
   stroke: none;
   text-anchor: middle;
   font-size: 0.8rem;
+  dominant-baseline: middle;
 }
