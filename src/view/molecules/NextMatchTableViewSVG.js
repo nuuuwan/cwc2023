@@ -117,10 +117,10 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
       }
       const color = diffRank < 0 ? "#080" : "#f00";
 
-      const x1 = px(2 + columnsPerGroup * 1 + (iResult - 1));
+      const x1 = px(2 + columnsPerGroup * 1 + 1.2 * (iResult - 1));
       const y1 = py(rankBefore + 1.5);
 
-      const x2 = px(2 + columnsPerGroup * iResult - (iResult - 1));
+      const x2 = px(2 + columnsPerGroup * iResult - 1.2 * (iResult - 1));
       const y2 = py(rankAfter + 1.5);
 
       const x12 = (x1 * 2 + x2 * 1) / 3;
@@ -133,6 +133,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
           stroke={color}
           fill="#fff"
           strokeWidth={2}
+          marker-end={diffRank < 0 ? "url(#head-green)" : "url(#head-red)"}
         />
       );
     }
@@ -152,6 +153,29 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
         viewBox={`0 0 ${SVG_HEIGHT} ${SVG_HEIGHT}`}
         xmlns="http://www.w3.org/2000/svg"
       >
+        <defs>
+          <marker
+            id="head-red"
+            orient="auto"
+            markerWidth="3"
+            markerHeight="4"
+            refX="0.1"
+            refY="2"
+          >
+            <path d="M0,0 V4 L2,2 Z" fill="red" />
+          </marker>
+          <marker
+            id="head-green"
+            orient="auto"
+            markerWidth="3"
+            markerHeight="4"
+            refX="0.1"
+            refY="2"
+          >
+            <path d="M0,0 V4 L2,2 Z" fill="green" />
+          </marker>
+        </defs>
+
         {lines}
         <g>
           <g>
