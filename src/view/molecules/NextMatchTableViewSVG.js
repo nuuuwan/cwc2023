@@ -78,10 +78,16 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
   const orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
   const nTeams = orderedTeamIDs.length;
 
-  const [WIDTH_PER_LABEL, HEIGHT_PER_TEAM] = [44, 32];
+  const [SVG_WIDTH, SVG_HEIGHT] = [400, 400];
+
   const columnsPerGroup = nLabels + 2;
-  const width = 3 * columnsPerGroup * WIDTH_PER_LABEL;
-  const height = (nTeams + 3) * HEIGHT_PER_TEAM;
+  const nGroups = 3;
+  const nCols = columnsPerGroup * nGroups;
+  const nRows = nTeams + 3;
+
+  const WIDTH_PER_LABEL = parseInt(SVG_WIDTH / nCols);
+  const HEIGHT_PER_TEAM = parseInt(SVG_HEIGHT / nRows);
+
   const px = (x) => WIDTH_PER_LABEL * x;
   const py = (y) => HEIGHT_PER_TEAM * y;
 
@@ -141,8 +147,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
 
       <svg
         id="next-match-table-view-svg"
-        width={width}
-        height={height}
+        viewBox={`0 0 ${SVG_HEIGHT} ${SVG_HEIGHT}`}
         xmlns="http://www.w3.org/2000/svg"
       >
         {lines}
