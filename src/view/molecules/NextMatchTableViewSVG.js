@@ -108,23 +108,33 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
       [rankAfter2, 2, pAfter2],
     ]) {
       const diffRank = rankAfter - rankBefore;
-      if (diffRank === 0) {
-        continue;
-      }
       const diffP = pAfter - pBefore;
-      if (Math.abs(diffP) < 0.00001) {
+      if (Math.abs(diffP) < 0.01 && diffRank === 0) {
         continue;
       }
-      const color = diffRank < 0 ? "#080" : "#f00";
 
-      const x1 = px(2 + columnsPerGroup * 1 + 1.2 * (iResult - 1));
+      let color;
+      if (diffRank === 0) {
+        color = diffP > 0 ? "green" : "red";
+      } else {
+        color = diffRank < 0 ? "green" : "red";
+      }
+
+      const x1 = px(2 + columnsPerGroup * 1 + 1.3 * (iResult - 1));
       const y1 = py(rankBefore + 1.5);
 
-      const x2 = px(2 + columnsPerGroup * iResult - 1.2 * (iResult - 1));
+      const x2 = px(2 + columnsPerGroup * iResult - 1.3 * (iResult - 1));
       const y2 = py(rankAfter + 1.5);
 
       const x12 = (x1 * 2 + x2 * 1) / 3;
       const x21 = (x1 * 1 + x2 * 2) / 3;
+
+      const [STROKE_WIDTH_MIN, STROKE_WIDTH_MAX] = [1.5, 5];
+
+      const strokeWidth = Math.min(
+        STROKE_WIDTH_MAX,
+        Math.max(STROKE_WIDTH_MIN, Math.abs(diffP) * 20)
+      );
 
       lines.push(
         <path
@@ -132,8 +142,8 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
           d={`M${x1},${y1} L${x12},${y1} L${x21},${y2} L${x2},${y2}`}
           stroke={color}
           fill="#fff"
-          strokeWidth={2}
-          marker-end={diffRank < 0 ? "url(#head-green)" : "url(#head-red)"}
+          strokeWidth={strokeWidth}
+          marker-end={`url(#head-${color})`}
         />
       );
     }
