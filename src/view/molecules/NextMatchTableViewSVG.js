@@ -113,12 +113,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
         continue;
       }
 
-      let color;
-      if (diffRank === 0) {
-        color = diffP > 0 ? "green" : "red";
-      } else {
-        color = diffRank < 0 ? "green" : "red";
-      }
+      const color = diffP > 0 ? "green" : "red";
 
       const x1 = px(2 + columnsPerGroup * 1 + 1.3 * (iResult - 1));
       const y1 = py(rankBefore + 1.5);
