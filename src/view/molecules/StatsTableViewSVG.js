@@ -82,7 +82,7 @@ export default function StatsTableViewSVG({
                       style={{ fill: Format.getPercentColor(stat) }}
                       className="text-right"
                     >
-                      {Format.percentText(stat)}
+                      {Format.percentTextWithEmoji(stat)}
                     </text>
                   </g>
                 );

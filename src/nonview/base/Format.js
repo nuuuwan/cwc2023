@@ -1,6 +1,5 @@
 import { EPSILON } from "../constants/STATISTICS.js";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CancelIcon from "@mui/icons-material/Cancel";
+import {EMOJI} from "../constants/EMOJI.js";
 import DateX from "./DateX";
 export const DEFAULT_TIME_ZONE = "Asia/Colombo";
 
@@ -87,36 +86,30 @@ export default class Format {
     });
   }
 
-  static percentWithIcon(p) {
-    const color = Format.getPercentColor(p);
-    const s = Format.percentText(p);
-
-    let Icon;
+  static percentTextWithEmoji(p) {
+    const text =  p.toLocaleString(undefined, {
+      style: "percent",
+      maximumFractionDigits: 0,
+    });
+    let emoji = '';
     if (p < EPSILON) {
-      Icon = CancelIcon;
+      emoji = ' ' + EMOJI.LOSER;
     } else if (p > 1 - EPSILON) {
-      Icon = CheckCircleIcon;
+      emoji = ' ' + EMOJI.WINNER;
     }
-
-    return (
-      <span
-        style={{
-          color,
-        }}
-      >
-        <span style={{ display: "inline-block" }}>{s}</span>
-
-        <span style={{ display: "inline-block", width: "6px" }}>
-          {Icon && (
-            <Icon
-              sx={{ fontSize: "80%", marginLeft: 0.5, marginTop: 0.1 }}
-              color={color}
-            />
-          )}
-        </span>
-      </span>
-    );
+    return text + emoji;
+    
   }
+
+  static percentTextWithEmojiAndColor(p) {
+    
+    return (
+      <span style={{color: Format.getPercentColor(p)}}>
+        {Format.percentTextWithEmoji(p)}
+      </span>
+    )
+  }
+
 
   static percentWithColor(p, pColor, opacity, prefix = "") {
     const color = Format.getPercentColor(pColor);
