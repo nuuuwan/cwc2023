@@ -9,6 +9,7 @@ export default function StatsTableViewSVG({
   teamIDToColor,
   interestedTeamIDs,
 }) {
+  console.debug(labelToTeamToStat);
   const labels = Object.keys(labelToTeamToStat);
   const firstLabel = labels[0];
   const orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
