@@ -23,7 +23,8 @@ const THEME = createTheme({
     },
   },
   typography: {
-    fontSize: 11,
+    fontFamily: "Akshar",
+    fontSize: 12,
   },
 });
 

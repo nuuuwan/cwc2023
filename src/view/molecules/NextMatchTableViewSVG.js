@@ -160,7 +160,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          <style type="text/css">
+          <style>
             @import url('https://fonts.googleapis.com/css?family=Akshar');
           </style>
           <marker
