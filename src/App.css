@@ -21,7 +21,7 @@ a {
 svg {
   margin: auto;
   display: block;
-  font-family: "Akshar";
+  font-family: "Akshar", sans-serif;
 }
 
 text {
