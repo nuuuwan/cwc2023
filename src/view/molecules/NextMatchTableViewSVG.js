@@ -138,9 +138,12 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
 
       const [STROKE_WIDTH_MIN, STROKE_WIDTH_MAX] = [1, 6];
       const MAX_ABS_P = 0.25;
-      
-      const strokeWidth =STROKE_WIDTH_MIN + (STROKE_WIDTH_MAX - STROKE_WIDTH_MIN) * Math.min(MAX_ABS_P, Math.abs(diffP)) / MAX_ABS_P;
 
+      const strokeWidth =
+        STROKE_WIDTH_MIN +
+        ((STROKE_WIDTH_MAX - STROKE_WIDTH_MIN) *
+          Math.min(MAX_ABS_P, Math.abs(diffP))) /
+          MAX_ABS_P;
 
       lines.push(
         <path

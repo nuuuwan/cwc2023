@@ -12,7 +12,7 @@ export default function StatsTableViewSVG({
   const labels = Object.keys(labelToTeamToStat);
   const firstLabel = labels[0];
   const orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
-  
+
   return (
     <g id="stats-table-view-svg">
       <g>
