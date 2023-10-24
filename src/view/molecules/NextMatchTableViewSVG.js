@@ -188,17 +188,17 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
         {lines}
         <g>
           <g>
-            <text x={px(2 + columnsPerGroup * 0)} y={py(0.5)}>
+            <text x={px(2.25 + columnsPerGroup * 0)} y={py(0.5)} className="text-center">
               {"If " + team1.label + " wins"}
             </text>
           </g>
           <g>
-            <text x={px(2 + columnsPerGroup * 1)} y={py(0.5)}>
+            <text x={px(2.25 + columnsPerGroup * 1)} y={py(0.5)}>
               Before
             </text>
           </g>
           <g>
-            <text x={px(2 + columnsPerGroup * 2)} y={py(0.5)}>
+            <text x={px(2.25 + columnsPerGroup * 2)} y={py(0.5)}>
               {"If " + team2.label + " wins"}
             </text>
           </g>
