@@ -37,9 +37,7 @@ export default function StatsTableView({
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell size="small" align="center">
-                Team
-              </TableCell>
+              <TableCell size="small" align="center"></TableCell>
               {Object.keys(labelToTeamToStat).map(function (label) {
                 return (
                   <TableCell

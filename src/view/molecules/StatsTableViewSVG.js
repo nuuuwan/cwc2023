@@ -16,11 +16,6 @@ export default function StatsTableViewSVG({
     <g id="stats-table-view-svg">
       <g>
         <g>
-          <g>
-            <text x={px(0.5)} y={py(0.5)} style={{ fill: "#888" }}>
-              Team
-            </text>
-          </g>
           {Object.keys(labelToTeamToStat).map(function (label, iLabel) {
             return (
               <g key={"header-" + label}>
@@ -50,10 +45,10 @@ export default function StatsTableViewSVG({
           return (
             <g key={teamID}>
               <rect
-                x={px(0)}
-                y={py(iTeam + 1)}
-                width={px(2) - px(0)}
-                height={py(1) - py(0)}
+                x={px(-0.1)}
+                y={py(iTeam + 1 + 0.05)}
+                width={px(2.7) - px(0)}
+                height={py(0.9) - py(0)}
                 fill={color}
               />
               <line
@@ -66,7 +61,7 @@ export default function StatsTableViewSVG({
                 strokeDasharray={strokeDasharray}
               />
               <g>
-                <text x={px(0.5)} y={py(iTeam + 1.5)}>
+                <text x={px(0)} y={py(iTeam + 1.5)} className="text-left">
                   {team.label}
                 </text>
               </g>
@@ -78,9 +73,10 @@ export default function StatsTableViewSVG({
                 return (
                   <g key={"stat-" + label + "-" + teamID}>
                     <text
-                      x={px(1.5 + labels.indexOf(label))}
+                      x={px(2.5 + labels.indexOf(label))}
                       y={py(iTeam + 1.5)}
                       style={{ fill: Format.getPercentColor(stat) }}
+                      className="text-right"
                     >
                       {Format.percentText(stat)}
                     </text>

@@ -116,10 +116,10 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
 
       const color = diffP > 0 ? "green" : "red";
 
-      const x1 = px(2 + columnsPerGroup * 1 + 1.3 * (iResult - 1));
+      const x1 = px(2.2 + columnsPerGroup * 1 + 1.5 * (iResult - 1));
       const y1 = py(rankBefore + 1.5);
 
-      const x2 = px(2 + columnsPerGroup * iResult - 1.3 * (iResult - 1));
+      const x2 = px(2.2 + columnsPerGroup * iResult - 1.5 * (iResult - 1));
       const y2 = py(rankAfter + 1.5);
 
       const x12 = (x1 * 2 + x2 * 1) / 3;
