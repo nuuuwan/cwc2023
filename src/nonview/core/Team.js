@@ -30,7 +30,7 @@ export default class Team {
   }
 
   get label() {
-    return this.emoji + " " + this.id;
+    return this.emoji + " " + this.twitterHandleText;
   }
 
   get pWinner() {
