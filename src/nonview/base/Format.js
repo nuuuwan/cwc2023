@@ -1,5 +1,5 @@
 import { EPSILON } from "../constants/STATISTICS.js";
-import {EMOJI} from "../constants/EMOJI.js";
+import { EMOJI } from "../constants/EMOJI.js";
 import DateX from "./DateX";
 export const DEFAULT_TIME_ZONE = "Asia/Colombo";
 
@@ -87,29 +87,26 @@ export default class Format {
   }
 
   static percentTextWithEmoji(p) {
-    const text =  p.toLocaleString(undefined, {
+    const text = p.toLocaleString(undefined, {
       style: "percent",
       maximumFractionDigits: 0,
     });
-    let emoji = '';
+    let emoji = "";
     if (p < EPSILON) {
-      emoji = ' ' + EMOJI.LOSER;
+      emoji = " " + EMOJI.LOSER;
     } else if (p > 1 - EPSILON) {
-      emoji = ' ' + EMOJI.WINNER;
+      emoji = " " + EMOJI.WINNER;
     }
     return text + emoji;
-    
   }
 
   static percentTextWithEmojiAndColor(p) {
-    
     return (
-      <span style={{color: Format.getPercentColor(p)}}>
+      <span style={{ color: Format.getPercentColor(p) }}>
         {Format.percentTextWithEmoji(p)}
       </span>
-    )
+    );
   }
-
 
   static percentWithColor(p, pColor, opacity, prefix = "") {
     const color = Format.getPercentColor(pColor);
