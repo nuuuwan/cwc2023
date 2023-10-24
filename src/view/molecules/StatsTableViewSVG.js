@@ -7,10 +7,12 @@ export default function StatsTableViewSVG({
   px,
   py,
   teamIDToColor,
+  interestedTeamIDs,
 }) {
   const labels = Object.keys(labelToTeamToStat);
   const firstLabel = labels[0];
   const orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
+  console.debug(interestedTeamIDs);
 
   return (
     <g id="stats-table-view-svg">
@@ -35,6 +37,8 @@ export default function StatsTableViewSVG({
       <g>
         {orderedTeamIDs.map(function (teamID, iTeam) {
           const team = new Team(teamID);
+          const isInterested = interestedTeamIDs.includes(teamID);
+          const opacity = isInterested ? 1 : 0.3;
 
           let lineStrokeColor = "#ccc4";
           let strokeDasharray = "";
@@ -65,7 +69,12 @@ export default function StatsTableViewSVG({
                 strokeDasharray={strokeDasharray}
               />
               <g>
-                <text x={px(0)} y={py(iTeam + 1.5)} className="text-left">
+                <text
+                  x={px(0)}
+                  y={py(iTeam + 1.5)}
+                  className="text-left"
+                  style={{ opacity }}
+                >
                   {team.label}
                 </text>
               </g>
@@ -79,7 +88,7 @@ export default function StatsTableViewSVG({
                     <text
                       x={px(2.5 + labels.indexOf(label))}
                       y={py(iTeam + 1.5)}
-                      style={{ fill: Format.getPercentColor(stat) }}
+                      style={{ fill: Format.getPercentColor(stat), opacity }}
                       className="text-right"
                     >
                       {Format.percentTextWithEmoji(stat)}

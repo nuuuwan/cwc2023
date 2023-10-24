@@ -16,6 +16,7 @@ function NextMatchForTeam({
   HEIGHT_PER_TEAM,
   px,
   py,
+  interestedTeamIDs,
 }) {
   const { teamIDToPSemiFinalist: teamIDToSemiFinalistBefore } = statsBefore;
   const { teamIDToPSemiFinalist: teamIDToSemiFinalistAfter } = statsAfter;
@@ -54,6 +55,7 @@ function NextMatchForTeam({
         }
         py={(y) => py(y) + HEIGHT_PER_TEAM}
         teamIDToColor={teamIDToColor}
+        interestedTeamIDs={interestedTeamIDs}
       />
     </g>
   );
@@ -95,6 +97,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
   const py = (y) => HEIGHT_PER_TEAM * y;
 
   let lines = [];
+  let interestedTeamIDs = [];
   for (let teamID of orderedTeamIDs) {
     const rankBefore = stats.teamIDToSemiFinalistRank[teamID];
     const rankAfter1 = statsTeam1.teamIDToSemiFinalistRank[teamID];
@@ -104,14 +107,22 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
     const pAfter1 = statsTeam1.teamIDToPSemiFinalist[teamID];
     const pAfter2 = statsTeam2.teamIDToPSemiFinalist[teamID];
 
+    const P_INTEREST = 0.05;
+
     for (let [rankAfter, iResult, pAfter] of [
       [rankAfter1, 0, pAfter1],
       [rankAfter2, 2, pAfter2],
     ]) {
       const diffRank = rankAfter - rankBefore;
       const diffP = pAfter - pBefore;
-      if (Math.abs(diffP) < 0.01 && diffRank === 0) {
+      if (Math.abs(diffP) < P_INTEREST && diffRank === 0) {
         continue;
+      }
+
+      let opacity = 0.3;
+      if (Math.abs(diffP) > P_INTEREST) {
+        interestedTeamIDs.push(teamID);
+        opacity = 1.0;
       }
 
       const color = diffP > 0 ? "green" : "red";
@@ -140,6 +151,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
           fill="#fff"
           strokeWidth={strokeWidth}
           markerEnd={`url(#head-${color})`}
+          style={{ opacity }}
         />
       );
     }
@@ -219,12 +231,14 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
             HEIGHT_PER_TEAM={HEIGHT_PER_TEAM}
             px={(x) => px(x)}
             py={(y) => py(y)}
+            interestedTeamIDs={interestedTeamIDs}
           />{" "}
           <g>
             <StatsTableViewSVG
               labelToTeamToStat={labelToTeamToStat}
               px={(x) => px(x) + (1 + columnsPerGroup) * WIDTH_PER_LABEL}
               py={(y) => py(y) + HEIGHT_PER_TEAM}
+              interestedTeamIDs={interestedTeamIDs}
             />
           </g>
           <NextMatchForTeam
@@ -237,6 +251,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
             HEIGHT_PER_TEAM={HEIGHT_PER_TEAM}
             px={(x) => px(x)}
             py={(y) => py(y)}
+            interestedTeamIDs={interestedTeamIDs}
           />
         </g>
       </svg>
