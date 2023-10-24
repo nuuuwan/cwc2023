@@ -9,7 +9,6 @@ export default function StatsTableViewSVG({
   teamIDToColor,
   interestedTeamIDs,
 }) {
-  console.debug(labelToTeamToStat);
   const labels = Object.keys(labelToTeamToStat);
   const firstLabel = labels[0];
   const orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
@@ -22,11 +21,12 @@ export default function StatsTableViewSVG({
             return (
               <g key={"header-" + label}>
                 <text
-                  x={px(iLabel + 1.25)}
+                  className="text-right"
+                  x={px(iLabel + 2.7)}
                   y={py(0.5)}
                   style={{ fill: "#888" }}
                 >
-                  {label}
+                  {Format.getLabel(label)}
                 </text>
               </g>
             );
@@ -68,32 +68,33 @@ export default function StatsTableViewSVG({
                 strokeWidth={1}
                 strokeDasharray={strokeDasharray}
               />
-              <g>
-                <text
-                  x={px(0)}
-                  y={py(iTeam + 1.5)}
-                  className="text-left"
-                  style={{ opacity }}
-                >
-                  {team.label}
-                </text>
-              </g>
+              <text
+                x={px(0)}
+                y={py(iTeam + 1.5)}
+                className="text-left"
+                style={{ opacity }}
+              >
+                {team.label}
+              </text>
               {Object.entries(labelToTeamToStat).map(function ([
                 label,
                 teamToStat,
               ]) {
                 const stat = teamToStat[teamID];
                 return (
-                  <g key={"stat-" + label + "-" + teamID}>
-                    <text
-                      x={px(2.5 + labels.indexOf(label))}
-                      y={py(iTeam + 1.5)}
-                      style={{ fill: Format.getPercentColor(stat), opacity }}
-                      className="text-right"
-                    >
-                      {Format.percentTextWithEmoji(stat)}
-                    </text>
-                  </g>
+                  <text
+                    key={"stat-" + label + "-" + teamID}
+                    x={px(2.5 + labels.indexOf(label))}
+                    y={py(iTeam + 1.5)}
+                    style={{
+                      fill: Format.getColor(label, stat),
+                      opacity,
+                      fontSize: Format.getFontSize(label),
+                    }}
+                    className="text-right"
+                  >
+                    {Format.getText(label, stat)}
+                  </text>
                 );
               })}
             </g>

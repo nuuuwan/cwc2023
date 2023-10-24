@@ -74,10 +74,10 @@ function LinesSVG({
 
       const color = diffP > 0 ? "green" : "red";
 
-      const x1 = px(2.2 + columnsPerGroup * 1 + 1.5 * (iResult - 1));
+      const x1 = px(2.6 + columnsPerGroup * 1 + 2.1 * (iResult - 1));
       const y1 = py(rankBefore + 1.5);
 
-      const x2 = px(2.2 + columnsPerGroup * iResult - 1.5 * (iResult - 1));
+      const x2 = px(2.6 + columnsPerGroup * iResult - 2.1 * (iResult - 1));
       const y2 = py(rankAfter + 1.5);
 
       const x12 = (x1 * 2 + x2 * 1) / 3;
@@ -116,6 +116,11 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
 
   const labelToTeamToStat = {
     Qualify: teamIDToSemiFinalistBefore,
+    Diff: Object.fromEntries(
+      Object.entries(teamIDToSemiFinalistBefore).map(function ([teamID, p]) {
+        return [teamID, p - teamIDToSemiFinalistBefore[teamID]];
+      })
+    ),
   };
 
   const [statsTeam1, statsTeam2] = Object.values(resultToStats);
@@ -156,10 +161,26 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
   }
 
   const labelToTeamToStatAfter1 = {
-    Quality: statsTeam1.teamIDToPSemiFinalist,
+    Qualify: statsTeam1.teamIDToPSemiFinalist,
+    Diff: Object.fromEntries(
+      Object.entries(statsTeam1.teamIDToPSemiFinalist).map(function ([
+        teamID,
+        p,
+      ]) {
+        return [teamID, p - teamIDToSemiFinalistBefore[teamID]];
+      })
+    ),
   };
   const labelToTeamToStatAfter2 = {
-    Quality: statsTeam2.teamIDToPSemiFinalist,
+    Qualify: statsTeam2.teamIDToPSemiFinalist,
+    Diff: Object.fromEntries(
+      Object.entries(statsTeam2.teamIDToPSemiFinalist).map(function ([
+        teamID,
+        p,
+      ]) {
+        return [teamID, p - teamIDToSemiFinalistBefore[teamID]];
+      })
+    ),
   };
 
   return (

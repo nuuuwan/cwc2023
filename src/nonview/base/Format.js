@@ -65,18 +65,8 @@ export default class Format {
   }
 
   static getPercentChangeColor(dP) {
-    const absDP = Math.abs(dP);
-    let a = "0";
-    if (absDP > 0.1) {
-      a = "4";
-    } else if (absDP > 0.05) {
-      a = "2";
-    } else if (absDP > 0.025) {
-      a = "1";
-    }
-
     const rgb = dP > 0 ? `#080` : `#f00`;
-    return `${rgb}${a}`;
+    return `${rgb}`;
   }
 
   static percentText(p) {
@@ -155,14 +145,13 @@ export default class Format {
     return Format.percentWithColor(p, pColor, 1.0, prefix);
   }
 
-  static percentChange(p) {
-    const prefix = p > 0 ? "+" : "";
-    if (Math.abs(p) < 0.005) {
-      return "-";
+  static percentChangeText(p) {
+    const prefix = p > 0 ? "+" : "-";
+    if (Math.abs(p) < 0.05) {
+      return "";
     }
-    return Format.percentWithColorOverride(p, p, prefix);
+    return prefix + Format.percentText(Math.abs(p));
   }
-
   // Rank
 
   static rank(rank) {
@@ -276,6 +265,51 @@ export default class Format {
     }
 
     return x.toLocaleString(undefined, { maximumSignificantDigits: 2 });
+  }
+
+  // Combination
+  static getText(label, p) {
+    switch (label) {
+      case "Qualify":
+        return Format.percentTextWithEmoji(p);
+      case "Diff":
+        return Format.percentChangeText(p);
+      default:
+        throw new Error(`Unknown label: ${label}`);
+    }
+  }
+
+  static getColor(label, p) {
+    switch (label) {
+      case "Qualify":
+        return Format.getPercentColor(p);
+      case "Diff":
+        return Format.getPercentChangeColor(p);
+      default:
+        throw new Error(`Unknown label: ${label}`);
+    }
+  }
+
+  static getLabel(label) {
+    switch (label) {
+      case "Qualify":
+        return "Qualify";
+      case "Diff":
+        return "";
+      default:
+        throw new Error(`Unknown label: ${label}`);
+    }
+  }
+
+  static getFontSize(label) {
+    switch (label) {
+      case "Qualify":
+        return "100%";
+      case "Diff":
+        return "67%";
+      default:
+        throw new Error(`Unknown label: ${label}`);
+    }
   }
 }
 
