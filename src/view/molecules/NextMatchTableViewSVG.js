@@ -188,7 +188,11 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
         {lines}
         <g>
           <g>
-            <text x={px(2.25 + columnsPerGroup * 0)} y={py(0.5)} className="text-center">
+            <text
+              x={px(2.25 + columnsPerGroup * 0)}
+              y={py(0.5)}
+              className="text-center"
+            >
               {"If " + team1.label + " wins"}
             </text>
           </g>

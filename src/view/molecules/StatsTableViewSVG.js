@@ -19,7 +19,11 @@ export default function StatsTableViewSVG({
           {Object.keys(labelToTeamToStat).map(function (label, iLabel) {
             return (
               <g key={"header-" + label}>
-                <text x={px(iLabel + 1.25)} y={py(0.5)} style={{ fill: "#888" }}>
+                <text
+                  x={px(iLabel + 1.25)}
+                  y={py(0.5)}
+                  style={{ fill: "#888" }}
+                >
                   {label}
                 </text>
               </g>
