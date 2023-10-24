@@ -147,7 +147,7 @@ export default class Format {
 
   static percentChangeText(p) {
     const prefix = p > 0 ? "+" : "-";
-    if (Math.abs(p) < 0.05) {
+    if (Math.abs(p) < 0.005) {
       return "";
     }
     return prefix + Format.percentText(Math.abs(p));
