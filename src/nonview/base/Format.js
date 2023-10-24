@@ -80,6 +80,22 @@ export default class Format {
   }
 
   static percentText(p) {
+    if (p < EPSILON) {
+      return "0%";
+    }
+
+    if (p > 1 - EPSILON) {
+      return "100%";
+    }
+
+    if (p < 0.005) {
+      return "<1%";
+    }
+
+    if (p > 0.995) {
+      return ">99%";
+    }
+
     return p.toLocaleString(undefined, {
       style: "percent",
       maximumFractionDigits: 0,
@@ -87,10 +103,8 @@ export default class Format {
   }
 
   static percentTextWithEmoji(p) {
-    const text = p.toLocaleString(undefined, {
-      style: "percent",
-      maximumFractionDigits: 0,
-    });
+    const text = Format.percentText(p);
+
     let emoji = "";
     if (p < EPSILON) {
       emoji = " " + EMOJI.LOSER;
