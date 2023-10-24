@@ -17,3 +17,16 @@ a {
   line-height: 0;
   padding: 0 0.25em;
 }
+
+svg {
+  margin: auto;
+  display: block;
+}
+
+text {
+  fill: #000;
+  stroke: none;
+  text-anchor: middle;
+  font-size: 0.85rem;
+  dominant-baseline: middle;
+}

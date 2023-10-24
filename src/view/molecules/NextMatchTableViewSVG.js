@@ -4,7 +4,7 @@ import { TEAM } from "../../nonview/core/Team.js";
 import StatsTableViewSVG from "./StatsTableViewSVG.js";
 import Format from "../../nonview/base/Format.js";
 
-import "./NextMatchTableViewSVG.css";
+import "../../App.css";
 
 function NextMatchForTeam({
   resultID,
@@ -80,7 +80,8 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
   const orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
   const nTeams = orderedTeamIDs.length;
 
-  const [SVG_WIDTH, SVG_HEIGHT] = [400, 400];
+  const SVG_WIDTH = 500;
+  const SVG_HEIGHT = 500;
 
   const columnsPerGroup = nLabels + 3; // PAD Team Label PAD
   const nGroups = 3;
@@ -138,7 +139,7 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
           stroke={color}
           fill="#fff"
           strokeWidth={strokeWidth}
-          marker-end={`url(#head-${color})`}
+          markerEnd={`url(#head-${color})`}
         />
       );
     }
@@ -159,6 +160,9 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
+          <style type="text/css">
+            @import url('https://fonts.googleapis.com/css?family=Akshar');
+          </style>
           <marker
             id="head-red"
             orient="auto"
