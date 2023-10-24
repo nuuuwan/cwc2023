@@ -145,16 +145,13 @@ export default function NextMatchTableViewSVG({ bigTable, nextODI }) {
 
   let interestedTeamIDs = [];
   for (let teamID of orderedTeamIDs) {
-    const pBefore = stats.teamIDToPSemiFinalist[teamID];
     const pAfter1 = statsTeam1.teamIDToPSemiFinalist[teamID];
     const pAfter2 = statsTeam2.teamIDToPSemiFinalist[teamID];
     const P_INTEREST = 0.05;
 
-    for (let pAfter of [pAfter1, pAfter2]) {
-      const diffP = pAfter - pBefore;
-      if (Math.abs(diffP) > P_INTEREST) {
-        interestedTeamIDs.push(teamID);
-      }
+    const diffP = pAfter1 - pAfter2;
+    if (Math.abs(diffP) > P_INTEREST) {
+      interestedTeamIDs.push(teamID);
     }
   }
 
