@@ -23,7 +23,7 @@ const THEME = createTheme({
     },
   },
   typography: {
-    fontSize: 12,
+    fontSize: 11,
   },
 });
 
