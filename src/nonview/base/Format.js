@@ -285,7 +285,6 @@ export default class Format {
         return Format.getPercentChangeColor(p);
       default:
         return Format.getPercentColor(p);
-      
     }
   }
 

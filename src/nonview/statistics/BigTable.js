@@ -196,7 +196,6 @@ export default class BigTable {
     }
 
     for (let [teamID, positionList] of Object.entries(teamIDToPositionList)) {
-   
       for (let pctl of PERCENTILES) {
         pctlToTeamIDToPosition[pctl][teamID] = Statistics.percentile(
           positionList,

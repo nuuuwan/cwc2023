@@ -7,13 +7,16 @@ import Format from "../../nonview/base/Format.js";
 import React from "react";
 import StyledTableCell from "../atoms/StyledTableCell.js";
 
-export default function StatsTableView({ labelToTeamToStat, onClickTeam,orderedTeamIDs  }) {
+export default function StatsTableView({
+  labelToTeamToStat,
+  onClickTeam,
+  orderedTeamIDs,
+}) {
   if (!orderedTeamIDs) {
     const firstLabel = Object.keys(labelToTeamToStat)[0];
-   orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
-
+    orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
   }
-  
+
   return (
     <Box sx={{ padding: 1 }}>
       <TableContainer component={Box}>
