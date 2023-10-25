@@ -1,110 +1,73 @@
 import { Box } from "@mui/material";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  TableHead,
-} from "@mui/material";
+import { Table, TableBody, TableContainer, TableRow } from "@mui/material";
 import Team from "../../nonview/core/Team.js";
 import TeamView from "../atoms/TeamView.js";
 import Format from "../../nonview/base/Format.js";
-import {
-  PACK_RATIO,
-  MIN_P_FOR_PACK,
-} from "../../nonview/constants/STATISTICS.js";
-
-import { COLOR_GRAY_LIST } from "../../nonview/base/Format.js";
 
 import React from "react";
+import StyledTableCell from "../atoms/StyledTableCell.js";
 
-export default function StatsTableView({
-  labelToTeamToStat,
-  onClickTeam,
-  teamIDToColorOverRide,
-  teamIDToStatAnnotate,
-}) {
+export default function StatsTableView({ labelToTeamToStat, onClickTeam }) {
   const firstLabel = Object.keys(labelToTeamToStat)[0];
-  let prevFirstStat = null;
-  let iPack = 0;
-
   const orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
 
   return (
-    <Box>
+    <Box sx={{ padding: 2 }}>
       <TableContainer component={Box}>
         <Table>
-          <TableHead>
+          <TableBody>
             <TableRow>
-              <TableCell size="small" align="center"></TableCell>
+              <StyledTableCell size="small" align="center"></StyledTableCell>
               {Object.keys(labelToTeamToStat).map(function (label) {
                 return (
-                  <TableCell
+                  <StyledTableCell
                     key={"header-" + label}
                     size="small"
                     align="center"
                   >
-                    {label}
-                  </TableCell>
+                    {Format.getLabel(label)}
+                  </StyledTableCell>
                 );
               })}
             </TableRow>
-          </TableHead>
 
-          <TableBody>
             {orderedTeamIDs.map(function (teamID, iTeam) {
               const team = new Team(teamID);
-              const firstStat = labelToTeamToStat[firstLabel][teamID];
-              const ratio = prevFirstStat / firstStat;
-              prevFirstStat = firstStat;
-              if (ratio > PACK_RATIO && prevFirstStat > MIN_P_FOR_PACK) {
-                iPack += 1;
-              }
-              let background = COLOR_GRAY_LIST[iPack];
-              if (teamIDToColorOverRide) {
-                background = teamIDToColorOverRide[teamID];
-              } else {
-                background = COLOR_GRAY_LIST[iPack];
-              }
               const onClickInner = function () {
                 onClickTeam(team);
               };
 
               const borderTop = iTeam !== 4 ? "none" : "2px dashed #8888";
 
-              let statAnnotate = null;
-              if (teamIDToStatAnnotate) {
-                statAnnotate = teamIDToStatAnnotate[teamID];
-              }
-
               return (
-                <TableRow key={teamID} sx={{ background }}>
-                  <TableCell
-                    size="small"
-                    align="center"
-                    component="th"
-                    scope="row"
+                <TableRow key={teamID}>
+                  <StyledTableCell
                     onClick={onClickInner}
-                    sx={{ cursor: "pointer", borderTop }}
+                    size="small"
+                    sx={{
+                      borderTop,
+                    }}
                   >
                     <TeamView team={team} />
-                  </TableCell>
+                  </StyledTableCell>
                   {Object.entries(labelToTeamToStat).map(function ([
                     label,
                     teamToStat,
                   ]) {
                     const stat = teamToStat[teamID];
                     return (
-                      <TableCell
+                      <StyledTableCell
                         key={"stat-" + label + "-" + teamID}
                         size="small"
                         align="center"
-                        sx={{ fontSize: "100%", borderTop }}
+                        sx={{
+                          fontSize: Format.getFontSize(label),
+                          borderTop,
+                          color: Format.getColor(label, stat),
+                        }}
                       >
-                        {Format.percentTextWithEmojiAndColor(stat)}
-                        {statAnnotate}
-                      </TableCell>
+                        {Format.getText(label, stat)}
+                      </StyledTableCell>
                     );
                   })}
                 </TableRow>

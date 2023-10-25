@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import { TEAM } from "../../nonview/core/Team.js";
-import StatsTableViewSVG from "./StatsTableViewSVG.js";
+import StatsTableViewSVG from "./__StatsTableViewSVG.js";
 import Format from "../../nonview/base/Format.js";
 
 import "../../App.css";

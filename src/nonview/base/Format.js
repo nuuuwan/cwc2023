@@ -271,6 +271,8 @@ export default class Format {
   static getText(label, p) {
     switch (label) {
       case "Qualify":
+      case "Finalist":
+      case "Winner":
         return Format.percentTextWithEmoji(p);
       case "Diff":
         return Format.percentChangeText(p);
@@ -282,6 +284,8 @@ export default class Format {
   static getColor(label, p) {
     switch (label) {
       case "Qualify":
+      case "Finalist":
+      case "Winner":
         return Format.getPercentColor(p);
       case "Diff":
         return Format.getPercentChangeColor(p);
@@ -294,6 +298,10 @@ export default class Format {
     switch (label) {
       case "Qualify":
         return "Qualify";
+      case "Finalist":
+        return "Finalist";
+      case "Winner":
+        return "Winner";
       case "Diff":
         return "";
       default:
@@ -304,6 +312,8 @@ export default class Format {
   static getFontSize(label) {
     switch (label) {
       case "Qualify":
+      case "Finalist":
+      case "Winner":
         return "100%";
       case "Diff":
         return "67%";
