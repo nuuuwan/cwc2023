@@ -19,11 +19,6 @@ export default function NextMatchTableView({ bigTable, nextODI, onClickTeam }) {
 
   const labelToTeamToStat = {
     Qualify: teamIDToSemiFinalistBefore,
-    Diff: Object.fromEntries(
-      Object.entries(teamIDToSemiFinalistBefore).map(function ([teamID, p]) {
-        return [teamID, p - teamIDToSemiFinalistBefore[teamID]];
-      })
-    ),
   };
 
   const [statsTeam1, statsTeam2] = Object.values(resultToStats);

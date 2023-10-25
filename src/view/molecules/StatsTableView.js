@@ -12,19 +12,15 @@ export default function StatsTableView({ labelToTeamToStat, onClickTeam }) {
   const orderedTeamIDs = Object.keys(labelToTeamToStat[firstLabel]);
 
   return (
-    <Box sx={{ padding: 2 }}>
+    <Box sx={{ padding: 1 }}>
       <TableContainer component={Box}>
         <Table>
           <TableBody>
             <TableRow>
-              <StyledTableCell size="small" align="center"></StyledTableCell>
+              <StyledTableCell align="center"></StyledTableCell>
               {Object.keys(labelToTeamToStat).map(function (label) {
                 return (
-                  <StyledTableCell
-                    key={"header-" + label}
-                    size="small"
-                    align="center"
-                  >
+                  <StyledTableCell key={"header-" + label} align="center">
                     {Format.getLabel(label)}
                   </StyledTableCell>
                 );
@@ -38,12 +34,18 @@ export default function StatsTableView({ labelToTeamToStat, onClickTeam }) {
               };
 
               const borderTop = iTeam !== 4 ? "none" : "2px dashed #8888";
+              let opacity = 1.0;
+              if (labelToTeamToStat["Diff"]) {
+                const diff = labelToTeamToStat["Diff"][teamID];
+                if (Math.abs(diff) < 0.025) {
+                  opacity = 0.3;
+                }
+              }
 
               return (
-                <TableRow key={teamID}>
+                <TableRow key={teamID} sx={{ opacity }}>
                   <StyledTableCell
                     onClick={onClickInner}
-                    size="small"
                     sx={{
                       borderTop,
                     }}
@@ -58,7 +60,6 @@ export default function StatsTableView({ labelToTeamToStat, onClickTeam }) {
                     return (
                       <StyledTableCell
                         key={"stat-" + label + "-" + teamID}
-                        size="small"
                         align="center"
                         sx={{
                           fontSize: Format.getFontSize(label),

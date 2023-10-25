@@ -316,7 +316,7 @@ export default class Format {
       case "Winner":
         return "100%";
       case "Diff":
-        return "67%";
+        return "150%";
       default:
         throw new Error(`Unknown label: ${label}`);
     }
