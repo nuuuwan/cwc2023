@@ -95,13 +95,13 @@ export default class Format {
   static percentTextWithEmoji(p) {
     const text = Format.percentText(p);
 
-    let emoji = "";
     if (p < EPSILON) {
-      emoji = " " + EMOJI.LOSER;
-    } else if (p > 1 - EPSILON) {
-      emoji = " " + EMOJI.WINNER;
+      return EMOJI.LOSER;
     }
-    return text + emoji;
+    if (p > 1 - EPSILON) {
+      return EMOJI.WINNER;
+    }
+    return text;
   }
 
   static percentTextWithEmojiAndColor(p) {
@@ -316,7 +316,7 @@ export default class Format {
       case "Winner":
         return "100%";
       case "Diff":
-        return "150%";
+        return "100%";
       default:
         throw new Error(`Unknown label: ${label}`);
     }
