@@ -13,12 +13,12 @@ export const TEAM1_ID_TO_TEAM2_ID_TO_ODDS_PAIR = {
     [TEAM.LKA.id]: [1.29, 3.56],
   },
   [TEAM.ZAF.id]: {
-    [TEAM.PAK.id]: [1.52, 2.50],
+    [TEAM.PAK.id]: [1.52, 2.5],
   },
   [TEAM.BGD.id]: {
     [TEAM.NLD.id]: [1.38, 3.14],
   },
   [TEAM.IND.id]: {
-    [TEAM.ENG.id]: [1.53, 2.50],
+    [TEAM.ENG.id]: [1.53, 2.5],
   },
 };
