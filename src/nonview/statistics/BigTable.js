@@ -8,7 +8,7 @@ import { CWC23_TEAM_ID_LIST } from "../constants/CWC23_TEAM_ID_LIST.js";
 import { GROUP_STAGE_ODI_LIST } from "../data/GROUP_STAGE_ODI_LIST.js";
 import ODI from "../core/ODI.js";
 
-export const PERCENTILES = [50, 100];
+export const PERCENTILES = [0.0, 0.5, 1.0];
 const N_NEXT_MATCHES = 5;
 
 export default class BigTable {
@@ -186,20 +186,17 @@ export default class BigTable {
       }
     }
 
-    let teamIDToMedianPosition = {};
     let pctlToTeamIDToPosition = {};
 
-    for (let pctl_int of PERCENTILES) {
-      const pctl = pctl_int / 100.0;
+    for (let pctl of PERCENTILES) {
       pctlToTeamIDToPosition[pctl] = {};
-      for (let teamID in CWC23_TEAM_ID_LIST) {
+      for (let teamID of CWC23_TEAM_ID_LIST) {
         pctlToTeamIDToPosition[pctl][teamID] = null;
       }
     }
 
     for (let [teamID, positionList] of Object.entries(teamIDToPositionList)) {
-      teamIDToMedianPosition[teamID] = Statistics.median(positionList);
-
+   
       for (let pctl of PERCENTILES) {
         pctlToTeamIDToPosition[pctl][teamID] = Statistics.percentile(
           positionList,

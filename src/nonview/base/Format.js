@@ -272,6 +272,8 @@ export default class Format {
     switch (label) {
       case "Diff":
         return Format.percentChangeText(p);
+      case "Median Rank":
+        return Format.rank(p);
       default:
         return Format.percentTextWithEmoji(p);
     }
