@@ -162,7 +162,7 @@ export default class Format {
           color,
         }}
       >
-        {Format.float(rank)}
+        {Format.int(rank)}
       </span>
     );
   }
@@ -269,11 +269,13 @@ export default class Format {
 
   // Combination
   static getText(label, p) {
+    if (label.includes("Rank")) {
+      return Format.rank(p);
+    }
+
     switch (label) {
       case "Diff":
         return Format.percentChangeText(p);
-      case "Mean Rank":
-        return Format.rank(p);
       default:
         return Format.percentTextWithEmoji(p);
     }

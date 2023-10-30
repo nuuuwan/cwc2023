@@ -7,20 +7,15 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
     teamIDToPFinalist,
     teamIDToPSemiFinalist,
     orderedTeamIDs,
-    teamIDToTotalPosition,
-    n,
+    pctlToTeamIDToPosition,
   } = bigTable.stats;
 
   const labelToTeamToStat = {
     Qualify: teamIDToPSemiFinalist,
     Finalist: teamIDToPFinalist,
     Winner: teamIDToPWinner,
-    "Mean Rank": Object.fromEntries(
-      Object.entries(teamIDToTotalPosition).map(([teamID, totalPosition]) => [
-        teamID,
-        totalPosition / n,
-      ])
-    ),
+    "Rank-Best": pctlToTeamIDToPosition[0.0],
+    "Rank-Median": pctlToTeamIDToPosition[0.5],
   };
 
   return (

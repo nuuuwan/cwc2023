@@ -8,7 +8,7 @@ import { CWC23_TEAM_ID_LIST } from "../constants/CWC23_TEAM_ID_LIST.js";
 import { GROUP_STAGE_ODI_LIST } from "../data/GROUP_STAGE_ODI_LIST.js";
 import ODI from "../core/ODI.js";
 
-export const PERCENTILES = [0.0, 0.5, 1.0];
+export const PERCENTILES = [0, 0.5, 0.9, 0.95, 0.99, 1];
 const N_NEXT_MATCHES = 5;
 
 export default class BigTable {
@@ -141,7 +141,7 @@ export default class BigTable {
 
     for (let simulator of simulatorList) {
       const { koResultIdx, odiIdx, resultIdx, teams } = simulator.stats;
-      
+
       // Winner
       const winner = koResultIdx["Final"];
       teamIDToWinner[winner.id] += 1;
@@ -264,8 +264,6 @@ export default class BigTable {
     const nHorses =
       Statistics.sumOfSquares([Statistics.sum(pList)]) /
       Statistics.sumOfSquares(pList);
-
-    console.debug({teamIDToPositionToN});
 
     return {
       n,
