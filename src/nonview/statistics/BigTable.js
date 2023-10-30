@@ -140,8 +140,8 @@ export default class BigTable {
     let teamIDToPositionList = {};
 
     for (let simulator of simulatorList) {
-      const { koResultIdx, odiIdx, resultIdx } = simulator.stats;
-
+      const { koResultIdx, odiIdx, resultIdx, teams } = simulator.stats;
+      
       // Winner
       const winner = koResultIdx["Final"];
       teamIDToWinner[winner.id] += 1;
@@ -172,7 +172,7 @@ export default class BigTable {
         teamIDToPoints[team.id] += 1;
       }
       teamIDToPoints = Dict.sortByValue(teamIDToPoints);
-      const orderedTeamIDs = Object.keys(teamIDToPoints);
+      const orderedTeamIDs = teams.map((team) => team.id);
 
       for (let iOrder in orderedTeamIDs) {
         const teamID = orderedTeamIDs[iOrder];
@@ -264,6 +264,8 @@ export default class BigTable {
     const nHorses =
       Statistics.sumOfSquares([Statistics.sum(pList)]) /
       Statistics.sumOfSquares(pList);
+
+    console.debug({teamIDToPositionToN});
 
     return {
       n,

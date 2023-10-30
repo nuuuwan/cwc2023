@@ -113,7 +113,7 @@ export default class Simulator {
       }
     }
 
-    return { odiIdx, koResultIdx, sumLogPWinner, nUpsets, nMajorUpsets };
+    return { odiIdx, koResultIdx, sumLogPWinner, nUpsets, nMajorUpsets, teams };
   }
 
   getStats() {
@@ -124,7 +124,7 @@ export default class Simulator {
       nMajorUpsets: nMajorUpsetsGroupStage,
     } = this.simulateGroupStage();
 
-    const { odiIdx, koResultIdx, sumLogPWinner, nUpsets, nMajorUpsets } =
+    const { odiIdx, koResultIdx, sumLogPWinner, nUpsets, nMajorUpsets, teams } =
       this.simulateKnockOutStage({
         resultIdx,
         sumLogPWinner: sumLogPWinnerGroupStage,
@@ -139,6 +139,7 @@ export default class Simulator {
       sumLogPWinner,
       nUpsets,
       nMajorUpsets,
+      teams,
     };
   }
 }
