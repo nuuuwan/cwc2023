@@ -17,9 +17,9 @@ export default function ODIView({ odi, winner, odiState, onClickODI }) {
   let winnerInner = winner;
 
   if (odiState === 1) {
-    winnerInner = odi.team1;
+    winnerInner = odi.favoriteTeam;
   } else if (odiState === 2) {
-    winnerInner = odi.team2;
+    winnerInner = odi.underdogTeam;
   }
   const isStateFlipped = !!odiState;
 
