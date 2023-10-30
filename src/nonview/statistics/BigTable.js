@@ -251,7 +251,7 @@ export default class BigTable {
     const teamIDToPSemiFinalist = Dict.normalize(teamIDToSemiFinalist, n);
 
     // Misc
-    const pList = Object.values(teamIDToWinner);
+    const pList = Object.values(teamIDToSemiFinalist);
     const nHorses =
       Statistics.sumOfSquares([Statistics.sum(pList)]) /
       Statistics.sumOfSquares(pList);
