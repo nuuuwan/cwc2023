@@ -14,4 +14,12 @@ export default class Dict {
       Object.entries(dict).map(([key, value]) => [key, value / n])
     );
   }
+
+  static getValueToN(dict) {
+    const valueToN = {};
+    for (let value of Object.values(dict)) {
+      valueToN[value] = (valueToN[value] || 0) + 1;
+    }
+    return valueToN;
+  }
 }

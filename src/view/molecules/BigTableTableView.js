@@ -10,6 +10,7 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
     teamIDToTotalPosition,
     n,
   } = bigTable.stats;
+
   const labelToTeamToStat = {
     Qualify: teamIDToPSemiFinalist,
     Finalist: teamIDToPFinalist,
