@@ -13,10 +13,10 @@ export default class Simulator {
   getWinner(odi) {
     const state = this.odiStateIdx[odi.id];
     if (state === 1) {
-      return odi.team1;
+      return odi.favoriteTeam;
     }
     if (state === 2) {
-      return odi.team2;
+      return odi.underdogTeam;
     }
 
     switch (this.mode) {
