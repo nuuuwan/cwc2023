@@ -210,12 +210,15 @@ export default class BigTable {
       );
     }
 
-    const teamIDToPositionToN =Object.fromEntries(
-      Object.entries(teamIDToPositionList).map(function ([teamID, positionList]) {
+    const teamIDToPositionToN = Object.fromEntries(
+      Object.entries(teamIDToPositionList).map(function ([
+        teamID,
+        positionList,
+      ]) {
         const positionToN = Dict.getValueToN(positionList);
         return [teamID, positionToN];
       })
-    )
+    );
     // Order
     const orderedTeamIDs = CWC23_TEAM_ID_LIST.slice().sort(function (
       teamA,
