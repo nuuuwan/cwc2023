@@ -21,7 +21,7 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
       ])
     ),
   };
-  
+
   return (
     <StatsTableView
       orderedTeamIDs={orderedTeamIDs}
