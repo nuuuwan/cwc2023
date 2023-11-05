@@ -15,7 +15,7 @@ export default function BigTableTableView({ bigTable, onClickTeam }) {
     Finalist: teamIDToPFinalist,
     Winner: teamIDToPWinner,
     "Rank-Best": pctlToTeamIDToPosition[0.0],
-    "Rank-Median": pctlToTeamIDToPosition[0.5],
+    "Rank-Worst": pctlToTeamIDToPosition[1.0],
   };
 
   return (
