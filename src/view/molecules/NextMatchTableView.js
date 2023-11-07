@@ -15,7 +15,7 @@ import StyledTableCell from "../atoms/StyledTableCell.js";
 export default function NextMatchTableView({ bigTable, nextODI, onClickTeam }) {
   const { odiToStats } = bigTable.odiStats;
   const { resultToStats } = odiToStats[nextODI.id];
-  const { teamIDToPSemiFinalist: teamIDToSemiFinalistBefore } = bigTable.stats;
+  const { teamIDToPSemiFinalist: teamIDToSemiFinalistBefore, orderedTeamIDs } = bigTable.stats;
 
   const labelToTeamToStat = {
     Qualify: teamIDToSemiFinalistBefore,
@@ -77,18 +77,21 @@ export default function NextMatchTableView({ bigTable, nextODI, onClickTeam }) {
                 <StatsTableView
                   labelToTeamToStat={labelToTeamToStatAfter1}
                   onClickTeam={onClickTeam}
+                  orderedTeamIDs={statsTeam1.orderedTeamIDs}
                 />
               </StyledTableCell>
               <StyledTableCell>
                 <StatsTableView
                   labelToTeamToStat={labelToTeamToStat}
                   onClickTeam={onClickTeam}
+                  orderedTeamIDs={orderedTeamIDs}
                 />
               </StyledTableCell>
               <StyledTableCell>
                 <StatsTableView
                   labelToTeamToStat={labelToTeamToStatAfter2}
                   onClickTeam={onClickTeam}
+                  orderedTeamIDs={statsTeam2.orderedTeamIDs}
                 />
               </StyledTableCell>
             </TableRow>
