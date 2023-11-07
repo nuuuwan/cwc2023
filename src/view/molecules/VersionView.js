@@ -54,9 +54,7 @@ export default function VersionView() {
 
   return (
     <Box sx={{ margin: 2, marginTop: 10, textAlign: "center" }}>
-      <Typography variant="body1" sx={{ fontSize: "50%" }}>
-        {LAST_COMMIT_MESSAGE}
-      </Typography>
+
       <DateDeltaView date={VERSION_DATETIME} />
 
       <Typography variant="caption" color="gray" sx={{ fontSize: "50%" }}>
