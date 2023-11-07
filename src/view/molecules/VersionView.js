@@ -4,10 +4,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import PestControlIcon from "@mui/icons-material/PestControl";
 import Format from "../../nonview/base/Format.js";
 import StorageIcon from "@mui/icons-material/Storage";
-import {
-  VERSION_DATETIME,
-
-} from "../../nonview/constants/VERSION.js";
+import { VERSION_DATETIME } from "../../nonview/constants/VERSION.js";
 import HelpIcon from "@mui/icons-material/Help";
 import FeedIcon from "@mui/icons-material/Feed";
 import DateDeltaView from "../atoms/DateDeltaView.js";
@@ -54,7 +51,6 @@ export default function VersionView() {
 
   return (
     <Box sx={{ margin: 2, marginTop: 10, textAlign: "center" }}>
-
       <DateDeltaView date={VERSION_DATETIME} />
 
       <Typography variant="caption" color="gray" sx={{ fontSize: "50%" }}>
