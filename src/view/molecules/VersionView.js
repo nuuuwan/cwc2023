@@ -6,7 +6,7 @@ import Format from "../../nonview/base/Format.js";
 import StorageIcon from "@mui/icons-material/Storage";
 import {
   VERSION_DATETIME,
-  LAST_COMMIT_MESSAGE,
+
 } from "../../nonview/constants/VERSION.js";
 import HelpIcon from "@mui/icons-material/Help";
 import FeedIcon from "@mui/icons-material/Feed";

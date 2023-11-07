@@ -7,7 +7,7 @@ export default class GroupStagePointsTable {
   }
   static getNRRRandomRemainder(nPlayed) {
     const K_NRR = 1;
-    return (9-nPlayed) * (Math.random() - 0.5) * 2* K_NRR;
+    return (9 - nPlayed) * (Math.random() - 0.5) * 2 * K_NRR;
   }
   getTeamToWins() {
     const teamToWins = Object.values(this.resultIdx).reduce(function (
@@ -28,8 +28,12 @@ export default class GroupStagePointsTable {
         const ptrA = TEAM_ID_TO_POINTS_TABLE_ROW[idA];
         const ptrB = TEAM_ID_TO_POINTS_TABLE_ROW[idB];
 
-        const nrrA = ptrA.netRunRate + GroupStagePointsTable.getNRRRandomRemainder(ptrA.nPlayed);
-        const nrrB = ptrB.netRunRate +  GroupStagePointsTable.getNRRRandomRemainder(ptrB.nPlayed);
+        const nrrA =
+          ptrA.netRunRate +
+          GroupStagePointsTable.getNRRRandomRemainder(ptrA.nPlayed);
+        const nrrB =
+          ptrB.netRunRate +
+          GroupStagePointsTable.getNRRRandomRemainder(ptrB.nPlayed);
         if (nrrA !== nrrB) {
           return nrrB - nrrA;
         }
