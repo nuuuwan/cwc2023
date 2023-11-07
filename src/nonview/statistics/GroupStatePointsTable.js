@@ -6,7 +6,7 @@ export default class GroupStagePointsTable {
     this.resultIdx = resultIdx;
   }
   static getNRRRandomRemainder(nPlayed) {
-    const K_NRR = 1;
+    const K_NRR = 2;
     return (9 - nPlayed) * (Math.random() - 0.5) * 2 * K_NRR;
   }
   getTeamToWins() {
