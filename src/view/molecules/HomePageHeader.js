@@ -5,8 +5,8 @@ import LockIcon from "@mui/icons-material/Lock";
 export default function HomePageHeader({ bigTable, odiStateIdx }) {
   let background = "#888";
   if (bigTable) {
-    const { teamIDToSemiFinalist } = bigTable.stats;
-    const winner = TEAM[Object.keys(teamIDToSemiFinalist)[0]];
+    const { orderedTeamIDs } = bigTable.stats;
+    const winner = TEAM[orderedTeamIDs[0]];
     background = winner.color;
   }
 
